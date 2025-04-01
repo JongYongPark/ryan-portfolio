@@ -1,0 +1,81 @@
+baseURL = "https://jongyongpark.github.io/portfolio/"
+publishDir = "public"
+title = "Ryan's Portfolio"
+theme = "PaperMod"
+languageCode = "ko"
+defaultContentLanguage = "ko"
+
+[params]
+  homeInfoParams = false
+
+  [params.profileMode]
+    enabled = true
+    title = "Ryan"
+    subtitle = "💻 DevSecOps Engineer"
+    imageUrl = "images/profile.png"
+    imageTitle = "Ryan Profile"
+
+    [[params.profileMode.buttons]]
+      name = "📧 Email"
+      url = "mailto:ryan@example.com"
+
+    [[params.profileMode.buttons]]
+      name = "🌐 Website"
+      url = "https://ryanpark.dev"
+
+    [[params.profileMode.buttons]]
+      name = "▶ YouTube"
+      url = "https://youtube.com/@ryan"
+
+    [[params.profileMode.buttons]]
+      name = "🐙 GitHub"
+      url = "https://github.com/ryanpark"
+
+    [[params.profileMode.buttons]]
+      name = "📸 Instagram"
+      url = "https://instagram.com/ryan.dev"
+
+[menu]
+  [[menu.main]]
+    name = "검색"
+    url = "/search/"
+    weight = 1
+
+  [[menu.main]]
+    name = "카테고리"
+    url = "/categories/"
+    weight = 2
+
+  [[menu.main]]
+    name = "태그"
+    url = "/tags/"
+    weight = 3
+
+  [[menu.main]]
+    name = "연도"
+    url = "/archives/"
+    weight = 4
+
+  [[menu.main]]
+    name = "강의"
+    url = "/lectures/"
+    weight = 5
+
+  [[menu.main]]
+    name = "어바웃미"
+    url = "/about/"
+    weight = 6
+
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]   # 반드시 있어야 함
+
+[params.search]
+  enabled = true
+
+[params.assets]
+  customCSS = ["css/custom.css"]
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"

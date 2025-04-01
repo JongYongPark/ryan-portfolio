@@ -1,0 +1,45 @@
+{{ define "main" }}
+  <h1>🔍 블로그 검색</h1>
+  <input id="searchInput" type="text" placeholder="검색어를 입력하세요..." style="width: 100%; padding: 10px; font-size: 1.1rem;">
+
+  <ul id="searchResults" style="margin-top: 1.5rem;"></ul>
+
+  <script src="{{ "fuse.min.js" | relURL }}"></script>
+  <script src="{{ "search.json" | relURL }}"></script>
+  <script>
+    const input = document.getElementById('searchInput');
+    const results = document.getElementById('searchResults');
+    
+    fetch('/index.json')
+      .then(res => res.json())
+      .then(data => {
+        const fuse = new Fuse(data, {
+          keys: ['title', 'content'],
+          includeMatches: true,
+          threshold: 0.2,
+          minMatchCharLength: 2,
+          useExtendedSearch: true
+        });
+    
+        input.addEventListener('input', () => {
+          const keyword = input.value.trim();
+          results.innerHTML = '';
+    
+          if (!keyword) return;
+    
+          const matches = fuse.search(`="${keyword}"`);
+          if (matches.length === 0) {
+            results.innerHTML = '<li>😢 검색 결과가 없습니다.</li>';
+            return;
+          }
+    
+          matches.forEach(match => {
+            const item = match.item;
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${item.permalink}">${item.title}</a>`;
+            results.appendChild(li);
+          });
+        });
+      });
+  </script>
+{{ end }}

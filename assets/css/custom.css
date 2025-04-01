@@ -1,0 +1,15 @@
+/* 다크모드일 때만 적용 */
+.dark body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark .post-card {
+  background-color: #1e1e1e;
+  border-color: #333;
+  color: #ddd;
+}
+
+.dark .post-title {
+  color: #90caf9;
+}

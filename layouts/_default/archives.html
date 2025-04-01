@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <h1>📁 연도별 포스트</h1>
+  {{ range (.Site.RegularPages.GroupByDate "2006") }}
+    <h2>{{ .Key }}</h2>
+    <ul>
+      {{ range .Pages }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <small>({{ .Date.Format "2006-01-02" }})</small>
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+{{ end }}

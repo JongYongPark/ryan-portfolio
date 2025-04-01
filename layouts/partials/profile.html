@@ -1,0 +1,54 @@
+<style>
+  .profile-wrapper {
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .profile-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .profile-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+
+  .profile-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+
+  .profile-buttons a {
+    margin: 0 0.5rem;
+    text-decoration: none;
+    color: #0077cc;
+    font-weight: 500;
+  }
+</style>
+
+<div class="profile-wrapper">
+  {{ with site.Params.profileMode.imageUrl }}
+    <img src="{{ . | relURL }}" alt="{{ site.Params.profileMode.imageTitle }}" class="profile-avatar" />
+  {{ end }}
+
+  <div class="profile-title">{{ site.Params.profileMode.title }}</div>
+
+  {{ with site.Params.profileMode.subtitle }}
+    <div class="profile-subtitle">{{ . }}</div>
+  {{ end }}
+
+  {{ with site.Params.profileMode.buttons }}
+    <div class="profile-buttons">
+      {{ range . }}
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+      {{ end }}
+    </div>
+  {{ end }}
+</div>

@@ -1,0 +1,95 @@
+{{ define "main" }}
+<style>
+  @media (max-width: 768px) {
+    .layout {
+      flex-direction: column;
+    }
+  
+    .left-panel {
+      flex: unset;
+      width: 100%;
+      position: static;
+      background-color: transparent;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+  
+    .right-panel {
+      width: 100%;
+    }
+  
+    .profile-wrapper {
+      margin-top: 0;
+      padding: 0;
+    }
+  }
+  
+
+    /* 다크모드 전용 스타일 */
+  .dark body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  /* 포스트 본문 텍스트 밝기 조정 */
+  .dark .post-content,
+  .dark .post-summary,
+  .dark .content {
+    color: #e8e8e8;
+  }
+
+  /* 링크는 더 밝은 파란색 */
+  .dark a {
+    color: #64b5f6;
+  }
+
+  /* 코드블록 배경 및 텍스트 색상 */
+  .dark pre,
+  .dark code {
+    background-color: #1e1e1e;
+    color: #ffcc80;
+  }
+
+  /* 강조 텍스트 */
+  .dark strong {
+    color: #ffffff;
+  }
+
+  .layout {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .left-panel {
+    flex: 0 0 20%;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .right-panel {
+    flex: 1;
+  }
+
+  /* 아이콘 스타일 보정 (profile.html에서 사용 중) */
+  .profile-buttons a {
+    display: block;
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+  }
+</style>
+
+<div class="layout">
+  <div class="left-panel">
+    {{ partial "profile.html" . }}
+  </div>
+  <div class="right-panel">
+    {{ partial "posts.html" . }}
+  </div>
+</div>
+{{ end }}

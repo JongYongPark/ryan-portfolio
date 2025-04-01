@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head>
+	<meta name="generator" content="Hugo 0.142.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>라이언 블로그</title>
+
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml">
+<link rel="alternate" type="application/json" href="http://localhost:1313/index.json">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="라이언 블로그 (Alt + H)">라이언 블로그</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+<style>
+  @media (max-width: 768px) {
+    .layout {
+      flex-direction: column;
+    }
+  
+    .left-panel {
+      flex: unset;
+      width: 100%;
+      position: static;
+      background-color: transparent;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+  
+    .right-panel {
+      width: 100%;
+    }
+  
+    .profile-wrapper {
+      margin-top: 0;
+      padding: 0;
+    }
+  }
+  
+
+     
+  .dark body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+   
+  .dark .post-content,
+  .dark .post-summary,
+  .dark .content {
+    color: #e8e8e8;
+  }
+
+   
+  .dark a {
+    color: #64b5f6;
+  }
+
+   
+  .dark pre,
+  .dark code {
+    background-color: #1e1e1e;
+    color: #ffcc80;
+  }
+
+   
+  .dark strong {
+    color: #ffffff;
+  }
+
+  .layout {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .left-panel {
+    flex: 0 0 20%;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .right-panel {
+    flex: 1;
+  }
+
+   
+  .profile-buttons a {
+    display: block;
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+  }
+</style>
+
+<div class="layout">
+  <div class="left-panel">
+    <style>
+  .profile-wrapper {
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .profile-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .profile-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+
+  .profile-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+
+  .profile-buttons a {
+    margin: 0 0.5rem;
+    text-decoration: none;
+    color: #0077cc;
+    font-weight: 500;
+  }
+</style>
+
+<div class="profile-wrapper">
+  
+    <img src="/images/profile.png" alt="Ryan Profile" class="profile-avatar" />
+  
+
+  <div class="profile-title">Ryan</div>
+
+  
+    <div class="profile-subtitle">💻 DevSecOps Engineer</div>
+  
+
+  
+    <div class="profile-buttons">
+      
+        <a href="mailto:ryan@example.com" target="_blank" rel="noopener noreferrer">📧 Email</a>
+      
+        <a href="https://ryanpark.dev" target="_blank" rel="noopener noreferrer">🌐 Website</a>
+      
+        <a href="https://youtube.com/@ryan" target="_blank" rel="noopener noreferrer">▶ YouTube</a>
+      
+        <a href="https://github.com/ryanpark" target="_blank" rel="noopener noreferrer">🐙 GitHub</a>
+      
+        <a href="https://instagram.com/ryan.dev" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+      
+    </div>
+  
+</div>
+
+  </div>
+  <div class="right-panel">
+    <style>
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .post-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .post-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .post-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.7rem;
+  }
+
+  .post-summary {
+    font-size: 0.95rem;
+    color: #333;
+  }
+</style>
+
+<div class="recent-posts">
+  <h2>최근 포스트</h2>
+  <div class="post-list">
+    
+      <div class="post-card">
+        <a href="/posts/sample-post-1/" class="post-title">샘플 포스트 1</a>
+        <div class="post-meta">
+          📅 2024년 03월 24일
+           | 🏷️ 테스트, 샘플
+        </div>
+        <div class="post-summary">
+          <p>이것은 요약입니다.</p>
+        </div>
+      </div>
+    
+      <div class="post-card">
+        <a href="/posts/sample-post-2/" class="post-title">샘플 포스트 2</a>
+        <div class="post-meta">
+          📅 2024년 03월 24일
+           | 🏷️ 테스트, 샘플
+        </div>
+        <div class="post-summary">
+          <p>이것은 샘플 포스트 2의 본문입니다.<br>
+Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.</p>
+        </div>
+      </div>
+    
+      <div class="post-card">
+        <a href="/posts/sample-post-3/" class="post-title">샘플 포스트 3</a>
+        <div class="post-meta">
+          📅 2024년 03월 24일
+           | 🏷️ 테스트, 샘플
+        </div>
+        <div class="post-summary">
+          <p>이것은 샘플 포스트 3의 본문입니다.<br>
+Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.</p>
+        </div>
+      </div>
+    
+      <div class="post-card">
+        <a href="/posts/sample-post-4/" class="post-title">샘플 포스트 4</a>
+        <div class="post-meta">
+          📅 2024년 03월 24일
+           | 🏷️ 테스트, 샘플
+        </div>
+        <div class="post-summary">
+          <p>이것은 샘플 포스트 4의 본문입니다.<br>
+Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.</p>
+        </div>
+      </div>
+    
+      <div class="post-card">
+        <a href="/posts/sample-post-5/" class="post-title">샘플 포스트 5</a>
+        <div class="post-meta">
+          📅 2024년 03월 24일
+           | 🏷️ 테스트, 샘플
+        </div>
+        <div class="post-summary">
+          <p>이것은 샘플 포스트 5의 본문입니다.<br>
+Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.</p>
+        </div>
+      </div>
+    
+      <div class="post-card">
+        <a href="/archives/" class="post-title">연도별 아카이브</a>
+        <div class="post-meta">
+          📅 2023년 03월 24일
+          
+        </div>
+        <div class="post-summary">
+          
+        </div>
+      </div>
+    
+      <div class="post-card">
+        <a href="/search/" class="post-title">검색</a>
+        <div class="post-meta">
+          📅 0001년 01월 01일
+          
+        </div>
+        <div class="post-summary">
+          
+        </div>
+      </div>
+    
+  </div>
+</div>
+
+  </div>
+</div>
+
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">라이언 블로그</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
