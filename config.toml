@@ -79,3 +79,5 @@ defaultContentLanguage = "ko"
 [taxonomies]
   category = "categories"
   tag = "tags"
+
+ignoreFiles = ["^content/private/"]  

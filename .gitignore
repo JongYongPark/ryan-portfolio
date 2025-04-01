@@ -1,0 +1,34 @@
+# Hugo build output
+
+######## add this for github action. remove for normal push use case
+######## This files will be gnerated by github action
+# /public/
+# /resources/
+
+####### temporary files which hugo generates
+# Hugo cache
+/.hugo_build.lock
+hugo_stats.json
+############
+
+# 시스템 파일
+.DS_Store
+Thumbs.db
+
+# IDE & Editor 설정
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-specific
+ehthumbs.db
+Icon?
+desktop.ini
+
+# 로그 & 백업
+*.log
+*.bak
+
+# 개인 비공개 콘텐츠 예시
+# /content/private/

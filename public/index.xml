@@ -1,51 +1,61 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>라이언 블로그</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on 라이언 블로그</description>
+    <title>Ryan&#39;s Portfolio</title>
+    <link>http://localhost:1313/portfolio/</link>
+    <description>Recent content on Ryan&#39;s Portfolio</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>ko</language>
     <lastBuildDate>Sun, 24 Mar 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/portfolio/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>샘플 포스트 1</title>
-      <link>http://localhost:1313/posts/sample-post-1/</link>
+      <title>Category1</title>
+      <link>http://localhost:1313/portfolio/categories/category1/</link>
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/sample-post-1/</guid>
-      <description>&lt;p&gt;이것은 요약입니다.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/portfolio/categories/category1/</guid>
+      <description></description>
     </item>
     <item>
-      <title>샘플 포스트 2</title>
-      <link>http://localhost:1313/posts/sample-post-2/</link>
+      <title>DevSecOps</title>
+      <link>http://localhost:1313/portfolio/categories/devsecops/</link>
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/sample-post-2/</guid>
-      <description>&lt;p&gt;이것은 샘플 포스트 2의 본문입니다.&lt;br&gt;
-Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/portfolio/categories/devsecops/</guid>
+      <description></description>
     </item>
     <item>
-      <title>샘플 포스트 3</title>
-      <link>http://localhost:1313/posts/sample-post-3/</link>
+      <title>샘플</title>
+      <link>http://localhost:1313/portfolio/tags/%EC%83%98%ED%94%8C/</link>
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/sample-post-3/</guid>
-      <description>&lt;p&gt;이것은 샘플 포스트 3의 본문입니다.&lt;br&gt;
-Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/portfolio/tags/%EC%83%98%ED%94%8C/</guid>
+      <description></description>
     </item>
     <item>
-      <title>샘플 포스트 4</title>
-      <link>http://localhost:1313/posts/sample-post-4/</link>
+      <title>테스트</title>
+      <link>http://localhost:1313/portfolio/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8/</link>
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/sample-post-4/</guid>
-      <description>&lt;p&gt;이것은 샘플 포스트 4의 본문입니다.&lt;br&gt;
-Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/portfolio/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8/</guid>
+      <description></description>
     </item>
     <item>
-      <title>샘플 포스트 5</title>
-      <link>http://localhost:1313/posts/sample-post-5/</link>
-      <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/sample-post-5/</guid>
-      <description>&lt;p&gt;이것은 샘플 포스트 5의 본문입니다.&lt;br&gt;
-Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
+      <title>Categories/Archives</title>
+      <link>http://localhost:1313/portfolio/categories/archives/</link>
+      <pubDate>Fri, 24 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/categories/archives/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Posts</title>
+      <link>http://localhost:1313/portfolio/posts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Private</title>
+      <link>http://localhost:1313/portfolio/private/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/private/</guid>
+      <description></description>
     </item>
   </channel>
 </rss>
