@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>SpringBoot on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/springboot/</link>
+    <description>Recent content in SpringBoot on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/springboot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nest.js</title>
+      <link>http://localhost:1313/portfolio/posts/developer/javascipt/nestjs/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/javascipt/nestjs/</guid>
+      <description>&lt;h1 id=&#34;nextjs-와와-springboot-비교&#34;&gt;Next.js 와와 SpringBoot 비교&lt;/h1&gt;
+&lt;h2 id=&#34;속도비교&#34;&gt;속도비교&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;NestJS&lt;/strong&gt;와 &lt;strong&gt;Spring Boot&lt;/strong&gt;는 각각의 장단점이 있지만, &lt;strong&gt;개발 속도&lt;/strong&gt; 측면에서 비교할 때는 &lt;strong&gt;NestJS&lt;/strong&gt;가 더 빠를 수 있는 몇 가지 이유가 있습니다. 다만, 최종 선택은 프로젝트의 요구 사항과 팀의 경험에 따라 달라질 수 있습니다. 아래에서 두 프레임워크를 비교해보겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-nestjs의-빠른-개발-속도&#34;&gt;1. &lt;strong&gt;NestJS의 빠른 개발 속도&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;JavaScript/TypeScript 기반&lt;/strong&gt;: NestJS는 &lt;strong&gt;TypeScript&lt;/strong&gt;를 기본으로 사용합니다. TypeScript는 자바스크립트를 확장한 언어로, 컴파일 시 타입 검사를 제공하여 코드 작성 중 버그를 미리 잡을 수 있습니다. 또한, &lt;strong&gt;JavaScript&lt;/strong&gt;와 &lt;strong&gt;TypeScript&lt;/strong&gt;는 웹 프론트엔드 개발에서 널리 사용되기 때문에, 프론트엔드와 백엔드 개발자들이 &lt;strong&gt;같은 언어&lt;/strong&gt;를 사용할 수 있어 통합 개발 속도가 빨라질 수 있습니다.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Next.js on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/next.js/</link>
+    <description>Recent content in Next.js on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/next.js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nest.js</title>
+      <link>http://localhost:1313/portfolio/posts/developer/javascipt/nestjs/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/javascipt/nestjs/</guid>
+      <description>&lt;h1 id=&#34;nextjs-와와-springboot-비교&#34;&gt;Next.js 와와 SpringBoot 비교&lt;/h1&gt;
+&lt;h2 id=&#34;속도비교&#34;&gt;속도비교&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;NestJS&lt;/strong&gt;와 &lt;strong&gt;Spring Boot&lt;/strong&gt;는 각각의 장단점이 있지만, &lt;strong&gt;개발 속도&lt;/strong&gt; 측면에서 비교할 때는 &lt;strong&gt;NestJS&lt;/strong&gt;가 더 빠를 수 있는 몇 가지 이유가 있습니다. 다만, 최종 선택은 프로젝트의 요구 사항과 팀의 경험에 따라 달라질 수 있습니다. 아래에서 두 프레임워크를 비교해보겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-nestjs의-빠른-개발-속도&#34;&gt;1. &lt;strong&gt;NestJS의 빠른 개발 속도&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;JavaScript/TypeScript 기반&lt;/strong&gt;: NestJS는 &lt;strong&gt;TypeScript&lt;/strong&gt;를 기본으로 사용합니다. TypeScript는 자바스크립트를 확장한 언어로, 컴파일 시 타입 검사를 제공하여 코드 작성 중 버그를 미리 잡을 수 있습니다. 또한, &lt;strong&gt;JavaScript&lt;/strong&gt;와 &lt;strong&gt;TypeScript&lt;/strong&gt;는 웹 프론트엔드 개발에서 널리 사용되기 때문에, 프론트엔드와 백엔드 개발자들이 &lt;strong&gt;같은 언어&lt;/strong&gt;를 사용할 수 있어 통합 개발 속도가 빨라질 수 있습니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Next.js - JWT</title>
+      <link>http://localhost:1313/portfolio/posts/developer/javascipt/nextjs-jwt/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/javascipt/nextjs-jwt/</guid>
+      <description>&lt;h1 id=&#34;nextjs-app-with-jwt-based-authentication-and-a-basic-security-setup&#34;&gt;Next.js app with JWT-based authentication and a basic security setup&lt;/h1&gt;
+&lt;p&gt;Here&amp;rsquo;s how you can create a simple &lt;strong&gt;Next.js&lt;/strong&gt; app with &lt;strong&gt;JWT-based authentication&lt;/strong&gt; and a basic security setup.&lt;/p&gt;
+&lt;h3 id=&#34;steps-overview&#34;&gt;Steps Overview:&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Initialize a Next.js app&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Set up authentication with JWT&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create login and protected routes&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Add security features&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;1-initialize-nextjs-app&#34;&gt;1. Initialize Next.js App&lt;/h3&gt;
+&lt;p&gt;Run the following commands to initialize a Next.js app:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npx create-next-app@latest my-nextjs-jwt-app
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd my-nextjs-jwt-app
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npm install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-install-dependencies&#34;&gt;2. Install Dependencies&lt;/h3&gt;
+&lt;p&gt;You need additional packages for handling JWT, user authentication, and securing the app:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

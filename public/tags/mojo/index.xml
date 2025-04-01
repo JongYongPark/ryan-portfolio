@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Mojo on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/mojo/</link>
+    <description>Recent content in Mojo on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Thu, 27 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/mojo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mojo Install</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/mojo-install/</link>
+      <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/mojo-install/</guid>
+      <description>&lt;h1 id=&#34;mojo-설치&#34;&gt;Mojo 설치&lt;/h1&gt;
+&lt;p&gt;Mojo는 Modular가 개발한 새로운 프로그래밍 언어로, Python과 유사하지만 더 높은 성능을 제공합니다. WSL (Windows Subsystem for Linux)의 Ubuntu 환경에서 Mojo를 설치하려면 다음과 같은 단계를 따르면 됩니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-wsl-및-ubuntu-확인&#34;&gt;&lt;strong&gt;1. WSL 및 Ubuntu 확인&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;먼저 WSL이 설치되어 있고 Ubuntu가 실행 중인지 확인하세요.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WSL이 설치되어 있지 않다면 &lt;a href=&#34;https://learn.microsoft.com/ko-kr/windows/wsl/install&#34;&gt;Microsoft 공식 문서&lt;/a&gt;를 참고하여 설치하세요.&lt;/li&gt;
+&lt;li&gt;Ubuntu는 Microsoft Store에서 다운로드하거나 명령줄에서 설치할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;WSL Ubuntu가 이미 설치되어 있다면, 터미널을 열고 다음 명령어로 Ubuntu 버전을 확인하세요:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lsb_release -a
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;2-mojo-설치-준비&#34;&gt;&lt;strong&gt;2. Mojo 설치 준비&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Mojo는 아직 초기 단계의 언어이므로 공식적으로 지원되는 패키지 관리자가 없습니다. 따라서 Modular의 공식 웹사이트나 CLI 도구를 사용하여 설치해야 합니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mojo Sample Code like Curl</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/mojo-curl/</link>
+      <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/mojo-curl/</guid>
+      <description>&lt;h2 id=&#34;-mojo로-curl과-비슷한-기능-구현하기&#34;&gt;&lt;strong&gt;🚀 Mojo로 &lt;code&gt;curl&lt;/code&gt;과 비슷한 기능 구현하기&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Mojo는 Python과 유사한 문법을 가지면서도, 시스템 프로그래밍에 적합한 고성능 언어입니다. 현재 Mojo는 공식적으로 네트워크 라이브러리를 제공하지 않으므로, &lt;strong&gt;소켓을 활용하여 HTTP 요청을 보내는 &lt;code&gt;curl&lt;/code&gt; 대체 기능&lt;/strong&gt;을 직접 구현할 수 있습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;-1-mojo에서-http-요청curl-기능-구현하기&#34;&gt;&lt;strong&gt;📌 1. Mojo에서 HTTP 요청(&lt;code&gt;curl&lt;/code&gt; 기능) 구현하기&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;다음 코드는 &lt;strong&gt;Mojo에서 &lt;code&gt;curl&lt;/code&gt;과 유사한 기능을 수행하는 HTTP GET 요청 함수&lt;/strong&gt;입니다.&lt;/p&gt;
+&lt;h3 id=&#34;-mojo_curlmojo-파일-생성&#34;&gt;&lt;strong&gt;💾 &lt;code&gt;mojo_curl.mojo&lt;/code&gt; 파일 생성&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;아래 코드를 &lt;code&gt;mojo_curl.mojo&lt;/code&gt;라는 파일에 저장하세요.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-mojo&#34; data-lang=&#34;mojo&#34;&gt;import sys
+import socket
+
+# HTTP GET 요청 함수
+fn http_get(url: str) -&amp;gt; str:
+    # URL 파싱
+    let parts = url.split(&amp;#34;://&amp;#34;)
+    if parts.size() != 2 or parts[0] != &amp;#34;http&amp;#34;:
+        return &amp;#34;❌ 지원되지 않는 URL 형식입니다! (http만 지원)&amp;#34;
+
+    let domain_path = parts[1].split(&amp;#34;/&amp;#34;, 1)
+    let host = domain_path[0]
+    let path = &amp;#34;/&amp;#34; + domain_path[1] if domain_path.size() &amp;gt; 1 else &amp;#34;/&amp;#34;
+
+    # 소켓 생성 및 서버 연결
+    let sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect((host, 80))
+
+    # HTTP 요청 작성
+    let request = &amp;#34;GET &amp;#34; + path + &amp;#34; HTTP/1.1\r\n&amp;#34;
+    request += &amp;#34;Host: &amp;#34; + host + &amp;#34;\r\n&amp;#34;
+    request += &amp;#34;User-Agent: Mojo-Curl/1.0\r\n&amp;#34;
+    request += &amp;#34;Connection: close\r\n\r\n&amp;#34;
+
+    # 요청 전송
+    sock.send(request.encode())
+
+    # 응답 수신
+    let response = &amp;#34;&amp;#34;
+    while True:
+        let data = sock.recv(1024)
+        if not data:
+            break
+        response += data.decode()
+
+    sock.close()
+    return response
+
+# 명령줄에서 URL 입력 받기
+fn main():
+    if sys.argv.size() &amp;lt; 2:
+        print(&amp;#34;🛠 사용법: mojo run mojo_curl.mojo &amp;lt;URL&amp;gt;&amp;#34;)
+        return
+
+    let url = sys.argv[1]
+    let response = http_get(url)
+    print(response)
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h1 id=&#34;-2-mojo-설치-및-실행-방법&#34;&gt;&lt;strong&gt;📌 2. Mojo 설치 및 실행 방법&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;Mojo는 현재 &lt;strong&gt;Linux 및 macOS에서만 실행 가능&lt;/strong&gt;합니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MOJO</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/mojo/</link>
+      <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/mojo/</guid>
+      <description>&lt;h1 id=&#34;mojo-사용처&#34;&gt;Mojo 사용처&lt;/h1&gt;
+&lt;p&gt;Mojo는 2023년에 출시된 비교적 새로운 프로그래밍 언어로, 아직 초기 단계에 있습니다. 따라서 현재까지 Mojo를 사용한 대표적인 오픈소스 프로젝트나 상용 프로젝트는 많지 않습니다. 그러나 Modular(모듈러)가 Mojo를 설계한 목적과 특징을 기반으로, Mojo가 어떤 유형의 프로젝트에 적합할지 예측할 수 있으며, 이미 공개된 몇 가지 실험적 또는 데모 프로젝트를 통해 그 활용 가능성을 확인할 수 있습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-mojo를-사용한-주요-프로젝트-및-사례&#34;&gt;&lt;strong&gt;1. Mojo를 사용한 주요 프로젝트 및 사례&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4 id=&#34;1-modular-ai-플랫폼&#34;&gt;&lt;strong&gt;(1) Modular AI 플랫폼&lt;/strong&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로젝트 설명&lt;/strong&gt;: Modular는 Mojo를 개발한 회사이며, 이들의 주요 목표는 AI 및 머신러닝 워크플로우를 최적화하는 것입니다. Modular AI 플랫폼은 Mojo를 기반으로 구축되며, 고성능 컴퓨팅과 AI 모델 개발을 지원합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;왜 Mojo를 사용했는가?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;고성능 요구사항&lt;/strong&gt;: AI 모델 학습 및 추론은 대규모 데이터와 복잡한 계산을 필요로 합니다. Mojo는 LLVM 기반으로 컴파일되며 SIMD(Single Instruction, Multiple Data) 명령어와 병렬 처리를 내장으로 지원하여 Python보다 훨씬 빠른 성능을 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Python 호환성&lt;/strong&gt;: 많은 AI/ML 프로젝트는 Python 기반으로 작성되어 있습니다. Mojo는 Python 문법과 생태계를 유지하면서도 성능을 극대화하므로, 기존 코드베이스를 쉽게 마이그레이션하거나 확장할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;2-과학-컴퓨팅-및-시뮬레이션&#34;&gt;&lt;strong&gt;(2) 과학 컴퓨팅 및 시뮬레이션&lt;/strong&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로젝트 설명&lt;/strong&gt;: 일부 연구자들은 Mojo를 사용하여 물리 시뮬레이션, 기상 예측, 분자 동역학 시뮬레이션 등을 구현하고 있습니다. 이러한 작업은 일반적으로 C++ 또는 Fortran으로 작성되었지만, Mojo는 Python의 가독성과 Rust 수준의 성능을 결합하여 더 접근하기 쉬운 솔루션을 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;왜 Mojo를 사용했는가?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;성능 최적화&lt;/strong&gt;: 과학 컴퓨팅은 높은 계산 성능을 요구하며, Mojo는 이를 위해 SIMD 및 병렬 처리를 내장으로 지원합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;생산성 향상&lt;/strong&gt;: Python처럼 간결한 문법을 사용하여 코드 작성이 빠르며, 동시에 성능 저하 없이 작업을 완료할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;3-실시간-데이터-처리&#34;&gt;&lt;strong&gt;(3) 실시간 데이터 처리&lt;/strong&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로젝트 설명&lt;/strong&gt;: 실시간 스트리밍 데이터를 처리하거나 금융 거래 시스템에서 사용되는 고성능 애플리케이션에서도 Mojo가 활용될 가능성이 큽니다. 예를 들어, 주식 시장 데이터를 실시간으로 분석하고 트레이딩 신호를 생성하는 시스템이 Mojo로 구현될 수 있습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;왜 Mojo를 사용했는가?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;저지연(Low Latency)&lt;/strong&gt;: 실시간 데이터 처리는 매우 짧은 시간 내에 데이터를 처리해야 하며, Mojo는 이러한 요구를 충족할 수 있는 성능을 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;병렬 처리&lt;/strong&gt;: Mojo의 내장된 병렬 처리 기능은 다중 코어를 효율적으로 활용하여 데이터 처리 속도를 극대화합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-mojo를-선택한-이유-요약&#34;&gt;&lt;strong&gt;2. Mojo를 선택한 이유 요약&lt;/strong&gt;&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;특징&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;왜 Mojo를 선택했는가?&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;고성능&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;LLVM 기반 컴파일러와 SIMD, 병렬 처리를 통해 Python보다 훨씬 빠른 성능을 제공합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Python 호환성&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Python 문법과 생태계를 유지하므로, 기존 Python 코드를 쉽게 마이그레이션하거나 확장할 수 있습니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;메모리 안전성&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Rust와 유사한 메모리 관리 모델을 도입하여 안전하고 효율적인 메모리 사용이 가능합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;개발 생산성&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Python처럼 간결한 문법을 사용하여 개발 속도를 높입니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;AI/ML 최적화&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;AI/ML 워크플로우를 위한 고성능 컴퓨팅 환경을 제공합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-mojo의-잠재적-활용-분야&#34;&gt;&lt;strong&gt;3. Mojo의 잠재적 활용 분야&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;현재 Mojo는 초기 단계이지만, 다음과 같은 분야에서 활용될 가능성이 큽니다:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

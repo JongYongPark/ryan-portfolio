@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Python on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/python/</link>
+    <description>Recent content in Python on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 31 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python Basic Grammar</title>
+      <link>http://localhost:1313/portfolio/posts/developer/python-basics/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/python-basics/</guid>
+      <description>&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;FastAPI&lt;/strong&gt;, &lt;strong&gt;Flask&lt;/strong&gt;, &lt;strong&gt;Django&lt;/strong&gt;는 모두 &lt;strong&gt;Python&lt;/strong&gt;으로 개발된 인기 있는 웹 프레임워크입니다. 이들 각각은 사용 사례와 목적이 다르며, 성능, 확장성, 사용 편의성 등에서 차이가 있습니다. 각 프레임워크의 특징과 장단점을 비교하여, 어떤 상황에서 어떤 프레임워크가 적합할지 알아보겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-fastapi&#34;&gt;&lt;strong&gt;1. FastAPI&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;특징&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비동기 처리&lt;/strong&gt;와 &lt;strong&gt;자동화된 데이터 검증&lt;/strong&gt;을 기본으로 지원합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Python 3.7+&lt;/strong&gt; 이상에서 사용하는 &lt;strong&gt;type hints&lt;/strong&gt;를 기반으로, &lt;strong&gt;자동 API 문서화&lt;/strong&gt;(Swagger, ReDoc)를 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;성능&lt;/strong&gt;이 매우 뛰어나며, 특히 &lt;strong&gt;REST API&lt;/strong&gt;나 &lt;strong&gt;GraphQL&lt;/strong&gt; 서버 구축에 적합합니다. &lt;strong&gt;Starlette&lt;/strong&gt;을 기반으로 하여 높은 성능을 자랑합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pydantic&lt;/strong&gt;을 사용한 &lt;strong&gt;데이터 검증&lt;/strong&gt;이 매우 강력하고, 코드의 오류를 컴파일 시점에 잡을 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

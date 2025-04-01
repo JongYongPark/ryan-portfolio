@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>CERT Java Checker | RyanLabs</title>
+<meta name="keywords" content="CERT, Java, Checker">
+<meta name="description" content="CERT SER03-J : Do not serialize unencrypted sensitive data.
+죄송합니다. 이전에 제공된 정보에서 혼란을 드려 죄송합니다. CERT Java 보안 코딩 표준에서 SER03-J: 민감한 데이터를 암호화하지 않고 직렬화하지 마십시오라는 규칙은 민감한 정보가 직렬화 과정에서 노출되지 않도록 보호하기 위한 지침을 제공합니다.
+취약한 코드 예시
+아래 코드는 사용자의 비밀번호를 평문으로 직렬화하여 파일에 저장하는 취약한 예제입니다.
+import java.io.*;
+
+public class UserInfo implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String username;
+    private String password; // 민감한 데이터
+
+    public UserInfo(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    // getter 및 setter 생략
+
+    public static void main(String[] args) {
+        UserInfo user = new UserInfo(&#34;user1&#34;, &#34;password123&#34;);
+
+        // 객체를 파일에 직렬화
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&#34;user.ser&#34;))) {
+            oos.writeObject(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+위 코드에서는 UserInfo 객체를 직렬화하여 user.ser 파일에 저장합니다. 그러나 password 필드는 암호화되지 않은 상태로 저장되므로, 파일이 유출되면 비밀번호가 노출될 수 있습니다.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/checker/cert-java-checker/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/checker/cert-java-checker/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      CERT Java Checker
+    </h1>
+    <div class="post-meta"><span title='2025-02-17 00:00:00 +0000 UTC'>2월 17, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="cert-ser03-j--do-not-serialize-unencrypted-sensitive-data">CERT SER03-J : Do not serialize unencrypted sensitive data.<a hidden class="anchor" aria-hidden="true" href="#cert-ser03-j--do-not-serialize-unencrypted-sensitive-data">#</a></h1>
+<p>죄송합니다. 이전에 제공된 정보에서 혼란을 드려 죄송합니다. CERT Java 보안 코딩 표준에서 <strong>SER03-J: 민감한 데이터를 암호화하지 않고 직렬화하지 마십시오</strong>라는 규칙은 민감한 정보가 직렬화 과정에서 노출되지 않도록 보호하기 위한 지침을 제공합니다.</p>
+<h3 id="취약한-코드-예시">취약한 코드 예시<a hidden class="anchor" aria-hidden="true" href="#취약한-코드-예시">#</a></h3>
+<p>아래 코드는 사용자의 비밀번호를 평문으로 직렬화하여 파일에 저장하는 취약한 예제입니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInfo</span> <span style="color:#66d9ef">implements</span> Serializable {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> serialVersionUID <span style="color:#f92672">=</span> 1L;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String username;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String password; <span style="color:#75715e">// 민감한 데이터</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">UserInfo</span>(String username, String password) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> username;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> password;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// getter 및 setter 생략</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        UserInfo user <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UserInfo(<span style="color:#e6db74">&#34;user1&#34;</span>, <span style="color:#e6db74">&#34;password123&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 객체를 파일에 직렬화</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(<span style="color:#66d9ef">new</span> FileOutputStream(<span style="color:#e6db74">&#34;user.ser&#34;</span>))) {
+</span></span><span style="display:flex;"><span>            oos.<span style="color:#a6e22e">writeObject</span>(user);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>위 코드에서는 <code>UserInfo</code> 객체를 직렬화하여 <code>user.ser</code> 파일에 저장합니다. 그러나 <code>password</code> 필드는 암호화되지 않은 상태로 저장되므로, 파일이 유출되면 비밀번호가 노출될 수 있습니다.</p>
+<h3 id="안전한-코드-예시">안전한 코드 예시<a hidden class="anchor" aria-hidden="true" href="#안전한-코드-예시">#</a></h3>
+<p>민감한 데이터를 보호하기 위해서는 직렬화 전에 암호화하고, 역직렬화 후에는 복호화하는 과정이 필요합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.Cipher;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.spec.SecretKeySpec;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecureUserInfo</span> <span style="color:#66d9ef">implements</span> Serializable {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> serialVersionUID <span style="color:#f92672">=</span> 1L;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String username;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">transient</span> String password; <span style="color:#75715e">// 직렬화에서 제외</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String ALGORITHM <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;AES&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> KEY <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>{ <span style="color:#75715e">/* 16바이트 키 */</span> };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">SecureUserInfo</span>(String username, String password) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> username;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> encrypt(password);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String <span style="color:#a6e22e">encrypt</span>(String data) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            SecretKeySpec secretKey <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SecretKeySpec(KEY, ALGORITHM);
+</span></span><span style="display:flex;"><span>            Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(ALGORITHM);
+</span></span><span style="display:flex;"><span>            cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">ENCRYPT_MODE</span>, secretKey);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> encryptedData <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(data.<span style="color:#a6e22e">getBytes</span>());
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(encryptedData);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String <span style="color:#a6e22e">decrypt</span>(String encryptedData) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            SecretKeySpec secretKey <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SecretKeySpec(KEY, ALGORITHM);
+</span></span><span style="display:flex;"><span>            Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(ALGORITHM);
+</span></span><span style="display:flex;"><span>            cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>, secretKey);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decodedData <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(encryptedData);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decryptedData <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(decodedData);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(decryptedData);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">writeObject</span>(ObjectOutputStream oos) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">defaultWriteObject</span>();
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(encrypt(password));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readObject</span>(ObjectInputStream ois) <span style="color:#66d9ef">throws</span> IOException, ClassNotFoundException {
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">defaultReadObject</span>();
+</span></span><span style="display:flex;"><span>        String encryptedPassword <span style="color:#f92672">=</span> (String) ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> decrypt(encryptedPassword);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// getter 및 setter 생략</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        SecureUserInfo user <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SecureUserInfo(<span style="color:#e6db74">&#34;user1&#34;</span>, <span style="color:#e6db74">&#34;password123&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 객체를 파일에 직렬화</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(<span style="color:#66d9ef">new</span> FileOutputStream(<span style="color:#e6db74">&#34;secure_user.ser&#34;</span>))) {
+</span></span><span style="display:flex;"><span>            oos.<span style="color:#a6e22e">writeObject</span>(user);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 파일에서 객체를 역직렬화</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(<span style="color:#66d9ef">new</span> FileInputStream(<span style="color:#e6db74">&#34;secure_user.ser&#34;</span>))) {
+</span></span><span style="display:flex;"><span>            SecureUserInfo deserializedUser <span style="color:#f92672">=</span> (SecureUserInfo) ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Username: &#34;</span> <span style="color:#f92672">+</span> deserializedUser.<span style="color:#a6e22e">getUsername</span>());
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Password: &#34;</span> <span style="color:#f92672">+</span> deserializedUser.<span style="color:#a6e22e">getPassword</span>());
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException <span style="color:#f92672">|</span> ClassNotFoundException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>이 코드에서는 <code>password</code> 필드를 <code>transient</code>로 선언하여 직렬화에서 제외하고, 커스텀 <code>writeObject</code> 및 <code>readObject</code> 메서드를 통해 암호화된 비밀번호를 처리합니다. 이렇게 하면 직렬화된 데이터에 민감한 정보가 암호화되어 저장되므로, 데이터 유출 시에도 안전성을 높일 수 있습니다.</p>
+<p><strong>주의</strong>: 위 예제에서 사용된 키(<code>KEY</code>)는 실제 환경에서는 안전한 키 관리 방안을 통해 보호되어야 합니다.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/portfolio/tags/cert/">CERT</a></li>
+      <li><a href="http://localhost:1313/portfolio/tags/java/">Java</a></li>
+      <li><a href="http://localhost:1313/portfolio/tags/checker/">Checker</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>BeyondCompare on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/beyondcompare/</link>
+    <description>Recent content in BeyondCompare on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Tue, 25 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/beyondcompare/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Beyond Compare 4를 리눅스에 설치하기</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/beyond-compare-wsl/</link>
+      <pubDate>Tue, 25 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/beyond-compare-wsl/</guid>
+      <description>&lt;h1 id=&#34;beyond-compare-4를-리눅스에-설치하기&#34;&gt;Beyond Compare 4를 리눅스에 설치하기&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ cd ~/Downloads/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ wget https://www.scootersoftware.com/bcompare-4.4.6.27483_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--2025-02-25 14:58:16--  https://www.scootersoftware.com/bcompare-4.4.6.27483_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Resolving www.scootersoftware.com &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;www.scootersoftware.com&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;... 72.32.90.250
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connecting to www.scootersoftware.com &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;www.scootersoftware.com&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;|72.32.90.250|:443... connected.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;HTTP request sent, awaiting response... &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; OK
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Length: &lt;span style=&#34;color:#ae81ff&#34;&gt;20609066&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;20M&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;application/octet-stream&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Saving to: ‘bcompare-4.4.6.27483_amd64.deb’
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcompare-4.4.6.27483_amd64.deb          100%&lt;span style=&#34;color:#f92672&#34;&gt;[=============================================================================&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;  19.65M  3.55MB/s    in 6.7s
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2025-02-25 14:58:24 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2.93 MB/s&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; - ‘bcompare-4.4.6.27483_amd64.deb’ saved &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;20609066/20609066&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ sudo apt install ./bcompare-4.4.6.27483_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;sudo&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; password &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; jonpark:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Reading package lists... Done
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Building dependency tree... Done
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Reading state information... Done
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Note, selecting &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bcompare&amp;#39;&lt;/span&gt; instead of &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;./bcompare-4.4.6.27483_amd64.deb&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The following package was automatically installed and is no longer required:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  libllvm17t64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Use &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo apt autoremove&amp;#39;&lt;/span&gt; to remove it.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The following NEW packages will be installed:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  bcompare
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; upgraded, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; newly installed, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; to remove and &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt; not upgraded.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Need to get &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; B/20.6 MB of archives.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;After this operation, 60.9 MB of additional disk space will be used.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Get:1 /home/jonpark/Downloads/bcompare-4.4.6.27483_amd64.deb bcompare amd64 4.4.6-27483 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;20.6 MB&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Selecting previously unselected package bcompare.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Reading database ... &lt;span style=&#34;color:#ae81ff&#34;&gt;130187&lt;/span&gt; files and directories currently installed.&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Preparing to unpack .../bcompare-4.4.6.27483_amd64.deb ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Unpacking bcompare &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;4.4.6-27483&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Setting up bcompare &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;4.4.6-27483&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp: cannot create regular file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/usr/share/kservices5/&amp;#39;&lt;/span&gt;: Not a directory
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; bamfdaemon &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0.5.6+22.04.20220217-0ubuntu5&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Rebuilding /usr/share/applications/bamf-2.index...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; desktop-file-utils &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0.27-2build1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; gnome-menus &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;3.36.0-1.1ubuntu3&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; shared-mime-info &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2.4-4&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; libc-bin &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2.39-0ubuntu8.4&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/locale
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/man
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/tcltk
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/templates
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/locale
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/doc-root
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/templates
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/locale
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/doc-root
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/help
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/vim/vim91/lang
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Total disk space freed by localepurge: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;N: Download is performed unsandboxed as root as file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/home/jonpark/Downloads/bcompare-4.4.6.27483_amd64.deb&amp;#39;&lt;/span&gt; couldn&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;t be accessed by user &amp;#39;&lt;/span&gt;_apt&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;. - pkgAcquire::Run &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;13: Permission denied&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;########################################&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 아래부터는 옵션임.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ ls  ~/.config/bcompare/ -al
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;total 28K
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;drwxrwxr-x  &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; jonpark jonpark 4.0K Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 ./
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;drwx------ &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt; jonpark jonpark 4.0K Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 ../
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark    &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 BCLOCK_11.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark  &lt;span style=&#34;color:#ae81ff&#34;&gt;546&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 BCState.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark  &lt;span style=&#34;color:#ae81ff&#34;&gt;204&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 BCState.xml.bak
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 IsPro
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark  &lt;span style=&#34;color:#ae81ff&#34;&gt;563&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 menu.ini
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark   &lt;span style=&#34;color:#ae81ff&#34;&gt;48&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:07 registry.dat
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ ls /usr/lib/beyondcompare/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcmount32*  bcmount.sh*  BCompare.mad  GPG-KEY-scootersoftware  lib7z.so*        libunrar.so*  qt4/                         scootersoftware.list
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcmount64*  BCompare*    ext/          help/                    libQt4Pas.so.5*  mime.types    scootersoftware-keyring.gpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ cd  /usr/lib/beyondcompare/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcmount32*  bcmount.sh*  BCompare.mad  GPG-KEY-scootersoftware  lib7z.so*        libunrar.so*  qt4/                         scootersoftware.list
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcmount64*  BCompare*    ext/          help/                    libQt4Pas.so.5*  mime.types    scootersoftware-keyring.gpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ sudo cp BCompare BCompare.org
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ sudo cp -r ~/.config/bcompare ~/.config/bcompare.org
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ rm -rf ~/.config/bcompare
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;kill BC&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kill BC
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ sudo rm -rf ~/.config/bcompare &lt;span style=&#34;color:#75715e&#34;&gt;#thinks bensonkb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo sed -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;s/??????????????????????/g&amp;#34;&lt;/span&gt; /usr/lib/beyondcompare/BCompare
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Start BC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Enter license&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Works&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="Find and Replace
+Outlook 메시지에서 Find and Replace 기능을 사용하려면 아래 단계를 따르세요. 이 기능은 일반적으로 작성 중인 메시지에서 작동하며, 이미 보낸 메시지나 받은 메시지에는 적용되지 않습니다.
+
+Outlook에서 Find and Replace 사용하기 (Windows 기준)
+
+
+새 이메일 작성
+
+Outlook에서 새 메시지를 작성하거나 기존 메시지 초안을 엽니다.
+
+
+
+Find (찾기) 열기
+
+메시지 본문에서 Ctrl &#43; F를 누르면 &ldquo;이메일 전달&quot;이 실행되므로, &ldquo;찾기&quot;를 열려면:
+
+메뉴에서 홈 탭 또는 메시지 탭을 클릭합니다.
+오른쪽 상단의 돋보기 모양(찾기)을 클릭하거나, 키보드 단축키 Ctrl &#43; H를 누릅니다.
+
+
+
+
+
+Find and Replace 창 열기">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/technical-support/outlook/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/technical-support/outlook/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="find-and-replace">Find and Replace<a hidden class="anchor" aria-hidden="true" href="#find-and-replace">#</a></h1>
+<p>Outlook 메시지에서 <strong>Find and Replace</strong> 기능을 사용하려면 아래 단계를 따르세요. 이 기능은 일반적으로 <strong>작성 중인 메시지</strong>에서 작동하며, 이미 보낸 메시지나 받은 메시지에는 적용되지 않습니다.</p>
+<hr>
+<h3 id="outlook에서-find-and-replace-사용하기-windows-기준"><strong>Outlook에서 Find and Replace 사용하기 (Windows 기준)</strong><a hidden class="anchor" aria-hidden="true" href="#outlook에서-find-and-replace-사용하기-windows-기준">#</a></h3>
+<ol>
+<li>
+<p><strong>새 이메일 작성</strong></p>
+<ul>
+<li>Outlook에서 새 메시지를 작성하거나 기존 메시지 초안을 엽니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Find (찾기) 열기</strong></p>
+<ul>
+<li>메시지 본문에서 <strong>Ctrl + F</strong>를 누르면 &ldquo;이메일 전달&quot;이 실행되므로, &ldquo;찾기&quot;를 열려면:
+<ul>
+<li>메뉴에서 <strong>홈</strong> 탭 또는 <strong>메시지</strong> 탭을 클릭합니다.</li>
+<li>오른쪽 상단의 돋보기 모양(찾기)을 클릭하거나, 키보드 단축키 <strong>Ctrl + H</strong>를 누릅니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Find and Replace 창 열기</strong></p>
+<ul>
+<li><strong>Ctrl + H</strong>를 누르면 바로 &ldquo;찾기 및 바꾸기&rdquo; 창이 열립니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>찾기 및 바꾸기 설정</strong></p>
+<ul>
+<li><strong>찾을 내용(Find what):</strong> 텍스트 상자에 변경하려는 단어나 구문을 입력합니다.</li>
+<li><strong>바꿀 내용(Replace with):</strong> 새로 교체할 텍스트를 입력합니다.</li>
+<li>(옵션) <strong>옵션</strong>을 클릭하면 대소문자 구분이나 전체 단어 일치 등 조건을 추가로 설정할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>교체 실행</strong></p>
+<ul>
+<li><strong>Replace(바꾸기):</strong> 한 번에 한 항목씩 바꿉니다.</li>
+<li><strong>Replace All(모두 바꾸기):</strong> 메시지 전체에서 모든 일치 항목을 한 번에 바꿉니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>결과 확인</strong></p>
+<ul>
+<li>바뀐 내용을 메시지 본문에서 확인합니다. 모든 내용이 정확한지 검토하세요.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="참고사항"><strong>참고사항</strong><a hidden class="anchor" aria-hidden="true" href="#참고사항">#</a></h3>
+<ul>
+<li><strong>받은 이메일:</strong> Outlook에서는 받은 이메일의 본문을 직접 편집할 수 없으므로, 이 기능은 사용할 수 없습니다.</li>
+<li><strong>Outlook Web (웹 버전):</strong> 웹 버전에서는 기본적으로 &ldquo;찾기&rdquo; 기능만 제공되며 &ldquo;바꾸기&rdquo; 기능은 지원되지 않을 수 있습니다. 따라서 데스크톱 버전에서 사용하는 것을 추천합니다.</li>
+<li><strong>단축키 요약:</strong>
+<ul>
+<li><strong>Ctrl + F:</strong> 메시지 전달</li>
+<li><strong>Ctrl + H:</strong> 찾기 및 바꾸기</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="필요한-추가-정보나-도움말이-있으면-알려주세요-">필요한 추가 정보나 도움말이 있으면 알려주세요! 😊<a hidden class="anchor" aria-hidden="true" href="#필요한-추가-정보나-도움말이-있으면-알려주세요-">#</a></h2>
+<h1 id="텍스트-형식을-html로-변경">텍스트 형식을 HTML로 변경<a hidden class="anchor" aria-hidden="true" href="#텍스트-형식을-html로-변경">#</a></h1>
+<p>Outlook 메시지에서 텍스트 형식을 HTML로 변경하려면 아래 단계를 따르세요. <strong>HTML 형식</strong>은 이메일에 다양한 서식(글꼴, 색상, 이미지 등)을 추가하거나 복잡한 레이아웃을 사용할 수 있게 해줍니다.</p>
+<hr>
+<h3 id="windows용-outlook"><strong>Windows용 Outlook</strong><a hidden class="anchor" aria-hidden="true" href="#windows용-outlook">#</a></h3>
+<h4 id="1-새-메시지-작성-또는-기존-초안-열기"><strong>1. 새 메시지 작성 또는 기존 초안 열기</strong><a hidden class="anchor" aria-hidden="true" href="#1-새-메시지-작성-또는-기존-초안-열기">#</a></h4>
+<ul>
+<li>Outlook에서 새 이메일을 작성하거나 기존 초안을 엽니다.</li>
+</ul>
+<h4 id="2-메시지-형식-변경"><strong>2. 메시지 형식 변경</strong><a hidden class="anchor" aria-hidden="true" href="#2-메시지-형식-변경">#</a></h4>
+<ol>
+<li>
+<p><strong>리본 메뉴에서 &ldquo;형식 텍스트&rdquo; 탭 클릭</strong></p>
+<ul>
+<li>작성 창 상단의 리본 메뉴에서 <strong>형식 텍스트</strong> 탭을 선택합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>&ldquo;형식 옵션&rdquo; 선택</strong></p>
+<ul>
+<li>&ldquo;형식&rdquo; 섹션에서 <strong>HTML</strong>을 선택합니다.</li>
+<li>기본 설정이 &ldquo;일반 텍스트&rdquo; 또는 &ldquo;RTF(서식 있는 텍스트)&ldquo;로 되어 있으면 HTML로 변경됩니다.</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-확인"><strong>3. 확인</strong><a hidden class="anchor" aria-hidden="true" href="#3-확인">#</a></h4>
+<ul>
+<li>메시지 작성 창에서 HTML 서식을 사용할 수 있는지 확인합니다. 예를 들어, 글꼴 스타일 변경, 색상 추가, 이미지 삽입 등이 가능해집니다.</li>
+</ul>
+<hr>
+<h3 id="outlook-web-웹-버전"><strong>Outlook Web (웹 버전)</strong><a hidden class="anchor" aria-hidden="true" href="#outlook-web-웹-버전">#</a></h3>
+<ol>
+<li>
+<p><strong>새 이메일 작성</strong></p>
+<ul>
+<li>Outlook 웹 버전에서 새 메시지를 작성하거나 초안을 엽니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>텍스트 형식 메뉴 열기</strong></p>
+<ul>
+<li>이메일 작성 창 아래쪽에 있는 서식 도구 모음에서 <strong>더 많은 옵션</strong>(보통 세 개의 점 아이콘 &ldquo;⋮&quot;)을 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>형식 옵션 선택</strong></p>
+<ul>
+<li>드롭다운 메뉴에서 <strong>HTML</strong> 또는 <strong>서식 있는 텍스트</strong>를 선택합니다.</li>
+<li>서식 도구 모음이 활성화되면 HTML 형식이 적용된 것입니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="outlook-설정에서-기본-형식-html로-설정하기"><strong>Outlook 설정에서 기본 형식 HTML로 설정하기</strong><a hidden class="anchor" aria-hidden="true" href="#outlook-설정에서-기본-형식-html로-설정하기">#</a></h3>
+<h4 id="windows용-outlook-1">Windows용 Outlook:<a hidden class="anchor" aria-hidden="true" href="#windows용-outlook-1">#</a></h4>
+<ol>
+<li>
+<p><strong>파일 &gt; 옵션 열기</strong></p>
+<ul>
+<li>Outlook 상단 메뉴에서 <strong>파일</strong>을 클릭하고 <strong>옵션</strong>을 선택합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>메일 옵션으로 이동</strong></p>
+<ul>
+<li>왼쪽 메뉴에서 <strong>메일</strong>을 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>메시지 작성 형식 설정</strong></p>
+<ul>
+<li>&ldquo;메시지 작성 형식&rdquo; 섹션에서 &ldquo;HTML&quot;을 기본 형식으로 선택합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>저장</strong></p>
+<ul>
+<li><strong>확인</strong>을 눌러 설정을 저장합니다.</li>
+</ul>
+</li>
+</ol>
+<h4 id="outlook-web">Outlook Web:<a hidden class="anchor" aria-hidden="true" href="#outlook-web">#</a></h4>
+<ol>
+<li>
+<p><strong>설정 열기</strong></p>
+<ul>
+<li>오른쪽 상단의 톱니바퀴 아이콘을 클릭하고 <strong>모든 Outlook 설정 보기</strong>를 선택합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>메일 &gt; 작성 및 답장</strong></p>
+<ul>
+<li>왼쪽 메뉴에서 <strong>메일 &gt; 작성 및 답장</strong>을 선택합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>기본 형식 설정</strong></p>
+<ul>
+<li>&ldquo;새 메시지 작성 형식&quot;에서 <strong>HTML</strong>을 선택합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>저장</strong></p>
+<ul>
+<li>설정 저장 버튼을 눌러 변경 내용을 적용합니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="추가-팁"><strong>추가 팁</strong><a hidden class="anchor" aria-hidden="true" href="#추가-팁">#</a></h3>
+<ul>
+<li>HTML 형식은 다양한 디자인 옵션을 제공하지만, 모든 이메일 클라이언트에서 동일하게 보이지 않을 수 있습니다. 중요한 이메일은 미리 보기로 확인하세요.</li>
+<li><strong>첨부 파일을 사용하는 경우:</strong> HTML 형식을 사용하면 첨부 파일의 배치와 관련된 문제가 줄어듭니다.</li>
+</ul>
+<h2 id="궁금한-점이-있으면-추가로-알려주세요-">궁금한 점이 있으면 추가로 알려주세요! 😊<a hidden class="anchor" aria-hidden="true" href="#궁금한-점이-있으면-추가로-알려주세요-">#</a></h2>
+<h1 id="outlook-에서-내가-보내는-이메일에-항상-내가-참조로-들어가게-설정하는-방법">outlook 에서 내가 보내는 이메일에 항상 내가 참조로 들어가게 설정하는 방법<a hidden class="anchor" aria-hidden="true" href="#outlook-에서-내가-보내는-이메일에-항상-내가-참조로-들어가게-설정하는-방법">#</a></h1>
+<p>Outlook에서 자신이 보내는 이메일에 항상 본인을 참조(CC)로 자동 추가하려면 <strong>규칙(Rules)</strong> 기능을 사용하면 됩니다. 아래에 단계별 설정 방법을 안내드리겠습니다.</p>
+<hr>
+<h3 id="1-outlook-규칙-만들기">1. <strong>Outlook 규칙 만들기</strong><a hidden class="anchor" aria-hidden="true" href="#1-outlook-규칙-만들기">#</a></h3>
+<ol>
+<li>
+<p><strong>Outlook 열기</strong></p>
+<ul>
+<li>데스크톱 버전 Outlook을 엽니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>규칙 및 알림 관리 열기</strong></p>
+<ul>
+<li><strong>파일</strong> 메뉴 → <strong>규칙 및 알림 관리</strong> 클릭.</li>
+</ul>
+</li>
+<li>
+<p><strong>새 규칙 만들기</strong></p>
+<ul>
+<li>규칙 창에서 <strong>새 규칙</strong> 버튼을 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>규칙 템플릿 선택</strong></p>
+<ul>
+<li><strong>발신자가 보내는 메시지에 규칙 적용</strong>을 선택하고 <strong>다음</strong>을 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>조건 설정 (옵션)</strong></p>
+<ul>
+<li>특정 조건 없이 모든 이메일에 자신을 참조로 추가하려면 조건을 선택하지 않고 <strong>다음</strong>을 클릭합니다.</li>
+<li>조건 경고 메시지가 나타나면 <strong>예</strong>를 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>작업 선택</strong></p>
+<ul>
+<li><strong>메시지에 사람 또는 공용 그룹을 참조로 추가</strong>를 선택합니다.</li>
+<li>하단 창에서 <strong>사람 또는 공용 그룹</strong>을 클릭한 뒤 본인의 이메일 주소를 입력합니다.</li>
+<li><strong>확인</strong>을 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>규칙 이름 지정</strong></p>
+<ul>
+<li>규칙 이름을 설정하고 <strong>완료</strong>를 클릭합니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="2-outlook-웹-버전-outlook-on-the-web-owa">2. <strong>Outlook 웹 버전 (Outlook on the Web, OWA)</strong><a hidden class="anchor" aria-hidden="true" href="#2-outlook-웹-버전-outlook-on-the-web-owa">#</a></h3>
+<ol>
+<li>
+<p><strong>Outlook 웹 로그인</strong></p>
+<ul>
+<li><a href="https://outlook.office.com">https://outlook.office.com</a>에서 로그인합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>설정 열기</strong></p>
+<ul>
+<li>오른쪽 상단의 <strong>설정(톱니바퀴)</strong> 클릭 → <strong>모든 Outlook 설정 보기</strong> 클릭.</li>
+</ul>
+</li>
+<li>
+<p><strong>규칙 설정</strong></p>
+<ul>
+<li><strong>메일</strong> → <strong>규칙</strong> 메뉴로 이동합니다.</li>
+<li><strong>새 규칙 추가</strong>를 클릭합니다.
+<ul>
+<li><strong>규칙 이름</strong>: 예) &ldquo;항상 나를 CC에 추가&rdquo;</li>
+<li><strong>조건 추가</strong>: 조건 설정 없이 <strong>모든 메시지</strong>를 선택합니다.</li>
+<li><strong>작업 추가</strong>: <strong>CC로 추가</strong>를 선택하고 본인의 이메일 주소를 입력합니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>저장</strong></p>
+<ul>
+<li>규칙을 저장하고 설정을 닫습니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="주의-사항">주의 사항<a hidden class="anchor" aria-hidden="true" href="#주의-사항">#</a></h3>
+<ul>
+<li><strong>중복 이메일</strong>: 본인이 CC로 계속 포함되므로 수신함이 지저분해질 수 있습니다. 이를 방지하려면 이메일을 특정 폴더로 이동시키는 규칙을 추가 설정할 수 있습니다.</li>
+<li><strong>보내는 사람 계정</strong>: Outlook이 여러 계정을 사용하는 경우, 각 계정에 대해 동일한 규칙을 설정해야 할 수 있습니다.</li>
+</ul>
+<hr>
+<h2 id="설정-후에도-궁금한-점이-있다면-말씀해주세요-">설정 후에도 궁금한 점이 있다면 말씀해주세요! 😊<a hidden class="anchor" aria-hidden="true" href="#설정-후에도-궁금한-점이-있다면-말씀해주세요-">#</a></h2>
+<h1 id="outlook에서-특정-이메일-주소로-보낼-때마다-자신을-항상-cc에-포함시키는-방법">Outlook에서 특정 이메일 주소로 보낼 때마다 자신을 항상 CC에 포함시키는 방법<a hidden class="anchor" aria-hidden="true" href="#outlook에서-특정-이메일-주소로-보낼-때마다-자신을-항상-cc에-포함시키는-방법">#</a></h1>
+<p>Outlook에서 특정 이메일 주소로 보낼 때마다 자신을 항상 CC에 포함시키는 방법은 아래와 같습니다.</p>
+<hr>
+<h3 id="1-outlook-데스크톱-앱에서-규칙-설정">1. <strong>Outlook 데스크톱 앱에서 규칙 설정</strong><a hidden class="anchor" aria-hidden="true" href="#1-outlook-데스크톱-앱에서-규칙-설정">#</a></h3>
+<ol>
+<li>
+<p><strong>파일 메뉴 열기</strong></p>
+<ul>
+<li>Outlook 상단에서 <strong>파일</strong> 메뉴를 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>규칙 및 알림 관리</strong></p>
+<ul>
+<li><strong>규칙 및 알림 관리</strong> 버튼을 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>새 규칙 만들기</strong></p>
+<ul>
+<li><strong>새 규칙</strong> 버튼을 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>템플릿 선택</strong></p>
+<ul>
+<li><strong>발신자가 보내는 메시지에 규칙 적용</strong>을 선택하고 <strong>다음</strong>을 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>조건 추가</strong></p>
+<ul>
+<li><strong>받는 사람 주소에 특정 단어 포함</strong> 또는 <strong>받는 사람/참조에 사람 또는 공용 그룹이 포함된 경우</strong>를 선택합니다.</li>
+<li>하단 창에서 <strong>특정 단어</strong> 또는 <strong>사람 또는 공용 그룹</strong>을 클릭하고 <strong><a href="mailto:tech-support@blackduck.com">tech-support@blackduck.com</a></strong>을 입력한 뒤 확인을 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>작업 추가</strong></p>
+<ul>
+<li><strong>이 사람 또는 공용 그룹을 참조로 추가</strong>를 선택합니다.</li>
+<li>하단 창에서 <strong>사람 또는 공용 그룹</strong>을 클릭하고 본인의 이메일 주소를 입력합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>규칙 이름 지정</strong></p>
+<ul>
+<li>규칙 이름을 설정한 뒤 <strong>완료</strong>를 클릭합니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="2-outlook-웹-버전에서-설정-owa">2. <strong>Outlook 웹 버전에서 설정 (OWA)</strong><a hidden class="anchor" aria-hidden="true" href="#2-outlook-웹-버전에서-설정-owa">#</a></h3>
+<ol>
+<li>
+<p><strong>Outlook 웹 로그인</strong></p>
+<ul>
+<li><a href="https://outlook.office.com">https://outlook.office.com</a>에서 로그인합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>설정 메뉴 열기</strong></p>
+<ul>
+<li>화면 오른쪽 상단에서 <strong>설정(톱니바퀴)</strong> → <strong>모든 Outlook 설정 보기</strong>를 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>규칙 추가</strong></p>
+<ul>
+<li><strong>메일</strong> → <strong>규칙</strong> 메뉴로 이동합니다.</li>
+<li><strong>새 규칙 추가</strong>를 클릭합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>규칙 구성</strong></p>
+<ul>
+<li><strong>규칙 이름</strong>: 예) &ldquo;Black Duck CC 자동 추가&rdquo;</li>
+<li><strong>조건</strong>: <strong>받는 사람</strong> 조건을 선택하고, <strong><a href="mailto:tech-support@blackduck.com">tech-support@blackduck.com</a></strong>을 입력합니다.</li>
+<li><strong>작업</strong>: <strong>CC로 추가</strong>를 선택한 뒤 본인의 이메일 주소를 입력합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>저장</strong></p>
+<ul>
+<li>규칙을 저장하여 활성화합니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="참고">참고<a hidden class="anchor" aria-hidden="true" href="#참고">#</a></h3>
+<ul>
+<li>규칙을 활성화한 후 특정 조건에서만 적용되므로, 이메일을 보내기 전에 규칙이 의도대로 작동하는지 확인하는 것이 좋습니다.</li>
+<li>만약 추가로 다른 설정이 필요하거나 문제가 발생하면 말씀해주세요! 😊</li>
+</ul>
+<hr>
+<h1 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h1>
+<hr>
+<h1 id="heading-1"><a hidden class="anchor" aria-hidden="true" href="#heading-1">#</a></h1>
+<hr>
+<h1 id="heading-2"><a hidden class="anchor" aria-hidden="true" href="#heading-2">#</a></h1>
+<hr>
+<h1 id="heading-3"><a hidden class="anchor" aria-hidden="true" href="#heading-3">#</a></h1>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

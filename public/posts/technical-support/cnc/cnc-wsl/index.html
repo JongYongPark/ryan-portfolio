@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="curl -k -vvv https://bd-82898.local 실패
+🔍 문제 분석: curl -k -vvv https://bd-82898.local 실패 (SSL_ERROR_SYSCALL)
+🚨 문제 요약
+
+curl -k -vvv https://bd-82898.local 실행 시 TLS 핸드셰이크 실패 (SSL_ERROR_SYSCALL).
+curl 로그:
+* OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to bd-82898.local:443
+
+bd-82898.local의 IP 주소는 127.0.0.1로 해석됨 (로컬 호스트에서 실행 중).
+kubectl 로그에서 Ingress Nginx 컨트롤러가 정상적으로 실행되지 않음 (Deployment is not ready: 0 out of 1 expected pods are ready).
+
+
+🔎 원인 분석
+1️⃣ Ingress Nginx가 정상적으로 실행되지 않음
+
+로그에서 Ingress Nginx 컨트롤러가 정상적으로 기동되지 않았다는 메시지가 반복됨:
+Deployment is not ready: ingress-nginx/my-nginx-ingress-nginx-controller. 0 out of 1 expected pods are ready
+
+kubectl get pods -n ingress-nginx 명령어를 실행하여 Ingress Controller Pod 상태를 확인해야 함.
+
+✅ 해결 방법">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/technical-support/cnc/cnc-wsl/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/technical-support/cnc/cnc-wsl/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="curl--k--vvv-httpsbd-82898local-실패">curl -k -vvv <a href="https://bd-82898.local">https://bd-82898.local</a> 실패<a hidden class="anchor" aria-hidden="true" href="#curl--k--vvv-httpsbd-82898local-실패">#</a></h1>
+<h3 id="-문제-분석-curl--k--vvv-httpsbd-82898local-실패-ssl_error_syscall"><strong>🔍 문제 분석: <code>curl -k -vvv https://bd-82898.local</code> 실패 (SSL_ERROR_SYSCALL)</strong><a hidden class="anchor" aria-hidden="true" href="#-문제-분석-curl--k--vvv-httpsbd-82898local-실패-ssl_error_syscall">#</a></h3>
+<h4 id="-문제-요약"><strong>🚨 문제 요약</strong><a hidden class="anchor" aria-hidden="true" href="#-문제-요약">#</a></h4>
+<ol>
+<li><code>curl -k -vvv https://bd-82898.local</code> 실행 시 <strong>TLS 핸드셰이크 실패</strong> (<code>SSL_ERROR_SYSCALL</code>).</li>
+<li><code>curl</code> 로그:
+<pre tabindex="0"><code>* OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to bd-82898.local:443
+</code></pre></li>
+<li><code>bd-82898.local</code>의 IP 주소는 <code>127.0.0.1</code>로 해석됨 (로컬 호스트에서 실행 중).</li>
+<li><code>kubectl</code> 로그에서 <strong>Ingress Nginx 컨트롤러가 정상적으로 실행되지 않음</strong> (<code>Deployment is not ready: 0 out of 1 expected pods are ready</code>).</li>
+</ol>
+<hr>
+<h2 id="-원인-분석"><strong>🔎 원인 분석</strong><a hidden class="anchor" aria-hidden="true" href="#-원인-분석">#</a></h2>
+<h3 id="1-ingress-nginx가-정상적으로-실행되지-않음"><strong>1️⃣ Ingress Nginx가 정상적으로 실행되지 않음</strong><a hidden class="anchor" aria-hidden="true" href="#1-ingress-nginx가-정상적으로-실행되지-않음">#</a></h3>
+<ul>
+<li>로그에서 Ingress Nginx 컨트롤러가 정상적으로 기동되지 않았다는 메시지가 반복됨:
+<pre tabindex="0"><code>Deployment is not ready: ingress-nginx/my-nginx-ingress-nginx-controller. 0 out of 1 expected pods are ready
+</code></pre></li>
+<li><code>kubectl get pods -n ingress-nginx</code> 명령어를 실행하여 Ingress Controller Pod 상태를 확인해야 함.</li>
+</ul>
+<p>✅ <strong>해결 방법</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span></code></pre></div><ul>
+<li>만약 <strong>CrashLoopBackOff</strong> 또는 <strong>Error</strong> 상태라면 로그 확인:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl logs -n ingress-nginx &lt;nginx-controller-pod&gt;
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="2-https-포트443가-제대로-리스닝되지-않음"><strong>2️⃣ HTTPS 포트(443)가 제대로 리스닝되지 않음</strong><a hidden class="anchor" aria-hidden="true" href="#2-https-포트443가-제대로-리스닝되지-않음">#</a></h3>
+<ul>
+<li><code>curl</code>이 <code>127.0.0.1:443</code>에 연결하려 하지만 TLS 핸드셰이크가 실패함.</li>
+<li><code>netstat</code> 또는 <code>ss</code> 명령어를 사용하여 포트 443이 열려 있는지 확인해야 함.</li>
+</ul>
+<p>✅ <strong>해결 방법</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>netstat -tulnp | grep :443
+</span></span></code></pre></div><ul>
+<li>정상적인 경우:
+<pre tabindex="0"><code>tcp    LISTEN  0  128  0.0.0.0:443  0.0.0.0:*  nginx
+</code></pre></li>
+<li>만약 아무것도 출력되지 않는다면 Ingress Nginx가 포트를 제대로 리스닝하지 않는 것.</li>
+</ul>
+<hr>
+<h3 id="3-tls-인증서-문제"><strong>3️⃣ TLS 인증서 문제</strong><a hidden class="anchor" aria-hidden="true" href="#3-tls-인증서-문제">#</a></h3>
+<ul>
+<li><code>curl -k</code> 옵션을 사용해도 TLS 오류가 발생함 → 인증서가 제대로 구성되지 않았을 가능성이 있음.</li>
+<li><code>cnc-deploy</code> 로그를 보면 <code>CNC_CIM_TLS_NGINX_SECRET_NAME=&quot;cnc-cim-tls-nginx&quot;</code> 환경 변수가 설정되어 있음.</li>
+</ul>
+<p>✅ <strong>해결 방법</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get secret -n ingress-nginx cnc-cim-tls-nginx -o yaml
+</span></span></code></pre></div><ul>
+<li>만약 존재하지 않는다면:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;TLS Secret이 존재하지 않음. 새로 생성 필요&#34;</span>
+</span></span></code></pre></div></li>
+<li><strong>TLS 인증서를 다시 생성하고 적용해야 함</strong>.</li>
+</ul>
+<hr>
+<h3 id="-해결-방법-요약"><strong>🚀 해결 방법 요약</strong><a hidden class="anchor" aria-hidden="true" href="#-해결-방법-요약">#</a></h3>
+<p>✅ <strong>1. Ingress Nginx Pod 상태 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span><span style="display:flex;"><span>kubectl logs -n ingress-nginx &lt;nginx-controller-pod&gt;
+</span></span></code></pre></div><ul>
+<li><strong>오류 로그 분석 후 조치</strong>.</li>
+</ul>
+<p>✅ <strong>2. 443 포트 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>netstat -tulnp | grep :443
+</span></span></code></pre></div><ul>
+<li><strong>포트가 리스닝 중인지 확인</strong>.</li>
+</ul>
+<p>✅ <strong>3. TLS 인증서 확인 및 재설정</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get secret -n ingress-nginx cnc-cim-tls-nginx -o yaml
+</span></span></code></pre></div><ul>
+<li><strong>존재하지 않으면 새로운 인증서 생성 후 적용</strong>.</li>
+</ul>
+<h2 id="이제-위-단계를-실행하고-결과를-확인한-후-추가적인-조치를-취할-수-있습니다-">이제 위 단계를 실행하고 결과를 확인한 후 추가적인 조치를 취할 수 있습니다. 🚀<a hidden class="anchor" aria-hidden="true" href="#이제-위-단계를-실행하고-결과를-확인한-후-추가적인-조치를-취할-수-있습니다-">#</a></h2>
+<h1 id="curl--k--vvv-httpsbd-82898local-실패-1">curl -k -vvv <a href="https://bd-82898.local">https://bd-82898.local</a> 실패<a hidden class="anchor" aria-hidden="true" href="#curl--k--vvv-httpsbd-82898local-실패-1">#</a></h1>
+<h3 id="-문제-분석--해결-방법-curl--k--vvv-httpsbd-82898local-실패-ssl_error_syscall"><strong>🔍 문제 분석 &amp; 해결 방법: <code>curl -k -vvv https://bd-82898.local</code> 실패 (SSL_ERROR_SYSCALL)</strong><a hidden class="anchor" aria-hidden="true" href="#-문제-분석--해결-방법-curl--k--vvv-httpsbd-82898local-실패-ssl_error_syscall">#</a></h3>
+<h3 id="-문제-요약-1"><strong>🚨 문제 요약</strong><a hidden class="anchor" aria-hidden="true" href="#-문제-요약-1">#</a></h3>
+<ol>
+<li>
+<p><strong>Ingress Controller가 정상적으로 실행 중 (<code>1/1 Running</code>)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span></code></pre></div><pre tabindex="0"><code>NAME                                                 READY   STATUS    RESTARTS   AGE
+my-nginx-ingress-nginx-controller-57f6bc457c-k9x7c   1/1     Running   0          59m
+</code></pre></li>
+<li>
+<p><strong>TLS 인증서 <code>cnc-cim-tls-nginx</code>가 존재하지 않음</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get secret -n ingress-nginx cnc-cim-tls-nginx -o yaml
+</span></span></code></pre></div><pre tabindex="0"><code>Error from server (NotFound): secrets &#34;cnc-cim-tls-nginx&#34; not found
+</code></pre></li>
+<li>
+<p><strong>Ingress Controller 로그에서 SSL 인증서 로딩 실패</strong></p>
+<pre tabindex="0"><code>W0312 09:56:08.059301 10 controller.go:1306] Error getting SSL certificate &#34;cnc/cnc-cim-tls-nginx&#34;: local SSL certificate cnc/cnc-cim-tls-nginx was not found. Using default certificate
+</code></pre></li>
+<li>
+<p><strong>서비스 Endpoint 없음</strong></p>
+<pre tabindex="0"><code>W0312 09:56:08.059231 10 controller.go:1083] Service &#34;cnc/cnc-minio&#34; does not have any active Endpoint.
+W0312 09:56:08.059231 10 controller.go:1083] Service &#34;cnc/cnc-cim-cnc-storage-proxy&#34; does not have any active Endpoint.
+</code></pre></li>
+</ol>
+<hr>
+<h2 id="-문제의-원인"><strong>🔎 문제의 원인</strong><a hidden class="anchor" aria-hidden="true" href="#-문제의-원인">#</a></h2>
+<ol>
+<li>
+<p><strong>TLS 인증서가 존재하지 않음 (<code>cnc-cim-tls-nginx</code> secret 누락)</strong></p>
+<ul>
+<li>Ingress는 <code>cnc-cim-tls-nginx</code>를 참조하지만, 해당 Secret이 생성되지 않음.</li>
+<li>현재 기본 <code>fake-certificate.pem</code>을 사용 중.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ingress에 연결된 서비스(<code>cnc-minio</code>, <code>cnc-cim-cnc-storage-proxy</code>, <code>cnc-cim-cim</code>)가 활성화되지 않음</strong></p>
+<ul>
+<li>Ingress Controller는 대상 서비스로 요청을 전달해야 하지만, 서비스 Endpoint가 활성화되지 않음.</li>
+<li>Ingress는 정상 작동하지만, 백엔드 서비스가 준비되지 않음.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ingress가 <code>127.0.0.1</code>에서 리스닝하는지 확인 필요</strong></p>
+<ul>
+<li><code>curl</code> 명령어가 <code>127.0.0.1:443</code>로 요청을 보내고 있음.</li>
+<li><code>kubectl get svc -n ingress-nginx</code>로 <code>ingress-nginx</code> 서비스가 어떤 IP에서 리스닝하는지 확인 필요.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-해결-방법"><strong>🚀 해결 방법</strong><a hidden class="anchor" aria-hidden="true" href="#-해결-방법">#</a></h2>
+<h3 id="1-tls-인증서-cnc-cim-tls-nginx-생성-및-적용"><strong>1️⃣ TLS 인증서 (<code>cnc-cim-tls-nginx</code>) 생성 및 적용</strong><a hidden class="anchor" aria-hidden="true" href="#1-tls-인증서-cnc-cim-tls-nginx-생성-및-적용">#</a></h3>
+<p>현재 <code>cnc-cim-tls-nginx</code> Secret이 없기 때문에 새로 생성해야 합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl create secret tls cnc-cim-tls-nginx -n ingress-nginx <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --cert<span style="color:#f92672">=</span>/path/to/your/cert.pem <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --key<span style="color:#f92672">=</span>/path/to/your/key.pem
+</span></span></code></pre></div><p>✅ <strong>확인 방법</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get secret -n ingress-nginx cnc-cim-tls-nginx
+</span></span></code></pre></div><ul>
+<li>Secret이 정상적으로 생성되었는지 확인 후, Ingress Controller를 다시 시작합니다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><hr>
+<h3 id="2-ingress-controller가-443-포트를-리스닝하는지-확인"><strong>2️⃣ Ingress Controller가 443 포트를 리스닝하는지 확인</strong><a hidden class="anchor" aria-hidden="true" href="#2-ingress-controller가-443-포트를-리스닝하는지-확인">#</a></h3>
+<p>현재 <code>curl</code>이 <code>127.0.0.1:443</code>로 요청을 보내고 있으므로, <code>ingress-nginx</code> 서비스가 실제로 443에서 리스닝하는지 확인해야 합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get svc -n ingress-nginx
+</span></span></code></pre></div><p>✅ <strong>예제 출력</strong></p>
+<pre tabindex="0"><code>NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+my-nginx-ingress-nginx-controller    LoadBalancer   10.96.58.210     &lt;pending&gt;     80:31873/TCP,443:31874/TCP   59m
+</code></pre><ul>
+<li><code>PORT(S)</code>에서 <code>443</code>이 리스닝하는지 확인.</li>
+</ul>
+<p>🚨 <strong>포트가 <code>443</code>이 아니라면 Ingress 설정을 변경해야 함.</strong></p>
+<ul>
+<li><code>ingress-nginx</code>가 <code>NodePort</code> 또는 <code>LoadBalancer</code>로 배포되었는지 확인 후 수정.</li>
+</ul>
+<hr>
+<h3 id="3-서비스-endpoint-문제-해결"><strong>3️⃣ 서비스 Endpoint 문제 해결</strong><a hidden class="anchor" aria-hidden="true" href="#3-서비스-endpoint-문제-해결">#</a></h3>
+<p>Ingress가 정상 작동하려면 <code>cnc-minio</code>, <code>cnc-cim-cnc-storage-proxy</code>, <code>cnc-cim-cim</code> 서비스가 활성화되어 있어야 합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n cnc
+</span></span><span style="display:flex;"><span>kubectl get svc -n cnc
+</span></span></code></pre></div><p>✅ <strong>서비스가 비활성 상태이면 다시 시작</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n cnc cnc-minio cnc-cim-cnc-storage-proxy cnc-cim-cim
+</span></span></code></pre></div><p>🚨 <strong>특정 서비스의 Pod이 CrashLoopBackOff 상태라면 로그 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl logs -n cnc &lt;pod-name&gt;
+</span></span></code></pre></div><p>해당 서비스가 정상적으로 실행되지 않으면 Ingress가 트래픽을 전달할 수 없습니다.</p>
+<hr>
+<h2 id="-최종-점검"><strong>✅ 최종 점검</strong><a hidden class="anchor" aria-hidden="true" href="#-최종-점검">#</a></h2>
+<ol>
+<li>
+<p><strong>TLS 인증서 Secret 생성</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get secret -n ingress-nginx cnc-cim-tls-nginx
+</span></span></code></pre></div><ul>
+<li>존재하지 않으면 생성 후 Ingress Controller 재시작.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ingress가 443 포트에서 리스닝 중인지 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get svc -n ingress-nginx
+</span></span></code></pre></div></li>
+<li>
+<p><strong>연결된 서비스가 정상적으로 실행 중인지 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n cnc
+</span></span><span style="display:flex;"><span>kubectl get svc -n cnc
+</span></span></code></pre></div></li>
+<li>
+<p><strong>모든 설정 후 <code>curl</code> 다시 실행</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="이제-위-단계대로-수행하면-tls-문제와-서비스-연결-문제를-해결할-수-있습니다-">이제 위 단계대로 수행하면 <strong>TLS 문제와 서비스 연결 문제를 해결할 수 있습니다!</strong> 🚀<a hidden class="anchor" aria-hidden="true" href="#이제-위-단계대로-수행하면-tls-문제와-서비스-연결-문제를-해결할-수-있습니다-">#</a></h2>
+<h1 id="secret-생성-후-helm-재설치install-필요-여부">Secret 생성 후 Helm 재설치(install) 필요 여부<a hidden class="anchor" aria-hidden="true" href="#secret-생성-후-helm-재설치install-필요-여부">#</a></h1>
+<h3 id="-secret-생성-후-helm-재설치install-필요-여부-분석"><strong>🔍 Secret 생성 후 Helm 재설치(install) 필요 여부 분석</strong><a hidden class="anchor" aria-hidden="true" href="#-secret-생성-후-helm-재설치install-필요-여부-분석">#</a></h3>
+<p>현재 <code>kubectl create secret tls ... | kubectl apply -f -</code> 명령어를 실행하여 TLS Secret을 생성하고 적용하였습니다.</p>
+<p>✅ <strong>Secret이 정상적으로 적용되었는지 확인:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get secret -n ingress-nginx cnc-cim-tls-nginx -o yaml
+</span></span><span style="display:flex;"><span>kubectl get secret -n ingress-nginx cnc-certificate -o yaml
+</span></span></code></pre></div><ul>
+<li>Secret이 <code>ingress-nginx</code> 네임스페이스에 정상적으로 생성되었는지 확인합니다.</li>
+</ul>
+<hr>
+<h3 id="-helm-재설치가-필요한가"><strong>🚀 Helm 재설치가 필요한가?</strong><a hidden class="anchor" aria-hidden="true" href="#-helm-재설치가-필요한가">#</a></h3>
+<h4 id="-helm-재설치가-필요-없는-경우">✅ <strong>Helm 재설치가 필요 없는 경우</strong><a hidden class="anchor" aria-hidden="true" href="#-helm-재설치가-필요-없는-경우">#</a></h4>
+<ul>
+<li>기존 Helm 차트가 <strong>Secret을 참조할 때 직접 네임스페이스에서 가져오도록 구성된 경우</strong>.</li>
+<li>Ingress 또는 다른 관련 리소스가 Secret을 참조하고 있으며, Secret이 새로 적용된 경우 <strong>Helm 재설치 없이 적용됨</strong>.</li>
+<li>아래 명령어를 실행하여 Ingress 설정이 자동으로 반영되는지 확인:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><ul>
+<li>Ingress Controller가 Secret 변경 사항을 자동으로 감지하면 Helm 재설치 없이 적용됨.</li>
+</ul>
+</li>
+</ul>
+<h4 id="-helm-재설치가-필요한-경우">❌ <strong>Helm 재설치가 필요한 경우</strong><a hidden class="anchor" aria-hidden="true" href="#-helm-재설치가-필요한-경우">#</a></h4>
+<ul>
+<li>Helm 차트가 Secret을 미리 생성하는 방식(Helm의 <code>values.yaml</code>에서 Secret을 관리)으로 되어 있다면, Helm이 Secret을 다시 배포할 필요가 있음.</li>
+<li>기존 Ingress 리소스가 새로운 Secret을 참조하도록 업데이트되지 않은 경우.</li>
+<li>확인 방법:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>helm get values my-helm-release -n cnc
+</span></span></code></pre></div><ul>
+<li><code>tls.secretName</code> 값이 <code>cnc-cim-tls-nginx</code>로 설정되어 있지 않다면, Helm 값을 업데이트해야 함.</li>
+</ul>
+</li>
+</ul>
+<p>✅ <strong>Helm 재설치 없이 적용 가능한 방법 (Ingress 강제 업데이트)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl annotate ingress cnc-cim --overwrite kubernetes.io/ingress.class<span style="color:#f92672">=</span>nginx
+</span></span><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><ul>
+<li>Ingress를 강제로 다시 적용하여 새로운 Secret을 사용하도록 함.</li>
+</ul>
+<p>✅ <strong>Helm 업데이트 적용이 필요한 경우</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>helm upgrade --install my-helm-release ./helm-chart -n cnc
+</span></span></code></pre></div><ul>
+<li><code>helm upgrade</code>를 사용하면 기존 리소스를 유지하면서 변경 사항을 적용할 수 있음.</li>
+</ul>
+<hr>
+<h3 id="-최종-결론"><strong>🚀 최종 결론</strong><a hidden class="anchor" aria-hidden="true" href="#-최종-결론">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>상황</th>
+          <th>Helm 재설치 필요 여부</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Ingress Controller가 Secret 변경 사항을 자동 감지하는 경우</td>
+          <td>❌ 필요 없음 (Ingress 재시작만 필요)</td>
+      </tr>
+      <tr>
+          <td>Helm 차트가 Secret을 직접 생성하는 경우 (<code>values.yaml</code>에 정의)</td>
+          <td>✅ <code>helm upgrade</code> 필요</td>
+      </tr>
+      <tr>
+          <td>Ingress 리소스가 새로운 Secret을 자동으로 참조하지 않는 경우</td>
+          <td>✅ Ingress 강제 재적용 필요 (<code>kubectl annotate ingress</code>)</td>
+      </tr>
+  </tbody>
+</table>
+<p>📌 <strong>권장 해결 방법:</strong></p>
+<ol>
+<li>
+<p><strong>Ingress Controller 재시작 후 테스트</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Ingress 리소스 강제 업데이트 후 테스트</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl annotate ingress cnc-cim --overwrite kubernetes.io/ingress.class<span style="color:#f92672">=</span>nginx
+</span></span></code></pre></div></li>
+<li>
+<p><strong>그래도 적용되지 않는다면 Helm 재설치</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>helm upgrade --install my-helm-release ./helm-chart -n cnc
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="-위-단계를-순서대로-실행-후-curl--k--vvv-httpsbd-82898local을-다시-실행하여-정상-작동하는지-확인하세요">🚀 <strong>위 단계를 순서대로 실행 후 <code>curl -k -vvv https://bd-82898.local</code>을 다시 실행하여 정상 작동하는지 확인하세요!</strong><a hidden class="anchor" aria-hidden="true" href="#-위-단계를-순서대로-실행-후-curl--k--vvv-httpsbd-82898local을-다시-실행하여-정상-작동하는지-확인하세요">#</a></h2>
+<h1 id="etchosts에서-bd-82898local-설정-방법">/etc/hosts에서 bd-82898.local 설정 방법<a hidden class="anchor" aria-hidden="true" href="#etchosts에서-bd-82898local-설정-방법">#</a></h1>
+<h3 id="-etchosts에서-bd-82898local-설정-방법"><strong>🔍 <code>/etc/hosts</code>에서 <code>bd-82898.local</code> 설정 방법</strong><a hidden class="anchor" aria-hidden="true" href="#-etchosts에서-bd-82898local-설정-방법">#</a></h3>
+<p>현재 <strong>Ingress Controller가 배포된 Kubernetes 클러스터</strong>에서 <code>bd-82898.local</code>을 올바르게 설정하려면 <code>/etc/hosts</code> 파일을 적절히 수정해야 합니다.</p>
+<hr>
+<h2 id="-1-etchosts에-올바른-ip-추가하기"><strong>✅ 1️⃣ <code>/etc/hosts</code>에 올바른 IP 추가하기</strong><a hidden class="anchor" aria-hidden="true" href="#-1-etchosts에-올바른-ip-추가하기">#</a></h2>
+<p>현재 <code>curl -k -vvv https://bd-82898.local</code> 실행 시 <strong><code>127.0.0.1</code>로 해석</strong>되는데, 이것이 올바른 Ingress Controller의 IP가 아닐 가능성이 큽니다.</p>
+<p>📌 <strong>Ingress의 실제 External IP 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get svc -n ingress-nginx
+</span></span></code></pre></div><p>✅ 예제 출력:</p>
+<pre tabindex="0"><code>NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
+my-nginx-ingress-nginx-controller    LoadBalancer   10.96.58.210     192.168.1.100   80:31873/TCP,443:31874/TCP   59m
+</code></pre><ul>
+<li><code>EXTERNAL-IP</code> 값 (<code>192.168.1.100</code>)이 Ingress Controller가 제공하는 외부 접속 IP.</li>
+</ul>
+<hr>
+<h2 id="-2-etchosts-수정"><strong>✅ 2️⃣ <code>/etc/hosts</code> 수정</strong><a hidden class="anchor" aria-hidden="true" href="#-2-etchosts-수정">#</a></h2>
+<p><code>bd-82898.local</code>을 올바르게 해석하도록 <code>/etc/hosts</code> 파일을 수정해야 합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo nano /etc/hosts
+</span></span></code></pre></div><p>🚀 <strong>추가해야 할 내용 (예제)</strong></p>
+<pre tabindex="0"><code>192.168.1.100    bd-82898.local
+</code></pre><ul>
+<li>위에서 확인한 <strong>Ingress Controller의 External IP</strong>(<code>192.168.1.100</code>)를 사용해야 합니다.</li>
+<li>만약 Ingress가 <code>NodePort</code>를 사용하고 있다면, 마스터 노드의 IP를 사용해야 할 수도 있습니다.</li>
+</ul>
+<p>✅ <strong>파일 저장 후 변경 사항 적용</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo systemctl restart networking
+</span></span></code></pre></div><hr>
+<h2 id="-3-설정-확인"><strong>✅ 3️⃣ 설정 확인</strong><a hidden class="anchor" aria-hidden="true" href="#-3-설정-확인">#</a></h2>
+<p>설정이 제대로 반영되었는지 <code>ping</code> 또는 <code>nslookup</code>으로 확인합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ping -c <span style="color:#ae81ff">4</span> bd-82898.local
+</span></span></code></pre></div><p>✅ 정상적인 경우:</p>
+<pre tabindex="0"><code>PING bd-82898.local (192.168.1.100) 56(84) bytes of data.
+64 bytes from 192.168.1.100: icmp_seq=1 ttl=64 time=0.053 ms
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>nslookup bd-82898.local
+</span></span></code></pre></div><p>✅ 정상적인 경우:</p>
+<pre tabindex="0"><code>Server:        127.0.0.53
+Address:       127.0.0.53#53
+
+Non-authoritative answer:
+Name:   bd-82898.local
+Address: 192.168.1.100
+</code></pre><hr>
+<h2 id="-4-curl로-테스트"><strong>✅ 4️⃣ <code>curl</code>로 테스트</strong><a hidden class="anchor" aria-hidden="true" href="#-4-curl로-테스트">#</a></h2>
+<p>이제 <code>/etc/hosts</code>를 수정했으므로 다시 <code>curl</code>을 실행하여 Ingress Controller가 정상적으로 응답하는지 확인합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local
+</span></span></code></pre></div><p>✅ <strong>정상적인 경우:</strong></p>
+<pre tabindex="0"><code>* Connected to bd-82898.local (192.168.1.100) port 443
+* TLS handshake successful
+...
+HTTP/1.1 200 OK
+</code></pre><p>🚨 <strong>여전히 SSL/TLS 오류가 발생한다면?</strong></p>
+<ul>
+<li>Ingress에 올바른 TLS Secret이 적용되었는지 확인:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get secret -n ingress-nginx cnc-cim-tls-nginx
+</span></span></code></pre></div></li>
+<li>Ingress 리소스를 확인:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl describe ingress -n cnc
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h2 id="-결론"><strong>🚀 결론</strong><a hidden class="anchor" aria-hidden="true" href="#-결론">#</a></h2>
+<ol>
+<li><strong>Ingress Controller의 External IP 확인 (<code>kubectl get svc -n ingress-nginx</code>)</strong></li>
+<li><strong>Ingress의 External IP를 <code>/etc/hosts</code>에 추가</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo nano /etc/hosts
+</span></span></code></pre></div><pre tabindex="0"><code>192.168.1.100    bd-82898.local
+</code></pre></li>
+<li><strong>설정 적용 후 확인 (<code>ping</code>, <code>nslookup</code>)</strong></li>
+<li><strong><code>curl</code>로 HTTPS 요청 테스트 (<code>curl -k -vvv https://bd-82898.local</code>)</strong></li>
+</ol>
+<h2 id="이제-bd-82898local이-올바르게-설정되었으므로-ingress와-연결이-정상적으로-작동할-것입니다-">이제 <code>bd-82898.local</code>이 올바르게 설정되었으므로, Ingress와 연결이 정상적으로 작동할 것입니다! 🚀<a hidden class="anchor" aria-hidden="true" href="#이제-bd-82898local이-올바르게-설정되었으므로-ingress와-연결이-정상적으로-작동할-것입니다-">#</a></h2>
+<h1 id="curl--k--vvv-httpsbd-82898local-실패-2">curl -k -vvv <a href="https://bd-82898.local">https://bd-82898.local</a> 실패<a hidden class="anchor" aria-hidden="true" href="#curl--k--vvv-httpsbd-82898local-실패-2">#</a></h1>
+<h3 id="-문제-분석-및-해결-방법-curl--k--vvv-httpsbd-82898local-실패-ssl_error_syscall"><strong>🔍 문제 분석 및 해결 방법: <code>curl -k -vvv https://bd-82898.local</code> 실패 (<code>SSL_ERROR_SYSCALL</code>)</strong><a hidden class="anchor" aria-hidden="true" href="#-문제-분석-및-해결-방법-curl--k--vvv-httpsbd-82898local-실패-ssl_error_syscall">#</a></h3>
+<h2 id="-주요-문제-확인"><strong>🚨 주요 문제 확인</strong><a hidden class="anchor" aria-hidden="true" href="#-주요-문제-확인">#</a></h2>
+<ol>
+<li>
+<p><strong>현재 <code>bd-82898.local</code>이 <code>127.0.0.1</code>로 해석됨 (잘못된 IP)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat /etc/hosts
+</span></span></code></pre></div><pre tabindex="0"><code>127.0.0.1       localhost bd-82898.local
+</code></pre><ul>
+<li><code>/etc/hosts</code> 파일에서 <code>bd-82898.local</code>이 <code>127.0.0.1</code>로 설정되어 있음.</li>
+<li>하지만 Ingress Controller는 <strong>클러스터의 NodePort 또는 노드 IP에서 실행됨.</strong></li>
+<li><code>127.0.0.1:443</code>는 현재 Ingress Controller와 연결되지 않음.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ingress Controller가 <code>NodePort</code>로 실행됨</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get svc -n ingress-nginx
+</span></span></code></pre></div><pre tabindex="0"><code>NAME                                          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+my-nginx-ingress-nginx-controller             NodePort    10.96.58.210   &lt;none&gt;        80:30105/TCP,443:31813/TCP   69m
+</code></pre><ul>
+<li>현재 Ingress Controller가 <code>NodePort</code>로 설정됨.</li>
+<li>외부에서 <code>443</code> 포트로 접근하려면 <strong>클러스터 노드의 IP 및 <code>NodePort</code>를 사용해야 함.</strong></li>
+<li>현재 <code>/etc/hosts</code>의 <code>127.0.0.1</code>은 <strong>잘못된 주소</strong>이며, 수정해야 함.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>hostname -I</code> 결과</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hostname -I
+</span></span></code></pre></div><pre tabindex="0"><code>172.31.180.118 172.17.0.1 172.18.0.1 fc00:f853:ccd:e793::1
+</code></pre><ul>
+<li><strong>올바른 노드 IP는 <code>172.31.180.118</code> (이전 출력에서 첫 번째 IP가 일반적으로 노드 IP)</strong></li>
+<li><code>/etc/hosts</code>에서 <code>bd-82898.local</code>을 이 IP로 매핑해야 함.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-해결-방법-1"><strong>✅ 해결 방법</strong><a hidden class="anchor" aria-hidden="true" href="#-해결-방법-1">#</a></h2>
+<h3 id="1-etchosts에서-bd-82898local을-노드-ip로-변경"><strong>1️⃣ <code>/etc/hosts</code>에서 <code>bd-82898.local</code>을 노드 IP로 변경</strong><a hidden class="anchor" aria-hidden="true" href="#1-etchosts에서-bd-82898local을-노드-ip로-변경">#</a></h3>
+<p>📌 <strong><code>/etc/hosts</code> 수정</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo nano /etc/hosts
+</span></span></code></pre></div><p>🚀 <strong>수정 후 예제 (<code>127.0.0.1</code>을 <code>172.31.180.118</code>로 변경)</strong></p>
+<pre tabindex="0"><code>172.31.180.118   bd-82898.local
+</code></pre><p>📌 <strong>변경 사항 적용</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo systemctl restart networking
+</span></span></code></pre></div><p>또는 WSL을 다시 시작하면 변경 사항이 반영됩니다.</p>
+<p>✅ <strong>설정 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ping bd-82898.local
+</span></span></code></pre></div><p>정상적인 경우:</p>
+<pre tabindex="0"><code>PING bd-82898.local (172.31.180.118) 56(84) bytes of data.
+64 bytes from 172.31.180.118: icmp_seq=1 ttl=64 time=0.053 ms
+</code></pre><hr>
+<h3 id="2-curl로-올바른-nodeport-사용하여-테스트"><strong>2️⃣ <code>curl</code>로 올바른 NodePort 사용하여 테스트</strong><a hidden class="anchor" aria-hidden="true" href="#2-curl로-올바른-nodeport-사용하여-테스트">#</a></h3>
+<p>현재 Ingress Controller가 <code>NodePort (31813)</code>에서 HTTPS를 제공하므로 <strong>올바른 포트로 요청을 보내야 함</strong>.</p>
+<p>✅ <strong>NodePort 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get svc -n ingress-nginx
+</span></span></code></pre></div><p>✅ <strong><code>curl</code> 테스트 (올바른 포트 사용)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div><p>🚀 <strong>정상적인 경우</strong></p>
+<pre tabindex="0"><code>* Connected to bd-82898.local (172.31.180.118) port 31813
+* TLS handshake successful
+...
+HTTP/1.1 200 OK
+</code></pre><p>🚨 <strong>여전히 <code>SSL_ERROR_SYSCALL</code> 발생하면?</strong></p>
+<ul>
+<li>Ingress 설정이 올바르게 적용되었는지 확인:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get ingress -n cnc
+</span></span><span style="display:flex;"><span>kubectl describe ingress -n cnc
+</span></span></code></pre></div><ul>
+<li>TLS 설정이 누락되었다면 Ingress 리소스를 업데이트해야 함.</li>
+</ul>
+<hr>
+<h3 id="3-ingress-controller의-external-ip를-직접-확인-후-etchosts-업데이트"><strong>3️⃣ Ingress Controller의 External IP를 직접 확인 후 <code>/etc/hosts</code> 업데이트</strong><a hidden class="anchor" aria-hidden="true" href="#3-ingress-controller의-external-ip를-직접-확인-후-etchosts-업데이트">#</a></h3>
+<p>📌 <strong>외부에서 접근 가능한 Ingress Controller의 IP 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get nodes -o wide
+</span></span></code></pre></div><p>✅ 예제 출력:</p>
+<pre tabindex="0"><code>NAME       STATUS   ROLES    AGE    VERSION   INTERNAL-IP      EXTERNAL-IP
+worker-1   Ready    &lt;none&gt;   2d     v1.25.2   172.31.180.118   &lt;none&gt;
+</code></pre><ul>
+<li><strong><code>INTERNAL-IP</code> (172.31.180.118)를 <code>/etc/hosts</code>에 설정해야 함.</strong></li>
+</ul>
+<p>📌 <strong>Ingress 상태 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl describe svc -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><p>✅ <strong>결과에서 External IP가 설정되어 있는지 확인</strong></p>
+<pre tabindex="0"><code>LoadBalancer Ingress: 172.31.180.118
+</code></pre><p>🚀 <strong>올바른 <code>/etc/hosts</code> 설정</strong></p>
+<pre tabindex="0"><code>172.31.180.118   bd-82898.local
+</code></pre><hr>
+<h2 id="-최종-해결-방법-요약"><strong>🚀 최종 해결 방법 요약</strong><a hidden class="anchor" aria-hidden="true" href="#-최종-해결-방법-요약">#</a></h2>
+<ol>
+<li><strong>Ingress Controller의 노드 IP 확인</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hostname -I
+</span></span></code></pre></div></li>
+<li><strong>NodePort로 요청 (<code>31813</code> 확인)</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div></li>
+<li><strong><code>/etc/hosts</code>에서 <code>127.0.0.1</code>을 Ingress Controller IP로 변경</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo nano /etc/hosts
+</span></span></code></pre></div><pre tabindex="0"><code>172.31.180.118   bd-82898.local
+</code></pre></li>
+<li><strong>네트워크 변경 사항 적용</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo systemctl restart networking
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h2 id="-이제-다시-curl--k--vvv-httpsbd-82898local을-실행하여-정상-동작하는지-확인하세요">🚀 <strong>이제 다시 <code>curl -k -vvv https://bd-82898.local</code>을 실행하여 정상 동작하는지 확인하세요!</strong><a hidden class="anchor" aria-hidden="true" href="#-이제-다시-curl--k--vvv-httpsbd-82898local을-실행하여-정상-동작하는지-확인하세요">#</a></h2>
+<h1 id="curl--k--vvv-httpsbd-82898local31813-실패-connection-refused">curl -k -vvv <a href="https://bd-82898.local:31813">https://bd-82898.local:31813</a> 실패 (Connection refused)<a hidden class="anchor" aria-hidden="true" href="#curl--k--vvv-httpsbd-82898local31813-실패-connection-refused">#</a></h1>
+<h3 id="-문제-분석-및-해결-방법-curl--k--vvv-httpsbd-82898local31813-실패-connection-refused"><strong>🔍 문제 분석 및 해결 방법: <code>curl -k -vvv https://bd-82898.local:31813</code> 실패 (<code>Connection refused</code>)</strong><a hidden class="anchor" aria-hidden="true" href="#-문제-분석-및-해결-방법-curl--k--vvv-httpsbd-82898local31813-실패-connection-refused">#</a></h3>
+<h2 id="-주요-문제-확인-1"><strong>🚨 주요 문제 확인</strong><a hidden class="anchor" aria-hidden="true" href="#-주요-문제-확인-1">#</a></h2>
+<ol>
+<li>
+<p><strong><code>bd-82898.local</code>이 올바른 노드 IP(<code>172.31.180.118</code>)로 해석됨</strong> ✅</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat /etc/hosts
+</span></span></code></pre></div><pre tabindex="0"><code>172.31.180.118   bd-82898.local
+</code></pre><ul>
+<li><code>/etc/hosts</code> 설정은 올바르게 적용됨.</li>
+<li><code>ping bd-82898.local</code> 테스트 결과 <strong>정상적인 응답</strong>을 받음.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ingress Controller가 <code>NodePort</code>로 실행 중</strong> ✅</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get svc -n ingress-nginx
+</span></span></code></pre></div><pre tabindex="0"><code>NAME                                          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+my-nginx-ingress-nginx-controller             NodePort    10.96.58.210   &lt;none&gt;        80:30105/TCP,443:31813/TCP   69m
+</code></pre><ul>
+<li><strong>HTTPS(443) → NodePort <code>31813</code>에서 제공됨</strong>.</li>
+<li>외부에서 <code>https://bd-82898.local:31813</code>로 접근해야 함.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>curl</code> 요청 시 <code>Connection refused</code> 발생</strong> ❌</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div><pre tabindex="0"><code>* connect to 172.31.180.118 port 31813 failed: Connection refused
+* Failed to connect to bd-82898.local port 31813
+</code></pre><ul>
+<li><strong>원인: Ingress Controller가 실행 중이지만, 노드의 <code>31813</code> 포트가 실제로 열려 있지 않음.</strong></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-해결-방법-2"><strong>✅ 해결 방법</strong><a hidden class="anchor" aria-hidden="true" href="#-해결-방법-2">#</a></h2>
+<h3 id="1-ingress-controller가-실제로-nodeport에서-리스닝하는지-확인"><strong>1️⃣ Ingress Controller가 실제로 <code>NodePort</code>에서 리스닝하는지 확인</strong><a hidden class="anchor" aria-hidden="true" href="#1-ingress-controller가-실제로-nodeport에서-리스닝하는지-확인">#</a></h3>
+<p>Ingress Controller가 <code>31813</code>에서 수신하고 있는지 확인해야 합니다.</p>
+<p>📌 <strong>Ingress Controller Pod의 상태 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span></code></pre></div><p>✅ 정상적인 경우:</p>
+<pre tabindex="0"><code>NAME                                                 READY   STATUS    RESTARTS   AGE
+my-nginx-ingress-nginx-controller-57f6bc457c-k9x7c   1/1     Running   0          69m
+</code></pre><p>🚨 <strong>Pod이 <code>CrashLoopBackOff</code> 또는 <code>Error</code> 상태라면 문제 발생 → 로그 확인 필요</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl logs -n ingress-nginx my-nginx-ingress-nginx-controller-57f6bc457c-k9x7c
+</span></span></code></pre></div><p>📌 <strong>NodePort(<code>31813</code>)가 실제로 열려 있는지 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div><p>✅ 정상적인 경우:</p>
+<pre tabindex="0"><code>tcp6       0      0 :::31813                :::*                    LISTEN      1234/nginx
+</code></pre><p>🚨 <strong>출력이 없으면 Ingress Controller가 <code>NodePort</code>를 리스닝하지 않음 → 재시작 필요</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><hr>
+<h3 id="2-nodeport가-모든-인터페이스에서-열려-있는지-확인"><strong>2️⃣ <code>NodePort</code>가 모든 인터페이스에서 열려 있는지 확인</strong><a hidden class="anchor" aria-hidden="true" href="#2-nodeport가-모든-인터페이스에서-열려-있는지-확인">#</a></h3>
+<p>📌 <strong>Ingress Service가 External Traffic을 올바르게 받도록 설정</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl edit svc -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><p>🚀 <strong>아래 설정을 추가 또는 확인 (<code>ExternalTrafficPolicy: Cluster</code> 유지)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">externalTrafficPolicy</span>: <span style="color:#ae81ff">Cluster</span>
+</span></span></code></pre></div><p>📌 <strong>변경 후 Ingress Controller 재시작</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><hr>
+<h3 id="3-방화벽-설정-확인-wsl2-환경"><strong>3️⃣ 방화벽 설정 확인 (WSL2 환경)</strong><a hidden class="anchor" aria-hidden="true" href="#3-방화벽-설정-확인-wsl2-환경">#</a></h3>
+<p>현재 WSL2에서 실행 중이므로 <strong>WSL2의 네트워크 설정이 Ingress Controller의 <code>NodePort</code>를 차단할 수 있음</strong>.</p>
+<p>📌 <strong>WSL2에서 <code>NodePort</code> 포트를 허용</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">31813</span> -j ACCEPT
+</span></span><span style="display:flex;"><span>sudo iptables -A OUTPUT -p tcp --sport <span style="color:#ae81ff">31813</span> -j ACCEPT
+</span></span></code></pre></div><p>📌 <strong>현재 열린 포트 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div><p>✅ 정상적인 경우:</p>
+<pre tabindex="0"><code>tcp6       0      0 :::31813                :::*                    LISTEN      1234/nginx
+</code></pre><p>🚨 <strong>포트가 열려 있지 않으면 WSL2 네트워크 구성을 변경해야 함.</strong></p>
+<hr>
+<h3 id="4-curl로-다시-테스트"><strong>4️⃣ <code>curl</code>로 다시 테스트</strong><a hidden class="anchor" aria-hidden="true" href="#4-curl로-다시-테스트">#</a></h3>
+<p>📌 <strong>이제 다시 <code>curl</code>을 실행하여 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div><p>✅ <strong>정상적인 경우</strong></p>
+<pre tabindex="0"><code>* Connected to bd-82898.local (172.31.180.118) port 31813
+* TLS handshake successful
+...
+HTTP/1.1 200 OK
+</code></pre><p>🚨 <strong>여전히 <code>Connection refused</code>가 발생하면?</strong></p>
+<ul>
+<li><code>NodePort</code>가 정상적으로 열려 있는지 다시 확인 (<code>netstat -tulnp | grep 31813</code>)</li>
+<li>Ingress Controller 로그 확인 (<code>kubectl logs -n ingress-nginx &lt;pod-name&gt;</code>)</li>
+</ul>
+<hr>
+<h2 id="-최종-해결-방법-요약-1"><strong>🚀 최종 해결 방법 요약</strong><a hidden class="anchor" aria-hidden="true" href="#-최종-해결-방법-요약-1">#</a></h2>
+<ol>
+<li><strong>Ingress Controller가 실행 중인지 확인</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span></code></pre></div></li>
+<li><strong><code>NodePort(31813)</code>가 열려 있는지 확인</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div></li>
+<li><strong>Ingress Controller가 올바르게 배포되었는지 확인 후 재시작</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div></li>
+<li><strong>WSL2에서 <code>NodePort(31813)</code> 방화벽 허용</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">31813</span> -j ACCEPT
+</span></span></code></pre></div></li>
+<li><strong><code>curl</code> 테스트 재실행</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="-이제-다시-실행해보고-curl이-정상적으로-응답하는지-확인하세요">🚀 <strong>이제 다시 실행해보고 <code>curl</code>이 정상적으로 응답하는지 확인하세요!</strong><a hidden class="anchor" aria-hidden="true" href="#-이제-다시-실행해보고-curl이-정상적으로-응답하는지-확인하세요">#</a></h2>
+<h1 id="nodeport-31813-connection-refused">NodePort (31813) Connection Refused<a hidden class="anchor" aria-hidden="true" href="#nodeport-31813-connection-refused">#</a></h1>
+<h3 id="-문제-분석-및-해결-방법-nodeport-31813-connection-refused"><strong>🔍 문제 분석 및 해결 방법: <code>NodePort (31813) Connection Refused</code></strong><a hidden class="anchor" aria-hidden="true" href="#-문제-분석-및-해결-방법-nodeport-31813-connection-refused">#</a></h3>
+<h2 id="-주요-문제-확인-2"><strong>🚨 주요 문제 확인</strong><a hidden class="anchor" aria-hidden="true" href="#-주요-문제-확인-2">#</a></h2>
+<ol>
+<li>
+<p><strong><code>/etc/hosts</code> 설정 확인 (<code>bd-82898.local</code>이 올바르게 설정됨) ✅</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat /etc/hosts
+</span></span></code></pre></div><pre tabindex="0"><code>172.31.180.118   bd-82898.local
+</code></pre><ul>
+<li><strong>이제 <code>bd-82898.local</code>이 <code>172.31.180.118</code>(클러스터 노드 IP)로 해석됨)</strong> → 올바르게 설정됨.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ingress Controller가 실행 중 ✅</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span></code></pre></div><pre tabindex="0"><code>NAME                                                READY   STATUS    RESTARTS   AGE
+my-nginx-ingress-nginx-controller-c6559fb58-296k6   1/1     Running   0          7m28s
+</code></pre><ul>
+<li><strong>Ingress Controller가 <code>Running</code> 상태이며 재시작도 수행됨.</strong></li>
+</ul>
+</li>
+<li>
+<p><strong><code>NodePort (31813)</code>이 열려 있지 않음 ❌</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div><ul>
+<li><strong>결과 없음 → Ingress Controller가 <code>NodePort 31813</code>을 리스닝하지 않음.</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Pod 로그 확인 불가 (<code>Error from server (NotFound)</code>) ❌</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl logs -n ingress-nginx my-nginx-ingress-nginx-controller-57f6bc457c-k9x7c
+</span></span></code></pre></div><ul>
+<li><strong>Pod 이름이 변경됨 → 올바른 Pod 이름 사용해야 함.</strong></li>
+<li><strong>현재 실행 중인 Pod 로그를 확인해야 함.</strong></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-해결-방법-3"><strong>✅ 해결 방법</strong><a hidden class="anchor" aria-hidden="true" href="#-해결-방법-3">#</a></h2>
+<h3 id="1-올바른-ingress-controller-pod-로그-확인"><strong>1️⃣ 올바른 Ingress Controller Pod 로그 확인</strong><a hidden class="anchor" aria-hidden="true" href="#1-올바른-ingress-controller-pod-로그-확인">#</a></h3>
+<p>현재 <code>my-nginx-ingress-nginx-controller-57f6bc457c-k9x7c</code>가 존재하지 않으므로, <strong>실제 실행 중인 Pod 로그를 확인해야 함</strong>.</p>
+<p>📌 <strong>현재 실행 중인 Ingress Pod 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span></code></pre></div><p>✅ 예제 출력:</p>
+<pre tabindex="0"><code>NAME                                                READY   STATUS    RESTARTS   AGE
+my-nginx-ingress-nginx-controller-c6559fb58-296k6   1/1     Running   0          10m
+</code></pre><p>🚀 <strong>실제 실행 중인 Pod의 로그 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl logs -n ingress-nginx my-nginx-ingress-nginx-controller-c6559fb58-296k6
+</span></span></code></pre></div><ul>
+<li>로그에 <strong><code>listening on port 31813</code></strong> 또는 <strong>TLS 설정 관련 오류가 있는지 확인</strong>.</li>
+</ul>
+<hr>
+<h3 id="2-nodeport-31813이-열려-있는지-확인-및-ingress-설정-확인"><strong>2️⃣ <code>NodePort (31813)</code>이 열려 있는지 확인 및 Ingress 설정 확인</strong><a hidden class="anchor" aria-hidden="true" href="#2-nodeport-31813이-열려-있는지-확인-및-ingress-설정-확인">#</a></h3>
+<p>📌 <strong>Ingress Controller가 <code>NodePort</code>에서 서비스되고 있는지 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get svc -n ingress-nginx
+</span></span></code></pre></div><p>✅ 정상적인 경우:</p>
+<pre tabindex="0"><code>NAME                                          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+my-nginx-ingress-nginx-controller             NodePort    10.96.58.210   &lt;none&gt;        80:30105/TCP,443:31813/TCP   69m
+</code></pre><ul>
+<li><strong><code>NodePort 31813</code>이 할당되어 있어야 함.</strong></li>
+<li>만약 <code>NodePort</code>가 설정되지 않았다면, <strong>Ingress를 다시 설정해야 함</strong>.</li>
+</ul>
+<p>🚀 <strong><code>NodePort</code> 포트가 실제로 리스닝 중인지 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div><p>✅ 정상적인 경우:</p>
+<pre tabindex="0"><code>tcp6       0      0 :::31813                :::*                    LISTEN      1234/nginx
+</code></pre><p>🚨 <strong>여전히 결과가 없으면 Ingress Controller를 다시 배포해야 함.</strong></p>
+<hr>
+<h3 id="3-ingress-controller-설정-수정-필요한-경우"><strong>3️⃣ Ingress Controller 설정 수정 (필요한 경우)</strong><a hidden class="anchor" aria-hidden="true" href="#3-ingress-controller-설정-수정-필요한-경우">#</a></h3>
+<p>📌 <strong><code>NodePort</code> 설정을 강제 적용</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl edit svc -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><p>🚀 <strong>아래 설정 확인 및 추가</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">externalTrafficPolicy</span>: <span style="color:#ae81ff">Cluster</span>
+</span></span></code></pre></div><p>📌 <strong>변경 후 Ingress Controller 재시작</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><hr>
+<h3 id="4-wsl2에서-nodeport-31813-포트가-차단되지-않았는지-확인"><strong>4️⃣ WSL2에서 <code>NodePort (31813)</code> 포트가 차단되지 않았는지 확인</strong><a hidden class="anchor" aria-hidden="true" href="#4-wsl2에서-nodeport-31813-포트가-차단되지-않았는지-확인">#</a></h3>
+<p>현재 <strong>WSL2에서 실행 중이므로 WSL2의 네트워크 설정이 <code>NodePort</code>를 차단할 가능성이 있음</strong>.</p>
+<p>📌 <strong>WSL2에서 <code>NodePort (31813)</code> 방화벽 허용</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">31813</span> -j ACCEPT
+</span></span><span style="display:flex;"><span>sudo iptables -A OUTPUT -p tcp --sport <span style="color:#ae81ff">31813</span> -j ACCEPT
+</span></span></code></pre></div><p>📌 <strong>현재 열린 포트 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div><p>✅ 정상적인 경우:</p>
+<pre tabindex="0"><code>tcp6       0      0 :::31813                :::*                    LISTEN      1234/nginx
+</code></pre><p>🚨 <strong>포트가 열려 있지 않으면 WSL2 네트워크 구성을 변경해야 함.</strong></p>
+<hr>
+<h3 id="5-curl로-다시-테스트"><strong>5️⃣ <code>curl</code>로 다시 테스트</strong><a hidden class="anchor" aria-hidden="true" href="#5-curl로-다시-테스트">#</a></h3>
+<p>📌 <strong>이제 다시 <code>curl</code>을 실행하여 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div><p>✅ <strong>정상적인 경우</strong></p>
+<pre tabindex="0"><code>* Connected to bd-82898.local (172.31.180.118) port 31813
+* TLS handshake successful
+...
+HTTP/1.1 200 OK
+</code></pre><p>🚨 <strong>여전히 <code>Connection refused</code>가 발생하면?</strong></p>
+<ul>
+<li><code>NodePort</code>가 정상적으로 열려 있는지 다시 확인 (<code>netstat -tulnp | grep 31813</code>)</li>
+<li>Ingress Controller 로그 확인 (<code>kubectl logs -n ingress-nginx &lt;pod-name&gt;</code>)</li>
+</ul>
+<hr>
+<h2 id="-최종-해결-방법-요약-2"><strong>🚀 최종 해결 방법 요약</strong><a hidden class="anchor" aria-hidden="true" href="#-최종-해결-방법-요약-2">#</a></h2>
+<ol>
+<li><strong>Ingress Controller가 실행 중인지 확인</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span></code></pre></div></li>
+<li><strong>실제 실행 중인 Pod 로그 확인</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl logs -n ingress-nginx my-nginx-ingress-nginx-controller-c6559fb58-296k6
+</span></span></code></pre></div></li>
+<li><strong><code>NodePort (31813)</code>가 열려 있는지 확인</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div></li>
+<li><strong>Ingress Controller가 올바르게 배포되었는지 확인 후 재시작</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div></li>
+<li><strong>WSL2에서 <code>NodePort (31813)</code> 방화벽 허용</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">31813</span> -j ACCEPT
+</span></span></code></pre></div></li>
+<li><strong><code>curl</code> 테스트 재실행</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div></li>
+</ol>
+<p>🚀 <strong>이제 다시 실행해보고 <code>curl</code>이 정상적으로 응답하는지 확인하세요!</strong></p>
+<hr>
+<h1 id="nodeport-31813-connection-refused-1">NodePort (31813) Connection Refused<a hidden class="anchor" aria-hidden="true" href="#nodeport-31813-connection-refused-1">#</a></h1>
+<h3 id="-문제-분석-및-해결-방법-nodeport-31813-connection-refused-1"><strong>🔍 문제 분석 및 해결 방법: <code>NodePort (31813) Connection Refused</code></strong><a hidden class="anchor" aria-hidden="true" href="#-문제-분석-및-해결-방법-nodeport-31813-connection-refused-1">#</a></h3>
+<hr>
+<h2 id="-주요-문제-요약"><strong>🚨 주요 문제 요약</strong><a hidden class="anchor" aria-hidden="true" href="#-주요-문제-요약">#</a></h2>
+<ol>
+<li>
+<p><strong>Ingress Controller Pod이 정상 실행됨 (<code>Running</code>)</strong> ✅</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span></code></pre></div><pre tabindex="0"><code>NAME                                                 READY   STATUS    RESTARTS   AGE
+my-nginx-ingress-nginx-controller-6b7b86d57d-2trlq   1/1     Running   0          80s
+</code></pre><ul>
+<li>Ingress Controller가 정상적으로 실행 중임.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>NodePort (31813)</code>에서 서비스되지 않음 (<code>Connection refused</code>)</strong> ❌</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div><pre tabindex="0"><code>* connect to 172.31.180.118 port 31813 failed: Connection refused
+* Failed to connect to bd-82898.local port 31813
+</code></pre><ul>
+<li><strong>Ingress Controller가 <code>NodePort</code>를 리스닝하지 않거나, WSL2에서 차단됨.</strong></li>
+</ul>
+</li>
+<li>
+<p><strong><code>netstat -tulnp | grep 31813</code> 실행 시 아무런 결과가 없음</strong> ❌</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div><ul>
+<li><strong>Ingress Controller가 <code>31813</code> 포트를 열지 않음.</strong></li>
+<li><strong>Kubernetes의 <code>NodePort</code> 설정 문제 가능성 있음.</strong></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-해결-방법-4"><strong>✅ 해결 방법</strong><a hidden class="anchor" aria-hidden="true" href="#-해결-방법-4">#</a></h2>
+<h3 id="1-nodeport-31813가-올바르게-설정되었는지-확인"><strong>1️⃣ <code>NodePort (31813)</code>가 올바르게 설정되었는지 확인</strong><a hidden class="anchor" aria-hidden="true" href="#1-nodeport-31813가-올바르게-설정되었는지-확인">#</a></h3>
+<p>📌 <strong>Ingress Controller의 서비스 설정을 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get svc -n ingress-nginx
+</span></span></code></pre></div><p>✅ 예상되는 정상적인 경우:</p>
+<pre tabindex="0"><code>NAME                                          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+my-nginx-ingress-nginx-controller             NodePort    10.96.58.210   &lt;none&gt;        80:30105/TCP,443:31813/TCP   69m
+</code></pre><p>🚨 <strong>만약 <code>443:31813/TCP</code>가 없거나 <code>TYPE=ClusterIP</code>이면, <code>NodePort</code> 설정이 잘못됨.</strong><br>
+이를 수정해야 함.</p>
+<hr>
+<h3 id="2-nodeport-31813가-ingress-controller-pod에서-리스닝되는지-확인"><strong>2️⃣ <code>NodePort (31813)</code>가 Ingress Controller Pod에서 리스닝되는지 확인</strong><a hidden class="anchor" aria-hidden="true" href="#2-nodeport-31813가-ingress-controller-pod에서-리스닝되는지-확인">#</a></h3>
+<p>📌 <strong>Ingress Controller의 실제 Pod에서 <code>31813</code> 포트를 리스닝하고 있는지 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl exec -it -n ingress-nginx my-nginx-ingress-nginx-controller-6b7b86d57d-2trlq -- netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div><p>✅ <strong>정상적인 경우 (Pod 내부에서 <code>31813</code> 포트가 열려 있음):</strong></p>
+<pre tabindex="0"><code>tcp6       0      0 :::31813                :::*                    LISTEN      1234/nginx
+</code></pre><p>🚨 <strong>만약 포트가 열려 있지 않다면?</strong></p>
+<ul>
+<li>Ingress 설정이 잘못되어 있을 가능성이 큼.</li>
+<li>아래 <strong>Ingress 설정을 강제 수정</strong>해야 함.</li>
+</ul>
+<hr>
+<h3 id="3-ingress-controller-서비스-설정을-강제-수정"><strong>3️⃣ Ingress Controller 서비스 설정을 강제 수정</strong><a hidden class="anchor" aria-hidden="true" href="#3-ingress-controller-서비스-설정을-강제-수정">#</a></h3>
+<p>📌 <strong>Ingress Controller의 <code>NodePort</code>가 정확하게 설정되었는지 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl edit svc -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><p>🚀 <strong>아래 설정 확인 및 추가 (<code>externalTrafficPolicy: Cluster</code> 유지)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">externalTrafficPolicy</span>: <span style="color:#ae81ff">Cluster</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">https</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">https</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodePort</span>: <span style="color:#ae81ff">31813</span>  <span style="color:#75715e"># &lt;- 올바르게 설정되어야 함</span>
+</span></span></code></pre></div><p>📌 <strong>변경 후 Ingress Controller 재시작</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><hr>
+<h3 id="4-wsl2에서-nodeport-31813-포트가-차단되지-않았는지-확인-1"><strong>4️⃣ WSL2에서 <code>NodePort (31813)</code> 포트가 차단되지 않았는지 확인</strong><a hidden class="anchor" aria-hidden="true" href="#4-wsl2에서-nodeport-31813-포트가-차단되지-않았는지-확인-1">#</a></h3>
+<p>📌 <strong>WSL2는 기본적으로 외부 트래픽을 차단할 수 있으므로, 수동으로 <code>NodePort</code>를 허용해야 함.</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">31813</span> -j ACCEPT
+</span></span><span style="display:flex;"><span>sudo iptables -A OUTPUT -p tcp --sport <span style="color:#ae81ff">31813</span> -j ACCEPT
+</span></span></code></pre></div><p>📌 <strong>현재 열린 포트 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div><p>✅ 정상적인 경우:</p>
+<pre tabindex="0"><code>tcp6       0      0 :::31813                :::*                    LISTEN      1234/nginx
+</code></pre><p>🚨 <strong>포트가 열려 있지 않으면 WSL2 네트워크 구성을 변경해야 함.</strong></p>
+<hr>
+<h3 id="5-curl로-다시-테스트-1"><strong>5️⃣ <code>curl</code>로 다시 테스트</strong><a hidden class="anchor" aria-hidden="true" href="#5-curl로-다시-테스트-1">#</a></h3>
+<p>📌 <strong>이제 다시 <code>curl</code>을 실행하여 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div><p>✅ <strong>정상적인 경우</strong></p>
+<pre tabindex="0"><code>* Connected to bd-82898.local (172.31.180.118) port 31813
+* TLS handshake successful
+...
+HTTP/1.1 200 OK
+</code></pre><p>🚨 <strong>여전히 <code>Connection refused</code>가 발생하면?</strong></p>
+<ul>
+<li><code>NodePort</code>가 정상적으로 열려 있는지 다시 확인 (<code>netstat -tulnp | grep 31813</code>)</li>
+<li>Ingress Controller 로그 확인 (<code>kubectl logs -n ingress-nginx &lt;pod-name&gt;</code>)</li>
+</ul>
+<hr>
+<h2 id="-최종-해결-방법-요약-3"><strong>🚀 최종 해결 방법 요약</strong><a hidden class="anchor" aria-hidden="true" href="#-최종-해결-방법-요약-3">#</a></h2>
+<ol>
+<li><strong>Ingress Controller가 실행 중인지 확인</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx
+</span></span></code></pre></div></li>
+<li><strong>Ingress Controller의 <code>NodePort</code> 설정 확인</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl get svc -n ingress-nginx
+</span></span></code></pre></div></li>
+<li><strong>Pod 내부에서 <code>NodePort (31813)</code>가 리스닝되는지 확인</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl exec -it -n ingress-nginx my-nginx-ingress-nginx-controller-6b7b86d57d-2trlq -- netstat -tulnp | grep <span style="color:#ae81ff">31813</span>
+</span></span></code></pre></div></li>
+<li><strong>Ingress Controller 서비스 설정을 강제 수정</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl edit svc -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">externalTrafficPolicy</span>: <span style="color:#ae81ff">Cluster</span>
+</span></span></code></pre></div></li>
+<li><strong>Ingress Controller 재시작</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl rollout restart deployment -n ingress-nginx my-nginx-ingress-nginx-controller
+</span></span></code></pre></div></li>
+<li><strong>WSL2에서 <code>NodePort (31813)</code> 방화벽 허용</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">31813</span> -j ACCEPT
+</span></span></code></pre></div></li>
+<li><strong><code>curl</code> 테스트 재실행</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>curl -k -vvv https://bd-82898.local:31813
+</span></span></code></pre></div></li>
+</ol>
+<p>🚀 <strong>이제 다시 실행해보고 <code>curl</code>이 정상적으로 응답하는지 확인하세요!</strong></p>
+<hr>
+<h1 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h1>
+<hr>
+<h1 id="heading-1"><a hidden class="anchor" aria-hidden="true" href="#heading-1">#</a></h1>
+<hr>
+<h1 id="heading-2"><a hidden class="anchor" aria-hidden="true" href="#heading-2">#</a></h1>
+<hr>
+<h1 id="heading-3"><a hidden class="anchor" aria-hidden="true" href="#heading-3">#</a></h1>
+<hr>
+<h1 id="heading-4"><a hidden class="anchor" aria-hidden="true" href="#heading-4">#</a></h1>
+<hr>
+<h1 id="heading-5"><a hidden class="anchor" aria-hidden="true" href="#heading-5">#</a></h1>
+<hr>
+<h1 id="heading-6"><a hidden class="anchor" aria-hidden="true" href="#heading-6">#</a></h1>
+<hr>
+<h1 id="heading-7"><a hidden class="anchor" aria-hidden="true" href="#heading-7">#</a></h1>
+<hr>
+<h1 id="heading-8"><a hidden class="anchor" aria-hidden="true" href="#heading-8">#</a></h1>
+<hr>
+<h1 id="heading-9"><a hidden class="anchor" aria-hidden="true" href="#heading-9">#</a></h1>
+<hr>
+<h1 id="heading-10"><a hidden class="anchor" aria-hidden="true" href="#heading-10">#</a></h1>
+<hr>
+<h1 id="heading-11"><a hidden class="anchor" aria-hidden="true" href="#heading-11">#</a></h1>
+<hr>
+<h1 id="heading-12"><a hidden class="anchor" aria-hidden="true" href="#heading-12">#</a></h1>
+<hr>
+<h1 id="heading-13"><a hidden class="anchor" aria-hidden="true" href="#heading-13">#</a></h1>
+<hr>
+<h1 id="heading-14"><a hidden class="anchor" aria-hidden="true" href="#heading-14">#</a></h1>
+<hr>
+<h1 id="heading-15"><a hidden class="anchor" aria-hidden="true" href="#heading-15">#</a></h1>
+<hr>
+<h1 id="heading-16"><a hidden class="anchor" aria-hidden="true" href="#heading-16">#</a></h1>
+<hr>
+<h1 id="heading-17"><a hidden class="anchor" aria-hidden="true" href="#heading-17">#</a></h1>
+<hr>
+<h1 id="heading-18"><a hidden class="anchor" aria-hidden="true" href="#heading-18">#</a></h1>
+<hr>
+<h1 id="heading-19"><a hidden class="anchor" aria-hidden="true" href="#heading-19">#</a></h1>
+<hr>
+<h1 id="heading-20"><a hidden class="anchor" aria-hidden="true" href="#heading-20">#</a></h1>
+<hr>
+<h1 id="heading-21"><a hidden class="anchor" aria-hidden="true" href="#heading-21">#</a></h1>
+<hr>
+<h1 id="heading-22"><a hidden class="anchor" aria-hidden="true" href="#heading-22">#</a></h1>
+<hr>
+<h1 id="heading-23"><a hidden class="anchor" aria-hidden="true" href="#heading-23">#</a></h1>
+<hr>
+<h1 id="heading-24"><a hidden class="anchor" aria-hidden="true" href="#heading-24">#</a></h1>
+<hr>
+<h1 id="heading-25"><a hidden class="anchor" aria-hidden="true" href="#heading-25">#</a></h1>
+<hr>
+<h1 id="heading-26"><a hidden class="anchor" aria-hidden="true" href="#heading-26">#</a></h1>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

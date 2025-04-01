@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Checker on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/categories/checker/</link>
+    <description>Recent content in Checker on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Mon, 17 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/categories/checker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AUTOSAR C&#43;&#43; A2-10-5</title>
+      <link>http://localhost:1313/portfolio/posts/checker/autosar-a2-10-5/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/checker/autosar-a2-10-5/</guid>
+      <description>&lt;h1 id=&#34;autosar-c-a2-10-5-규칙-가이드&#34;&gt;AUTOSAR C++ A2-10-5 규칙 가이드&lt;/h1&gt;
+&lt;h2 id=&#34;목차&#34;&gt;목차&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#%EA%B7%9C%EC%B9%99-%EA%B0%9C%EC%9A%94&#34;&gt;규칙 개요&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%ED%95%B5%EC%8B%AC-%EA%B0%9C%EB%85%90&#34;&gt;핵심 개념&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%EC%9C%84%EB%B0%98-%EC%82%AC%EB%A1%80&#34;&gt;위반 사례&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95&#34;&gt;해결 방법&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85&#34;&gt;상세 설명&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%EC%B0%B8%EA%B3%A0-%EC%82%AC%ED%95%AD&#34;&gt;참고 사항&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;규칙-개요&#34;&gt;규칙 개요&lt;/h2&gt;
+&lt;p&gt;AUTOSAR C++ A2-10-5 규칙은 다음과 같이 정의됩니다:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;정적 저장 기간을 가진 함수 또는 외부/내부 연결을 가진 비멤버 객체의 식별자 이름은 재사용되어서는 안 된다.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;규칙의-목적&#34;&gt;규칙의 목적&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;코드의 명확성과 가독성 향상&lt;/li&gt;
+&lt;li&gt;유지보수성 개선&lt;/li&gt;
+&lt;li&gt;모호성과 오류 가능성 감소&lt;/li&gt;
+&lt;li&gt;자동차 소프트웨어의 안전성 강화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;핵심-개념&#34;&gt;핵심 개념&lt;/h2&gt;
+&lt;h3 id=&#34;1-static-storage-duration-정적-저장-기간&#34;&gt;1. Static Storage Duration (정적 저장 기간)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;C++에서 모든 함수는 기본적으로 정적 저장 기간을 가짐&lt;/li&gt;
+&lt;li&gt;프로그램 시작부터 종료까지 메모리에 존재&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;static&lt;/code&gt; 키워드는 함수의 저장 기간이 아닌 링키지(linkage)를 변경&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-non-member-object-비멤버-객체&#34;&gt;2. Non-member Object (비멤버 객체)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;클래스나 구조체의 멤버가 아닌 변수나 객체&lt;/li&gt;
+&lt;li&gt;전역 변수, 네임스페이스 범위 변수, 블록 범위의 정적 변수 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-linkage-연결&#34;&gt;3. Linkage (연결)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;External Linkage&lt;/strong&gt;: 다른 번역 단위에서도 참조 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Internal Linkage&lt;/strong&gt;: 같은 번역 단위 내에서만 참조 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;위반-사례&#34;&gt;위반 사례&lt;/h2&gt;
+&lt;h3 id=&#34;1-함수-오버로딩&#34;&gt;1. 함수 오버로딩&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 위반 예시
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int32_t&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;my_printf&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; msg) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;char: %s&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, msg);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int32_t&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;my_printf&lt;/span&gt;(std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; msg) {  &lt;span style=&#34;color:#75715e&#34;&gt;// 위반: 동일 식별자 재사용
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;string: %s&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, msg.c_str());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-다른-범위에서-식별자-재사용&#34;&gt;2. 다른 범위에서 식별자 재사용&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 위반 예시
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; globalVar;  &lt;span style=&#34;color:#75715e&#34;&gt;// 외부 링키지를 가진 전역 변수
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;func&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; globalVar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;// 위반: 외부 링키지를 가진 식별자 재사용
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;해결-방법&#34;&gt;해결 방법&lt;/h2&gt;
+&lt;h3 id=&#34;1-함수-이름-구분&#34;&gt;1. 함수 이름 구분&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 올바른 예시
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int32_t&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;my_printf_c_string&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; msg) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;char: %s&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, msg);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int32_t&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;my_printf_cpp_string&lt;/span&gt;(std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; msg) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;string: %s&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, msg.c_str());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-변수-이름-구분&#34;&gt;2. 변수 이름 구분&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 올바른 예시
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; globalVar;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;func&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; localGlobalVar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;// 명확한 이름 사용
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;상세-설명&#34;&gt;상세 설명&lt;/h2&gt;
+&lt;h3 id=&#34;static-storage-duration-vs-automatic-storage-duration&#34;&gt;Static Storage Duration vs Automatic Storage Duration&lt;/h3&gt;
+&lt;h4 id=&#34;static-storage-duration&#34;&gt;Static Storage Duration&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;프로그램 시작 시점에 생성&lt;/li&gt;
+&lt;li&gt;프로그램 종료까지 존재&lt;/li&gt;
+&lt;li&gt;초기화되지 않으면 0 또는 nullptr로 자동 초기화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;automatic-storage-duration&#34;&gt;Automatic Storage Duration&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;선언된 블록 진입 시 생성&lt;/li&gt;
+&lt;li&gt;블록 종료 시 파괴&lt;/li&gt;
+&lt;li&gt;초기화되지 않으면 값이 불확정 상태&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;예시-코드&#34;&gt;예시 코드&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 정적 저장 기간
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; globalStaticVar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;staticFunction&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Static function is called&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;exampleFunction&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 자동 저장 기간
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; localAutoVar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 정적 저장 기간
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; localStaticVar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    localAutoVar&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    localStaticVar&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;localAutoVar: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; localAutoVar &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;localStaticVar: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; localStaticVar &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;참고-사항&#34;&gt;참고 사항&lt;/h2&gt;
+&lt;h3 id=&#34;오해-해소&#34;&gt;오해 해소&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;함수에 &lt;code&gt;static&lt;/code&gt; 키워드가 없더라도 모든 함수는 기본적으로 정적 저장 기간을 가짐&lt;/li&gt;
+&lt;li&gt;C++에서는 함수 오버로딩이 합법적이지만, AUTOSAR C++14는 더 엄격한 안전 기준을 적용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;컴파일-및-검증&#34;&gt;컴파일 및 검증&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 일반 컴파일&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;g++ -std&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;c++14 -o test_a2_10_5 test_a2_10_5.cpp
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# AUTOSAR 검증&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;coverity scan --checker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;AUTOSAR test_a2_10_5.cpp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;결론&#34;&gt;결론&lt;/h3&gt;
+&lt;p&gt;AUTOSAR C++14 Rule A2-10-5는 자동차 소프트웨어의 안전성과 신뢰성을 위해 코드의 명확성을 강조하는 규칙입니다. 식별자의 재사용을 금지함으로써 코드의 가독성과 유지보수성을 향상시킵니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CERT Cpp Checker</title>
+      <link>http://localhost:1313/portfolio/posts/checker/cert-cpp-checker/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/checker/cert-cpp-checker/</guid>
+      <description>&lt;hr&gt;</description>
+    </item>
+    <item>
+      <title>CERT Java Checker</title>
+      <link>http://localhost:1313/portfolio/posts/checker/cert-java-checker/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/checker/cert-java-checker/</guid>
+      <description>&lt;h1 id=&#34;cert-ser03-j--do-not-serialize-unencrypted-sensitive-data&#34;&gt;CERT SER03-J : Do not serialize unencrypted sensitive data.&lt;/h1&gt;
+&lt;p&gt;죄송합니다. 이전에 제공된 정보에서 혼란을 드려 죄송합니다. CERT Java 보안 코딩 표준에서 &lt;strong&gt;SER03-J: 민감한 데이터를 암호화하지 않고 직렬화하지 마십시오&lt;/strong&gt;라는 규칙은 민감한 정보가 직렬화 과정에서 노출되지 않도록 보호하기 위한 지침을 제공합니다.&lt;/p&gt;
+&lt;h3 id=&#34;취약한-코드-예시&#34;&gt;취약한 코드 예시&lt;/h3&gt;
+&lt;p&gt;아래 코드는 사용자의 비밀번호를 평문으로 직렬화하여 파일에 저장하는 취약한 예제입니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; java.io.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserInfo&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;implements&lt;/span&gt; Serializable {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;long&lt;/span&gt; serialVersionUID &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1L;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; String username;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; String password; &lt;span style=&#34;color:#75715e&#34;&gt;// 민감한 데이터&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserInfo&lt;/span&gt;(String username, String password) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;username&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; username;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;password&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; password;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// getter 및 setter 생략&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;(String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        UserInfo user &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; UserInfo(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;user1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;password123&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 객체를 파일에 직렬화&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; (ObjectOutputStream oos &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; ObjectOutputStream(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; FileOutputStream(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;user.ser&amp;#34;&lt;/span&gt;))) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            oos.&lt;span style=&#34;color:#a6e22e&#34;&gt;writeObject&lt;/span&gt;(user);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        } &lt;span style=&#34;color:#66d9ef&#34;&gt;catch&lt;/span&gt; (IOException e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            e.&lt;span style=&#34;color:#a6e22e&#34;&gt;printStackTrace&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;위 코드에서는 &lt;code&gt;UserInfo&lt;/code&gt; 객체를 직렬화하여 &lt;code&gt;user.ser&lt;/code&gt; 파일에 저장합니다. 그러나 &lt;code&gt;password&lt;/code&gt; 필드는 암호화되지 않은 상태로 저장되므로, 파일이 유출되면 비밀번호가 노출될 수 있습니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hyundai Cpp Checker</title>
+      <link>http://localhost:1313/portfolio/posts/checker/hyundai-cpp-checker/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/checker/hyundai-cpp-checker/</guid>
+      <description>&lt;h1 id=&#34;hyundai-mp-oop-011&#34;&gt;HYUNDAI MP-OOP-011&lt;/h1&gt;
+&lt;p&gt;HYUNDAI MP-OOP-011 룰은 C++ 프로그래밍에서 &lt;strong&gt;클래스의 멤버 변수를 직접적으로 노출하지 말고, 적절한 접근 제어를 통해 캡슐화(encapsulation)를 유지하라&lt;/strong&gt;는 원칙을 강조합니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-룰의-목적&#34;&gt;&lt;strong&gt;1. 룰의 목적&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;데이터 보호&lt;/strong&gt;: 클래스 내부의 데이터가 외부 코드에 의해 직접 수정되는 것을 방지하여 무결성을 유지합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;유지보수성 향상&lt;/strong&gt;: 데이터 접근을 메서드를 통해 제어함으로써 코드 변경 시 영향 범위를 최소화합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;캡슐화 준수&lt;/strong&gt;: 객체 지향 프로그래밍의 기본 원칙인 캡슐화를 통해 데이터와 메서드를 하나의 단위로 묶어 관리합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-권장-사항&#34;&gt;&lt;strong&gt;2. 권장 사항&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;멤버 변수의 접근 제어&lt;/strong&gt;: 모든 멤버 변수를 &lt;code&gt;private&lt;/code&gt; 또는 &lt;code&gt;protected&lt;/code&gt;로 선언하여 외부에서 직접 접근하지 못하도록 합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;접근자 메서드 제공&lt;/strong&gt;: 필요한 경우, 멤버 변수에 접근하기 위한 &lt;code&gt;getter&lt;/code&gt; 및 &lt;code&gt;setter&lt;/code&gt; 메서드를 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;불필요한 공개 멤버 제거&lt;/strong&gt;: 외부에서 직접 접근할 필요가 없는 멤버는 공개하지 않습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-예시&#34;&gt;&lt;strong&gt;3. 예시&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;잘못된 예:&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hyundai Java Checker</title>
+      <link>http://localhost:1313/portfolio/posts/checker/hyundai-java-checker/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/checker/hyundai-java-checker/</guid>
+      <description>&lt;h1 id=&#34;mj-ser-002--do-not-serialize-unencrypted-sensitive-data&#34;&gt;MJ-SER-002 : Do not serialize unencrypted sensitive data.&lt;/h1&gt;
+&lt;p&gt;CERT SER03-J 에 매핑됨&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://documentation.blackduck.com/bundle/coverity-docs-2023.12/page/checker-ref/tables/hyundai-java.html&#34;&gt;https://documentation.blackduck.com/bundle/coverity-docs-2023.12/page/checker-ref/tables/hyundai-java.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://documentation.blackduck.com/bundle/coverity-docs/page/checker-ref/tables/sei-cert-java-coding-standard.html&#34;&gt;https://documentation.blackduck.com/bundle/coverity-docs/page/checker-ref/tables/sei-cert-java-coding-standard.html&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AUTOSAR</title>
+      <link>http://localhost:1313/portfolio/posts/checker/autosar/</link>
+      <pubDate>Sat, 17 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/checker/autosar/</guid>
+      <description>&lt;h1 id=&#34;autosar-automotive-open-system-architecture&#34;&gt;AUTOSAR (Automotive Open System Architecture)&lt;/h1&gt;
+&lt;h2 id=&#34;목차&#34;&gt;목차&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#autosar-automotive-open-system-architecture&#34;&gt;AUTOSAR (Automotive Open System Architecture)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%EB%AA%A9%EC%B0%A8&#34;&gt;목차&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#autosar-classic-platform&#34;&gt;AUTOSAR Classic Platform&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%EB%B2%84%EC%A0%84-%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC&#34;&gt;버전 히스토리&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#autosar-adaptive-platform&#34;&gt;AUTOSAR Adaptive Platform&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%EB%B2%84%EC%A0%84-%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC-1&#34;&gt;버전 히스토리&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#autosar-c-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8&#34;&gt;AUTOSAR C++ 가이드라인&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%EC%A3%BC%EC%9A%94-%EB%B2%84%EC%A0%84&#34;&gt;주요 버전&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8-%ED%8A%B9%EC%A7%95&#34;&gt;가이드라인 특징&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%EC%A3%BC%EC%9A%94-%EB%AA%A9%EC%A0%81&#34;&gt;주요 목적&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;autosar-classic-platform&#34;&gt;AUTOSAR Classic Platform&lt;/h2&gt;
+&lt;p&gt;AUTOSAR Classic Platform은 자동차의 기본적인 전자 제어 시스템을 위한 표준입니다.&lt;/p&gt;
+&lt;h3 id=&#34;버전-히스토리&#34;&gt;버전 히스토리&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;버전&lt;/th&gt;
+          &lt;th&gt;발표 연도&lt;/th&gt;
+          &lt;th&gt;주요 특징&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 1.0&lt;/td&gt;
+          &lt;td&gt;2005&lt;/td&gt;
+          &lt;td&gt;초기 버전&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 2.0&lt;/td&gt;
+          &lt;td&gt;2006&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 2.1&lt;/td&gt;
+          &lt;td&gt;2007&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 3.0&lt;/td&gt;
+          &lt;td&gt;2008&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 3.1&lt;/td&gt;
+          &lt;td&gt;2008&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 3.2&lt;/td&gt;
+          &lt;td&gt;2011&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.0&lt;/td&gt;
+          &lt;td&gt;2009&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.1&lt;/td&gt;
+          &lt;td&gt;2013&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.2&lt;/td&gt;
+          &lt;td&gt;2014&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.3&lt;/td&gt;
+          &lt;td&gt;2016&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.4&lt;/td&gt;
+          &lt;td&gt;2018&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.5&lt;/td&gt;
+          &lt;td&gt;2018&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.6&lt;/td&gt;
+          &lt;td&gt;2020&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.7&lt;/td&gt;
+          &lt;td&gt;2021&lt;/td&gt;
+          &lt;td&gt;최신 버전&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;autosar-adaptive-platform&#34;&gt;AUTOSAR Adaptive Platform&lt;/h2&gt;
+&lt;p&gt;AUTOSAR Adaptive Platform은 고성능 컴퓨팅과 자동화된 운전을 위한 표준입니다.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

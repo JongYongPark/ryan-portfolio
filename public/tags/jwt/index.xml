@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>JWT on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/jwt/</link>
+    <description>Recent content in JWT on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 31 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/jwt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Next.js - JWT</title>
+      <link>http://localhost:1313/portfolio/posts/developer/javascipt/nextjs-jwt/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/javascipt/nextjs-jwt/</guid>
+      <description>&lt;h1 id=&#34;nextjs-app-with-jwt-based-authentication-and-a-basic-security-setup&#34;&gt;Next.js app with JWT-based authentication and a basic security setup&lt;/h1&gt;
+&lt;p&gt;Here&amp;rsquo;s how you can create a simple &lt;strong&gt;Next.js&lt;/strong&gt; app with &lt;strong&gt;JWT-based authentication&lt;/strong&gt; and a basic security setup.&lt;/p&gt;
+&lt;h3 id=&#34;steps-overview&#34;&gt;Steps Overview:&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Initialize a Next.js app&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Set up authentication with JWT&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create login and protected routes&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Add security features&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;1-initialize-nextjs-app&#34;&gt;1. Initialize Next.js App&lt;/h3&gt;
+&lt;p&gt;Run the following commands to initialize a Next.js app:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npx create-next-app@latest my-nextjs-jwt-app
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd my-nextjs-jwt-app
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npm install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-install-dependencies&#34;&gt;2. Install Dependencies&lt;/h3&gt;
+&lt;p&gt;You need additional packages for handling JWT, user authentication, and securing the app:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Beyond Compare 4를 리눅스에 설치하기 | RyanLabs</title>
+<meta name="keywords" content="BeyondCompare">
+<meta name="description" content="Beyond Compare 4를 리눅스에 설치하기
+bash#:~$ cd ~/Downloads/
+
+bash#:~/Downloads$ wget https://www.scootersoftware.com/bcompare-4.4.6.27483_amd64.deb
+--2025-02-25 14:58:16--  https://www.scootersoftware.com/bcompare-4.4.6.27483_amd64.deb
+Resolving www.scootersoftware.com (www.scootersoftware.com)... 72.32.90.250
+Connecting to www.scootersoftware.com (www.scootersoftware.com)|72.32.90.250|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 20609066 (20M) [application/octet-stream]
+Saving to: ‘bcompare-4.4.6.27483_amd64.deb’
+
+bcompare-4.4.6.27483_amd64.deb          100%[=============================================================================&gt;]  19.65M  3.55MB/s    in 6.7s
+
+2025-02-25 14:58:24 (2.93 MB/s) - ‘bcompare-4.4.6.27483_amd64.deb’ saved [20609066/20609066]
+
+bash#:~/Downloads$ sudo apt install ./bcompare-4.4.6.27483_amd64.deb
+[sudo] password for jonpark:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Note, selecting &#39;bcompare&#39; instead of &#39;./bcompare-4.4.6.27483_amd64.deb&#39;
+The following package was automatically installed and is no longer required:
+  libllvm17t64
+Use &#39;sudo apt autoremove&#39; to remove it.
+The following NEW packages will be installed:
+  bcompare
+0 upgraded, 1 newly installed, 0 to remove and 16 not upgraded.
+Need to get 0 B/20.6 MB of archives.
+After this operation, 60.9 MB of additional disk space will be used.
+Get:1 /home/jonpark/Downloads/bcompare-4.4.6.27483_amd64.deb bcompare amd64 4.4.6-27483 [20.6 MB]
+Selecting previously unselected package bcompare.
+(Reading database ... 130187 files and directories currently installed.)
+Preparing to unpack .../bcompare-4.4.6.27483_amd64.deb ...
+Unpacking bcompare (4.4.6-27483) ...
+Setting up bcompare (4.4.6-27483) ...
+cp: cannot create regular file &#39;/usr/share/kservices5/&#39;: Not a directory
+Processing triggers for bamfdaemon (0.5.6&#43;22.04.20220217-0ubuntu5) ...
+Rebuilding /usr/share/applications/bamf-2.index...
+Processing triggers for desktop-file-utils (0.27-2build1) ...
+Processing triggers for gnome-menus (3.36.0-1.1ubuntu3) ...
+Processing triggers for shared-mime-info (2.4-4) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.4) ...
+localepurge: Disk space freed:      0 KiB in /usr/share/locale
+localepurge: Disk space freed:      0 KiB in /usr/share/man
+localepurge: Disk space freed:      0 KiB in /usr/share/tcltk
+localepurge: Disk space freed:      0 KiB in /usr/share/cups/templates
+localepurge: Disk space freed:      0 KiB in /usr/share/cups/locale
+localepurge: Disk space freed:      0 KiB in /usr/share/cups/doc-root
+localepurge: Disk space freed:      0 KiB in /usr/share/cups/templates
+localepurge: Disk space freed:      0 KiB in /usr/share/cups/locale
+localepurge: Disk space freed:      0 KiB in /usr/share/cups/doc-root
+localepurge: Disk space freed:      0 KiB in /usr/share/help
+localepurge: Disk space freed:      0 KiB in /usr/share/vim/vim91/lang
+
+Total disk space freed by localepurge: 0 KiB
+
+N: Download is performed unsandboxed as root as file &#39;/home/jonpark/Downloads/bcompare-4.4.6.27483_amd64.deb&#39; couldn&#39;t be accessed by user &#39;_apt&#39;. - pkgAcquire::Run (13: Permission denied)
+
+########################################
+## 아래부터는 옵션임.
+
+bash#:~/Downloads$ ls  ~/.config/bcompare/ -al
+total 28K
+drwxrwxr-x  2 jonpark jonpark 4.0K Feb 25 15:05 ./
+drwx------ 23 jonpark jonpark 4.0K Feb 25 15:05 ../
+-rw-rw-r--  1 jonpark jonpark    0 Feb 25 15:05 BCLOCK_11.0
+-rw-rw-r--  1 jonpark jonpark  546 Feb 25 15:05 BCState.xml
+-rw-rw-r--  1 jonpark jonpark  204 Feb 25 15:05 BCState.xml.bak
+-rw-rw-r--  1 jonpark jonpark    1 Feb 25 15:05 IsPro
+-rw-rw-r--  1 jonpark jonpark  563 Feb 25 15:05 menu.ini
+-rw-rw-r--  1 jonpark jonpark   48 Feb 25 15:07 registry.dat
+
+bash#:~/Downloads$ ls /usr/lib/beyondcompare/
+bcmount32*  bcmount.sh*  BCompare.mad  GPG-KEY-scootersoftware  lib7z.so*        libunrar.so*  qt4/                         scootersoftware.list
+bcmount64*  BCompare*    ext/          help/                    libQt4Pas.so.5*  mime.types    scootersoftware-keyring.gpg
+
+bash#:~/Downloads$ cd  /usr/lib/beyondcompare/
+
+bash#:/usr/lib/beyondcompare$ ls
+bcmount32*  bcmount.sh*  BCompare.mad  GPG-KEY-scootersoftware  lib7z.so*        libunrar.so*  qt4/                         scootersoftware.list
+bcmount64*  BCompare*    ext/          help/                    libQt4Pas.so.5*  mime.types    scootersoftware-keyring.gpg
+
+bash#:/usr/lib/beyondcompare$ sudo cp BCompare BCompare.org
+
+bash#:/usr/lib/beyondcompare$ sudo cp -r ~/.config/bcompare ~/.config/bcompare.org
+
+bash#:/usr/lib/beyondcompare$ rm -rf ~/.config/bcompare
+
+bash#:/usr/lib/beyondcompare$ echo &#34;kill BC&#34;
+kill BC
+
+bash#:/usr/lib/beyondcompare$ sudo rm -rf ~/.config/bcompare #thinks bensonkb
+sudo sed -i &#34;s/??????????????????????/g&#34; /usr/lib/beyondcompare/BCompare
+bash#:/usr/lib/beyondcompare$
+
+## Start BC
+## Enter license
+## Works
+">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/sdlc/beyond-compare-wsl/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/sdlc/beyond-compare-wsl/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Beyond Compare 4를 리눅스에 설치하기
+    </h1>
+    <div class="post-meta"><span title='2025-02-25 00:00:00 +0000 UTC'>2월 25, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="beyond-compare-4를-리눅스에-설치하기">Beyond Compare 4를 리눅스에 설치하기<a hidden class="anchor" aria-hidden="true" href="#beyond-compare-4를-리눅스에-설치하기">#</a></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bash#:~$ cd ~/Downloads/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~/Downloads$ wget https://www.scootersoftware.com/bcompare-4.4.6.27483_amd64.deb
+</span></span><span style="display:flex;"><span>--2025-02-25 14:58:16--  https://www.scootersoftware.com/bcompare-4.4.6.27483_amd64.deb
+</span></span><span style="display:flex;"><span>Resolving www.scootersoftware.com <span style="color:#f92672">(</span>www.scootersoftware.com<span style="color:#f92672">)</span>... 72.32.90.250
+</span></span><span style="display:flex;"><span>Connecting to www.scootersoftware.com <span style="color:#f92672">(</span>www.scootersoftware.com<span style="color:#f92672">)</span>|72.32.90.250|:443... connected.
+</span></span><span style="display:flex;"><span>HTTP request sent, awaiting response... <span style="color:#ae81ff">200</span> OK
+</span></span><span style="display:flex;"><span>Length: <span style="color:#ae81ff">20609066</span> <span style="color:#f92672">(</span>20M<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>application/octet-stream<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Saving to: ‘bcompare-4.4.6.27483_amd64.deb’
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bcompare-4.4.6.27483_amd64.deb          100%<span style="color:#f92672">[=============================================================================</span>&gt;<span style="color:#f92672">]</span>  19.65M  3.55MB/s    in 6.7s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2025-02-25 14:58:24 <span style="color:#f92672">(</span>2.93 MB/s<span style="color:#f92672">)</span> - ‘bcompare-4.4.6.27483_amd64.deb’ saved <span style="color:#f92672">[</span>20609066/20609066<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~/Downloads$ sudo apt install ./bcompare-4.4.6.27483_amd64.deb
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>sudo<span style="color:#f92672">]</span> password <span style="color:#66d9ef">for</span> jonpark:
+</span></span><span style="display:flex;"><span>Reading package lists... Done
+</span></span><span style="display:flex;"><span>Building dependency tree... Done
+</span></span><span style="display:flex;"><span>Reading state information... Done
+</span></span><span style="display:flex;"><span>Note, selecting <span style="color:#e6db74">&#39;bcompare&#39;</span> instead of <span style="color:#e6db74">&#39;./bcompare-4.4.6.27483_amd64.deb&#39;</span>
+</span></span><span style="display:flex;"><span>The following package was automatically installed and is no longer required:
+</span></span><span style="display:flex;"><span>  libllvm17t64
+</span></span><span style="display:flex;"><span>Use <span style="color:#e6db74">&#39;sudo apt autoremove&#39;</span> to remove it.
+</span></span><span style="display:flex;"><span>The following NEW packages will be installed:
+</span></span><span style="display:flex;"><span>  bcompare
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> upgraded, <span style="color:#ae81ff">1</span> newly installed, <span style="color:#ae81ff">0</span> to remove and <span style="color:#ae81ff">16</span> not upgraded.
+</span></span><span style="display:flex;"><span>Need to get <span style="color:#ae81ff">0</span> B/20.6 MB of archives.
+</span></span><span style="display:flex;"><span>After this operation, 60.9 MB of additional disk space will be used.
+</span></span><span style="display:flex;"><span>Get:1 /home/jonpark/Downloads/bcompare-4.4.6.27483_amd64.deb bcompare amd64 4.4.6-27483 <span style="color:#f92672">[</span>20.6 MB<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Selecting previously unselected package bcompare.
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>Reading database ... <span style="color:#ae81ff">130187</span> files and directories currently installed.<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Preparing to unpack .../bcompare-4.4.6.27483_amd64.deb ...
+</span></span><span style="display:flex;"><span>Unpacking bcompare <span style="color:#f92672">(</span>4.4.6-27483<span style="color:#f92672">)</span> ...
+</span></span><span style="display:flex;"><span>Setting up bcompare <span style="color:#f92672">(</span>4.4.6-27483<span style="color:#f92672">)</span> ...
+</span></span><span style="display:flex;"><span>cp: cannot create regular file <span style="color:#e6db74">&#39;/usr/share/kservices5/&#39;</span>: Not a directory
+</span></span><span style="display:flex;"><span>Processing triggers <span style="color:#66d9ef">for</span> bamfdaemon <span style="color:#f92672">(</span>0.5.6+22.04.20220217-0ubuntu5<span style="color:#f92672">)</span> ...
+</span></span><span style="display:flex;"><span>Rebuilding /usr/share/applications/bamf-2.index...
+</span></span><span style="display:flex;"><span>Processing triggers <span style="color:#66d9ef">for</span> desktop-file-utils <span style="color:#f92672">(</span>0.27-2build1<span style="color:#f92672">)</span> ...
+</span></span><span style="display:flex;"><span>Processing triggers <span style="color:#66d9ef">for</span> gnome-menus <span style="color:#f92672">(</span>3.36.0-1.1ubuntu3<span style="color:#f92672">)</span> ...
+</span></span><span style="display:flex;"><span>Processing triggers <span style="color:#66d9ef">for</span> shared-mime-info <span style="color:#f92672">(</span>2.4-4<span style="color:#f92672">)</span> ...
+</span></span><span style="display:flex;"><span>Processing triggers <span style="color:#66d9ef">for</span> libc-bin <span style="color:#f92672">(</span>2.39-0ubuntu8.4<span style="color:#f92672">)</span> ...
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/locale
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/man
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/tcltk
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/cups/templates
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/cups/locale
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/cups/doc-root
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/cups/templates
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/cups/locale
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/cups/doc-root
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/help
+</span></span><span style="display:flex;"><span>localepurge: Disk space freed:      <span style="color:#ae81ff">0</span> KiB in /usr/share/vim/vim91/lang
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Total disk space freed by localepurge: <span style="color:#ae81ff">0</span> KiB
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>N: Download is performed unsandboxed as root as file <span style="color:#e6db74">&#39;/home/jonpark/Downloads/bcompare-4.4.6.27483_amd64.deb&#39;</span> couldn<span style="color:#e6db74">&#39;t be accessed by user &#39;</span>_apt<span style="color:#960050;background-color:#1e0010">&#39;</span>. - pkgAcquire::Run <span style="color:#f92672">(</span>13: Permission denied<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 아래부터는 옵션임.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~/Downloads$ ls  ~/.config/bcompare/ -al
+</span></span><span style="display:flex;"><span>total 28K
+</span></span><span style="display:flex;"><span>drwxrwxr-x  <span style="color:#ae81ff">2</span> jonpark jonpark 4.0K Feb <span style="color:#ae81ff">25</span> 15:05 ./
+</span></span><span style="display:flex;"><span>drwx------ <span style="color:#ae81ff">23</span> jonpark jonpark 4.0K Feb <span style="color:#ae81ff">25</span> 15:05 ../
+</span></span><span style="display:flex;"><span>-rw-rw-r--  <span style="color:#ae81ff">1</span> jonpark jonpark    <span style="color:#ae81ff">0</span> Feb <span style="color:#ae81ff">25</span> 15:05 BCLOCK_11.0
+</span></span><span style="display:flex;"><span>-rw-rw-r--  <span style="color:#ae81ff">1</span> jonpark jonpark  <span style="color:#ae81ff">546</span> Feb <span style="color:#ae81ff">25</span> 15:05 BCState.xml
+</span></span><span style="display:flex;"><span>-rw-rw-r--  <span style="color:#ae81ff">1</span> jonpark jonpark  <span style="color:#ae81ff">204</span> Feb <span style="color:#ae81ff">25</span> 15:05 BCState.xml.bak
+</span></span><span style="display:flex;"><span>-rw-rw-r--  <span style="color:#ae81ff">1</span> jonpark jonpark    <span style="color:#ae81ff">1</span> Feb <span style="color:#ae81ff">25</span> 15:05 IsPro
+</span></span><span style="display:flex;"><span>-rw-rw-r--  <span style="color:#ae81ff">1</span> jonpark jonpark  <span style="color:#ae81ff">563</span> Feb <span style="color:#ae81ff">25</span> 15:05 menu.ini
+</span></span><span style="display:flex;"><span>-rw-rw-r--  <span style="color:#ae81ff">1</span> jonpark jonpark   <span style="color:#ae81ff">48</span> Feb <span style="color:#ae81ff">25</span> 15:07 registry.dat
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~/Downloads$ ls /usr/lib/beyondcompare/
+</span></span><span style="display:flex;"><span>bcmount32*  bcmount.sh*  BCompare.mad  GPG-KEY-scootersoftware  lib7z.so*        libunrar.so*  qt4/                         scootersoftware.list
+</span></span><span style="display:flex;"><span>bcmount64*  BCompare*    ext/          help/                    libQt4Pas.so.5*  mime.types    scootersoftware-keyring.gpg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~/Downloads$ cd  /usr/lib/beyondcompare/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:/usr/lib/beyondcompare$ ls
+</span></span><span style="display:flex;"><span>bcmount32*  bcmount.sh*  BCompare.mad  GPG-KEY-scootersoftware  lib7z.so*        libunrar.so*  qt4/                         scootersoftware.list
+</span></span><span style="display:flex;"><span>bcmount64*  BCompare*    ext/          help/                    libQt4Pas.so.5*  mime.types    scootersoftware-keyring.gpg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:/usr/lib/beyondcompare$ sudo cp BCompare BCompare.org
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:/usr/lib/beyondcompare$ sudo cp -r ~/.config/bcompare ~/.config/bcompare.org
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:/usr/lib/beyondcompare$ rm -rf ~/.config/bcompare
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:/usr/lib/beyondcompare$ echo <span style="color:#e6db74">&#34;kill BC&#34;</span>
+</span></span><span style="display:flex;"><span>kill BC
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:/usr/lib/beyondcompare$ sudo rm -rf ~/.config/bcompare <span style="color:#75715e">#thinks bensonkb</span>
+</span></span><span style="display:flex;"><span>sudo sed -i <span style="color:#e6db74">&#34;s/??????????????????????/g&#34;</span> /usr/lib/beyondcompare/BCompare
+</span></span><span style="display:flex;"><span>bash#:/usr/lib/beyondcompare$
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Start BC</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Enter license</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Works</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/portfolio/tags/beyondcompare/">BeyondCompare</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

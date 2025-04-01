@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Makefile on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/makefile/</link>
+    <description>Recent content in Makefile on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Mon, 03 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/makefile/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Differences, priorities, and Bash equivalents for :=, =, and ?= in Makefiles</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/makefile-bash--variable-assignment/</link>
+      <pubDate>Mon, 03 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/makefile-bash--variable-assignment/</guid>
+      <description>&lt;p&gt;Differences, priorities, and Bash equivalents for :=, =, and ?= in Makefiles&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;An Explanation of the differences, priorities, and Bash equivalents for :=, =, and ?= in Makefiles.&lt;/p&gt;
+&lt;p&gt;Makefile variable assignment operators:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;:= (Simple expansion):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Expands variables immediately at assignment time.&lt;/li&gt;
+&lt;li&gt;Example: FOO := $(BAR)&lt;/li&gt;
+&lt;li&gt;If BAR changes later, FOO will not be affected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;= (Recursive expansion):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Defers expansion until the variable is used.&lt;/li&gt;
+&lt;li&gt;Example: FOO = $(BAR)&lt;/li&gt;
+&lt;li&gt;If BAR changes later, FOO will reflect the new value when used.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;?= (Conditional assignment):&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

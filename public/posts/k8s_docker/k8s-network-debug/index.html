@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="CNC debug
+Access host
+https://aws-sig-ts-jonpark.aws.internal/
+Return
+This site can’t be reached
+aws-sig-ts-jonpark.aws.internal refused to connect.
+Try:
+Checking the connection
+Checking the proxy and the firewall
+ERR_CONNECTION_REFUSED
+k9s &gt; ingress &gt; cnc-cim &gt; Describe
+Kubernetes Ingress: cnc-cim
+Basic Information
+
+  
+      
+          Field
+          Value
+      
+  
+  
+      
+          Name
+          cnc-cim
+      
+      
+          Namespace
+          cnc
+      
+      
+          Address
+          10.96.104.21
+      
+      
+          Default backend
+          default-http-backend:80 (&lt;error: endpoints &ldquo;default-http-backend&rdquo; not found&gt;)
+      
+  
+
+TLS Configuration
+cnc-cim-tls-nginx terminates aws-sig-ts-jonpark.aws.internal
+Routing Rules
+
+  
+      
+          Host
+          Path
+          Backend
+      
+  
+  
+      
+          aws-sig-ts-jonpark.aws.internal
+          /
+          cnc-cim-cim:8443 (172.16.1.33:8443)
+      
+  
+
+Annotations
+
+meta.helm.sh/release-name: cnc-cim
+meta.helm.sh/release-namespace: cnc
+nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+
+Events
+&lt;none&gt;">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/k8s_docker/k8s-network-debug/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/k8s_docker/k8s-network-debug/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="cnc-debug">CNC debug<a hidden class="anchor" aria-hidden="true" href="#cnc-debug">#</a></h1>
+<h2 id="access-host">Access host<a hidden class="anchor" aria-hidden="true" href="#access-host">#</a></h2>
+<p><a href="https://aws-sig-ts-jonpark.aws.internal/">https://aws-sig-ts-jonpark.aws.internal/</a></p>
+<h3 id="return">Return<a hidden class="anchor" aria-hidden="true" href="#return">#</a></h3>
+<p>This site can’t be reached
+aws-sig-ts-jonpark.aws.internal refused to connect.
+Try:</p>
+<p>Checking the connection
+Checking the proxy and the firewall
+ERR_CONNECTION_REFUSED</p>
+<h3 id="k9s--ingress--cnc-cim--describe">k9s &gt; ingress &gt; cnc-cim &gt; Describe<a hidden class="anchor" aria-hidden="true" href="#k9s--ingress--cnc-cim--describe">#</a></h3>
+<h3 id="kubernetes-ingress-cnc-cim">Kubernetes Ingress: cnc-cim<a hidden class="anchor" aria-hidden="true" href="#kubernetes-ingress-cnc-cim">#</a></h3>
+<h4 id="basic-information">Basic Information<a hidden class="anchor" aria-hidden="true" href="#basic-information">#</a></h4>
+<table>
+  <thead>
+      <tr>
+          <th>Field</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Name</strong></td>
+          <td>cnc-cim</td>
+      </tr>
+      <tr>
+          <td><strong>Namespace</strong></td>
+          <td>cnc</td>
+      </tr>
+      <tr>
+          <td><strong>Address</strong></td>
+          <td>10.96.104.21</td>
+      </tr>
+      <tr>
+          <td><strong>Default backend</strong></td>
+          <td>default-http-backend:80 (&lt;error: endpoints &ldquo;default-http-backend&rdquo; not found&gt;)</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="tls-configuration">TLS Configuration<a hidden class="anchor" aria-hidden="true" href="#tls-configuration">#</a></h4>
+<p>cnc-cim-tls-nginx terminates aws-sig-ts-jonpark.aws.internal</p>
+<h4 id="routing-rules">Routing Rules<a hidden class="anchor" aria-hidden="true" href="#routing-rules">#</a></h4>
+<table>
+  <thead>
+      <tr>
+          <th>Host</th>
+          <th>Path</th>
+          <th>Backend</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>aws-sig-ts-jonpark.aws.internal</td>
+          <td>/</td>
+          <td>cnc-cim-cim:8443 (172.16.1.33:8443)</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="annotations">Annotations<a hidden class="anchor" aria-hidden="true" href="#annotations">#</a></h4>
+<ul>
+<li>meta.helm.sh/release-name: cnc-cim</li>
+<li>meta.helm.sh/release-namespace: cnc</li>
+<li>nginx.ingress.kubernetes.io/backend-protocol: HTTPS</li>
+</ul>
+<h4 id="events">Events<a hidden class="anchor" aria-hidden="true" href="#events">#</a></h4>
+<p>&lt;none&gt;</p>
+<h1 id="issue--ssl-certificate-mismatch">Issue : SSL Certificate Mismatch<a hidden class="anchor" aria-hidden="true" href="#issue--ssl-certificate-mismatch">#</a></h1>
+<h2 id="error-log">error log<a hidden class="anchor" aria-hidden="true" href="#error-log">#</a></h2>
+<h3 id="k9s--pod--inggress-controller--log">k9s &gt; pod &gt; inggress controller &gt; log<a hidden class="anchor" aria-hidden="true" href="#k9s--pod--inggress-controller--log">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>I0310 10:51:25.487782      <span style="color:#ae81ff">13</span> event.go:282<span style="color:#f92672">]</span> Event<span style="color:#f92672">(</span>v1.ObjectReference<span style="color:#f92672">{</span>Kind:<span style="color:#e6db74">&#34;Pod&#34;</span>, Namespace:<span style="color:#e6db74">&#34;ingress-nginx&#34;</span>, Name:<span style="color:#e6db74">&#34;my-nginx-ingress-nginx-controller-7db7fdff4d-pdrsb&#34;</span>, UID:<span style="color:#e6db74">&#34;8b0e4a21-6378-4d21-8f1f-ed01ca8a48b8&#34;</span>, APIVersion:<span style="color:#e6db74">&#34;v1&#34;</span>, ResourceVersion:<span style="color:#e6db74">&#34;671&#34;</span>, FieldPath:<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">})</span>: type: <span style="color:#e6db74">&#39;Normal&#39;</span> reason: <span style="color:#e6db74">&#39;RELOAD&#39;</span> NGINX reload triggered due to a change in configuration
+</span></span><span style="display:flex;"><span>W0310 10:51:28.745556      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-minio&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:28.745585      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cnc-storage-proxy&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:28.745610      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:28.745635      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:28.745648      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:51:28.745657      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:28.745667      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:51:28.745706      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:51:32.078103      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-minio&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:32.078130      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cnc-storage-proxy&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:32.078151      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:32.078176      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:32.078190      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:51:32.078199      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:32.078208      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:51:32.078250      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:51:35.411303      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-minio&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:35.411329      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cnc-storage-proxy&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:35.411350      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:35.411377      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:35.411390      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:51:35.411400      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:35.411410      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:51:35.411457      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:51:38.745429      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-minio&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:38.745454      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cnc-storage-proxy&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:38.745475      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:38.745504      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:38.745522      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:51:38.745536      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:38.745546      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:51:38.745584      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:51:42.077570      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cnc-storage-proxy&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:42.077604      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:42.077637      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:42.077652      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:51:42.077662      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:42.077672      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:51:42.077711      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>I0310 10:51:48.013671      <span style="color:#ae81ff">13</span> status.go:299<span style="color:#f92672">]</span> <span style="color:#e6db74">&#34;updating Ingress status&#34;</span> namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cnc&#34;</span> ingress<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cnc-minio-api&#34;</span> currentValue<span style="color:#f92672">=[]</span> newValue<span style="color:#f92672">=[{</span>IP:10.96.104.21 Hostname: Ports:<span style="color:#f92672">[]}]</span>
+</span></span><span style="display:flex;"><span>I0310 10:51:48.013711      <span style="color:#ae81ff">13</span> status.go:299<span style="color:#f92672">]</span> <span style="color:#e6db74">&#34;updating Ingress status&#34;</span> namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cnc&#34;</span> ingress<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cnc-cim&#34;</span> currentValue<span style="color:#f92672">=[]</span> newValue<span style="color:#f92672">=[{</span>IP:10.96.104.21 Hostname: Ports:<span style="color:#f92672">[]}]</span>
+</span></span><span style="display:flex;"><span>I0310 10:51:48.013724      <span style="color:#ae81ff">13</span> status.go:299<span style="color:#f92672">]</span> <span style="color:#e6db74">&#34;updating Ingress status&#34;</span> namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cnc&#34;</span> ingress<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cnc-cim-storage-proxy&#34;</span> currentValue<span style="color:#f92672">=[]</span> newValue<span style="color:#f92672">=[{</span>IP:10.96.104.21 Hostname: Ports:<span style="color:#f92672">[]}]</span>
+</span></span><span style="display:flex;"><span>I0310 10:51:48.013733      <span style="color:#ae81ff">13</span> status.go:299<span style="color:#f92672">]</span> <span style="color:#e6db74">&#34;updating Ingress status&#34;</span> namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cnc&#34;</span> ingress<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cnc-cim-crossbar&#34;</span> currentValue<span style="color:#f92672">=[]</span> newValue<span style="color:#f92672">=[{</span>IP:10.96.104.21 Hostname: Ports:<span style="color:#f92672">[]}]</span>
+</span></span><span style="display:flex;"><span>I0310 10:51:48.016055      <span style="color:#ae81ff">13</span> event.go:282<span style="color:#f92672">]</span> Event<span style="color:#f92672">(</span>v1.ObjectReference<span style="color:#f92672">{</span>Kind:<span style="color:#e6db74">&#34;Ingress&#34;</span>, Namespace:<span style="color:#e6db74">&#34;cnc&#34;</span>, Name:<span style="color:#e6db74">&#34;cnc-cim&#34;</span>, UID:<span style="color:#e6db74">&#34;6fae7458-0baf-40a2-bd16-4359f5ae4746&#34;</span>, APIVersion:<span style="color:#e6db74">&#34;networking.k8s.io/v1&#34;</span>, ResourceVersion:<span style="color:#e6db74">&#34;5375&#34;</span>, FieldPath:<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">})</span>: type: <span style="color:#e6db74">&#39;Normal&#39;</span> reason: <span style="color:#e6db74">&#39;Sync&#39;</span> Scheduled <span style="color:#66d9ef">for</span> sync
+</span></span><span style="display:flex;"><span>W0310 10:51:48.016479      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cnc-storage-proxy&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:48.016520      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:48.016551      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:48.016563      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:51:48.016571      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:48.016582      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:51:48.016632      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>I0310 10:51:48.017281      <span style="color:#ae81ff">13</span> event.go:282<span style="color:#f92672">]</span> Event<span style="color:#f92672">(</span>v1.ObjectReference<span style="color:#f92672">{</span>Kind:<span style="color:#e6db74">&#34;Ingress&#34;</span>, Namespace:<span style="color:#e6db74">&#34;cnc&#34;</span>, Name:<span style="color:#e6db74">&#34;cnc-minio-api&#34;</span>, UID:<span style="color:#e6db74">&#34;b39d4bfe-f9b8-4710-8e6e-b221dc75b58d&#34;</span>, APIVersion:<span style="color:#e6db74">&#34;networking.k8s.io/v1&#34;</span>, ResourceVersion:<span style="color:#e6db74">&#34;5376&#34;</span>, FieldPath:<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">})</span>: type: <span style="color:#e6db74">&#39;Normal&#39;</span> reason: <span style="color:#e6db74">&#39;Sync&#39;</span> Scheduled <span style="color:#66d9ef">for</span> sync
+</span></span><span style="display:flex;"><span>I0310 10:51:48.017627      <span style="color:#ae81ff">13</span> event.go:282<span style="color:#f92672">]</span> Event<span style="color:#f92672">(</span>v1.ObjectReference<span style="color:#f92672">{</span>Kind:<span style="color:#e6db74">&#34;Ingress&#34;</span>, Namespace:<span style="color:#e6db74">&#34;cnc&#34;</span>, Name:<span style="color:#e6db74">&#34;cnc-cim-crossbar&#34;</span>, UID:<span style="color:#e6db74">&#34;3ff5a02c-d3e1-4b4e-b1c4-b49f0bf0dcb9&#34;</span>, APIVersion:<span style="color:#e6db74">&#34;networking.k8s.io/v1&#34;</span>, ResourceVersion:<span style="color:#e6db74">&#34;5377&#34;</span>, FieldPath:<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">})</span>: type: <span style="color:#e6db74">&#39;Normal&#39;</span> reason: <span style="color:#e6db74">&#39;Sync&#39;</span> Scheduled <span style="color:#66d9ef">for</span> sync
+</span></span><span style="display:flex;"><span>I0310 10:51:48.017896      <span style="color:#ae81ff">13</span> event.go:282<span style="color:#f92672">]</span> Event<span style="color:#f92672">(</span>v1.ObjectReference<span style="color:#f92672">{</span>Kind:<span style="color:#e6db74">&#34;Ingress&#34;</span>, Namespace:<span style="color:#e6db74">&#34;cnc&#34;</span>, Name:<span style="color:#e6db74">&#34;cnc-cim-storage-proxy&#34;</span>, UID:<span style="color:#e6db74">&#34;23f93f96-2bc9-4645-947b-b3d5d30e0bb9&#34;</span>, APIVersion:<span style="color:#e6db74">&#34;networking.k8s.io/v1&#34;</span>, ResourceVersion:<span style="color:#e6db74">&#34;5378&#34;</span>, FieldPath:<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">})</span>: type: <span style="color:#e6db74">&#39;Normal&#39;</span> reason: <span style="color:#e6db74">&#39;Sync&#39;</span> Scheduled <span style="color:#66d9ef">for</span> sync
+</span></span><span style="display:flex;"><span>W0310 10:51:51.350611      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cnc-storage-proxy&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:51.350647      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:51.350673      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:51.350687      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:51:51.350696      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:51.350705      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:51:51.350751      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:51:54.685843      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cnc-storage-proxy&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:54.685878      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:51:54.685906      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:54.685918      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:51:54.685927      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:51:54.685934      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:51:54.685975      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:52:09.784430      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cnc-storage-proxy&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:52:09.784473      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:52:09.784508      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:52:09.784524      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:52:09.784537      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:52:09.784550      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:52:09.784601      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:52:23.157152      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:52:23.157190      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:52:23.157202      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:52:23.157211      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:52:23.157221      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:52:23.157258      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:52:26.492455      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:52:26.492492      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:52:26.492505      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:52:26.492514      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:52:26.492524      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:52:26.492563      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:52:53.011604      <span style="color:#ae81ff">13</span> controller.go:1083<span style="color:#f92672">]</span> Service <span style="color:#e6db74">&#34;cnc/cnc-cim-cim&#34;</span> does not have any active Endpoint.
+</span></span><span style="display:flex;"><span>W0310 10:52:53.011648      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:52:53.011665      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:52:53.011676      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:52:53.011690      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:52:53.011739      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>W0310 10:53:01.805354      <span style="color:#ae81ff">13</span> controller.go:1320<span style="color:#f92672">]</span> Unexpected error validating SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:53:01.805377      <span style="color:#ae81ff">13</span> controller.go:1321<span style="color:#f92672">]</span> Validating certificate against DNS names. This will be deprecated in a future version
+</span></span><span style="display:flex;"><span>W0310 10:53:01.805388      <span style="color:#ae81ff">13</span> controller.go:1326<span style="color:#f92672">]</span> SSL certificate <span style="color:#e6db74">&#34;cnc/cnc-cim-tls-nginx&#34;</span> does not contain a Common Name or Subject Alternative Name <span style="color:#66d9ef">for</span> server <span style="color:#e6db74">&#34;aws-sig-ts-jonpark.aws.internal&#34;</span>: x509: certificate is valid <span style="color:#66d9ef">for</span> local.connect.example.com, not aws-sig-ts-jonpark.aws.internal
+</span></span><span style="display:flex;"><span>W0310 10:53:01.805430      <span style="color:#ae81ff">13</span> controller.go:1327<span style="color:#f92672">]</span> Using default certificate
+</span></span><span style="display:flex;"><span>W0310 10:53:01.805478      <span style="color:#ae81ff">13</span> controller.go:395<span style="color:#f92672">]</span> Error getting Service <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span>: no object matching key <span style="color:#e6db74">&#34;cnc-cim/cim-cim&#34;</span> in local store
+</span></span><span style="display:flex;"><span>Stream closed EOF <span style="color:#66d9ef">for</span> ingress-nginx/my-nginx-ingress-nginx-controller-7db7fdff4d-pdrsb <span style="color:#f92672">(</span>controller<span style="color:#f92672">)</span>
+</span></span></code></pre></div><h2 id="analysis">Analysis<a hidden class="anchor" aria-hidden="true" href="#analysis">#</a></h2>
+<p>I&rsquo;ll analyze the Kubernetes Ingress NGINX controller logs to identify and help solve the issues. Based on the logs, there are several problems that need to be addressed:</p>
+<h3 id="main-issues-identified">Main Issues Identified<a hidden class="anchor" aria-hidden="true" href="#main-issues-identified">#</a></h3>
+<ol>
+<li>
+<p><strong>SSL Certificate Mismatch</strong>:</p>
+<ul>
+<li>The certificate is valid for <code>local.connect.example.com</code> but is being used for <code>aws-sig-ts-jonpark.aws.internal</code></li>
+<li>This is causing the controller to fall back to the default certificate</li>
+</ul>
+</li>
+<li>
+<p><strong>Missing Service Endpoints</strong>:</p>
+<ul>
+<li>Multiple services don&rsquo;t have active endpoints:
+<ul>
+<li><code>cnc/cnc-minio</code></li>
+<li><code>cnc/cnc-cim-cnc-storage-proxy</code></li>
+<li><code>cnc/cnc-cim-cim</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Service Not Found</strong>:</p>
+<ul>
+<li>Error getting Service <code>cnc-cim/cim-cim</code>: no object matching key in local store</li>
+</ul>
+</li>
+</ol>
+<h3 id="recommended-solutions">Recommended Solutions<a hidden class="anchor" aria-hidden="true" href="#recommended-solutions">#</a></h3>
+<h4 id="1-fix-the-ssl-certificate-issue">1. Fix the SSL Certificate Issue:<a hidden class="anchor" aria-hidden="true" href="#1-fix-the-ssl-certificate-issue">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create a new TLS certificate that includes the correct domain</span>
+</span></span><span style="display:flex;"><span>kubectl create secret tls cnc-cim-tls-nginx <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace cnc <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --key<span style="color:#f92672">=</span>path/to/private.key <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --cert<span style="color:#f92672">=</span>path/to/certificate.crt
+</span></span></code></pre></div><p>Ensure the certificate includes <code>aws-sig-ts-jonpark.aws.internal</code> either as the Common Name (CN) or in the Subject Alternative Name (SAN) field.</p>
+<h4 id="2-check-the-services-and-their-endpoints">2. Check the Services and Their Endpoints:<a hidden class="anchor" aria-hidden="true" href="#2-check-the-services-and-their-endpoints">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Check the service status</span>
+</span></span><span style="display:flex;"><span>kubectl get svc -n cnc cnc-minio cnc-cim-cnc-storage-proxy cnc-cim-cim
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check if pods backing these services are running</span>
+</span></span><span style="display:flex;"><span>kubectl get pods -n cnc -l app<span style="color:#f92672">=</span>cnc-minio
+</span></span><span style="display:flex;"><span>kubectl get pods -n cnc -l app<span style="color:#f92672">=</span>cnc-cim-cnc-storage-proxy
+</span></span><span style="display:flex;"><span>kubectl get pods -n cnc -l app<span style="color:#f92672">=</span>cnc-cim-cim
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check endpoints</span>
+</span></span><span style="display:flex;"><span>kubectl get endpoints -n cnc cnc-minio cnc-cim-cnc-storage-proxy cnc-cim-cim
+</span></span></code></pre></div><h4 id="3-fix-the-service-name-mismatch">3. Fix the Service Name Mismatch:<a hidden class="anchor" aria-hidden="true" href="#3-fix-the-service-name-mismatch">#</a></h4>
+<p>The logs show attempts to access <code>cnc-cim/cim-cim</code> but the service should be in the <code>cnc</code> namespace. Check if:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Verify the service exists in the correct namespace</span>
+</span></span><span style="display:flex;"><span>kubectl get svc -n cnc cim-cim
+</span></span><span style="display:flex;"><span>kubectl get svc -n cnc-cim cim-cim 2&gt;/dev/null <span style="color:#f92672">||</span> echo <span style="color:#e6db74">&#34;Service not found in cnc-cim namespace&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If needed, create or modify the service reference in your Ingress</span>
+</span></span><span style="display:flex;"><span>kubectl edit ingress cnc-cim -n cnc
+</span></span></code></pre></div><p>In the Ingress definition, make sure the backend service is correctly defined as <code>cnc-cim-cim</code> in the <code>cnc</code> namespace, not <code>cim-cim</code> in the <code>cnc-cim</code> namespace.</p>
+<p>Let me know if you need more specific guidance based on your environment&rsquo;s configuration!</p>
+<h2 id="act">Act<a hidden class="anchor" aria-hidden="true" href="#act">#</a></h2>
+<h3 id="check-svc">Check SVC<a hidden class="anchor" aria-hidden="true" href="#check-svc">#</a></h3>
+<ul>
+<li>K9s &gt; svc &gt; cnc-cim-cim &gt; Describe</li>
+</ul>
+<h4 id="describe">Describe<a hidden class="anchor" aria-hidden="true" href="#describe">#</a></h4>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Name</strong></td>
+          <td>cnc-cim-cim</td>
+      </tr>
+      <tr>
+          <td><strong>Namespace</strong></td>
+          <td>cnc</td>
+      </tr>
+      <tr>
+          <td><strong>Labels</strong></td>
+          <td>app.kubernetes.io/component=cim<!-- raw HTML omitted -->app.kubernetes.io/instance=cnc-cim<!-- raw HTML omitted -->app.kubernetes.io/managed-by=Helm<!-- raw HTML omitted -->app.kubernetes.io/name=cim<!-- raw HTML omitted -->app.kubernetes.io/part-of=coverity<!-- raw HTML omitted -->app.kubernetes.io/version=2025.3.0<!-- raw HTML omitted -->helm.sh/chart=cnc-0.0.1</td>
+      </tr>
+      <tr>
+          <td><strong>Annotations</strong></td>
+          <td>meta.helm.sh/release-name: cnc-cim</td>
+      </tr>
+      <tr>
+          <td><strong>meta.helm.sh/release-namespace</strong></td>
+          <td>cnc</td>
+      </tr>
+      <tr>
+          <td><strong>Selector</strong></td>
+          <td>app.kubernetes.io/component=cim,app.kubernetes.io/instance=cnc-cim,app.kubernetes.io/name=cim,app.kubernetes.io/part-of=coverity</td>
+      </tr>
+      <tr>
+          <td><strong>Type</strong></td>
+          <td>ClusterIP</td>
+      </tr>
+      <tr>
+          <td><strong>IP Family Policy</strong></td>
+          <td>SingleStack</td>
+      </tr>
+      <tr>
+          <td><strong>IP Families</strong></td>
+          <td>IPv4</td>
+      </tr>
+      <tr>
+          <td><strong>IP</strong></td>
+          <td>10.96.102.0</td>
+      </tr>
+      <tr>
+          <td><strong>IPs</strong></td>
+          <td>10.96.102.0</td>
+      </tr>
+      <tr>
+          <td><strong>Port</strong></td>
+          <td>p8080  8080/TCP<!-- raw HTML omitted -->p8443  8443/TCP</td>
+      </tr>
+      <tr>
+          <td><strong>TargetPort</strong></td>
+          <td>8080/TCP<!-- raw HTML omitted -->8443/TCP</td>
+      </tr>
+      <tr>
+          <td><strong>Endpoints</strong></td>
+          <td>172.16.1.33:8080<!-- raw HTML omitted -->172.16.1.33:8443</td>
+      </tr>
+      <tr>
+          <td><strong>Session Affinity</strong></td>
+          <td>None</td>
+      </tr>
+      <tr>
+          <td><strong>Events</strong></td>
+          <td><!-- raw HTML omitted --></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="log">Log<a hidden class="anchor" aria-hidden="true" href="#log">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Stream closed EOF <span style="color:#66d9ef">for</span> cnc/cnc-cim-cim-555c588b9d-p7wxb <span style="color:#f92672">(</span>cim-downloads<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Stream closed EOF <span style="color:#66d9ef">for</span> cnc/cnc-cim-cim-555c588b9d-p7wxb <span style="color:#f92672">(</span>otel-agent<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>cnc-cim-cim-555c588b9d-p7wxb cim-webapp <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;@type&#34;</span>:<span style="color:#e6db74">&#34;WebAccessEvent&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;timestamp&#34;</span>:<span style="color:#e6db74">&#34;2025-03-11T01:14:42.152+0000&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;INFO&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;hostname&#34;</span>:<span style="color:#e6db74">&#34;cnc-cim-cim-555c588b9d-p7wxb&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;count&#34;</span>:1,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;ipv6&#34;</span>:false,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;remoteHost&#34;</span>:<span style="color:#e6db74">&#34;172.16.1.1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;userId&#34;</span>:null,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;url&#34;</span>:<span style="color:#e6db74">&#34;/login/login.htm&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;userAgent&#34;</span>:<span style="color:#e6db74">&#34;kube-probe/1.25&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;languages&#34;</span>:<span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;duration&#34;</span>:4
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>cnc-cim-cim-555c588b9d-p7wxb cim-webapp <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;@type&#34;</span>:<span style="color:#e6db74">&#34;PerformanceLogEvent&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;timestamp&#34;</span>:<span style="color:#e6db74">&#34;2025-03-11T01:14:44.308+0000&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;INFO&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;hostname&#34;</span>:<span style="color:#e6db74">&#34;cnc-cim-cim-555c588b9d-p7wxb&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;count&#34;</span>:1,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metrics&#34;</span>:<span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;backUpInProgress&#34;</span>:0.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;commitExecutorSize&#34;</span>:5.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;unixOneMinuteLoadAverage&#34;</span>:-1.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;cimCpuUsage&#34;</span>:-1.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;memoryUsed&#34;</span>:1.974659168E9,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;webRequestsPerSecond&#34;</span>:0.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;diskBytesRead&#34;</span>:0.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;activeCommitCount&#34;</span>:0.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;commitQueueSize&#34;</span>:0.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;memoryTotal&#34;</span>:6.874464256E9,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;wsRequestsPerSecond&#34;</span>:0.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;commitGateOpen&#34;</span>:1.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;diskBytesWritten&#34;</span>:0.0,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;skeletonizationInProgress&#34;</span>:0.0
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>cnc-cim-cim-555c588b9d-p7wxb cim-webapp <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;timeMillis&#34;</span>:1741655707365,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;thread&#34;</span>:<span style="color:#e6db74">&#34;http-nio-8089-exec-4&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;WARN&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;loggerName&#34;</span>:<span style="color:#e6db74">&#34;com.coverity.ces.web.servlet.CimMetricsServlet&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;Metrics endpoint is not accessible on this port.&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;endOfBatch&#34;</span>:false,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;loggerFqcn&#34;</span>:<span style="color:#e6db74">&#34;org.apache.logging.slf4j.Log4jLogger&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;threadId&#34;</span>:99,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;threadPriority&#34;</span>:5
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>cnc-cim-cim-555c588b9d-p7wxb cim-webapp <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;@type&#34;</span>:<span style="color:#e6db74">&#34;WebAccessEvent&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;timestamp&#34;</span>:<span style="color:#e6db74">&#34;2025-03-11T01:15:27.152+0000&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;INFO&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;hostname&#34;</span>:<span style="color:#e6db74">&#34;cnc-cim-cim-555c588b9d-p7wxb&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;count&#34;</span>:1,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;ipv6&#34;</span>:false,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;remoteHost&#34;</span>:<span style="color:#e6db74">&#34;172.16.1.1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;userId&#34;</span>:null,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;url&#34;</span>:<span style="color:#e6db74">&#34;/login/login.htm&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;userAgent&#34;</span>:<span style="color:#e6db74">&#34;kube-probe/1.25&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;languages&#34;</span>:<span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;duration&#34;</span>:4
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>Stream closed EOF <span style="color:#66d9ef">for</span> cnc/cnc-cim-cim-555c588b9d-p7wxb <span style="color:#f92672">(</span>cim-webapp<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Stream closed EOF <span style="color:#66d9ef">for</span> cnc/cnc-cim-cim-555c588b9d-p7wxb <span style="color:#f92672">(</span>tls-sidecar<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Stream closed EOF <span style="color:#66d9ef">for</span> cnc/cnc-cim-cim-555c588b9d-p7wxb <span style="color:#f92672">(</span>cim-docs<span style="color:#f92672">)</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

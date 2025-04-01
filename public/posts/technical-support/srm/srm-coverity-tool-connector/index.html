@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>SRM Coverity Tool Connector Issues | RyanLabs</title>
+<meta name="keywords" content="SDLC, SRM, Coverity">
+<meta name="description" content="An unexpected error occurred while validating the connection
+01207318
+🔍 문제 요약 및 해결 방법
+✅ 문제 요약
+고객이 **Coverity(HTTP, 8080 포트)**에 대한 툴 커넥터 설정 중 &ldquo;An unexpected error occurred while validating the connection&rdquo; 오류가 발생했다고 보고함.
+로그를 확인한 결과, 다음과 같은 문제가 발생함:
+
+
+오류 메시지:
+ERROR - Creating a new NewHttpClient instance failed with: Response validation for [Coverity Session Cookie] encountered 1 error:
+1. Expected a [COVJSESSIONID-build] cookie in the response, but it was missing.
+
+Coverity 서버의 응답에서 COVJSESSIONID-build 세션 쿠키가 누락됨
+
+
+
+고객 확인 사항:">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/technical-support/srm/srm-coverity-tool-connector/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/technical-support/srm/srm-coverity-tool-connector/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      SRM Coverity Tool Connector Issues
+    </h1>
+    <div class="post-meta"><span title='2025-02-27 00:00:00 +0000 UTC'>2월 27, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="an-unexpected-error-occurred-while-validating-the-connection">An unexpected error occurred while validating the connection<a hidden class="anchor" aria-hidden="true" href="#an-unexpected-error-occurred-while-validating-the-connection">#</a></h1>
+<p>01207318</p>
+<h3 id="-문제-요약-및-해결-방법"><strong>🔍 문제 요약 및 해결 방법</strong><a hidden class="anchor" aria-hidden="true" href="#-문제-요약-및-해결-방법">#</a></h3>
+<h4 id="-문제-요약">✅ <strong>문제 요약</strong><a hidden class="anchor" aria-hidden="true" href="#-문제-요약">#</a></h4>
+<p>고객이 **Coverity(HTTP, 8080 포트)**에 대한 툴 커넥터 설정 중 <strong>&ldquo;An unexpected error occurred while validating the connection&rdquo;</strong> 오류가 발생했다고 보고함.<br>
+로그를 확인한 결과, 다음과 같은 문제가 발생함:</p>
+<ol>
+<li>
+<p><strong>오류 메시지:</strong></p>
+<pre tabindex="0"><code>ERROR - Creating a new NewHttpClient instance failed with: Response validation for [Coverity Session Cookie] encountered 1 error:
+1. Expected a [COVJSESSIONID-build] cookie in the response, but it was missing.
+</code></pre><ul>
+<li>Coverity 서버의 응답에서 <strong><code>COVJSESSIONID-build</code> 세션 쿠키가 누락됨</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>고객 확인 사항:</strong></p>
+<ul>
+<li>SRM 서버가 Coverity 서버에 8080/8443 (TCP) 및 80/443 (TCP) 포트로 정상적으로 연결 가능.</li>
+<li>Coverity 관리자가 생성한 <strong>API 키 파일 또는 사용자명/비밀번호 방식 모두 동일한 오류 발생.</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>의심되는 원인:</strong></p>
+<ul>
+<li><strong>302 리다이렉트 발생 가능성</strong>
+<ul>
+<li>HTTPS로 리다이렉트되거나, 로그인 페이지로 리다이렉트될 가능성 있음.</li>
+<li>HTTPS를 사용하고 올바른 포트를 입력해야 할 수 있음 (<code>https://</code> 및 8443 포트 사용).</li>
+</ul>
+</li>
+<li><strong>Coverity 서버의 위치 변경 여부 확인 필요</strong></li>
+<li><strong>Proxy 설정 여부 확인 필요</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>추가 확인 사항:</strong></p>
+<ul>
+<li>SRM이 Coverity와의 연결을 검증하는 요청은 <code>GET &lt;coverity url&gt;/api/v2/serverInfo/version</code> 형식이며, <strong>기본 인증(Basic Auth) 헤더 포함</strong></li>
+<li>최신 로그에서 Coverity 응답은 다음과 같음:
+<pre tabindex="0"><code>{&#34;internalVersion&#34;:&#34;7aa56f4 im-2024.12-push-31&#34;,&#34;externalVersion&#34;:&#34;2024.12.0&#34;}
+</code></pre></li>
+<li><strong><code>COVJSESSIONID-build</code> 쿠키가 응답에 없음.</strong></li>
+<li>대신 <strong><code>COVJSESSIONID8080SG</code></strong> 라는 이름의 세션 쿠키가 존재함.</li>
+</ul>
+</li>
+<li>
+<p><strong>코드 변경 가능성 (<code>CDX-951</code> 관련)</strong></p>
+<ul>
+<li>최신 Coverity Connect 업데이트에서 <strong>세션 쿠키를 검증하는 로직이 변경됨</strong></li>
+<li>코드가 <code>COVJSESSIONID-build</code> 쿠키를 찾도록 되어 있지만, 현재 응답에서는 **쿠키 이름이 <code>COVJSESSIONID8080SG</code>**로 다름.</li>
+<li>해결책으로 <code>coverity.session-cookie-name = COVJSESSIONID8080SG</code> 설정을 시도할 수 있음.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="-해결-방법"><strong>🚀 해결 방법</strong><a hidden class="anchor" aria-hidden="true" href="#-해결-방법">#</a></h3>
+<ol>
+<li>
+<p><strong>HTTPS 및 올바른 포트(8443) 사용</strong></p>
+<ul>
+<li>현재 8080 포트(HTTP)에서 오류 발생 → <code>https://</code> 및 8443 포트를 사용하여 시도.</li>
+<li>URL을 <code>http://</code>에서 <code>https://</code>로 변경하고 <code>8443</code> 포트를 사용:
+<pre tabindex="0"><code>https://coverity.example.com:8443
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p><strong>Proxy 설정 여부 확인</strong></p>
+<ul>
+<li>고객 네트워크에서 <strong>Proxy가 설정되어 있는지 확인</strong></li>
+<li>Proxy가 있는 경우, SRM이 Coverity 서버에 직접 연결할 수 있도록 설정 변경 필요.</li>
+</ul>
+</li>
+<li>
+<p><strong>302 리다이렉트 확인</strong></p>
+<ul>
+<li>302 응답이 HTTPS로 리다이렉트하는 것인지, 로그인 페이지로 리다이렉트하는 것인지 확인.</li>
+<li>로그인 페이지로 리다이렉트될 경우, 제공된 자격 증명이 만료되었을 가능성이 있음 → <strong>새 API 키 생성 및 테스트 필요.</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>세션 쿠키 이름 변경 시도</strong></p>
+<ul>
+<li><code>coverity.session-cookie-name = COVJSESSIONID8080SG</code> 설정 적용하여 테스트.</li>
+<li>이는 최신 Coverity 업데이트에서 변경된 쿠키 네이밍과 관련된 문제일 가능성이 있음.</li>
+</ul>
+</li>
+<li>
+<p><strong>SRM 디버그 로깅 활성화</strong></p>
+<ul>
+<li><code>com.avi.codedx.k.d.ac</code>의 디버그 로그를 활성화하여 더 자세한 오류 원인을 확인.</li>
+<li>디버그 로그에서 <strong>응답 본문(response body) 확인 필요.</strong></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="-결론"><strong>🎯 결론</strong><a hidden class="anchor" aria-hidden="true" href="#-결론">#</a></h3>
+<p>✅ <strong>주요 원인은 최신 Coverity 업데이트에서 세션 쿠키 이름이 변경된 것과 HTTP → HTTPS 리다이렉트 문제일 가능성이 큼.</strong><br>
+✅ <strong>HTTPS(<code>https://</code> 및 8443 포트)로 요청하고, <code>coverity.session-cookie-name</code> 값을 새로운 쿠키(<code>COVJSESSIONID8080SG</code>)로 변경하여 테스트 필요.</strong><br>
+✅ <strong>Proxy 설정 확인 및 API 키를 새로 생성하여 테스트하면 추가적인 원인 파악 가능.</strong> 🚀</p>
+<hr>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/portfolio/tags/sdlc/">SDLC</a></li>
+      <li><a href="http://localhost:1313/portfolio/tags/srm/">SRM</a></li>
+      <li><a href="http://localhost:1313/portfolio/tags/coverity/">Coverity</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

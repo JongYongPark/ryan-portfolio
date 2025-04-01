@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Git Usage | RyanLabs</title>
+<meta name="keywords" content="GIT">
+<meta name="description" content="
+
+GitHub에서 새로운 Repository(저장소)를 생성하는 방법
+GitHub에서 새로운 Repository(저장소)를 생성하는 방법
+GitHub에서 새로운 **Repository(저장소)**를 생성하는 방법을 단계별로 설명하겠습니다.
+방법 1: GitHub 웹사이트에서 직접 생성하는 방법
+방법 2: Git CLI를 사용하여 터미널에서 생성하는 방법
+
+📝 방법 1: GitHub 웹사이트에서 직접 생성하기
+1️⃣ GitHub에 로그인
+
+GitHub 홈페이지에 접속 후 로그인합니다.
+
+2️⃣ 새 저장소 생성 페이지 이동
+
+우측 상단의 &#43; 버튼을 클릭한 후 &ldquo;New repository&rdquo; 선택
+또는 직접 새 저장소 생성 페이지로 이동
+
+3️⃣ 저장소 정보 입력
+
+Repository name (필수): 저장소 이름을 입력합니다. (예: my-new-repo)
+Description (선택): 저장소에 대한 설명을 입력합니다.
+Visibility 선택:
+
+Public(공개) → 누구나 볼 수 있음.
+Private(비공개) → 본인과 초대한 사용자만 접근 가능.
+
+
+
+4️⃣ 추가 설정
+
+✅ Initialize this repository with a README (선택)
+
+체크하면 기본적인 README.md 파일이 생성됨.
+
+
+✅ .gitignore (선택)
+
+특정 파일을 Git에서 무시하도록 설정 (예: Python, Node.js 등).
+
+
+✅ License (선택)
+
+오픈소스 라이선스를 설정 (예: MIT, Apache 2.0 등).
+
+
+
+5️⃣ 저장소 생성
+
+&ldquo;Create repository&rdquo; 버튼을 클릭하면 저장소가 생성됩니다.
+
+6️⃣ 로컬 프로젝트와 연결
+이제 로컬에서 작업 중인 프로젝트를 GitHub 저장소에 연결할 수 있습니다.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/sdlc/git/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/sdlc/git/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Git Usage
+    </h1>
+    <div class="post-meta"><span title='2025-02-17 00:00:00 +0000 UTC'>2월 17, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><hr>
+<hr>
+<h1 id="github에서-새로운-repository저장소를-생성하는-방법"><strong>GitHub에서 새로운 Repository(저장소)를 생성하는 방법</strong><a hidden class="anchor" aria-hidden="true" href="#github에서-새로운-repository저장소를-생성하는-방법">#</a></h1>
+<h2 id="github에서-새로운-repository저장소를-생성하는-방법-1"><strong>GitHub에서 새로운 Repository(저장소)를 생성하는 방법</strong><a hidden class="anchor" aria-hidden="true" href="#github에서-새로운-repository저장소를-생성하는-방법-1">#</a></h2>
+<p>GitHub에서 새로운 **Repository(저장소)**를 생성하는 방법을 단계별로 설명하겠습니다.<br>
+<strong>방법 1:</strong> GitHub 웹사이트에서 직접 생성하는 방법<br>
+<strong>방법 2:</strong> Git CLI를 사용하여 터미널에서 생성하는 방법</p>
+<hr>
+<h2 id="-방법-1-github-웹사이트에서-직접-생성하기"><strong>📝 방법 1: GitHub 웹사이트에서 직접 생성하기</strong><a hidden class="anchor" aria-hidden="true" href="#-방법-1-github-웹사이트에서-직접-생성하기">#</a></h2>
+<h3 id="1-github에-로그인"><strong>1️⃣ GitHub에 로그인</strong><a hidden class="anchor" aria-hidden="true" href="#1-github에-로그인">#</a></h3>
+<ul>
+<li><a href="https://github.com/">GitHub 홈페이지</a>에 접속 후 로그인합니다.</li>
+</ul>
+<h3 id="2-새-저장소-생성-페이지-이동"><strong>2️⃣ 새 저장소 생성 페이지 이동</strong><a hidden class="anchor" aria-hidden="true" href="#2-새-저장소-생성-페이지-이동">#</a></h3>
+<ul>
+<li>우측 상단의 <strong><code>+</code> 버튼</strong>을 클릭한 후 <strong>&ldquo;New repository&rdquo;</strong> 선택</li>
+<li>또는 직접 <a href="https://github.com/new">새 저장소 생성 페이지</a>로 이동</li>
+</ul>
+<h3 id="3-저장소-정보-입력"><strong>3️⃣ 저장소 정보 입력</strong><a hidden class="anchor" aria-hidden="true" href="#3-저장소-정보-입력">#</a></h3>
+<ul>
+<li><strong>Repository name (필수):</strong> 저장소 이름을 입력합니다. (예: <code>my-new-repo</code>)</li>
+<li><strong>Description (선택):</strong> 저장소에 대한 설명을 입력합니다.</li>
+<li><strong>Visibility 선택:</strong>
+<ul>
+<li><code>Public</code>(공개) → 누구나 볼 수 있음.</li>
+<li><code>Private</code>(비공개) → 본인과 초대한 사용자만 접근 가능.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-추가-설정"><strong>4️⃣ 추가 설정</strong><a hidden class="anchor" aria-hidden="true" href="#4-추가-설정">#</a></h3>
+<ul>
+<li>✅ <code>Initialize this repository with a README</code> (선택)
+<ul>
+<li>체크하면 기본적인 <code>README.md</code> 파일이 생성됨.</li>
+</ul>
+</li>
+<li>✅ <code>.gitignore</code> (선택)
+<ul>
+<li>특정 파일을 Git에서 무시하도록 설정 (예: Python, Node.js 등).</li>
+</ul>
+</li>
+<li>✅ <code>License</code> (선택)
+<ul>
+<li>오픈소스 라이선스를 설정 (예: MIT, Apache 2.0 등).</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-저장소-생성"><strong>5️⃣ 저장소 생성</strong><a hidden class="anchor" aria-hidden="true" href="#5-저장소-생성">#</a></h3>
+<ul>
+<li><strong>&ldquo;Create repository&rdquo;</strong> 버튼을 클릭하면 저장소가 생성됩니다.</li>
+</ul>
+<h3 id="6-로컬-프로젝트와-연결"><strong>6️⃣ 로컬 프로젝트와 연결</strong><a hidden class="anchor" aria-hidden="true" href="#6-로컬-프로젝트와-연결">#</a></h3>
+<p>이제 로컬에서 작업 중인 프로젝트를 GitHub 저장소에 연결할 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># 1. 로컬에서 Git 초기화 (저장소가 없을 경우)</span>
+</span></span><span style="display:flex;"><span>git init
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. 원격 저장소 추가</span>
+</span></span><span style="display:flex;"><span>git remote add origin https://github.com/사용자이름/my-new-repo.git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. 변경 사항 커밋 및 푸시</span>
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Initial commit&#34;</span>
+</span></span><span style="display:flex;"><span>git push -u origin main
+</span></span></code></pre></div><hr>
+<h2 id="-방법-2-git-cli로-github에서-저장소-생성하기"><strong>🖥️ 방법 2: Git CLI로 GitHub에서 저장소 생성하기</strong><a hidden class="anchor" aria-hidden="true" href="#-방법-2-git-cli로-github에서-저장소-생성하기">#</a></h2>
+<p>GitHub CLI(<code>gh</code>)를 사용하면 터미널에서 저장소를 생성할 수도 있습니다.</p>
+<h3 id="1-github-cli-설치"><strong>1️⃣ GitHub CLI 설치</strong><a hidden class="anchor" aria-hidden="true" href="#1-github-cli-설치">#</a></h3>
+<ul>
+<li>먼저 GitHub CLI(GitHub Command Line Interface)를 설치해야 합니다.
+<ul>
+<li><strong>Windows:</strong> <a href="https://cli.github.com/">다운로드 링크</a></li>
+<li><strong>macOS:</strong> <code>brew install gh</code></li>
+<li><strong>Linux:</strong> <code>sudo apt install gh</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-github-로그인"><strong>2️⃣ GitHub 로그인</strong><a hidden class="anchor" aria-hidden="true" href="#2-github-로그인">#</a></h3>
+<p>GitHub CLI를 통해 로그인합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>gh auth login
+</span></span></code></pre></div><ul>
+<li>GitHub 계정 로그인 후 OAuth 토큰을 설정하면 CLI에서 GitHub API를 사용할 수 있습니다.</li>
+</ul>
+<h3 id="3-새로운-저장소-생성"><strong>3️⃣ 새로운 저장소 생성</strong><a hidden class="anchor" aria-hidden="true" href="#3-새로운-저장소-생성">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>gh repo create my-new-repo --public --clone
+</span></span></code></pre></div><p>📌 <strong>설명</strong></p>
+<ul>
+<li><code>my-new-repo</code> → 저장소 이름</li>
+<li><code>--public</code> → 공개 저장소 (비공개 저장소는 <code>--private</code> 사용)</li>
+<li><code>--clone</code> → 로컬에 자동으로 복제</li>
+</ul>
+<h3 id="4-로컬-프로젝트와-연결"><strong>4️⃣ 로컬 프로젝트와 연결</strong><a hidden class="anchor" aria-hidden="true" href="#4-로컬-프로젝트와-연결">#</a></h3>
+<p>만약 기존 프로젝트가 있다면 아래 명령어로 원격 저장소에 연결합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git remote add origin https://github.com/사용자이름/my-new-repo.git
+</span></span><span style="display:flex;"><span>git branch -M main
+</span></span><span style="display:flex;"><span>git push -u origin main
+</span></span></code></pre></div><hr>
+<h2 id="-마무리"><strong>🚀 마무리</strong><a hidden class="anchor" aria-hidden="true" href="#-마무리">#</a></h2>
+<p>✅ <strong>GitHub 웹사이트에서 직접 저장소 생성</strong> → 가장 쉬운 방법<br>
+✅ <strong>GitHub CLI(<code>gh</code>)를 사용하여 터미널에서 생성</strong> → 빠르고 효율적인 방법<br>
+✅ <strong>로컬 프로젝트를 GitHub와 연결하여 원격 저장소로 관리 가능</strong></p>
+<h2 id="이제-새-github-저장소에서-개발을-시작해보세요-">이제 새 GitHub 저장소에서 개발을 시작해보세요! 🎉🚀<a hidden class="anchor" aria-hidden="true" href="#이제-새-github-저장소에서-개발을-시작해보세요-">#</a></h2>
+<h1 id="git-workflow-상세-설명"><strong>Git Workflow 상세 설명</strong><a hidden class="anchor" aria-hidden="true" href="#git-workflow-상세-설명">#</a></h1>
+<p>Git을 사용하여 프로젝트를 효과적으로 관리하려면 올바른 <strong>Git Workflow</strong>를 이해하는 것이 중요합니다.<br>
+Git Workflow는 프로젝트의 코드 협업과 버전 관리를 위한 규칙과 프로세스를 정의하는 개념입니다.</p>
+<hr>
+<h2 id="1-기본적인-git-workflow"><strong>1. 기본적인 Git Workflow</strong><a hidden class="anchor" aria-hidden="true" href="#1-기본적인-git-workflow">#</a></h2>
+<p>기본적인 Git Workflow는 다음 단계를 포함합니다.</p>
+<ol>
+<li><strong>작업 디렉토리에서 파일 수정</strong></li>
+<li><strong><code>git add</code>를 사용하여 스테이징(Staging)</strong></li>
+<li><strong><code>git commit</code>을 사용하여 로컬 저장소(Local Repository)에 기록</strong></li>
+<li><strong><code>git push</code>를 사용하여 원격 저장소(Remote Repository)에 업로드</strong></li>
+<li><strong>필요하면 <code>git pull</code> 또는 <code>git fetch</code>를 사용하여 최신 변경 사항 가져오기</strong></li>
+<li><strong>협업 시 <code>git branch</code>와 <code>git merge</code> 또는 <code>git rebase</code>를 활용하여 코드 통합</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># 1. 원격 저장소에서 최신 코드 가져오기</span>
+</span></span><span style="display:flex;"><span>git pull origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. 새 기능 개발을 위해 브랜치 생성 및 이동</span>
+</span></span><span style="display:flex;"><span>git checkout -b feature-new
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. 파일 수정 후 스테이징</span>
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. 커밋</span>
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;새로운 기능 추가&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 5. 원격 저장소로 푸시</span>
+</span></span><span style="display:flex;"><span>git push origin feature-new
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 6. PR(풀 리퀘스트, Merge 요청) 또는 main 브랜치로 병합</span>
+</span></span><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge feature-new
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 7. 정리 (로컬 브랜치 삭제)</span>
+</span></span><span style="display:flex;"><span>git branch -d feature-new
+</span></span></code></pre></div><hr>
+<h2 id="2-git-workflow의-종류"><strong>2. Git Workflow의 종류</strong><a hidden class="anchor" aria-hidden="true" href="#2-git-workflow의-종류">#</a></h2>
+<p>다양한 Git Workflow가 존재하며, 팀과 프로젝트에 따라 적절한 방식을 선택하여 사용합니다.</p>
+<h3 id="1-centralized-workflow-중앙집중식-워크플로우"><strong>(1) Centralized Workflow (중앙집중식 워크플로우)</strong><a hidden class="anchor" aria-hidden="true" href="#1-centralized-workflow-중앙집중식-워크플로우">#</a></h3>
+<ul>
+<li>SVN(서브버전)과 유사한 방식으로 Git을 사용하는 방법.</li>
+<li>모든 개발자가 <code>main</code> (또는 <code>master</code>) 브랜치에서 직접 작업.</li>
+<li>간단한 프로젝트에서는 가능하지만, 협업 시 충돌이 자주 발생.</li>
+</ul>
+<p>📌 <strong>사용 방법</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git pull origin main  <span style="color:#75715e"># 최신 코드 가져오기</span>
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;작업 내용&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div><p>✅ <strong>장점:</strong> 배우기 쉽고 간단함.<br>
+❌ <strong>단점:</strong> 병렬 개발이 어렵고, 코드 충돌이 자주 발생할 수 있음.</p>
+<hr>
+<h3 id="2-feature-branch-workflow-기능-브랜치-워크플로우"><strong>(2) Feature Branch Workflow (기능 브랜치 워크플로우)</strong><a hidden class="anchor" aria-hidden="true" href="#2-feature-branch-workflow-기능-브랜치-워크플로우">#</a></h3>
+<ul>
+<li>모든 기능(feature) 개발을 별도의 브랜치에서 진행 후, 완성되면 <code>main</code> 브랜치로 병합.</li>
+<li><code>main</code> 브랜치는 항상 배포 가능한 상태로 유지.</li>
+</ul>
+<p>📌 <strong>사용 방법</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git checkout -b feature-login  <span style="color:#75715e"># 새 기능 브랜치 생성</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 코드 수정</span>
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;로그인 기능 추가&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin feature-login  <span style="color:#75715e"># 원격 저장소에 푸시</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (이후 GitHub/GitLab에서 Pull Request 생성 후 리뷰 후 병합)</span>
+</span></span></code></pre></div><p>✅ <strong>장점:</strong> <code>main</code> 브랜치를 안전하게 유지하며 기능별 개발 가능.<br>
+❌ <strong>단점:</strong> 브랜치가 많아질 경우 관리가 어려울 수 있음.</p>
+<hr>
+<h3 id="3-gitflow-workflow-깃플로우-워크플로우"><strong>(3) Gitflow Workflow (깃플로우 워크플로우)</strong><a hidden class="anchor" aria-hidden="true" href="#3-gitflow-workflow-깃플로우-워크플로우">#</a></h3>
+<ul>
+<li><strong>Vincent Driessen</strong>이 제안한 방식으로, 협업을 위한 체계적인 브랜치 전략.</li>
+<li><code>main</code>, <code>develop</code>, <code>feature</code>, <code>release</code>, <code>hotfix</code> 브랜치를 사용.</li>
+<li><code>develop</code> 브랜치는 개발 브랜치, <code>main</code>은 배포 브랜치.</li>
+</ul>
+<p>📌 <strong>브랜치 역할</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>브랜치</th>
+          <th>역할</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>main</code></td>
+          <td>실제 배포되는 안정적인 코드 (production)</td>
+      </tr>
+      <tr>
+          <td><code>develop</code></td>
+          <td>개발을 진행하는 브랜치</td>
+      </tr>
+      <tr>
+          <td><code>feature/</code></td>
+          <td>새로운 기능 개발 브랜치 (<code>develop</code>에서 생성)</td>
+      </tr>
+      <tr>
+          <td><code>release/</code></td>
+          <td>배포 준비 브랜치 (<code>develop</code>에서 생성)</td>
+      </tr>
+      <tr>
+          <td><code>hotfix/</code></td>
+          <td>긴급 수정 브랜치 (<code>main</code>에서 생성)</td>
+      </tr>
+  </tbody>
+</table>
+<p>📌 <strong>사용 방법</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># 1. 새로운 기능 개발</span>
+</span></span><span style="display:flex;"><span>git checkout develop
+</span></span><span style="display:flex;"><span>git checkout -b feature-authentication
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 기능 개발 후</span>
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;사용자 인증 기능 추가&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin feature-authentication
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. 기능 완료 후 develop 브랜치로 병합</span>
+</span></span><span style="display:flex;"><span>git checkout develop
+</span></span><span style="display:flex;"><span>git merge feature-authentication
+</span></span><span style="display:flex;"><span>git push origin develop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. 배포를 위해 release 브랜치 생성</span>
+</span></span><span style="display:flex;"><span>git checkout -b release-v1.0
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 배포 준비 완료 후 main으로 병합</span>
+</span></span><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge release-v1.0
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. 긴급 수정 (hotfix)</span>
+</span></span><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git checkout -b hotfix-login-bug
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 버그 수정 후</span>
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;로그인 버그 수정&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin hotfix-login-bug
+</span></span></code></pre></div><p>✅ <strong>장점:</strong> 안정적인 배포가 가능하고, 체계적인 개발 프로세스를 유지 가능.<br>
+❌ <strong>단점:</strong> 브랜치가 많아져 관리가 복잡해질 수 있음.</p>
+<hr>
+<h3 id="4-github-flow-깃허브-플로우"><strong>(4) GitHub Flow (깃허브 플로우)</strong><a hidden class="anchor" aria-hidden="true" href="#4-github-flow-깃허브-플로우">#</a></h3>
+<ul>
+<li>Gitflow를 단순화한 방식으로, <code>main</code>과 <code>feature</code> 브랜치만 사용.</li>
+<li><code>main</code> 브랜치는 항상 배포 가능한 상태로 유지하며, 기능 개발은 브랜치에서 진행 후 PR을 통해 병합.</li>
+</ul>
+<p>📌 <strong>사용 방법</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git checkout -b feature-dashboard
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 개발 후</span>
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;대시보드 추가&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin feature-dashboard
+</span></span></code></pre></div><ul>
+<li>이후 GitHub에서 <strong>Pull Request (PR)</strong> 생성 후 코드 리뷰 및 병합.</li>
+</ul>
+<p>✅ <strong>장점:</strong> 간단하고 빠른 개발 가능.<br>
+❌ <strong>단점:</strong> 대규모 프로젝트에서는 관리가 어려울 수 있음.</p>
+<hr>
+<h2 id="3-git의-주요-명령어-정리"><strong>3. Git의 주요 명령어 정리</strong><a hidden class="anchor" aria-hidden="true" href="#3-git의-주요-명령어-정리">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>명령어</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>git init</code></td>
+          <td>새로운 Git 저장소 생성</td>
+      </tr>
+      <tr>
+          <td><code>git clone &lt;url&gt;</code></td>
+          <td>원격 저장소 복사</td>
+      </tr>
+      <tr>
+          <td><code>git status</code></td>
+          <td>현재 작업 상태 확인</td>
+      </tr>
+      <tr>
+          <td><code>git add .</code></td>
+          <td>변경된 파일을 스테이징</td>
+      </tr>
+      <tr>
+          <td><code>git commit -m &quot;메시지&quot;</code></td>
+          <td>변경 사항을 로컬 저장소에 커밋</td>
+      </tr>
+      <tr>
+          <td><code>git push origin &lt;branch&gt;</code></td>
+          <td>원격 저장소에 푸시</td>
+      </tr>
+      <tr>
+          <td><code>git pull origin &lt;branch&gt;</code></td>
+          <td>원격 저장소의 변경 사항 가져오기</td>
+      </tr>
+      <tr>
+          <td><code>git checkout -b &lt;branch&gt;</code></td>
+          <td>새 브랜치 생성 및 이동</td>
+      </tr>
+      <tr>
+          <td><code>git merge &lt;branch&gt;</code></td>
+          <td>다른 브랜치를 현재 브랜치에 병합</td>
+      </tr>
+      <tr>
+          <td><code>git rebase &lt;branch&gt;</code></td>
+          <td>다른 브랜치를 현재 브랜치에 합치되, 커밋 히스토리를 정리</td>
+      </tr>
+      <tr>
+          <td><code>git log --oneline</code></td>
+          <td>커밋 내역을 한 줄로 보기</td>
+      </tr>
+      <tr>
+          <td><code>git reset --hard &lt;commit&gt;</code></td>
+          <td>특정 커밋으로 되돌리기 (주의!)</td>
+      </tr>
+      <tr>
+          <td><code>git stash</code></td>
+          <td>현재 변경 사항을 임시 저장</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="4-git-workflow-선택-가이드"><strong>4. Git Workflow 선택 가이드</strong><a hidden class="anchor" aria-hidden="true" href="#4-git-workflow-선택-가이드">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>사용 사례</th>
+          <th>추천 Workflow</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>간단한 프로젝트</td>
+          <td><strong>Centralized Workflow</strong></td>
+      </tr>
+      <tr>
+          <td>협업 및 기능 단위 개발</td>
+          <td><strong>Feature Branch Workflow</strong></td>
+      </tr>
+      <tr>
+          <td>대규모 팀 협업</td>
+          <td><strong>Gitflow Workflow</strong></td>
+      </tr>
+      <tr>
+          <td>빠른 개발 및 배포</td>
+          <td><strong>GitHub Flow</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>✅ <strong>작은 프로젝트</strong> → Feature Branch 또는 GitHub Flow<br>
+✅ <strong>대규모 협업 프로젝트</strong> → Gitflow</p>
+<hr>
+<h2 id="5-결론"><strong>5. 결론</strong><a hidden class="anchor" aria-hidden="true" href="#5-결론">#</a></h2>
+<p>Git Workflow를 잘 활용하면 협업을 더욱 효과적으로 진행할 수 있습니다.</p>
+<ul>
+<li><strong>작은 프로젝트</strong>에서는 간단한 Feature Branch Workflow나 GitHub Flow를 사용.</li>
+<li><strong>대규모 프로젝트</strong>에서는 체계적인 Gitflow를 활용하여 개발 프로세스를 정리.</li>
+</ul>
+<p><strong>팀의 필요와 프로젝트의 성격에 맞는 Workflow를 선택하여 활용하세요!</strong> 🚀</p>
+<hr>
+<h1 id="git에서-원격remote-저장소-url을-확인하는-방법"><strong>Git에서 원격(remote) 저장소 URL을 확인하는 방법</strong><a hidden class="anchor" aria-hidden="true" href="#git에서-원격remote-저장소-url을-확인하는-방법">#</a></h1>
+<h3 id="git에서-원격remote-저장소-url을-확인하는-방법-1"><strong>Git에서 원격(remote) 저장소 URL을 확인하는 방법</strong><a hidden class="anchor" aria-hidden="true" href="#git에서-원격remote-저장소-url을-확인하는-방법-1">#</a></h3>
+<h4 id="1-git-remote--v-명령어-사용-가장-일반적인-방법"><strong>1. <code>git remote -v</code> 명령어 사용 (가장 일반적인 방법)</strong><a hidden class="anchor" aria-hidden="true" href="#1-git-remote--v-명령어-사용-가장-일반적인-방법">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git remote -v
+</span></span></code></pre></div><p>📌 <strong>출력 예시:</strong></p>
+<pre tabindex="0"><code>origin  https://github.com/JongYongPark/my-repo.git (fetch)
+origin  https://github.com/JongYongPark/my-repo.git (push)
+</code></pre><ul>
+<li><code>origin</code>: 기본 원격 저장소 이름</li>
+<li><code>(fetch)</code>: 가져오기(fetch) 용도</li>
+<li><code>(push)</code>: 푸시(push) 용도</li>
+</ul>
+<hr>
+<h4 id="2-특정-원격-저장소-url-확인-git-remote-get-url"><strong>2. 특정 원격 저장소 URL 확인 (<code>git remote get-url</code>)</strong><a hidden class="anchor" aria-hidden="true" href="#2-특정-원격-저장소-url-확인-git-remote-get-url">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git remote get-url origin
+</span></span></code></pre></div><p>📌 <strong>출력 예시:</strong></p>
+<pre tabindex="0"><code>https://github.com/JongYongPark/my-repo.git
+</code></pre><ul>
+<li>특정 원격(remote)의 URL을 확인할 때 사용.</li>
+</ul>
+<p><strong>SSH 방식으로 설정된 경우 예시</strong></p>
+<pre tabindex="0"><code>git@github.com:JongYongPark/my-repo.git
+</code></pre><hr>
+<h4 id="3-자세한-원격-저장소-정보-확인-git-remote-show"><strong>3. 자세한 원격 저장소 정보 확인 (<code>git remote show</code>)</strong><a hidden class="anchor" aria-hidden="true" href="#3-자세한-원격-저장소-정보-확인-git-remote-show">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git remote show origin
+</span></span></code></pre></div><p>📌 <strong>출력 예시:</strong></p>
+<pre tabindex="0"><code>* remote origin
+  Fetch URL: https://github.com/JongYongPark/my-repo.git
+  Push  URL: https://github.com/JongYongPark/my-repo.git
+  HEAD branch: main
+  Remote branches:
+    main    tracked
+    develop tracked
+</code></pre><ul>
+<li><code>Fetch URL</code>과 <code>Push URL</code>을 포함한 원격 저장소의 정보가 출력됨.</li>
+<li>현재 추적 중인 원격 브랜치 정보도 제공됨.</li>
+</ul>
+<hr>
+<h3 id="추가-원격-저장소-url-변경-방법"><strong>추가: 원격 저장소 URL 변경 방법</strong><a hidden class="anchor" aria-hidden="true" href="#추가-원격-저장소-url-변경-방법">#</a></h3>
+<h4 id="1-https--ssh-변경"><strong>1. HTTPS → SSH 변경</strong><a hidden class="anchor" aria-hidden="true" href="#1-https--ssh-변경">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git remote set-url origin git@github.com:JongYongPark/my-repo.git
+</span></span></code></pre></div><h4 id="2-ssh--https-변경"><strong>2. SSH → HTTPS 변경</strong><a hidden class="anchor" aria-hidden="true" href="#2-ssh--https-변경">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git remote set-url origin https://github.com/JongYongPark/my-repo.git
+</span></span></code></pre></div><h4 id="3-원격-저장소-제거"><strong>3. 원격 저장소 제거</strong><a hidden class="anchor" aria-hidden="true" href="#3-원격-저장소-제거">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git remote remove origin
+</span></span></code></pre></div><hr>
+<p>✅ <strong>추천 방법:</strong><br>
+원격 저장소 URL을 확인할 때 <strong><code>git remote -v</code></strong> 또는 <strong><code>git remote get-url origin</code></strong> 을 사용하면 가장 간단하고 빠르게 확인할 수 있습니다. 🚀</p>
+<hr>
+<h1 id="git-pull-vs-git-fetch-차이점"><strong><code>git pull</code> vs <code>git fetch</code> 차이점</strong><a hidden class="anchor" aria-hidden="true" href="#git-pull-vs-git-fetch-차이점">#</a></h1>
+<p>Git에서 <code>git pull</code>과 <code>git fetch</code>는 모두 원격 저장소에서 변경 사항을 가져오는 역할을 합니다.<br>
+그러나 <strong>작동 방식과 목적이 다릅니다</strong>.</p>
+<hr>
+<h2 id="1-git-fetch란"><strong>1. <code>git fetch</code>란?</strong><a hidden class="anchor" aria-hidden="true" href="#1-git-fetch란">#</a></h2>
+<p>🚀 <strong>원격 저장소의 변경 사항을 가져오지만, 로컬 브랜치에는 반영하지 않음.</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git fetch origin
+</span></span></code></pre></div><p>📌 <strong>설명</strong></p>
+<ul>
+<li>원격 저장소(<code>origin</code>)의 최신 변경 사항을 로컬 저장소의 <strong>참조(refs) 데이터</strong>로만 업데이트함.</li>
+<li>로컬 브랜치에는 영향을 주지 않으며, 직접 머지(<code>merge</code>)하거나 리베이스(<code>rebase</code>)해야 변경 사항을 반영할 수 있음.</li>
+</ul>
+<p>📌 <strong>사용 예시</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git fetch origin
+</span></span><span style="display:flex;"><span>git log origin/main --oneline  <span style="color:#75715e"># 원격 브랜치의 변경 사항 확인</span>
+</span></span><span style="display:flex;"><span>git merge origin/main  <span style="color:#75715e"># 변경 사항을 로컬에 병합</span>
+</span></span></code></pre></div><p>✅ <strong>장점</strong></p>
+<ul>
+<li>로컬 브랜치를 안전하게 유지하면서 최신 상태를 확인할 수 있음.</li>
+<li>원격 변경 사항을 검토한 후 병합할 수 있어 충돌 가능성을 줄일 수 있음.</li>
+</ul>
+<p>❌ <strong>단점</strong></p>
+<ul>
+<li><code>fetch</code>만으로는 코드가 자동으로 업데이트되지 않음. <code>merge</code> 또는 <code>rebase</code>가 필요함.</li>
+</ul>
+<hr>
+<h2 id="2-git-pull이란"><strong>2. <code>git pull</code>이란?</strong><a hidden class="anchor" aria-hidden="true" href="#2-git-pull이란">#</a></h2>
+<p>🚀 <strong>원격 저장소의 변경 사항을 가져오고, 자동으로 현재 브랜치에 병합(<code>merge</code>)하거나 리베이스(<code>rebase</code>)함.</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git pull origin main
+</span></span></code></pre></div><p>📌 <strong>설명</strong></p>
+<ul>
+<li><code>git fetch</code> + <code>git merge</code> 또는 <code>git rebase</code>를 자동으로 수행.</li>
+<li>원격 저장소의 변경 사항이 바로 로컬 브랜치에 반영됨.</li>
+</ul>
+<p>📌 <strong>사용 예시</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git pull origin main  <span style="color:#75715e"># 원격 저장소의 최신 변경 사항을 가져와 자동 병합</span>
+</span></span></code></pre></div><p>✅ <strong>장점</strong></p>
+<ul>
+<li>빠르고 간편하게 원격 저장소의 최신 상태를 유지할 수 있음.</li>
+<li>한 번의 명령어로 <code>fetch</code>와 <code>merge</code>를 수행.</li>
+</ul>
+<p>❌ <strong>단점</strong></p>
+<ul>
+<li>변경 사항을 직접 검토할 기회 없이 자동으로 병합이 진행되므로, 예상치 못한 충돌(conflict)이 발생할 가능성이 있음.</li>
+</ul>
+<hr>
+<h2 id="3-git-fetch-vs-git-pull-차이점-정리"><strong>3. <code>git fetch</code> vs <code>git pull</code> 차이점 정리</strong><a hidden class="anchor" aria-hidden="true" href="#3-git-fetch-vs-git-pull-차이점-정리">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>비교 항목</th>
+          <th><code>git fetch</code></th>
+          <th><code>git pull</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>원격 변경 사항 가져오기</td>
+          <td>✅ 가져옴 (하지만 로컬에 반영 X)</td>
+          <td>✅ 가져옴 (그리고 자동 병합)</td>
+      </tr>
+      <tr>
+          <td>로컬 브랜치 업데이트</td>
+          <td>❌ 직접 <code>merge</code> 필요</td>
+          <td>✅ 자동 병합</td>
+      </tr>
+      <tr>
+          <td>충돌 가능성</td>
+          <td>❌ 없음 (병합 전 확인 가능)</td>
+          <td>⚠️ 있음 (자동 병합되므로)</td>
+      </tr>
+      <tr>
+          <td>사용 목적</td>
+          <td>최신 변경 사항 확인 후 병합할지 결정</td>
+          <td>바로 병합하여 최신 상태 유지</td>
+      </tr>
+      <tr>
+          <td>명령어 조합</td>
+          <td><code>git fetch</code> + <code>git merge</code></td>
+          <td><code>git fetch</code> + <code>git merge</code> 자동 수행</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="4-git-fetch를-사용해야-할-때"><strong>4. <code>git fetch</code>를 사용해야 할 때</strong><a hidden class="anchor" aria-hidden="true" href="#4-git-fetch를-사용해야-할-때">#</a></h2>
+<ul>
+<li>원격 저장소의 최신 변경 사항을 <strong>검토한 후 병합하고 싶을 때</strong>.</li>
+<li><strong>충돌을 방지하고 싶을 때</strong> (자동 병합이 되지 않으므로 안전함).</li>
+<li>CI/CD(배포 파이프라인)에서 원격 상태를 동기화하지만, 즉시 반영하지 않고 싶을 때.</li>
+</ul>
+<p>📌 <strong>추천 워크플로우</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git fetch origin
+</span></span><span style="display:flex;"><span>git diff main origin/main  <span style="color:#75715e"># 변경 사항 확인</span>
+</span></span><span style="display:flex;"><span>git merge origin/main  <span style="color:#75715e"># 안전하게 병합</span>
+</span></span></code></pre></div><hr>
+<h2 id="5-git-pull을-사용해야-할-때"><strong>5. <code>git pull</code>을 사용해야 할 때</strong><a hidden class="anchor" aria-hidden="true" href="#5-git-pull을-사용해야-할-때">#</a></h2>
+<ul>
+<li><strong>혼자 작업하는 경우</strong> 또는 <strong>빠르게 최신 변경 사항을 반영하고 싶을 때</strong>.</li>
+<li><strong>동료 개발자가 작업한 내용을 바로 가져와야 할 때</strong>.</li>
+</ul>
+<p>📌 <strong>추천 워크플로우</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git pull origin main
+</span></span></code></pre></div><p>(단, 충돌 발생 가능성이 있으므로 주의해야 함)</p>
+<hr>
+<h2 id="6-추가-git-pull---rebase"><strong>6. 추가: <code>git pull --rebase</code></strong><a hidden class="anchor" aria-hidden="true" href="#6-추가-git-pull---rebase">#</a></h2>
+<p>🚀 <code>git pull</code>은 기본적으로 <code>fetch</code> 후 <code>merge</code>를 수행하지만, <code>rebase</code>를 사용할 수도 있음.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git pull --rebase origin main
+</span></span></code></pre></div><p>📌 <strong>설명</strong></p>
+<ul>
+<li><code>git merge</code> 대신 <code>git rebase</code>를 수행하여 <strong>더 깔끔한 커밋 히스토리 유지</strong> 가능.</li>
+<li><code>merge</code>를 사용하면 <code>merge commit</code>이 생기지만, <code>rebase</code>를 사용하면 커밋이 일렬로 정리됨.</li>
+</ul>
+<p>📌 <strong>추천 시나리오</strong></p>
+<ul>
+<li>협업 시 <strong>Git 커밋 히스토리를 깔끔하게 유지</strong>하고 싶을 때.</li>
+<li>로컬에서 진행한 커밋을 원격 커밋 뒤에 순서대로 적용하고 싶을 때.</li>
+</ul>
+<hr>
+<h2 id="7-결론"><strong>7. 결론</strong><a hidden class="anchor" aria-hidden="true" href="#7-결론">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>상황</th>
+          <th>추천 명령어</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>원격 변경 사항을 가져와 검토 후 병합하고 싶을 때</td>
+          <td><code>git fetch</code> + <code>git merge</code></td>
+      </tr>
+      <tr>
+          <td>최신 변경 사항을 빠르게 반영하고 싶을 때</td>
+          <td><code>git pull</code></td>
+      </tr>
+      <tr>
+          <td>히스토리를 깔끔하게 유지하고 싶을 때</td>
+          <td><code>git pull --rebase</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>📌 <strong>요약</strong></p>
+<ul>
+<li>안전하게 최신 상태를 확인하려면 <strong><code>git fetch</code></strong></li>
+<li>빠르게 최신 코드로 업데이트하려면 <strong><code>git pull</code></strong></li>
+<li>히스토리를 정리하면서 업데이트하려면 <strong><code>git pull --rebase</code></strong></li>
+</ul>
+<hr>
+<p>✅ <strong>실제 프로젝트에서는 충돌 방지를 위해 <code>git fetch</code>를 먼저 하고, 변경 사항을 확인한 후 병합하는 것이 더 안전한 방법입니다.</strong> 🚀</p>
+<hr>
+<h1 id="git-merge-vs-git-rebase-비교"><strong>Git Merge vs Git Rebase 비교</strong><a hidden class="anchor" aria-hidden="true" href="#git-merge-vs-git-rebase-비교">#</a></h1>
+<p>Git에서 브랜치를 병합하는 방법에는 **<code>git merge</code>**와 <strong><code>git rebase</code></strong> 두 가지 방법이 있습니다.<br>
+두 방법 모두 브랜치를 병합하는 역할을 하지만, <strong>커밋 히스토리 관리 방식이 다릅니다.</strong></p>
+<hr>
+<h2 id="1-git-merge란"><strong>1. <code>git merge</code>란?</strong><a hidden class="anchor" aria-hidden="true" href="#1-git-merge란">#</a></h2>
+<p>🚀 <strong>두 브랜치를 병합(Merge Commit 생성)하여, 기존 커밋 히스토리를 유지하면서 새로운 병합 커밋을 만듦.</strong></p>
+<p>📌 <strong>사용 예시</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge feature-branch
+</span></span></code></pre></div><p>📌 <strong>설명</strong></p>
+<ul>
+<li><code>feature-branch</code>의 변경 사항을 <code>main</code> 브랜치에 병합.</li>
+<li><code>main</code> 브랜치와 <code>feature-branch</code>의 **공통 조상(commit)**을 기준으로 병합.</li>
+<li>새 커밋(<code>merge commit</code>)이 생성됨.</li>
+</ul>
+<p>📌 <strong>장점</strong>
+✅ <strong>커밋 히스토리가 보존됨</strong> (브랜치 병합이 명확하게 보임)<br>
+✅ 협업에서 충돌 관리가 쉬움</p>
+<p>📌 <strong>단점</strong>
+❌ <strong>불필요한 병합 커밋이 생성될 수 있음</strong><br>
+❌ 브랜치가 많아지면 히스토리가 복잡해질 수 있음</p>
+<hr>
+<h2 id="2-git-rebase란"><strong>2. <code>git rebase</code>란?</strong><a hidden class="anchor" aria-hidden="true" href="#2-git-rebase란">#</a></h2>
+<p>🚀 <strong>브랜치를 다른 브랜치의 최신 커밋으로 &ldquo;재배치&quot;하여, 병합 커밋 없이 깔끔한 히스토리를 유지.</strong></p>
+<p>📌 <strong>사용 예시</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git checkout feature-branch
+</span></span><span style="display:flex;"><span>git rebase main
+</span></span></code></pre></div><p>📌 <strong>설명</strong></p>
+<ul>
+<li><code>feature-branch</code>의 모든 커밋을 <code>main</code> 브랜치의 최신 상태로 <strong>재배치(reapply)</strong>.</li>
+<li><strong>기존 커밋을 새로운 커밋으로 변경</strong>하여, 브랜치가 마치 <code>main</code>에서 직접 시작한 것처럼 보이게 함.</li>
+<li><code>merge commit</code>이 생성되지 않음.</li>
+</ul>
+<p>📌 <strong>장점</strong>
+✅ <strong>커밋 히스토리가 깔끔해짐</strong><br>
+✅ <strong>불필요한 병합 커밋이 없어짐</strong><br>
+✅ <code>git log</code>가 직관적으로 유지됨</p>
+<p>📌 <strong>단점</strong>
+❌ <strong>이미 푸시된 커밋을 rebase하면 충돌 위험이 커짐</strong><br>
+❌ <strong>협업 시 다른 개발자와 히스토리가 꼬일 위험이 있음</strong></p>
+<hr>
+<h2 id="3-git-merge-vs-git-rebase-차이점"><strong>3. <code>git merge</code> vs <code>git rebase</code> 차이점</strong><a hidden class="anchor" aria-hidden="true" href="#3-git-merge-vs-git-rebase-차이점">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>비교 항목</th>
+          <th><code>git merge</code></th>
+          <th><code>git rebase</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>작동 방식</strong></td>
+          <td>두 브랜치를 병합하고 새로운 병합 커밋(Merge Commit) 생성</td>
+          <td>커밋을 다른 브랜치의 최신 상태로 재배치</td>
+      </tr>
+      <tr>
+          <td><strong>커밋 히스토리</strong></td>
+          <td>브랜치가 합쳐진 기록이 남음</td>
+          <td>병합 커밋 없이, 마치 한 줄로 이어진 것처럼 보임</td>
+      </tr>
+      <tr>
+          <td><strong>커밋 충돌 발생 시</strong></td>
+          <td>충돌 후 수동으로 해결, 병합 커밋 생성</td>
+          <td>충돌이 발생하면 각 커밋마다 해결해야 함</td>
+      </tr>
+      <tr>
+          <td><strong>사용 시점</strong></td>
+          <td>협업 중일 때, 원본 히스토리를 유지하고 싶을 때</td>
+          <td>로컬에서만 작업할 때, 히스토리를 깔끔하게 유지하고 싶을 때</td>
+      </tr>
+      <tr>
+          <td><strong>복잡성</strong></td>
+          <td>단순 (자동으로 merge)</td>
+          <td>어려움 (각 커밋을 하나씩 재배치)</td>
+      </tr>
+      <tr>
+          <td><strong>협업에 적합한가?</strong></td>
+          <td>✅ 협업에 적합 (공유된 브랜치에 사용 가능)</td>
+          <td>⚠️ 주의 필요 (공유된 브랜치에 사용하면 안됨)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="4-git-merge-vs-git-rebase-히스토리-차이"><strong>4. <code>git merge</code> vs <code>git rebase</code> 히스토리 차이</strong><a hidden class="anchor" aria-hidden="true" href="#4-git-merge-vs-git-rebase-히스토리-차이">#</a></h2>
+<h3 id="1-git-merge의-커밋-히스토리"><strong>(1) <code>git merge</code>의 커밋 히스토리</strong><a hidden class="anchor" aria-hidden="true" href="#1-git-merge의-커밋-히스토리">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>*   D (Merge Commit)  ← main
+</span></span><span style="display:flex;"><span>|\
+</span></span><span style="display:flex;"><span>| * C  ← feature-branch
+</span></span><span style="display:flex;"><span>| * B
+</span></span><span style="display:flex;"><span>|/
+</span></span><span style="display:flex;"><span>* A  ← main (공통 조상)
+</span></span></code></pre></div><ul>
+<li>브랜치가 <strong>합쳐진 기록이 남음</strong>.</li>
+<li><code>D</code>(Merge Commit)가 <code>main</code>과 <code>feature-branch</code>를 병합한 커밋.</li>
+</ul>
+<h3 id="2-git-rebase의-커밋-히스토리"><strong>(2) <code>git rebase</code>의 커밋 히스토리</strong><a hidden class="anchor" aria-hidden="true" href="#2-git-rebase의-커밋-히스토리">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>* C&#39;  ← feature-branch
+</span></span><span style="display:flex;"><span>* B&#39;
+</span></span><span style="display:flex;"><span>* A  ← main (공통 조상)
+</span></span></code></pre></div><ul>
+<li><code>feature-branch</code>의 커밋 <code>B</code>와 <code>C</code>가 <code>main</code> 위로 <strong>재배치됨</strong>.</li>
+<li>병합 커밋 없이 <strong>마치 <code>feature-branch</code>가 <code>main</code>에서 바로 시작한 것처럼 보임</strong>.</li>
+<li>기존 커밋 <code>B</code>와 <code>C</code>는 <code>B'</code>, <code>C'</code>로 새로운 커밋으로 변경됨.</li>
+</ul>
+<hr>
+<h2 id="5-git-rebase-사용-시-주의할-점"><strong>5. <code>git rebase</code> 사용 시 주의할 점</strong><a hidden class="anchor" aria-hidden="true" href="#5-git-rebase-사용-시-주의할-점">#</a></h2>
+<p>🚨 <strong>이미 원격 저장소(<code>origin</code>)에 푸시된 브랜치를 rebase하면 히스토리가 꼬일 수 있음.</strong><br>
+<strong>다른 개발자가 같은 브랜치를 사용하고 있다면 <code>rebase</code>는 피하는 것이 좋음!</strong></p>
+<p>✅ <strong>로컬에서만 사용하거나, 자신의 브랜치에서 사용해야 안전함.</strong><br>
+✅ <strong>공유된 브랜치에서는 <code>merge</code>를 사용하는 것이 좋음.</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git pull --rebase origin main  <span style="color:#75715e"># 최신 코드 반영 (rebase 방식)</span>
+</span></span></code></pre></div><ul>
+<li>로컬에서만 사용하는 경우 <code>rebase</code>를 활용하면 히스토리를 깔끔하게 유지할 수 있음.</li>
+</ul>
+<hr>
+<h2 id="6-언제-merge-vs-rebase를-사용해야-할까"><strong>6. 언제 <code>merge</code> vs <code>rebase</code>를 사용해야 할까?</strong><a hidden class="anchor" aria-hidden="true" href="#6-언제-merge-vs-rebase를-사용해야-할까">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>상황</th>
+          <th><code>git merge</code> 추천</th>
+          <th><code>git rebase</code> 추천</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>협업 프로젝트</td>
+          <td>✅</td>
+          <td>❌</td>
+      </tr>
+      <tr>
+          <td>로컬에서 브랜치 정리</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td>원격 브랜치 관리</td>
+          <td>✅</td>
+          <td>❌</td>
+      </tr>
+      <tr>
+          <td>커밋 히스토리 유지</td>
+          <td>✅</td>
+          <td>❌</td>
+      </tr>
+      <tr>
+          <td>히스토리 깔끔하게 유지</td>
+          <td>❌</td>
+          <td>✅</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-추천-가이드"><strong>📌 추천 가이드</strong><a hidden class="anchor" aria-hidden="true" href="#-추천-가이드">#</a></h3>
+<p>✅ <strong>팀 협업 중이라면?</strong> → <code>git merge</code> 사용 (충돌 관리가 쉬움)<br>
+✅ <strong>혼자 작업하는 브랜치라면?</strong> → <code>git rebase</code> 사용 (히스토리 깔끔)<br>
+✅ <strong>원격 저장소와 동기화할 때?</strong> → <code>git pull --rebase</code> 사용 (충돌 최소화)</p>
+<hr>
+<h2 id="7-결론-1"><strong>7. 결론</strong><a hidden class="anchor" aria-hidden="true" href="#7-결론-1">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>방식</th>
+          <th><code>git merge</code></th>
+          <th><code>git rebase</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>✅ <strong>쉽고 안전함</strong></td>
+          <td>병합 커밋이 생기지만 협업 시 안전함</td>
+          <td>커밋 히스토리를 깔끔하게 유지</td>
+      </tr>
+      <tr>
+          <td>❌ <strong>단점</strong></td>
+          <td>불필요한 Merge Commit이 생길 수 있음</td>
+          <td>원격 브랜치에서 사용하면 충돌 위험</td>
+      </tr>
+  </tbody>
+</table>
+<p>💡 <strong>무조건 하나만 사용하는 것이 아니라, 상황에 맞게 적절히 활용하는 것이 중요합니다!</strong> 🚀</p>
+<hr>
+<h1 id="git-conflict-충돌-발생-원인-및-해결-방법"><strong>Git Conflict (충돌) 발생 원인 및 해결 방법</strong><a hidden class="anchor" aria-hidden="true" href="#git-conflict-충돌-발생-원인-및-해결-방법">#</a></h1>
+<p>Git을 사용할 때 <code>git pull</code>, <code>git fetch</code>, <code>git commit</code>, <code>git merge</code>, <code>git rebase</code>, <code>git push</code> 등의 과정에서 **충돌(conflict)**이 발생할 수 있습니다.<br>
+각 경우에 따라 <strong>왜 충돌이 발생하는지</strong>와 <strong>어떻게 해결해야 하는지</strong>를 정리해보겠습니다.</p>
+<hr>
+<h2 id="1-git-pull-시-충돌"><strong>1. <code>git pull</code> 시 충돌</strong><a hidden class="anchor" aria-hidden="true" href="#1-git-pull-시-충돌">#</a></h2>
+<p>🚀 <strong>발생 원인:</strong></p>
+<ul>
+<li>원격 저장소(<code>origin/main</code>)에 있는 최신 커밋이 <strong>로컬 브랜치와 다를 때</strong> 발생.</li>
+<li>같은 파일을 <strong>동시에 여러 사람이 수정</strong>했을 때.</li>
+</ul>
+<p>📌 <strong>충돌 재현</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># 원격 저장소에 최신 변경 사항이 있음</span>
+</span></span><span style="display:flex;"><span>git pull origin main
+</span></span></code></pre></div><p>⛔ <strong>Error 메시지 예시</strong></p>
+<pre tabindex="0"><code>Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre><p>✅ <strong>해결 방법</strong></p>
+<ol>
+<li><code>git status</code>로 충돌이 발생한 파일 확인:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git status
+</span></span></code></pre></div></li>
+<li>충돌이 발생한 파일 열기 (<code>index.html</code> 예시):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt; <span style="color:#f92672">HEAD</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">로컬</span> <span style="color:#a6e22e">변경</span> <span style="color:#a6e22e">사항
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e"></span><span style="color:#f92672">=</span><span style="color:#e6db74">======</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">원격</span> <span style="color:#a6e22e">변경</span> <span style="color:#a6e22e">사항</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt;&gt;&gt;&gt;&gt; origin/main
+</span></span></code></pre></div></li>
+<li>충돌 부분을 직접 수정한 후 저장.</li>
+<li>변경 사항을 스테이징하고 커밋:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git add index.html
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Resolve merge conflict&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h2 id="2-git-fetch-시-충돌"><strong>2. <code>git fetch</code> 시 충돌</strong><a hidden class="anchor" aria-hidden="true" href="#2-git-fetch-시-충돌">#</a></h2>
+<p>🚀 <strong>발생 원인:</strong></p>
+<ul>
+<li><code>git fetch</code> 자체로는 충돌이 발생하지 않음.</li>
+<li>하지만 <code>git fetch</code> 후 <code>git merge</code> 또는 <code>git rebase</code>를 수행하면 충돌이 발생할 수 있음.</li>
+</ul>
+<p>✅ <strong>해결 방법</strong></p>
+<ul>
+<li><code>git fetch</code> 이후 충돌이 발생하면 <code>git merge</code> 또는 <code>git rebase</code> 과정에서 충돌 해결이 필요함.</li>
+</ul>
+<hr>
+<h2 id="3-git-commit-시-충돌"><strong>3. <code>git commit</code> 시 충돌</strong><a hidden class="anchor" aria-hidden="true" href="#3-git-commit-시-충돌">#</a></h2>
+<p>🚀 <strong>발생 원인:</strong></p>
+<ul>
+<li>일반적으로 <code>git commit</code> 시 충돌이 발생하지 않음.</li>
+<li>하지만 <code>git commit --amend</code>를 사용할 때, 이미 푸시된 커밋을 수정하면 충돌 가능.</li>
+</ul>
+<p>✅ <strong>해결 방법</strong></p>
+<ul>
+<li><code>commit --amend</code> 사용 시 신중하게 실행:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git commit --amend
+</span></span><span style="display:flex;"><span>git push --force origin main  <span style="color:#75715e"># 강제 푸시는 충돌을 유발할 수 있음 (주의!)</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h2 id="4-git-merge-시-충돌"><strong>4. <code>git merge</code> 시 충돌</strong><a hidden class="anchor" aria-hidden="true" href="#4-git-merge-시-충돌">#</a></h2>
+<p>🚀 <strong>발생 원인:</strong></p>
+<ul>
+<li>서로 다른 브랜치에서 같은 파일의 <strong>같은 부분을 수정했을 때</strong> 발생.</li>
+<li>예를 들어, <code>feature-branch</code>와 <code>main</code>이 서로 다른 방식으로 같은 파일을 수정한 경우.</li>
+</ul>
+<p>📌 <strong>충돌 재현</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge feature-branch
+</span></span></code></pre></div><p>⛔ <strong>Error 메시지 예시</strong></p>
+<pre tabindex="0"><code>Auto-merging src/app.js
+CONFLICT (content): Merge conflict in src/app.js
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre><p>✅ <strong>해결 방법</strong></p>
+<ol>
+<li><code>git status</code>로 충돌 파일 확인:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git status
+</span></span></code></pre></div></li>
+<li>충돌 파일 열기 (<code>src/app.js</code> 예시):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span style="color:#a6e22e">HEAD</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Main branch 변경 사항&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=======</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Feature branch 변경 사항&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span style="color:#a6e22e">feature</span><span style="color:#f92672">-</span><span style="color:#a6e22e">branch</span>
+</span></span></code></pre></div></li>
+<li>충돌 부분을 수동으로 수정하고 저장.</li>
+<li>변경 사항 스테이징 후 커밋:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git add src/app.js
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Resolve merge conflict&#34;</span>
+</span></span></code></pre></div></li>
+<li>병합 완료 후 푸시:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h2 id="5-git-rebase-시-충돌"><strong>5. <code>git rebase</code> 시 충돌</strong><a hidden class="anchor" aria-hidden="true" href="#5-git-rebase-시-충돌">#</a></h2>
+<p>🚀 <strong>발생 원인:</strong></p>
+<ul>
+<li><code>rebase</code>는 커밋을 재배치하기 때문에 <strong>각 커밋마다 충돌이 발생할 수 있음.</strong></li>
+<li>로컬 브랜치가 원격 브랜치와 다르게 변경된 경우.</li>
+</ul>
+<p>📌 <strong>충돌 재현</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git checkout feature-branch
+</span></span><span style="display:flex;"><span>git rebase main
+</span></span></code></pre></div><p>⛔ <strong>Error 메시지 예시</strong></p>
+<pre tabindex="0"><code>Applying: 변경 사항 적용 중...
+CONFLICT (content): Merge conflict in src/app.js
+error: could not apply commit_hash
+</code></pre><p>✅ <strong>해결 방법</strong></p>
+<ol>
+<li><code>git status</code>로 충돌 확인.</li>
+<li>충돌 파일을 열어 충돌 해결 후 저장.</li>
+<li>충돌 해결 후 <code>git rebase --continue</code> 실행:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git rebase --continue
+</span></span></code></pre></div></li>
+<li>만약 충돌이 너무 복잡하면 <code>git rebase --abort</code>로 되돌릴 수도 있음:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git rebase --abort
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h2 id="6-git-push-시-충돌"><strong>6. <code>git push</code> 시 충돌</strong><a hidden class="anchor" aria-hidden="true" href="#6-git-push-시-충돌">#</a></h2>
+<p>🚀 <strong>발생 원인:</strong></p>
+<ul>
+<li>로컬 브랜치가 원격 브랜치보다 뒤쳐져 있을 때 (<code>pull</code>이 필요할 때).</li>
+<li>강제 푸시 (<code>git push --force</code>)가 다른 개발자의 변경 사항을 덮어쓸 위험이 있음.</li>
+</ul>
+<p>📌 <strong>충돌 재현</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div><p>⛔ <strong>Error 메시지 예시</strong></p>
+<pre tabindex="0"><code>! [rejected]        main -&gt; main (non-fast-forward)
+error: failed to push some refs to &#39;https://github.com/user/repo.git&#39;
+</code></pre><p>✅ <strong>해결 방법</strong></p>
+<ol>
+<li>최신 변경 사항을 가져온 후 다시 푸시:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git pull origin main --rebase
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div></li>
+<li>강제 푸시가 필요한 경우 (<code>주의!</code>):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git push --force origin main
+</span></span></code></pre></div><ul>
+<li>⚠️ <code>--force</code> 사용 시, 원격의 변경 사항이 덮어씌워질 수 있으므로 신중하게 사용해야 함.</li>
+<li>안전한 강제 푸시는 <code>git push --force-with-lease</code>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git push --force-with-lease origin main
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-충돌-해결-시-기본-원칙"><strong>🚀 충돌 해결 시 기본 원칙</strong><a hidden class="anchor" aria-hidden="true" href="#-충돌-해결-시-기본-원칙">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>원칙</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>1. <code>git status</code> 먼저 확인</strong></td>
+          <td>충돌이 난 파일을 확인하려면 <code>git status</code> 실행</td>
+      </tr>
+      <tr>
+          <td><strong>2. 충돌 파일 직접 수정</strong></td>
+          <td><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> 부분을 직접 해결</td>
+      </tr>
+      <tr>
+          <td><strong>3. 변경 사항 커밋</strong></td>
+          <td>수정 후 <code>git add . &amp;&amp; git commit -m &quot;Resolve conflict&quot;</code> 실행</td>
+      </tr>
+      <tr>
+          <td><strong>4. 복잡한 충돌 시 <code>git merge --abort</code></strong></td>
+          <td>병합이 너무 복잡하면 병합을 취소</td>
+      </tr>
+      <tr>
+          <td><strong>5. rebase 중 문제 발생 시 <code>git rebase --abort</code></strong></td>
+          <td>rebase를 되돌릴 수 있음</td>
+      </tr>
+      <tr>
+          <td><strong>6. 강제 푸시(<code>--force</code>)는 신중하게 사용</strong></td>
+          <td>가능하면 <code>--force-with-lease</code> 사용</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-결론"><strong>🎯 결론</strong><a hidden class="anchor" aria-hidden="true" href="#-결론">#</a></h2>
+<p>✅ <strong><code>git merge</code></strong>: 두 브랜치를 병합할 때 충돌 발생 가능 → <strong>수동으로 해결 후 커밋</strong><br>
+✅ <strong><code>git rebase</code></strong>: 커밋을 재배치할 때 충돌 발생 가능 → <strong>각 커밋마다 해결 후 <code>git rebase --continue</code></strong><br>
+✅ <strong><code>git push</code></strong>: 원격 저장소와 로컬 저장소가 다를 때 충돌 발생 → <strong><code>git pull --rebase</code> 후 푸시</strong><br>
+✅ <strong><code>git pull</code></strong>: 원격 변경 사항과 로컬 변경 사항이 다를 때 충돌 발생 → <strong>충돌 해결 후 커밋</strong></p>
+<p>💡 <strong>Git 충돌을 줄이려면?</strong></p>
+<ul>
+<li><strong>항상 <code>git fetch</code> 후 <code>git merge/rebase</code> 하여 최신 코드 유지</strong></li>
+<li><strong>한 번에 너무 많은 변경 사항을 병합하지 않기</strong></li>
+<li><strong>팀원과 협업 시 <code>rebase</code>보다는 <code>merge</code>를 활용하여 충돌 최소화</strong></li>
+</ul>
+<p>🚀 <strong>이제 Git 충돌을 두려워하지 말고, 문제 발생 시 해결할 수 있도록 연습해보세요!</strong> 💪</p>
+<hr>
+<h1 id="git-branch-전략---perflexity">Git branch 전략 - perflexity<a hidden class="anchor" aria-hidden="true" href="#git-branch-전략---perflexity">#</a></h1>
+<h1 id="sdl-프로젝트-git-브랜치-관리-전략-효율적-협업을-위한-체계적-접근">SDL 프로젝트 Git 브랜치 관리 전략: 효율적 협업을 위한 체계적 접근<a hidden class="anchor" aria-hidden="true" href="#sdl-프로젝트-git-브랜치-관리-전략-효율적-협업을-위한-체계적-접근">#</a></h1>
+<h2 id="서론-sdl-프로젝트-특성과-브랜치-관리의-중요성">서론: SDL 프로젝트 특성과 브랜치 관리의 중요성<a hidden class="anchor" aria-hidden="true" href="#서론-sdl-프로젝트-특성과-브랜치-관리의-중요성">#</a></h2>
+<p>SDL(Specific Domain Library) 프로젝트는 도메인 특화 라이브러리 개발로 코드 안정성과 유지보수성이 핵심 요소입니다. Git 브랜치 전략은 다음 목표 달성에 기여합니다[2][6]:</p>
+<ol>
+<li><strong>기능 개발과 버그 수정의 병렬 처리</strong></li>
+<li>릴리스 버전별 코드 스냅샷 관리</li>
+<li>CI/CD 파이프라인과의 원활한 통합</li>
+<li>팀원 간 작업 충돌 최소화</li>
+</ol>
+<h2 id="핵심-브랜치-아키텍처-설계">핵심 브랜치 아키텍처 설계<a hidden class="anchor" aria-hidden="true" href="#핵심-브랜치-아키텍처-설계">#</a></h2>
+<h3 id="1-메인-브랜치-체계">1. 메인 브랜치 체계<a hidden class="anchor" aria-hidden="true" href="#1-메인-브랜치-체계">#</a></h3>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">gitGraph  
+    commit  
+    branch develop  
+    checkout develop  
+    commit  
+    branch feature/network-module  
+    checkout feature/network-module  
+    commit  
+    checkout develop  
+    merge feature/network-module  
+    branch release/v1.2.0  
+    checkout release/v1.2.0  
+    commit  
+    checkout main  
+    merge release/v1.2.0  
+    branch hotfix/auth-bug  
+    checkout hotfix/auth-bug  
+    commit  
+    checkout main  
+    merge hotfix/auth-bug  
+</code></pre><h4 id="구성-요소">구성 요소<a hidden class="anchor" aria-hidden="true" href="#구성-요소">#</a></h4>
+<ul>
+<li><strong>main</strong>: 안정화된 릴리스 버전 관리 (태그로 버전 표기)</li>
+<li><strong>develop</strong>: 차기 버전 개발 통합 브랜치</li>
+<li><strong>feature/</strong>*: 개별 기능 개발 (예: <code>feature/graphics-optimization</code>)</li>
+<li><strong>release/</strong>*: 버전별 QA 및 최종 테스트</li>
+<li><strong>hotfix/</strong>*: 긴급 버그 수정</li>
+</ul>
+<h2 id="sdl-개발-워크플로우-상세">SDL 개발 워크플로우 상세<a hidden class="anchor" aria-hidden="true" href="#sdl-개발-워크플로우-상세">#</a></h2>
+<h3 id="1-기능-개발-사이클">1. 기능 개발 사이클<a hidden class="anchor" aria-hidden="true" href="#1-기능-개발-사이클">#</a></h3>
+<ol>
+<li>개발 시작 시 develop 브랜치 기반 feature 생성</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout -b feature/physics-engine develop  
+</span></span></code></pre></div><ol start="2">
+<li>기능 구현 후 리뷰 요청</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push origin feature/physics-engine  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># GitHub/GitLab에서 PR 생성  </span>
+</span></span></code></pre></div><ol start="3">
+<li>코드 리뷰 통과 시 develop 병합</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout develop  
+</span></span><span style="display:flex;"><span>git merge --no-ff feature/physics-engine  
+</span></span></code></pre></div><h3 id="2-릴리스-프로세스">2. 릴리스 프로세스<a hidden class="anchor" aria-hidden="true" href="#2-릴리스-프로세스">#</a></h3>
+<ol>
+<li>릴리스 브랜치 생성 및 테스트</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout -b release/v2.1.0 develop  
+</span></span></code></pre></div><ol start="2">
+<li>버전 태그 생성</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git tag -a v2.1.0 -m <span style="color:#e6db74">&#34;Physics engine integration&#34;</span>  
+</span></span></code></pre></div><ol start="3">
+<li>main 및 develop 동기화</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main  
+</span></span><span style="display:flex;"><span>git merge release/v2.1.0  
+</span></span><span style="display:flex;"><span>git checkout develop  
+</span></span><span style="display:flex;"><span>git merge release/v2.1.0  
+</span></span></code></pre></div><h3 id="3-핫픽스-처리-절차">3. 핫픽스 처리 절차<a hidden class="anchor" aria-hidden="true" href="#3-핫픽스-처리-절차">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout -b hotfix/memory-leak main  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 버그 수정 후  </span>
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Fix memory allocation issue&#34;</span>  
+</span></span><span style="display:flex;"><span>git checkout main  
+</span></span><span style="display:flex;"><span>git merge hotfix/memory-leak  
+</span></span><span style="display:flex;"><span>git tag -a v2.1.1 -m <span style="color:#e6db74">&#34;Emergency memory leak fix&#34;</span>  
+</span></span><span style="display:flex;"><span>git checkout develop  
+</span></span><span style="display:flex;"><span>git merge hotfix/memory-leak  
+</span></span></code></pre></div><h2 id="고급-브랜치-관리-기법">고급 브랜치 관리 기법<a hidden class="anchor" aria-hidden="true" href="#고급-브랜치-관리-기법">#</a></h2>
+<h3 id="1-병렬-개발-지원-구조">1. 병렬 개발 지원 구조<a hidden class="anchor" aria-hidden="true" href="#1-병렬-개발-지원-구조">#</a></h3>
+<pre tabindex="0"><code>main  
+├── develop  
+│   ├── feature/A  
+│   ├── feature/B  
+│   └── release/next  
+└── hotfix/patch  
+</code></pre><h3 id="2-브랜치-네이밍-컨벤션">2. 브랜치 네이밍 컨벤션<a hidden class="anchor" aria-hidden="true" href="#2-브랜치-네이밍-컨벤션">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>유형</th>
+          <th>패턴</th>
+          <th>예시</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>기능</td>
+          <td>feature/[기능명]</td>
+          <td>feature/ai-pathfinding</td>
+      </tr>
+      <tr>
+          <td>릴리스</td>
+          <td>release/[버전]</td>
+          <td>release/v3.0.0-rc1</td>
+      </tr>
+      <tr>
+          <td>핫픽스</td>
+          <td>hotfix/[이슈ID]</td>
+          <td>hotfix/JIRA-142</td>
+      </tr>
+      <tr>
+          <td>실험</td>
+          <td>experiment/[주제]</td>
+          <td>experiment/vulkan-api</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="cicd-통합-전략">CI/CD 통합 전략<a hidden class="anchor" aria-hidden="true" href="#cicd-통합-전략">#</a></h2>
+<h3 id="1-자동화-파이프라인-구성">1. 자동화 파이프라인 구성<a hidden class="anchor" aria-hidden="true" href="#1-자동화-파이프라인-구성">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># .gitlab-ci.yml 예시  </span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">stages</span>:  
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">test  </span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">build  </span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">deploy  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">feature_test</span>:  
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">test  </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">only</span>:  
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">/^feature\/.*$/  </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:  
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">make test-unit  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">release_build</span>:  
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">build  </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">only</span>:  
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">/^release\/v\d+\.\d+\.\d+$/  </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:  
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">make build  </span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">./package.sh  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">production_deploy</span>:  
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">deploy  </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">only</span>:  
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">main  </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:  
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">ansible-playbook deploy.yml  </span>
+</span></span></code></pre></div><h3 id="2-품질-게이트-적용">2. 품질 게이트 적용<a hidden class="anchor" aria-hidden="true" href="#2-품질-게이트-적용">#</a></h3>
+<ol>
+<li><strong>정적 분석</strong>: Coverity, SonarQube 연동</li>
+<li><strong>테스트 커버리지</strong>: 85% 이상 강제</li>
+<li><strong>빌드 검증</strong>: 크로스 플랫폼 빌드 확인</li>
+</ol>
+<h2 id="성능-최적화-기법">성능 최적화 기법<a hidden class="anchor" aria-hidden="true" href="#성능-최적화-기법">#</a></h2>
+<h3 id="1-대용량-리포지토리-관리">1. 대용량 리포지토리 관리<a hidden class="anchor" aria-hidden="true" href="#1-대용량-리포지토리-관리">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 부분 클론  </span>
+</span></span><span style="display:flex;"><span>git clone --filter<span style="color:#f92672">=</span>blob:none https://sdl-repo.git  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 증분 패치  </span>
+</span></span><span style="display:flex;"><span>git fetch --deepen <span style="color:#ae81ff">100</span>  
+</span></span></code></pre></div><h3 id="2-병렬-처리-구성">2. 병렬 처리 구성<a hidden class="anchor" aria-hidden="true" href="#2-병렬-처리-구성">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 16코어 시스템 기준  </span>
+</span></span><span style="display:flex;"><span>git config --global pack.threads <span style="color:#ae81ff">16</span>  
+</span></span><span style="display:flex;"><span>git config --global core.looseCompression <span style="color:#ae81ff">6</span>  
+</span></span></code></pre></div><h2 id="충돌-해결-전략">충돌 해결 전략<a hidden class="anchor" aria-hidden="true" href="#충돌-해결-전략">#</a></h2>
+<h3 id="1-예방적-기법">1. 예방적 기법<a hidden class="anchor" aria-hidden="true" href="#1-예방적-기법">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 개발 시작 전 최신 동기화  </span>
+</span></span><span style="display:flex;"><span>git pull --rebase origin develop  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 커밋 단위 세분화  </span>
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Implement matrix multiplication&#34;</span> -m <span style="color:#e6db74">&#34;- Add base algorithm\n- Optimize cache usage&#34;</span>  
+</span></span></code></pre></div><h3 id="2-충돌-발생-시-처리-절차">2. 충돌 발생 시 처리 절차<a hidden class="anchor" aria-hidden="true" href="#2-충돌-발생-시-처리-절차">#</a></h3>
+<ol>
+<li>변경 이력 분석</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log --merge -p  
+</span></span></code></pre></div><ol start="2">
+<li>3-way 머지 도구 활용</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git mergetool -t kdiff3  
+</span></span></code></pre></div><ol start="3">
+<li>충돌 해결 후 검증</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff --check  
+</span></span></code></pre></div><h2 id="sdl-특화-고려사항">SDL 특화 고려사항<a hidden class="anchor" aria-hidden="true" href="#sdl-특화-고려사항">#</a></h2>
+<h3 id="1-플랫폼-종속성-관리">1. 플랫폼 종속성 관리<a hidden class="anchor" aria-hidden="true" href="#1-플랫폼-종속성-관리">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 플랫폼 별 기능 분기  </span>
+</span></span><span style="display:flex;"><span>git branch feature/metal-support  
+</span></span><span style="display:flex;"><span>git branch feature/directx-support  
+</span></span></code></pre></div><h3 id="2-성능-벤치마크-통합">2. 성능 벤치마크 통합<a hidden class="anchor" aria-hidden="true" href="#2-성능-벤치마크-통합">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 벤치마크 결과 커밋  </span>
+</span></span><span style="display:flex;"><span>git add benchmarks/  
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Add performance metrics for render pipeline&#34;</span>  
+</span></span></code></pre></div><h2 id="결론-sdl-프로젝트-최적화-방안">결론: SDL 프로젝트 최적화 방안<a hidden class="anchor" aria-hidden="true" href="#결론-sdl-프로젝트-최적화-방안">#</a></h2>
+<ol>
+<li><strong>전략 선택 기준</strong></li>
+</ol>
+<ul>
+<li>소규모 팀/신속 배포 → GitHub Flow</li>
+<li>대규모/엔터프라이즈 → Git Flow</li>
+<li>중간 규모/다중 환경 → GitLab Flow</li>
+</ul>
+<ol start="2">
+<li><strong>성공 요소</strong></li>
+</ol>
+<ul>
+<li>브랜치 수명 주기 명확화 (평균 2주 이내)</li>
+<li>자동화 테스트 커버리지 80% 이상 유지</li>
+<li>주간 브랜치 정리 주기 설정</li>
+</ul>
+<p>SDL 프로젝트의 경우 라이브러리 안정성이 최우선이므로 Git Flow 기반 전략을 권장하며, 릴리스 브랜치에서 최소 72시간 스테이징 기간을 거치는 것이 효과적입니다. 기능 개발 시 기능 플래그(feature flags)를 활용한 부분 활성화 기법을 병행하면 브랜치 관리 효율성을 극대화할 수 있습니다[7][10].</p>
+<hr>
+<h1 id="git-branch-전략---qwen">Git branch 전략 - qwen<a hidden class="anchor" aria-hidden="true" href="#git-branch-전략---qwen">#</a></h1>
+<p>SDL 프로젝트를 Git으로 관리할 때, <strong>branch 전략</strong>과 <strong>component 기반 관리</strong>는 프로젝트의 복잡성과 팀의 요구사항에 따라 달라질 수 있습니다. 아래에서는 각각의 관리 방법에 대해 설명드리겠습니다.</p>
+<hr>
+<h3 id="1-branch-관리-전략"><strong>1. Branch 관리 전략</strong><a hidden class="anchor" aria-hidden="true" href="#1-branch-관리-전략">#</a></h3>
+<p>Git을 사용하여 SDL 프로젝트를 관리할 때, 다음과 같은 branch 전략을 고려할 수 있습니다:</p>
+<h4 id="1-git-flow-모델"><strong>(1) Git Flow 모델</strong><a hidden class="anchor" aria-hidden="true" href="#1-git-flow-모델">#</a></h4>
+<ul>
+<li><strong>main</strong> 브랜치: 안정적인 릴리즈 버전만 포함합니다.</li>
+<li><strong>develop</strong> 브랜치: 다음 릴리즈를 위한 개발 작업이 진행됩니다.</li>
+<li><strong>feature</strong> 브랜치: 새로운 기능을 개발하기 위해 <code>develop</code>에서 분기됩니다. 기능 개발이 완료되면 다시 <code>develop</code>으로 병합됩니다 [[1]].</li>
+<li><strong>release</strong> 브랜치: 특정 릴리즈 준비를 위해 <code>develop</code>에서 분기됩니다. 최종 테스트 및 버그 수정 후 <code>main</code>과 <code>develop</code>에 병합됩니다.</li>
+<li><strong>hotfix</strong> 브랜치: 긴급 버그 수정을 위해 <code>main</code>에서 분기됩니다. 수정 후 <code>main</code>과 <code>develop</code>에 병합됩니다.</li>
+</ul>
+<p>이 전략은 SDL 프로젝트와 같이 여러 기능과 릴리즈를 동시에 관리해야 하는 경우 유용합니다 [[1]].</p>
+<h4 id="2-trunk-based-development"><strong>(2) Trunk-Based Development</strong><a hidden class="anchor" aria-hidden="true" href="#2-trunk-based-development">#</a></h4>
+<ul>
+<li>모든 개발자가 하나의 <strong>main</strong> 브랜치에서 작업하며, 짧은 주기로 코드를 통합합니다.</li>
+<li>큰 변경사항은 <strong>short-lived feature branches</strong>로 관리되며, 가능한 한 빨리 <code>main</code>으로 병합됩니다.</li>
+</ul>
+<p>이 전략은 작은 팀이나 CI/CD 파이프라인을 통해 자주 배포하는 프로젝트에 적합합니다.</p>
+<h4 id="3-customized-strategy"><strong>(3) Customized Strategy</strong><a hidden class="anchor" aria-hidden="true" href="#3-customized-strategy">#</a></h4>
+<ul>
+<li>SDL 프로젝트가 audio, video 등 독립적인 컴포넌트로 구성된 경우, 각 컴포넌트별로 <strong>독립적인 브랜치</strong>를 사용할 수 있습니다. 예를 들어:
+<ul>
+<li><code>audio-feature</code></li>
+<li><code>video-feature</code></li>
+</ul>
+</li>
+</ul>
+<p>이렇게 하면 각 컴포넌트의 변경사항을 독립적으로 관리하고, 필요할 때 <code>develop</code> 또는 <code>main</code>으로 병합할 수 있습니다.</p>
+<hr>
+<h3 id="2-component-기반-관리-방법"><strong>2. Component 기반 관리 방법</strong><a hidden class="anchor" aria-hidden="true" href="#2-component-기반-관리-방법">#</a></h3>
+<p>SDL 프로젝트에서 <strong>audio</strong>, <strong>video</strong>와 같은 컴포넌트를 관리하는 방법은 다음과 같습니다:</p>
+<h4 id="1-monorepo-방식"><strong>(1) Monorepo 방식</strong><a hidden class="anchor" aria-hidden="true" href="#1-monorepo-방식">#</a></h4>
+<ul>
+<li>모든 컴포넌트(audio, video 등)를 <strong>하나의 저장소</strong>에서 관리합니다.</li>
+<li>각 컴포넌트는 디렉토리 구조로 분리됩니다. 예를 들어:
+<pre tabindex="0"><code>/project-root
+  /audio
+  /video
+  /common
+  /docs
+</code></pre></li>
+<li>장점:
+<ul>
+<li>모든 컴포넌트를 동일한 저장소에서 관리하므로 의존성 관리가 쉽습니다.</li>
+<li>컴포넌트 간 공유 리소스(common 폴더)를 쉽게 활용할 수 있습니다 [[3]].</li>
+</ul>
+</li>
+<li>단점:
+<ul>
+<li>저장소 규모가 커질 수 있으며, 불필요한 파일을 다운로드해야 할 수도 있습니다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-multi-repo-방식"><strong>(2) Multi-repo 방식</strong><a hidden class="anchor" aria-hidden="true" href="#2-multi-repo-방식">#</a></h4>
+<ul>
+<li>각 컴포넌트(audio, video 등)를 <strong>독립적인 저장소</strong>로 관리합니다.</li>
+<li>예를 들어:
+<ul>
+<li><code>audio-component</code> 저장소</li>
+<li><code>video-component</code> 저장소</li>
+</ul>
+</li>
+<li>장점:
+<ul>
+<li>각 컴포넌트를 독립적으로 개발하고 배포할 수 있습니다.</li>
+<li>특정 컴포넌트만 필요한 경우 해당 저장소만 클론하면 됩니다 [[5]].</li>
+</ul>
+</li>
+<li>단점:
+<ul>
+<li>컴포넌트 간 의존성을 관리하기 어려울 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-submodule-또는-subtree-사용"><strong>(3) Submodule 또는 Subtree 사용</strong><a hidden class="anchor" aria-hidden="true" href="#3-submodule-또는-subtree-사용">#</a></h4>
+<ul>
+<li>Git의 <strong>submodule</strong> 또는 <strong>subtree</strong>를 사용하여 독립적인 저장소를 하나의 저장소로 통합할 수 있습니다.</li>
+<li>예를 들어:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git submodule add https://github.com/example/audio-component.git audio
+</span></span><span style="display:flex;"><span>git submodule add https://github.com/example/video-component.git video
+</span></span></code></pre></div></li>
+<li>장점:
+<ul>
+<li>각 컴포넌트를 독립적으로 관리하면서도, 메인 프로젝트에서 통합적으로 사용할 수 있습니다 [[1]].</li>
+</ul>
+</li>
+<li>단점:
+<ul>
+<li>Submodule은 관리가 복잡할 수 있으며, 초보자에게 어려울 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-sdl-component-관리-팁"><strong>3. SDL Component 관리 팁</strong><a hidden class="anchor" aria-hidden="true" href="#3-sdl-component-관리-팁">#</a></h3>
+<p>SDL 프로젝트에서 audio, video와 같은 컴포넌트를 관리할 때 다음 사항을 고려하세요:</p>
+<h4 id="1-dependency-management"><strong>(1) Dependency Management</strong><a hidden class="anchor" aria-hidden="true" href="#1-dependency-management">#</a></h4>
+<ul>
+<li>각 컴포넌트의 의존성을 명확히 정의합니다. 예를 들어, <code>Cargo.toml</code> 파일을 사용하여 Rust 프로젝트에서 의존성을 관리할 수 있습니다 [[5]].</li>
+<li>C++ 프로젝트의 경우, Visual Studio의 <strong>Additional Include Directories</strong> 설정을 통해 SDL 헤더와 라이브러리를 지정합니다 [[7]].</li>
+</ul>
+<h4 id="2-build-automation"><strong>(2) Build Automation</strong><a hidden class="anchor" aria-hidden="true" href="#2-build-automation">#</a></h4>
+<ul>
+<li>각 컴포넌트의 빌드 과정을 자동화합니다. 예를 들어, Makefile 또는 CMake를 사용하여 컴포넌트별 빌드 스크립트를 작성합니다 [[4]].</li>
+<li>CI/CD 파이프라인을 통해 자동으로 빌드 및 테스트를 수행할 수 있습니다.</li>
+</ul>
+<h4 id="3-sdl-diagram-활용"><strong>(3) SDL Diagram 활용</strong><a hidden class="anchor" aria-hidden="true" href="#3-sdl-diagram-활용">#</a></h4>
+<ul>
+<li>SDL 다이어그램을 사용하여 시스템 아키텍처를 시각적으로 표현합니다. 이를 통해 컴포넌트 간의 상호작용을 명확히 이해하고 설계를 간소화할 수 있습니다 [[6]].</li>
+</ul>
+<hr>
+<h3 id="결론"><strong>결론</strong><a hidden class="anchor" aria-hidden="true" href="#결론">#</a></h3>
+<p>SDL 프로젝트를 Git으로 관리할 때, <strong>branch 전략</strong>은 프로젝트 규모와 팀의 요구사항에 따라 선택해야 합니다. 또한, <strong>audio</strong>, <strong>video</strong>와 같은 컴포넌트는 Monorepo, Multi-repo, 또는 Submodule/Subtree 방식으로 관리할 수 있습니다. 각 방법의 장단점을 고려하여 팀의 워크플로우에 맞는 전략을 선택하시기 바랍니다.</p>
+<h2 id="추가-질문이-있으시면-언제든지-말씀해주세요-">추가 질문이 있으시면 언제든지 말씀해주세요! 😊<a hidden class="anchor" aria-hidden="true" href="#추가-질문이-있으시면-언제든지-말씀해주세요-">#</a></h2>
+<h1 id="git-debug">git debug<a hidden class="anchor" aria-hidden="true" href="#git-debug">#</a></h1>
+<p>git ls-remote 명령어에는 직접적인 debug 옵션이 없습니다. 하지만 HTTP 통신 내용을 확인하기 위해 다음과 같은 방법을 사용할 수 있습니다:</p>
+<ol>
+<li>GIT_CURL_VERBOSE 환경 변수 설정:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>GIT_CURL_VERBOSE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> git ls-remote https://github.com/JongYongPark/hello-cpp.git
+</span></span></code></pre></div><ol start="2">
+<li>GIT_TRACE 환경 변수 사용:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>GIT_TRACE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> git ls-remote https://github.com/JongYongPark/hello-cpp.git
+</span></span></code></pre></div><ol start="3">
+<li>-v 옵션 사용 (verbose 모드):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git -v ls-remote https://github.com/JongYongPark/hello-cpp.git
+</span></span></code></pre></div><p>이러한 방법들을 통해 Git이 서버와 주고받는 HTTP 요청 및 응답에 대한 상세 정보를 확인할 수 있습니다[2][4][6].</p>
+<p>git ls-remote 명령어는 &ldquo;smart&rdquo; HTTP 프로토콜을 사용하여 서버와 통신합니다. 주요 과정은 다음과 같습니다:</p>
+<ol>
+<li>GET 요청을 보내 서버가 &ldquo;smart&rdquo; 프로토콜을 지원하는지 확인</li>
+<li>&ldquo;smart&rdquo; 프로토콜 지원 시, POST 요청으로 서버에 명령 전송</li>
+<li>서버로부터 참조 목록(refs)과 해당 커밋 ID 수신[5]</li>
+</ol>
+<p>이 과정을 통해 원격 저장소의 참조 정보를 효율적으로 가져올 수 있습니다.</p>
+<h1 id="git-debug-1">git debug #1<a hidden class="anchor" aria-hidden="true" href="#git-debug-1">#</a></h1>
+<p>Git 명령어의 내부 동작과 HTTP 로그를 확인하여 인증 문제를 해결하기 위해 다음 단계를 따를 수 있습니다:</p>
+<ol>
+<li>Git 트레이스 로깅 활성화:
+환경 변수를 설정하여 Git의 상세 로깅을 활성화합니다.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export GIT_CURL_VERBOSE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>export GIT_TRACE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>export GIT_TRACE_PACKET<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><ol start="2">
+<li>Git 명령 실행:
+로깅이 활성화된 상태에서 Git 명령을 실행합니다. 예를 들어:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/username/repo.git
+</span></span></code></pre></div><ol start="3">
+<li>로그 분석:
+명령 실행 후 출력된 로그를 분석합니다. 인증 실패 시 다음과 같은 로그가 표시될 수 있습니다:</li>
+</ol>
+<pre tabindex="0"><code>trace: built-in: git clone https://github.com/username/repo.git
+trace: run_command: unset GIT_DIR; cd . &amp;&amp; git init repo
+trace: run_command: cd repo &amp;&amp; git config remote.origin.url https://github.com/username/repo.git
+trace: run_command: cd repo &amp;&amp; git fetch origin
+* Couldn&#39;t find host github.com in the .netrc file; using defaults
+* TLSv1.2 (OUT), TLS handshake, Client hello (1):
+* TLSv1.2 (IN), TLS handshake, Server hello (2):
+...
+&gt; GET /username/repo.git/info/refs?service=git-upload-pack HTTP/1.1
+&gt; Host: github.com
+&gt; User-Agent: git/2.30.1
+&gt; Accept: */*
+&gt; Accept-Encoding: deflate, gzip
+&gt; Pragma: no-cache
+&gt; 
+&lt; HTTP/1.1 401 Unauthorized
+&lt; Server: GitHub.com
+&lt; Date: Fri, 21 Feb 2025 09:31:00 GMT
+&lt; Content-Type: text/plain
+&lt; Content-Length: 21
+&lt; 
+fatal: Authentication failed for &#39;https://github.com/username/repo.git/&#39;
+</code></pre><p>주석:</p>
+<ul>
+<li><code>GIT_CURL_VERBOSE=1</code>: libcurl을 통한 HTTP 통신의 상세 정보를 표시합니다.</li>
+<li><code>GIT_TRACE=1</code>: Git 작업의 전반적인 트레이스 로그를 활성화합니다.</li>
+<li><code>GIT_TRACE_PACKET=1</code>: Git 프로토콜 패킷의 트레이스를 활성화합니다.</li>
+<li>&ldquo;401 Unauthorized&rdquo; 응답은 인증 실패를 나타냅니다.</li>
+<li>&ldquo;Authentication failed&rdquo; 메시지는 Git 클라이언트가 인증에 실패했음을 의미합니다.</li>
+</ul>
+<ol start="4">
+<li>
+<p>문제 해결:</p>
+<ul>
+<li>사용자 이름과 비밀번호가 정확한지 확인합니다.</li>
+<li>GitHub의 경우, 개인 액세스 토큰(PAT)을 사용하는 것이 좋습니다[2].</li>
+<li>자격 증명 관리자(예: Windows의 자격 증명 관리자, macOS의 키체인)에서 저장된 자격 증명을 확인하고 필요시 업데이트합니다[12].</li>
+</ul>
+</li>
+<li>
+<p>SSH 사용 고려:
+HTTPS 인증 문제가 지속될 경우, SSH 인증으로 전환을 고려할 수 있습니다[12].</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote set-url origin git@github.com:username/repo.git
+</span></span></code></pre></div><p>이러한 단계를 통해 Git 명령어의 내부 동작과 HTTP 통신을 상세히 확인하고, 인증 관련 문제를 효과적으로 진단하고 해결할 수 있습니다.</p>
+<h1 id="git-debug-2----거짓말이-있음---수정함">git debug #2  - 거짓말이 있음 - 수정함<a hidden class="anchor" aria-hidden="true" href="#git-debug-2----거짓말이-있음---수정함">#</a></h1>
+<p><a href="https://git-scm.com/book/ms/v2/Git-Internals-Environment-Variables">https://git-scm.com/book/ms/v2/Git-Internals-Environment-Variables</a></p>
+<p>Debugging
+Want to really know what Git is up to? Git has a fairly complete set of traces embedded, and all you need to do is turn them on. The possible values of these variables are as follows:</p>
+<p>“true”, “1”, or “2” – the trace category is written to stderr.</p>
+<p>An absolute path starting with / – the trace output will be written to that file.</p>
+<hr>
+<p>더 자세한 로그를 보기 위해 추가적인 환경 변수를 설정하고, 로그 출력을 파일로 리다이렉션할 수 있습니다. 다음은 더 상세한 로그를 얻기 위한 방법입니다:</p>
+<ol>
+<li>환경 변수 설정 (더 상세한 로깅):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export GIT_CURL_VERBOSE<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>export GIT_TRACE<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>export GIT_TRACE_PACKET<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>export GIT_TRACE_PERFORMANCE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>export GIT_TRACE_SETUP<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><ol start="2">
+<li>Git 명령 실행 및 로그 파일로 출력:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/username/repo.git &gt; git_log.txt 2&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><ol start="3">
+<li>로그 파일 분석:</li>
+</ol>
+<p>로그 파일(git_log.txt)을 열어 상세한 정보를 확인합니다. 다음은 예시 로그와 그에 대한 설명입니다:</p>
+<pre tabindex="0"><code>09:15:33.567890 git.c:444               trace: built-in: git clone https://github.com/username/repo.git
+09:15:33.569012 run-command.c:663       trace: run_command: unset GIT_DIR; cd . &amp;&amp; git init repo
+09:15:33.570123 git.c:704               trace: exec: git-init repo
+09:15:33.571234 run-command.c:663       trace: run_command: cd repo &amp;&amp; git config remote.origin.url https://github.com/username/repo.git
+09:15:33.572345 run-command.c:663       trace: run_command: cd repo &amp;&amp; git fetch origin
+09:15:33.573456 http.c:642              trace: HTTP: attempting to connect to github.com:443 (timeout: 30000 ms)
+09:15:33.574567 http.c:681              trace: HTTP: connected to github.com:443
+09:15:33.575678 http.c:456              trace: HTTP: sending request
+09:15:33.576789 packet-write.c:68       trace: packet: git&gt; GET /username/repo.git/info/refs?service=git-upload-pack HTTP/1.1
+09:15:33.577890 packet-write.c:68       trace: packet: git&gt; Host: github.com
+09:15:33.578901 packet-write.c:68       trace: packet: git&gt; User-Agent: git/2.30.1
+09:15:33.579012 packet-write.c:68       trace: packet: git&gt; Accept: */*
+09:15:33.580123 packet-write.c:68       trace: packet: git&gt; Accept-Encoding: gzip
+09:15:33.581234 packet-write.c:68       trace: packet: git&gt; 
+09:15:33.582345 http.c:644              trace: HTTP: reading response
+09:15:33.583456 packet-read.c:73        trace: packet: git`: Git 클라이언트가 서버로 보내는 HTTP 요청 헤더입니다.
+- `trace: packet: git&lt;`: 서버로부터 받은 HTTP 응답 헤더입니다.
+- `HTTP/1.1 401 Unauthorized`: 인증 실패를 나타내는 HTTP 상태 코드입니다.
+- `fatal: Authentication failed`: Git 클라이언트의 최종 에러 메시지입니다.
+
+이 상세한 로그를 통해 인증 과정의 각 단계, HTTP 요청/응답의 세부 사항, 그리고 타이밍 정보까지 확인할 수 있습니다. 이는 인증 문제를 더 정확히 진단하고 해결하는 데 도움이 됩니다.
+
+---
+
+---
+</code></pre>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/portfolio/tags/git/">Git</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

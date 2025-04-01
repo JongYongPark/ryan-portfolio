@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Go on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/go/</link>
+    <description>Recent content in Go on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Thu, 27 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go Install</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/go-install/</link>
+      <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/go-install/</guid>
+      <description>&lt;h1 id=&#34;go-install&#34;&gt;Go Install&lt;/h1&gt;
+&lt;p&gt;기존 Go 1.22.2가 &lt;code&gt;/usr/bin/go&lt;/code&gt;로 설치되어 있고, 새롭게 Go 1.23.1 및 Go 1.23.5를 &lt;strong&gt;&lt;code&gt;~/local&lt;/code&gt;&lt;/strong&gt; 폴더에 설치한 후 원하는 버전을 선택해서 사용하는 방법을 정리해 드리겠습니다. 🚀&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-1-기존-go-1222-확인&#34;&gt;✅ &lt;strong&gt;1. 기존 Go (1.22.2) 확인&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;현재 기본 Go(1.22.2)가 &lt;code&gt;/usr/bin/go&lt;/code&gt;에 설치되어 있음.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/usr/bin/go version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;출력 예시:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;go version go1.22.2 linux/amd64
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;-2-새로운-go-버전-1231--1235-설치&#34;&gt;✅ &lt;strong&gt;2. 새로운 Go 버전 (1.23.1 &amp;amp; 1.23.5) 설치&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;기존 Go(1.22.2)는 유지하면서, 추가 Go 버전을 설치하겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;-go-1231-다운로드-및-설치&#34;&gt;🔹 &lt;strong&gt;Go 1.23.1 다운로드 및 설치&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p ~/local
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd ~/local
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://go.dev/dl/go1.23.1.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -xzf go1.23.1.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv go go1.23.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;-go-1235-다운로드-및-설치&#34;&gt;🔹 &lt;strong&gt;Go 1.23.5 다운로드 및 설치&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd ~/local
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://go.dev/dl/go1.23.5.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -xzf go1.23.5.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv go go1.23.5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;설치 후 폴더 구조:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

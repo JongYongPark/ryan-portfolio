@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Standard on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/standard/</link>
+    <description>Recent content in Standard on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Sat, 17 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/standard/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AUTOSAR</title>
+      <link>http://localhost:1313/portfolio/posts/checker/autosar/</link>
+      <pubDate>Sat, 17 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/checker/autosar/</guid>
+      <description>&lt;h1 id=&#34;autosar-automotive-open-system-architecture&#34;&gt;AUTOSAR (Automotive Open System Architecture)&lt;/h1&gt;
+&lt;h2 id=&#34;목차&#34;&gt;목차&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#autosar-automotive-open-system-architecture&#34;&gt;AUTOSAR (Automotive Open System Architecture)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%EB%AA%A9%EC%B0%A8&#34;&gt;목차&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#autosar-classic-platform&#34;&gt;AUTOSAR Classic Platform&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%EB%B2%84%EC%A0%84-%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC&#34;&gt;버전 히스토리&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#autosar-adaptive-platform&#34;&gt;AUTOSAR Adaptive Platform&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%EB%B2%84%EC%A0%84-%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC-1&#34;&gt;버전 히스토리&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#autosar-c-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8&#34;&gt;AUTOSAR C++ 가이드라인&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%EC%A3%BC%EC%9A%94-%EB%B2%84%EC%A0%84&#34;&gt;주요 버전&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8-%ED%8A%B9%EC%A7%95&#34;&gt;가이드라인 특징&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%EC%A3%BC%EC%9A%94-%EB%AA%A9%EC%A0%81&#34;&gt;주요 목적&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;autosar-classic-platform&#34;&gt;AUTOSAR Classic Platform&lt;/h2&gt;
+&lt;p&gt;AUTOSAR Classic Platform은 자동차의 기본적인 전자 제어 시스템을 위한 표준입니다.&lt;/p&gt;
+&lt;h3 id=&#34;버전-히스토리&#34;&gt;버전 히스토리&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;버전&lt;/th&gt;
+          &lt;th&gt;발표 연도&lt;/th&gt;
+          &lt;th&gt;주요 특징&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 1.0&lt;/td&gt;
+          &lt;td&gt;2005&lt;/td&gt;
+          &lt;td&gt;초기 버전&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 2.0&lt;/td&gt;
+          &lt;td&gt;2006&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 2.1&lt;/td&gt;
+          &lt;td&gt;2007&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 3.0&lt;/td&gt;
+          &lt;td&gt;2008&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 3.1&lt;/td&gt;
+          &lt;td&gt;2008&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 3.2&lt;/td&gt;
+          &lt;td&gt;2011&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.0&lt;/td&gt;
+          &lt;td&gt;2009&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.1&lt;/td&gt;
+          &lt;td&gt;2013&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.2&lt;/td&gt;
+          &lt;td&gt;2014&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.3&lt;/td&gt;
+          &lt;td&gt;2016&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.4&lt;/td&gt;
+          &lt;td&gt;2018&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.5&lt;/td&gt;
+          &lt;td&gt;2018&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.6&lt;/td&gt;
+          &lt;td&gt;2020&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;AUTOSAR 4.7&lt;/td&gt;
+          &lt;td&gt;2021&lt;/td&gt;
+          &lt;td&gt;최신 버전&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;autosar-adaptive-platform&#34;&gt;AUTOSAR Adaptive Platform&lt;/h2&gt;
+&lt;p&gt;AUTOSAR Adaptive Platform은 고성능 컴퓨팅과 자동화된 운전을 위한 표준입니다.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

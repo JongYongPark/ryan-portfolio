@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Public IP &amp; CIDR | RyanLabs</title>
+<meta name="keywords" content="IP, CIDR">
+<meta name="description" content="Windows Powershell 에서 public IP와 CIDR 얻기 - claude
+테스트
+(base) PS C:\workspace\blog\ryanpark-devsecops&gt; # 방법 1: ipify API 사용
+(base) PS C:\workspace\blog\ryanpark-devsecops&gt; (Invoke-WebRequest -Uri &#34;https://api.ipify.org&#34;).Content
+44.214.210.109                                                                                                                      (base) PS C:\workspace\blog\ryanpark-devsecops&gt;                                                                                     (base) PS C:\workspace\blog\ryanpark-devsecops&gt; # 방방법법 2: ifconfig.me 사사용용                                                          (base) PS C:\workspace\blog\ryanpark-devsecops&gt; (Invoke-WebRequest -Uri &#34;https://ifconfig.me/ip&#34;).Content                           
+(base) PS C:\workspace\blog\ryanpark-devsecops&gt; 
+(base) PS C:\workspace\blog\ryanpark-devsecops&gt; # 방법 3: ipinfo.io 사용 (더 자세한 정보)
+(base) PS C:\workspace\blog\ryanpark-devsecops&gt; (Invoke-WebRequest -Uri &#34;https://ipinfo.io/json&#34;).Content | ConvertFrom-Json
+
+
+ip       : 44.214.210.109
+hostname : vpn-aws.blackduck.com
+city     : Ashburn
+region   : Virginia
+country  : US
+loc      : 39.0437,-77.4875
+org      : AS14618 Amazon.com, Inc.
+postal   : 20147
+timezone : America/New_York
+readme   : https://ipinfo.io/missingauth
+
+
+
+(base) PS C:\workspace\blog\ryanpark-devsecops&gt;
+
+
+Start-Process &#34;https://whois.domaintools.com/$ip&#34;
+
+ Quick Stats
+IP Location	United States United States Ashburn Amazon Data Services Nova
+ASN	United States AS14618 AMAZON-AES, US (registered Nov 04, 2005)
+Resolve Host	vpn-aws.blackduck.com
+Whois Server	whois.arin.net
+IP Address	44.214.210.109
+NetRange:       44.192.0.0 - 44.255.255.255
+CIDR:           44.192.0.0/10
+
+답변
+PowerShell에서 Public IP와 CIDR를 확인하는 방법을 알려드리겠습니다:">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/sdlc/public-ip-cidr/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/sdlc/public-ip-cidr/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Public IP &amp; CIDR
+    </h1>
+    <div class="post-meta"><span title='2025-02-24 00:00:00 +0000 UTC'>2월 24, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="windows-powershell-에서-public-ip와-cidr-얻기---claude">Windows Powershell 에서 public IP와 CIDR 얻기 - claude<a hidden class="anchor" aria-hidden="true" href="#windows-powershell-에서-public-ip와-cidr-얻기---claude">#</a></h1>
+<h2 id="테스트">테스트<a hidden class="anchor" aria-hidden="true" href="#테스트">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>(base) PS C:\workspace\blog\ryanpark-devsecops&gt; <span style="color:#75715e"># 방법 1: ipify API 사용</span>
+</span></span><span style="display:flex;"><span>(base) PS C:\workspace\blog\ryanpark-devsecops&gt; (Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://api.ipify.org&#34;</span>).Content
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">44.214</span>.210.109                                                                                                                      (base) PS C:\workspace\blog\ryanpark-devsecops&gt;                                                                                     (base) PS C:\workspace\blog\ryanpark-devsecops&gt; <span style="color:#75715e"># 방방법법 2: ifconfig.me 사사용용                                                          (base) PS C:\workspace\blog\ryanpark-devsecops&gt; (Invoke-WebRequest -Uri &#34;https://ifconfig.me/ip&#34;).Content                           </span>
+</span></span><span style="display:flex;"><span>(base) PS C:\workspace\blog\ryanpark-devsecops&gt; 
+</span></span><span style="display:flex;"><span>(base) PS C:\workspace\blog\ryanpark-devsecops&gt; <span style="color:#75715e"># 방법 3: ipinfo.io 사용 (더 자세한 정보)</span>
+</span></span><span style="display:flex;"><span>(base) PS C:\workspace\blog\ryanpark-devsecops&gt; (Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://ipinfo.io/json&#34;</span>).Content | ConvertFrom-Json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ip       <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">44.214</span>.210.109
+</span></span><span style="display:flex;"><span>hostname <span style="color:#960050;background-color:#1e0010">:</span> vpn-aws.blackduck.com
+</span></span><span style="display:flex;"><span>city     <span style="color:#960050;background-color:#1e0010">:</span> Ashburn
+</span></span><span style="display:flex;"><span>region   <span style="color:#960050;background-color:#1e0010">:</span> Virginia
+</span></span><span style="display:flex;"><span>country  <span style="color:#960050;background-color:#1e0010">:</span> US
+</span></span><span style="display:flex;"><span>loc      <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">39.0437</span>,<span style="color:#ae81ff">-77.4875</span>
+</span></span><span style="display:flex;"><span>org      <span style="color:#960050;background-color:#1e0010">:</span> AS14618 Amazon.com, Inc.
+</span></span><span style="display:flex;"><span>postal   <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">20147</span>
+</span></span><span style="display:flex;"><span>timezone <span style="color:#960050;background-color:#1e0010">:</span> America/New_York
+</span></span><span style="display:flex;"><span>readme   <span style="color:#960050;background-color:#1e0010">:</span> https<span style="color:#960050;background-color:#1e0010">:</span>//ipinfo.io/missingauth
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(base) PS C:\workspace\blog\ryanpark-devsecops&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Start-Process <span style="color:#e6db74">&#34;https://whois.domaintools.com/</span>$ip<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Quick Stats
+</span></span><span style="display:flex;"><span>IP Location	United States United States Ashburn Amazon Data Services Nova
+</span></span><span style="display:flex;"><span>ASN	United States AS14618 AMAZON-AES, US (registered Nov <span style="color:#ae81ff">04</span>, <span style="color:#ae81ff">2005</span>)
+</span></span><span style="display:flex;"><span>Resolve Host	vpn-aws.blackduck.com
+</span></span><span style="display:flex;"><span>Whois Server	whois.arin.net
+</span></span><span style="display:flex;"><span>IP Address	<span style="color:#ae81ff">44.214</span>.210.109
+</span></span><span style="display:flex;"><span>NetRange<span style="color:#960050;background-color:#1e0010">:</span>       <span style="color:#ae81ff">44.192</span>.0.0 - <span style="color:#ae81ff">44.255</span>.255.255
+</span></span><span style="display:flex;"><span>CIDR<span style="color:#960050;background-color:#1e0010">:</span>           <span style="color:#ae81ff">44.192</span>.0.<span style="color:#ae81ff">0</span>/<span style="color:#ae81ff">10</span>
+</span></span></code></pre></div><hr>
+<h2 id="답변">답변<a hidden class="anchor" aria-hidden="true" href="#답변">#</a></h2>
+<p>PowerShell에서 Public IP와 CIDR를 확인하는 방법을 알려드리겠습니다:</p>
+<ol>
+<li>Public IP 확인:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># 방법 1: ipify API 사용</span>
+</span></span><span style="display:flex;"><span>(Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://api.ipify.org&#34;</span>).Content
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 방법 2: ifconfig.me 사용</span>
+</span></span><span style="display:flex;"><span>(Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://ifconfig.me/ip&#34;</span>).Content
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 방법 3: ipinfo.io 사용 (더 자세한 정보)</span>
+</span></span><span style="display:flex;"><span>(Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://ipinfo.io/json&#34;</span>).Content | ConvertFrom-Json
+</span></span></code></pre></div><ol start="2">
+<li>CIDR 확인:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># ipinfo.io를 통해 네트워크 정보 포함하여 조회</span>
+</span></span><span style="display:flex;"><span>$ipInfo = (Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://ipinfo.io/json&#34;</span>).Content | ConvertFrom-Json
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;IP: </span>$($ipInfo.ip)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;CIDR: </span>$($ipInfo.org)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 또는 whois 정보를 통해 확인</span>
+</span></span><span style="display:flex;"><span>$ip = (Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://api.ipify.org&#34;</span>).Content
+</span></span><span style="display:flex;"><span>$whois = (Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://whois.ipip.net/</span>$ip<span style="color:#e6db74">&#34;</span>).Content
+</span></span><span style="display:flex;"><span>$whois
+</span></span></code></pre></div><p>추가 유용한 네트워크 정보 확인:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># 로컬 네트워크 어댑터 정보</span>
+</span></span><span style="display:flex;"><span>Get-NetIPConfiguration | Format-Table
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 상세 IP 구성 정보</span>
+</span></span><span style="display:flex;"><span>Get-NetIPAddress | Format-Table
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 라우팅 테이블</span>
+</span></span><span style="display:flex;"><span>Get-NetRoute | Format-Table
+</span></span></code></pre></div><p>참고: whois 정보를 더 자세히 보려면 Windows에 별도의 whois 도구 설치가 필요할 수 있습니다.</p>
+<h1 id="windows-에서-public-ip-와-cidir---chatgpt">Windows 에서 public IP 와 CIDIR - chatgpt<a hidden class="anchor" aria-hidden="true" href="#windows-에서-public-ip-와-cidir---chatgpt">#</a></h1>
+<h2 id="테스트-1">테스트<a hidden class="anchor" aria-hidden="true" href="#테스트-1">#</a></h2>
+<p>resolver1.opendns.com 에서 정상적인 답변이 나온다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>(base) PS C:\workspace\blog\ryanpark-devsecops&gt; nslookup myip.opendns.com resolver1.opendns.com
+</span></span><span style="display:flex;"><span>DNS request timed out.
+</span></span><span style="display:flex;"><span>    timeout was <span style="color:#ae81ff">2</span> seconds.
+</span></span><span style="display:flex;"><span>Server<span style="color:#960050;background-color:#1e0010">:</span>  UnKnown
+</span></span><span style="display:flex;"><span>Address<span style="color:#960050;background-color:#1e0010">:</span>  <span style="color:#ae81ff">208.67</span>.222.222
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Non-authoritative answer<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>Name<span style="color:#960050;background-color:#1e0010">:</span>    myip.opendns.com
+</span></span><span style="display:flex;"><span>Address<span style="color:#960050;background-color:#1e0010">:</span>  <span style="color:#ae81ff">44.214</span>.210.109
+</span></span></code></pre></div><h2 id="답변-1">답변<a hidden class="anchor" aria-hidden="true" href="#답변-1">#</a></h2>
+<p>Windows와 Linux에서 명령줄 인터페이스(CLI)를 통해 공인 IP 주소와 CIDR을 확인하는 방법은 다음과 같습니다:</p>
+<p><strong>1. 공인 IP 주소 확인하기</strong></p>
+<p>공인 IP 주소는 인터넷에 직접 연결된 장치에 할당되는 고유한 주소입니다. 내부 네트워크에서 사용하는 사설 IP 주소와 달리, 공인 IP 주소는 외부에서 접근 가능한 주소를 의미합니다.</p>
+<ul>
+<li>
+<p><strong>Windows에서 확인하기:</strong></p>
+<ol>
+<li>
+<p>명령 프롬프트를 엽니다: <code>Win + R</code> 키를 눌러 실행 창을 열고, <code>cmd</code>를 입력한 후 Enter 키를 누릅니다.</p>
+</li>
+<li>
+<p>다음 명령을 입력하여 공인 IP 주소를 확인합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nslookup myip.opendns.com resolver1.opendns.com
+</span></span></code></pre></div><p>명령을 실행하면 <code>Name:</code>과 <code>Address:</code> 항목이 표시되며, <code>Address:</code> 옆에 나타나는 IP 주소가 현재 장치의 공인 IP 주소입니다.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Linux에서 확인하기:</strong></p>
+<ol>
+<li>
+<p>터미널을 엽니다.</p>
+</li>
+<li>
+<p>다음 명령을 입력하여 공인 IP 주소를 확인합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl ifconfig.me
+</span></span></code></pre></div><p>이 명령을 실행하면 현재 장치의 공인 IP 주소가 출력됩니다.</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>2. CIDR 표기법 이해하기</strong></p>
+<p>CIDR(Classless Inter-Domain Routing)은 IP 주소와 서브넷 마스크를 결합하여 네트워크를 효율적으로 표현하는 방법입니다. CIDR 표기법은 IP 주소 뒤에 슬래시(<code>/</code>)와 숫자를 붙여 사용하며, 이 숫자는 서브넷 마스크에서 1로 설정된 비트의 수를 나타냅니다.</p>
+<p>공인 IP 주소의 CIDR 표기법을 확인하려면, 해당 IP 주소의 서브넷 마스크를 알아야 합니다. 그러나 공인 IP 주소의 서브넷 마스크는 일반적으로 ISP(인터넷 서비스 제공자)에 의해 관리되며, 개인 사용자가 직접 확인하기는 어렵습니다. 대부분의 가정용 네트워크에서는 공인 IP 주소가 단일 IP로 할당되므로, CIDR 표기법은 <code>/32</code>로 표현됩니다.</p>
+<p>정확한 서브넷 마스크 정보를 확인하려면 ISP에 문의하거나, 네트워크 관리자에게 확인하는 것이 좋습니다.</p>
+<p><strong>참고 자료:</strong></p>
+<ul>
+<li><a href="https://ko.wikipedia.org/wiki/%EB%82%B4%ED%98%95_%EB%8F%99%EC%A0%84_%EB%9D%BC%EC%9A%B4%EB%94%A9">CIDR 표기법 위키백과</a></li>
+</ul>
+<p>위의 방법들을 통해 Windows와 Linux에서 CLI를 사용하여 공인 IP 주소를 확인하고, CIDR 표기법에 대한 이해를 높일 수 있습니다.</p>
+<h1 id="linux에서-public-ip의-cidr을-찾는-방법---claude">Linux에서 public IP의 CIDR을 찾는 방법 - claude<a hidden class="anchor" aria-hidden="true" href="#linux에서-public-ip의-cidr을-찾는-방법---claude">#</a></h1>
+<h2 id="테스트-2">테스트<a hidden class="anchor" aria-hidden="true" href="#테스트-2">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ curl ifconfig.me
+</span></span><span style="display:flex;"><span>44.214.210.109
+</span></span><span style="display:flex;"><span>bash#:~$ curl ipinfo.io
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;ip&#34;</span>: <span style="color:#e6db74">&#34;44.214.210.109&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;vpn-aws.blackduck.com&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;city&#34;</span>: <span style="color:#e6db74">&#34;Ashburn&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;region&#34;</span>: <span style="color:#e6db74">&#34;Virginia&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;country&#34;</span>: <span style="color:#e6db74">&#34;US&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;loc&#34;</span>: <span style="color:#e6db74">&#34;39.0437,-77.4875&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;org&#34;</span>: <span style="color:#e6db74">&#34;AS14618 Amazon.com, Inc.&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;postal&#34;</span>: <span style="color:#e6db74">&#34;20147&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;timezone&#34;</span>: <span style="color:#e6db74">&#34;America/New_York&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;readme&#34;</span>: <span style="color:#e6db74">&#34;https://ipinfo.io/missingauth&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>bash#:~$ curl api.ipify.org
+</span></span><span style="display:flex;"><span>44.214.210.109
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> jonparwhois <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span> | grep CIDRe<span style="color:#f92672">)</span> | grep CIDR
+</span></span><span style="display:flex;"><span>CIDR:           44.192.0.0/10
+</span></span><span style="display:flex;"><span>CIDR:           44.192.0.0/11
+</span></span><span style="display:flex;"><span>bash#:~$ whois <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span> | grep -i <span style="color:#e6db74">&#34;route\|cidr\|netblock&#34;</span>
+</span></span><span style="display:flex;"><span>CIDR:           44.192.0.0/10
+</span></span><span style="display:flex;"><span>CIDR:           44.192.0.0/11
+</span></span><span style="display:flex;"><span>bash#:~$ curl ipinfo.io/<span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span>/org
+</span></span><span style="display:flex;"><span>AS14618 Amazon.com, Inc.
+</span></span><span style="display:flex;"><span>bash#:~$ 
+</span></span></code></pre></div><h2 id="답변변">답변변<a hidden class="anchor" aria-hidden="true" href="#답변변">#</a></h2>
+<p>Linux에서 public IP의 CIDR을 찾는 방법을 알려드리겠습니다:</p>
+<ol>
+<li>먼저 public IP를 확인합니다:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl ifconfig.me
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 또는</span>
+</span></span><span style="display:flex;"><span>curl ipinfo.io
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 또는 </span>
+</span></span><span style="display:flex;"><span>curl api.ipify.org
+</span></span></code></pre></div><ol start="2">
+<li>CIDR 확인을 위해 whois 명령어를 사용합니다:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>whois <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span> | grep CIDR
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 또는</span>
+</span></span><span style="display:flex;"><span>whois <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span> | grep -i <span style="color:#e6db74">&#34;route\|cidr\|netblock&#34;</span>
+</span></span></code></pre></div><p>더 간단한 방법으로는 다음과 같은 온라인 서비스를 이용할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl ipinfo.io/<span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span>/org
+</span></span></code></pre></div><p>이 명령어들은 IP 주소와 해당 IP가 속한 네트워크의 CIDR 표기법을 보여줄 것입니다. CIDR 정보가 없는 경우도 있을 수 있는데, 이때는 다른 whois 서버를 사용하거나 IP 주소가 속한 ISP의 정보를 직접 확인해야 할 수 있습니다.</p>
+<h1 id="qwen">qwen<a hidden class="anchor" aria-hidden="true" href="#qwen">#</a></h1>
+<h2 id="my-test">my test<a hidden class="anchor" aria-hidden="true" href="#my-test">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ curl ifconfig.me
+</span></span><span style="display:flex;"><span>44.214.210.109
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ curl ipinfo.io/ip
+</span></span><span style="display:flex;"><span>44.214.210.109
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ curl ipinfo.io
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;ip&#34;</span>: <span style="color:#e6db74">&#34;44.214.210.109&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;vpn-aws.blackduck.com&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;city&#34;</span>: <span style="color:#e6db74">&#34;Ashburn&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;region&#34;</span>: <span style="color:#e6db74">&#34;Virginia&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;country&#34;</span>: <span style="color:#e6db74">&#34;US&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;loc&#34;</span>: <span style="color:#e6db74">&#34;39.0437,-77.4875&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;org&#34;</span>: <span style="color:#e6db74">&#34;AS14618 Amazon.com, Inc.&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;postal&#34;</span>: <span style="color:#e6db74">&#34;20147&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;timezone&#34;</span>: <span style="color:#e6db74">&#34;America/New_York&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;readme&#34;</span>: <span style="color:#e6db74">&#34;https://ipinfo.io/missingauth&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ sudo apt install whois
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ whois <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ARIN WHOIS data and services are subject to the Terms of Use</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># available at: https://www.arin.net/resources/registry/whois/tou/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If you see inaccuracies in the results, please report at</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://www.arin.net/resources/registry/whois/inaccuracy_reporting/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Copyright 1997-2025, American Registry for Internet Numbers, Ltd.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># start</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NetRange:       44.192.0.0 - 44.255.255.255
+</span></span><span style="display:flex;"><span>CIDR:           44.192.0.0/10
+</span></span><span style="display:flex;"><span>NetName:        AMAZO-4
+</span></span><span style="display:flex;"><span>NetHandle:      NET-44-192-0-0-1
+</span></span><span style="display:flex;"><span>Parent:         NET44 <span style="color:#f92672">(</span>NET-44-0-0-0-0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>NetType:        Direct Allocation
+</span></span><span style="display:flex;"><span>OriginAS:       
+</span></span><span style="display:flex;"><span>Organization:   Amazon.com, Inc. <span style="color:#f92672">(</span>AMAZO-4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>RegDate:        2019-07-18
+</span></span><span style="display:flex;"><span>Updated:        2019-07-18
+</span></span><span style="display:flex;"><span>Ref:            https://rdap.arin.net/registry/ip/44.192.0.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgName:        Amazon.com, Inc.
+</span></span><span style="display:flex;"><span>OrgId:          AMAZO-4
+</span></span><span style="display:flex;"><span>Address:        Amazon Web Services, Inc.
+</span></span><span style="display:flex;"><span>Address:        P.O. Box <span style="color:#ae81ff">81226</span>
+</span></span><span style="display:flex;"><span>City:           Seattle
+</span></span><span style="display:flex;"><span>StateProv:      WA
+</span></span><span style="display:flex;"><span>PostalCode:     98108-1226
+</span></span><span style="display:flex;"><span>Country:        US
+</span></span><span style="display:flex;"><span>RegDate:        2005-09-29
+</span></span><span style="display:flex;"><span>Updated:        2022-09-30
+</span></span><span style="display:flex;"><span>Comment:        For details of this service please see
+</span></span><span style="display:flex;"><span>Comment:        http://ec2.amazonaws.com
+</span></span><span style="display:flex;"><span>Ref:            https://rdap.arin.net/registry/entity/AMAZO-4
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgNOCHandle: AANO1-ARIN
+</span></span><span style="display:flex;"><span>OrgNOCName:   Amazon AWS Network Operations
+</span></span><span style="display:flex;"><span>OrgNOCPhone:  +1-206-555-0000 
+</span></span><span style="display:flex;"><span>OrgNOCEmail:  amzn-noc-contact@amazon.com
+</span></span><span style="display:flex;"><span>OrgNOCRef:    https://rdap.arin.net/registry/entity/AANO1-ARIN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgRoutingHandle: IPROU3-ARIN
+</span></span><span style="display:flex;"><span>OrgRoutingName:   IP Routing
+</span></span><span style="display:flex;"><span>OrgRoutingPhone:  +1-206-555-0000 
+</span></span><span style="display:flex;"><span>OrgRoutingEmail:  aws-routing-poc@amazon.com
+</span></span><span style="display:flex;"><span>OrgRoutingRef:    https://rdap.arin.net/registry/entity/IPROU3-ARIN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgAbuseHandle: AEA8-ARIN
+</span></span><span style="display:flex;"><span>OrgAbuseName:   Amazon EC2 Abuse
+</span></span><span style="display:flex;"><span>OrgAbusePhone:  +1-206-555-0000 
+</span></span><span style="display:flex;"><span>OrgAbuseEmail:  trustandsafety@support.aws.com
+</span></span><span style="display:flex;"><span>OrgAbuseRef:    https://rdap.arin.net/registry/entity/AEA8-ARIN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgTechHandle: ANO24-ARIN
+</span></span><span style="display:flex;"><span>OrgTechName:   Amazon EC2 Network Operations
+</span></span><span style="display:flex;"><span>OrgTechPhone:  +1-206-555-0000 
+</span></span><span style="display:flex;"><span>OrgTechEmail:  amzn-noc-contact@amazon.com
+</span></span><span style="display:flex;"><span>OrgTechRef:    https://rdap.arin.net/registry/entity/ANO24-ARIN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgRoutingHandle: ARMP-ARIN
+</span></span><span style="display:flex;"><span>OrgRoutingName:   AWS RPKI Management POC
+</span></span><span style="display:flex;"><span>OrgRoutingPhone:  +1-206-555-0000 
+</span></span><span style="display:flex;"><span>OrgRoutingEmail:  aws-rpki-routing-poc@amazon.com
+</span></span><span style="display:flex;"><span>OrgRoutingRef:    https://rdap.arin.net/registry/entity/ARMP-ARIN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># start</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NetRange:       44.192.0.0 - 44.223.255.255
+</span></span><span style="display:flex;"><span>CIDR:           44.192.0.0/11
+</span></span><span style="display:flex;"><span>NetName:        AMAZON-IAD
+</span></span><span style="display:flex;"><span>NetHandle:      NET-44-192-0-0-2
+</span></span><span style="display:flex;"><span>Parent:         AMAZO-4 <span style="color:#f92672">(</span>NET-44-192-0-0-1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>NetType:        Reallocated
+</span></span><span style="display:flex;"><span>OriginAS:       
+</span></span><span style="display:flex;"><span>Organization:   Amazon Data Services NoVa <span style="color:#f92672">(</span>ADSN-1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>RegDate:        2019-08-01
+</span></span><span style="display:flex;"><span>Updated:        2019-08-01
+</span></span><span style="display:flex;"><span>Ref:            https://rdap.arin.net/registry/ip/44.192.0.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgName:        Amazon Data Services NoVa
+</span></span><span style="display:flex;"><span>OrgId:          ADSN-1
+</span></span><span style="display:flex;"><span>Address:        <span style="color:#ae81ff">13200</span> Woodland Park Road
+</span></span><span style="display:flex;"><span>City:           Herndon
+</span></span><span style="display:flex;"><span>StateProv:      VA
+</span></span><span style="display:flex;"><span>PostalCode:     <span style="color:#ae81ff">20171</span>
+</span></span><span style="display:flex;"><span>Country:        US
+</span></span><span style="display:flex;"><span>RegDate:        2018-04-25
+</span></span><span style="display:flex;"><span>Updated:        2019-08-02
+</span></span><span style="display:flex;"><span>Ref:            https://rdap.arin.net/registry/entity/ADSN-1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgTechHandle: ANO24-ARIN
+</span></span><span style="display:flex;"><span>OrgTechName:   Amazon EC2 Network Operations
+</span></span><span style="display:flex;"><span>OrgTechPhone:  +1-206-555-0000 
+</span></span><span style="display:flex;"><span>OrgTechEmail:  amzn-noc-contact@amazon.com
+</span></span><span style="display:flex;"><span>OrgTechRef:    https://rdap.arin.net/registry/entity/ANO24-ARIN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgAbuseHandle: AEA8-ARIN
+</span></span><span style="display:flex;"><span>OrgAbuseName:   Amazon EC2 Abuse
+</span></span><span style="display:flex;"><span>OrgAbusePhone:  +1-206-555-0000 
+</span></span><span style="display:flex;"><span>OrgAbuseEmail:  trustandsafety@support.aws.com
+</span></span><span style="display:flex;"><span>OrgAbuseRef:    https://rdap.arin.net/registry/entity/AEA8-ARIN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OrgNOCHandle: AANO1-ARIN
+</span></span><span style="display:flex;"><span>OrgNOCName:   Amazon AWS Network Operations
+</span></span><span style="display:flex;"><span>OrgNOCPhone:  +1-206-555-0000 
+</span></span><span style="display:flex;"><span>OrgNOCEmail:  amzn-noc-contact@amazon.com
+</span></span><span style="display:flex;"><span>OrgNOCRef:    https://rdap.arin.net/registry/entity/AANO1-ARIN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ARIN WHOIS data and services are subject to the Terms of Use</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># available at: https://www.arin.net/resources/registry/whois/tou/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If you see inaccuracies in the results, please report at</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://www.arin.net/resources/registry/whois/inaccuracy_reporting/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Copyright 1997-2025, American Registry for Internet Numbers, Ltd.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ whois <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span> | grep CIDR -C <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>NetRange:       44.192.0.0 - 44.255.255.255
+</span></span><span style="display:flex;"><span>CIDR:           44.192.0.0/10
+</span></span><span style="display:flex;"><span>NetName:        AMAZO-4
+</span></span><span style="display:flex;"><span>--
+</span></span><span style="display:flex;"><span>NetRange:       44.192.0.0 - 44.223.255.255
+</span></span><span style="display:flex;"><span>CIDR:           44.192.0.0/11
+</span></span><span style="display:flex;"><span>NetName:        AMAZON-IAD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ sudo apt install bind9-dnsutils
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ dig -x <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span> +short
+</span></span><span style="display:flex;"><span>vpn-aws.blackduck.com.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ dig -x <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>; &lt;&lt;&gt;&gt; DiG 9.18.30-0ubuntu0.24.04.2-Ubuntu &lt;&lt;&gt;&gt; -x 44.214.210.109
+</span></span><span style="display:flex;"><span>;; global options: +cmd
+</span></span><span style="display:flex;"><span>;; Got answer:
+</span></span><span style="display:flex;"><span>;; -&gt;&gt;HEADER<span style="color:#e6db74">&lt;&lt;- opco</span>de: QUERY, status: NOERROR, id: <span style="color:#ae81ff">53417</span>
+</span></span><span style="display:flex;"><span>;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>;; OPT PSEUDOSECTION:
+</span></span><span style="display:flex;"><span>; EDNS: version: 0, flags:; udp: <span style="color:#ae81ff">4096</span>
+</span></span><span style="display:flex;"><span>;; QUESTION SECTION:
+</span></span><span style="display:flex;"><span>;109.210.214.44.in-addr.arpa.   IN      PTR
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>;; ANSWER SECTION:
+</span></span><span style="display:flex;"><span>109.210.214.44.in-addr.arpa. <span style="color:#ae81ff">292</span> IN     PTR     vpn-aws.blackduck.com.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>;; Query time: <span style="color:#ae81ff">183</span> msec
+</span></span><span style="display:flex;"><span>;; SERVER: 10.255.255.254#53<span style="color:#f92672">(</span>10.255.255.254<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>UDP<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>;; WHEN: Mon Feb <span style="color:#ae81ff">24</span> 18:38:03 KST <span style="color:#ae81ff">2025</span>
+</span></span><span style="display:flex;"><span>;; MSG SIZE  rcvd: <span style="color:#ae81ff">91</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ code -r get_pubic_ip_cidr.py
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bash#:~$ python get_pubic_ip_cidr.py 
+</span></span><span style="display:flex;"><span>Public IP: 44.214.210.109
+</span></span><span style="display:flex;"><span>CIDR: AS14618 Amazon.com, Inc.
+</span></span></code></pre></div><hr>
+<h2 id="answer">Answer<a hidden class="anchor" aria-hidden="true" href="#answer">#</a></h2>
+<p>Linux 시스템에서 공인 IP 주소와 해당 CIDR을 찾으려면 여러 가지 방법이 있습니다. 기본적으로 Linux 자체에서는 네트워크 인터페이스나 로컬 네트워크 정보만 제공하며, 공인 IP 및 CIDR은 외부 서비스를 통해 확인해야 합니다.</p>
+<p>아래는 공인 IP와 CIDR을 찾는 몇 가지 방법입니다:</p>
+<hr>
+<h3 id="1-공인-ip-확인"><strong>1. 공인 IP 확인</strong><a hidden class="anchor" aria-hidden="true" href="#1-공인-ip-확인">#</a></h3>
+<p>공인 IP 주소를 확인하는 가장 간단한 방법은 외부 웹 서비스를 사용하는 것입니다. 예를 들어:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl ifconfig.me
+</span></span></code></pre></div><p>또는</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl ipinfo.io/ip
+</span></span></code></pre></div><p>이 명령어들은 현재 시스템의 공인 IP 주소를 반환합니다.</p>
+<hr>
+<h3 id="2-cidr-확인"><strong>2. CIDR 확인</strong><a hidden class="anchor" aria-hidden="true" href="#2-cidr-확인">#</a></h3>
+<p>CIDR(Classless Inter-Domain Routing) 정보는 일반적으로 공인 IP 주소와 함께 제공됩니다. 이를 확인하려면 다음과 같은 방법을 사용할 수 있습니다:</p>
+<h4 id="1-ipinfoio-사용"><strong>(1) <code>ipinfo.io</code> 사용</strong><a hidden class="anchor" aria-hidden="true" href="#1-ipinfoio-사용">#</a></h4>
+<p><code>ipinfo.io</code>는 공인 IP와 CIDR 정보를 포함한 자세한 정보를 제공합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl ipinfo.io
+</span></span></code></pre></div><p>출력 예시:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;ip&#34;</span>: <span style="color:#e6db74">&#34;123.45.67.89&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;example.hostname.com&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;city&#34;</span>: <span style="color:#e6db74">&#34;Seoul&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;region&#34;</span>: <span style="color:#e6db74">&#34;Seoul&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;country&#34;</span>: <span style="color:#e6db74">&#34;KR&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;loc&#34;</span>: <span style="color:#e6db74">&#34;37.5665,126.9780&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;org&#34;</span>: <span style="color:#e6db74">&#34;AS12345 Example ISP&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;postal&#34;</span>: <span style="color:#e6db74">&#34;04524&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;timezone&#34;</span>: <span style="color:#e6db74">&#34;Asia/Seoul&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;readme&#34;</span>: <span style="color:#e6db74">&#34;https://ipinfo.io/missingauth&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>여기서 CIDR 정보는 직접적으로 표시되지 않을 수 있지만, <code>org</code> 필드에서 ASN(Autonomous System Number) 정보를 통해 관련 CIDR 범위를 추적할 수 있습니다.</p>
+<h4 id="2-whois-명령어-사용"><strong>(2) <code>whois</code> 명령어 사용</strong><a hidden class="anchor" aria-hidden="true" href="#2-whois-명령어-사용">#</a></h4>
+<p><code>whois</code> 명령어를 사용하여 공인 IP 주소의 CIDR 정보를 조회할 수 있습니다. 먼저 공인 IP를 확인한 후, 이를 <code>whois</code>에 입력합니다.</p>
+<p>예시:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>whois <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><p>출력에서 <code>NetRange</code>, <code>CIDR</code> 또는 <code>inetnum</code> 필드를 찾아보세요. 예를 들어:</p>
+<pre tabindex="0"><code>NetRange:       123.45.0.0 - 123.45.255.255
+CIDR:           123.45.0.0/16
+</code></pre><h4 id="3-dig-명령어로-역방향-dns-확인"><strong>(3) <code>dig</code> 명령어로 역방향 DNS 확인</strong><a hidden class="anchor" aria-hidden="true" href="#3-dig-명령어로-역방향-dns-확인">#</a></h4>
+<p>역방향 DNS 조회를 통해 CIDR 정보를 간접적으로 확인할 수도 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dig -x <span style="color:#66d9ef">$(</span>curl -s ifconfig.me<span style="color:#66d9ef">)</span> +short
+</span></span></code></pre></div><hr>
+<h3 id="3-cidr-계산-도구-사용"><strong>3. CIDR 계산 도구 사용</strong><a hidden class="anchor" aria-hidden="true" href="#3-cidr-계산-도구-사용">#</a></h3>
+<p>CIDR을 직접 계산하거나 확인하려면 온라인 도구를 사용할 수도 있습니다. 예를 들어:</p>
+<ul>
+<li><a href="https://www.iplocation.net/ip-cidr-calculator">https://www.iplocation.net/ip-cidr-calculator</a></li>
+<li><a href="https://cidr.xyz/">https://cidr.xyz/</a></li>
+</ul>
+<hr>
+<h3 id="4-python-스크립트로-자동화"><strong>4. Python 스크립트로 자동화</strong><a hidden class="anchor" aria-hidden="true" href="#4-python-스크립트로-자동화">#</a></h3>
+<p>Python을 사용하여 공인 IP와 CIDR 정보를 자동으로 가져올 수 있습니다. 아래는 예제 코드입니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 공인 IP 확인</span>
+</span></span><span style="display:flex;"><span>response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://api.ipify.org?format=json&#34;</span>)
+</span></span><span style="display:flex;"><span>public_ip <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ip&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># CIDR 정보 확인 (ipinfo.io 활용)</span>
+</span></span><span style="display:flex;"><span>response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;https://ipinfo.io/</span><span style="color:#e6db74">{</span>public_ip<span style="color:#e6db74">}</span><span style="color:#e6db74">/json&#34;</span>)
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>json()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Public IP:&#34;</span>, data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;ip&#34;</span>))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;CIDR:&#34;</span>, data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;org&#34;</span>))  <span style="color:#75715e"># CIDR 정보가 없는 경우 ASN 정보 출력</span>
+</span></span></code></pre></div><hr>
+<h3 id="요약"><strong>요약</strong><a hidden class="anchor" aria-hidden="true" href="#요약">#</a></h3>
+<ol>
+<li>공인 IP는 <code>curl ifconfig.me</code> 또는 <code>curl ipinfo.io/ip</code>로 확인.</li>
+<li>CIDR 정보는 <code>whois</code> 명령어 또는 <code>ipinfo.io</code> API를 통해 확인.</li>
+<li>필요 시 Python 스크립트를 작성하여 자동화.</li>
+</ol>
+<p>이 방법들을 조합하면 공인 IP와 CIDR 정보를 쉽게 확인할 수 있습니다.</p>
+<hr>
+<h1 id="deepseek">deepseek<a hidden class="anchor" aria-hidden="true" href="#deepseek">#</a></h1>
+<h2 id="답변-2">답변<a hidden class="anchor" aria-hidden="true" href="#답변-2">#</a></h2>
+<p>리눅스 시스템에서 퍼블릭 IP의 CIDR(Classless Inter-Domain Routing)을 찾는 방법은 네트워크 환경에 따라 다릅니다. 다음 단계를 참고하세요:</p>
+<h3 id="1-퍼블릭-ip-주소-확인">1. <strong>퍼블릭 IP 주소 확인</strong><a hidden class="anchor" aria-hidden="true" href="#1-퍼블릭-ip-주소-확인">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl ifconfig.me
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 또는</span>
+</span></span><span style="display:flex;"><span>curl icanhazip.com
+</span></span></code></pre></div><h3 id="2-직접-연결된-시스템-예-vps-서버">2. <strong>직접 연결된 시스템 (예: VPS, 서버)</strong><a hidden class="anchor" aria-hidden="true" href="#2-직접-연결된-시스템-예-vps-서버">#</a></h3>
+<p>인터페이스에 직접 퍼블릭 IP가 할당된 경우 <code>ip</code> 명령어로 CIDR 확인:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip -o -f inet addr show | awk <span style="color:#e6db74">&#39;/scope global/ {print $4}&#39;</span>
+</span></span></code></pre></div><ul>
+<li>예시 출력: <code>203.0.113.45/24</code> (CIDR 포함)</li>
+</ul>
+<h3 id="3-nat-뒤에-있는-경우-예-가정용-네트워크">3. <strong>NAT 뒤에 있는 경우 (예: 가정용 네트워크)</strong><a hidden class="anchor" aria-hidden="true" href="#3-nat-뒤에-있는-경우-예-가정용-네트워크">#</a></h3>
+<p>로컬 시스템에서는 퍼블릭 서브넷을 알 수 없으므로 <strong>라우터 관리 페이지</strong>에서 확인하거나 <strong>ISP에 문의</strong>해야 합니다.</p>
+<h3 id="4-whois-조회-isp-할당-블록-확인">4. <strong>WHOIS 조회 (ISP 할당 블록 확인)</strong><a hidden class="anchor" aria-hidden="true" href="#4-whois-조회-isp-할당-블록-확인">#</a></h3>
+<p>퍼블릭 IP가 속한 대역을 추정할 때 사용:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install whois  <span style="color:#75715e"># 필요한 경우 설치</span>
+</span></span><span style="display:flex;"><span>curl ifconfig.me &gt; public_ip.txt
+</span></span><span style="display:flex;"><span>whois <span style="color:#66d9ef">$(</span>cat public_ip.txt<span style="color:#66d9ef">)</span> | grep -i <span style="color:#e6db74">&#34;CIDR&#34;</span>
+</span></span></code></pre></div><ul>
+<li>예시 출력: <code>CIDR: 203.0.113.0/24</code> (ISP의 광범위한 할당 블록)</li>
+</ul>
+<hr>
+<h3 id="요약-1"><strong>요약</strong><a hidden class="anchor" aria-hidden="true" href="#요약-1">#</a></h3>
+<ul>
+<li><strong>직접 할당된 서버</strong>: <code>ip addr show</code>로 CIDR 확인.</li>
+<li><strong>NAT 환경</strong>: 라우터/ISP에서 정보 획득.</li>
+<li><strong>WHOIS</strong>: ISP의 CIDR 블록 참고용으로 사용.</li>
+</ul>
+<p>이 방법들은 네트워크 구성에 따라 정확도가 달라질 수 있습니다.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/portfolio/tags/ip/">IP</a></li>
+      <li><a href="http://localhost:1313/portfolio/tags/cidr/">CIDR</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

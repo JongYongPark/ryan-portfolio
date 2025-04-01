@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Azure DevOps on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/azure-devops/</link>
+    <description>Recent content in Azure DevOps on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 31 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/azure-devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure DevOps API Rate Limits</title>
+      <link>http://localhost:1313/portfolio/posts/technical-support/azure--devops-api-rate-limits/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/technical-support/azure--devops-api-rate-limits/</guid>
+      <description>&lt;h2 id=&#34;azure-devops-api-rate-limits&#34;&gt;&lt;strong&gt;Azure DevOps API Rate Limits&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Azure DevOps imposes &lt;strong&gt;rate limits&lt;/strong&gt; on its REST API to ensure fair usage and prevent abuse. If you exceed these limits, your API requests may be throttled, resulting in HTTP &lt;code&gt;429 Too Many Requests&lt;/code&gt; responses. To avoid this, it&amp;rsquo;s important to monitor and manage your API usage.&lt;/p&gt;
+&lt;p&gt;Here’s how you can check and handle Azure DevOps Work Items API rate limits:&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-understanding-azure-devops-api-rate-limits&#34;&gt;&lt;strong&gt;1. Understanding Azure DevOps API Rate Limits&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Azure DevOps API rate limits are based on:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How to send findings from SRM (Software Risk Management) to Azure DevOps Work Items</title>
+      <link>http://localhost:1313/portfolio/posts/technical-support/srm/srm-findings-to-azure-devops-work/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/technical-support/srm/srm-findings-to-azure-devops-work/</guid>
+      <description>&lt;p&gt;how to check Azure DevOps Work Items API rate limit&lt;/p&gt;
+&lt;h2 id=&#34;how-to-send-findings-from-srm-software-risk-management-to-azure-devops-work-items&#34;&gt;How to send findings from SRM (Software Risk Management) to Azure DevOps Work Items&lt;/h2&gt;
+&lt;p&gt;To send findings from &lt;strong&gt;SRM (Software Risk Management)&lt;/strong&gt; to &lt;strong&gt;Azure DevOps Work Items&lt;/strong&gt;, you can follow the steps outlined below. This process involves using the Azure DevOps REST API to create or update work items based on the SRM findings. Here&amp;rsquo;s a detailed guide:&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-prerequisites&#34;&gt;&lt;strong&gt;1. Prerequisites&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Before starting, ensure the following:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

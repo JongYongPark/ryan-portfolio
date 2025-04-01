@@ -1,0 +1,2749 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="WEBVTT
+9f30d60e-e160-4571-80eb-7a69413b5cb2/13-0
+00:00:06.037 &ndash;&gt; 00:00:06.677
+Hi everyone.
+9f30d60e-e160-4571-80eb-7a69413b5cb2/16-0
+00:00:07.987 &ndash;&gt; 00:00:09.147
+Oh yeah. Hi.
+9f30d60e-e160-4571-80eb-7a69413b5cb2/33-0
+00:00:13.817 &ndash;&gt; 00:00:19.153
+And yeah, the, you know,
+last May we are asking some additional 2
+9f30d60e-e160-4571-80eb-7a69413b5cb2/33-1
+00:00:19.153 &ndash;&gt; 00:00:21.417
+test auditional work around.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/technical-support/srm/trouble-shooting-call/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/technical-support/srm/trouble-shooting-call/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><p>WEBVTT</p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/13-0
+00:00:06.037 &ndash;&gt; 00:00:06.677
+<!-- raw HTML omitted -->Hi everyone.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/16-0
+00:00:07.987 &ndash;&gt; 00:00:09.147
+<!-- raw HTML omitted -->Oh yeah. Hi.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/33-0
+00:00:13.817 &ndash;&gt; 00:00:19.153
+<!-- raw HTML omitted -->And yeah, the, you know,
+last May we are asking some additional 2<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/33-1
+00:00:19.153 &ndash;&gt; 00:00:21.417
+<!-- raw HTML omitted -->test auditional work around.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/40-0
+00:00:22.827 &ndash;&gt; 00:00:25.387
+<!-- raw HTML omitted -->Also the our can e-mail.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/51-0
+00:00:25.577 &ndash;&gt; 00:00:33.377
+<!-- raw HTML omitted -->I&rsquo;ll send the e-mail about the leave the
+comment from the identified so.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/54-0
+00:00:36.147 &ndash;&gt; 00:00:36.947
+<!-- raw HTML omitted -->Yeah. Hi everyone.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/66-0
+00:00:37.887 &ndash;&gt; 00:00:41.847
+<!-- raw HTML omitted -->Hey again, can I think we will.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/57-0
+00:00:38.917 &ndash;&gt; 00:00:39.157
+<!-- raw HTML omitted -->Hey.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/86-0
+00:00:42.007 &ndash;&gt; 00:00:47.042
+<!-- raw HTML omitted -->We have two environments in non
+production where we can demonstrate one<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/86-1
+00:00:47.042 &ndash;&gt; 00:00:51.727
+<!-- raw HTML omitted -->has the timeout set to two minutes and
+the other does not have it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/95-0
+00:00:52.447 &ndash;&gt; 00:00:56.127
+<!-- raw HTML omitted -->Both of them have the same kind of
+network rules etc.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/109-0
+00:00:57.467 &ndash;&gt; 00:01:02.427
+<!-- raw HTML omitted -->We&rsquo;ll we&rsquo;ll explain how we have tested it
+so far and the kind of behavior.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/117-0
+00:01:04.547 &ndash;&gt; 00:01:07.107
+<!-- raw HTML omitted -->The workaround that was suggested by you
+guys.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/125-0
+00:01:07.657 &ndash;&gt; 00:01:10.017
+<!-- raw HTML omitted -->We&rsquo;ll also demonstrate how that happens.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/135-0
+00:01:10.737 &ndash;&gt; 00:01:18.057
+<!-- raw HTML omitted -->Rahul from our side will be able to
+demonstrate that followed by we will.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/163-0
+00:01:20.147 &ndash;&gt; 00:01:23.587
+<!-- raw HTML omitted -->Surya from our side will be able to
+modify the configs,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/163-1
+00:01:23.587 &ndash;&gt; 00:01:27.027
+<!-- raw HTML omitted -->relaunch the Tomcat server et cetera,
+et cetera, right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/172-0
+00:01:27.027 &ndash;&gt; 00:01:32.547
+<!-- raw HTML omitted -->So first we&rsquo;ll showcase what we have been
+telling so far, which might.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/181-0
+00:01:34.227 &ndash;&gt; 00:01:36.707
+<!-- raw HTML omitted -->Be giving you additional insights which
+you may not be aware.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/191-0
+00:01:37.377 &ndash;&gt; 00:01:40.657
+<!-- raw HTML omitted -->So far I know that you&rsquo;ve been involved
+in our case.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/209-0
+00:01:42.507 &ndash;&gt; 00:01:44.746
+<!-- raw HTML omitted -->With water evidences we have been
+providing,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/209-1
+00:01:44.746 &ndash;&gt; 00:01:48.627
+<!-- raw HTML omitted -->but we just wanted to showcase this very
+quickly and then take it from there.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/212-0
+00:01:49.847 &ndash;&gt; 00:01:50.527
+<!-- raw HTML omitted -->Sure. Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/219-0
+00:01:50.527 &ndash;&gt; 00:01:52.327
+<!-- raw HTML omitted -->And just a note, so I sent an e-mail.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/259-0
+00:01:52.327 &ndash;&gt; 00:01:57.782
+<!-- raw HTML omitted -->It looks like you know in that one log
+from a couple of days ago that it shows<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/230-0
+00:01:56.497 &ndash;&gt; 00:01:56.617
+<!-- raw HTML omitted -->Hmm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/259-1
+00:01:57.782 &ndash;&gt; 00:02:01.235
+<!-- raw HTML omitted -->that it did actually succeed in cloning
+the repo,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/259-2
+00:02:01.235 &ndash;&gt; 00:02:06.622
+<!-- raw HTML omitted -->which you know kind of gives evidence
+that it it it wasn&rsquo;t able to go through<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/243-0
+00:02:01.527 &ndash;&gt; 00:02:01.807
+<!-- raw HTML omitted -->Sure.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/259-3
+00:02:06.622 &ndash;&gt; 00:02:07.727
+<!-- raw HTML omitted -->the process, OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/258-0
+00:02:08.297 &ndash;&gt; 00:02:08.737
+<!-- raw HTML omitted -->Yep.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/271-0
+00:02:09.787 &ndash;&gt; 00:02:11.307
+<!-- raw HTML omitted -->Yeah. So yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/283-0
+00:02:09.817 &ndash;&gt; 00:02:13.220
+<!-- raw HTML omitted -->And and we&rsquo;ll, we&rsquo;ll, we&rsquo;ll,
+we&rsquo;ll showcase that as well.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/283-1
+00:02:13.220 &ndash;&gt; 00:02:17.737
+<!-- raw HTML omitted -->We did test again this morning and we&rsquo;ll
+take you through all of that, yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/284-0
+00:02:18.927 &ndash;&gt; 00:02:19.207
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/298-0
+00:02:20.067 &ndash;&gt; 00:02:24.987
+<!-- raw HTML omitted -->So this is our production instance of
+GitHub we have.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/314-0
+00:02:25.067 &ndash;&gt; 00:02:30.647
+<!-- raw HTML omitted -->This is a private repo of web goat.
+We are going to try and integrate with<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/314-1
+00:02:30.647 &ndash;&gt; 00:02:31.987
+<!-- raw HTML omitted -->this private repo.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/325-0
+00:02:34.067 &ndash;&gt; 00:02:37.827
+<!-- raw HTML omitted -->If first in our develop,
+which one are you trying to do RAH.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/335-0
+00:02:40.257 &ndash;&gt; 00:02:43.137
+<!-- raw HTML omitted -->Happy to do however you want to lead it,
+yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/334-0
+00:02:41.987 &ndash;&gt; 00:02:42.347
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/343-0
+00:02:43.827 &ndash;&gt; 00:02:46.027
+<!-- raw HTML omitted -->Let let&rsquo;s do Dev first.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/352-0
+00:02:46.027 &ndash;&gt; 00:02:48.867
+<!-- raw HTML omitted -->So the dev instance is on 3.0.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/345-0
+00:02:46.437 &ndash;&gt; 00:02:46.717
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/374-0
+00:02:49.147 &ndash;&gt; 00:02:56.171
+<!-- raw HTML omitted -->It does not have the git config time.
+The config around Git timeout configured<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/374-1
+00:02:56.171 &ndash;&gt; 00:03:02.307
+<!-- raw HTML omitted -->at the moment it is whatever default
+config it has, right? So let&rsquo;s.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/383-0
+00:03:03.987 &ndash;&gt; 00:03:06.187
+<!-- raw HTML omitted -->Maybe open up the developer tools.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/379-0
+00:03:04.657 &ndash;&gt; 00:03:04.777
+<!-- raw HTML omitted -->Yep.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/385-0
+00:03:06.187 &ndash;&gt; 00:03:06.787
+<!-- raw HTML omitted -->Also, Rahul.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/388-0
+00:03:12.457 &ndash;&gt; 00:03:12.897
+<!-- raw HTML omitted -->Sure, Mary.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/391-0
+00:03:12.897 &ndash;&gt; 00:03:13.537
+<!-- raw HTML omitted -->No problem.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/401-0
+00:03:13.897 &ndash;&gt; 00:03:16.617
+<!-- raw HTML omitted -->I&rsquo;ll put networks here and if the.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/395-0
+00:03:15.557 &ndash;&gt; 00:03:15.917
+<!-- raw HTML omitted -->All right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/403-0
+00:03:15.957 &ndash;&gt; 00:03:18.237
+<!-- raw HTML omitted -->So I&rsquo;ll I&rsquo;ll leave it with you now, OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/409-0
+00:03:20.017 &ndash;&gt; 00:03:22.537
+<!-- raw HTML omitted -->So this times out after 15 seconds.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/415-0
+00:03:23.377 &ndash;&gt; 00:03:24.057
+<!-- raw HTML omitted -->Oh, so this is.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/423-0
+00:03:24.057 &ndash;&gt; 00:03:27.937
+<!-- raw HTML omitted -->Does this have the the the updated build
+that we provided or no?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/437-0
+00:03:29.077 &ndash;&gt; 00:03:31.999
+<!-- raw HTML omitted -->This is on 3.0.
+I think the updated build has this one<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/437-1
+00:03:31.999 &ndash;&gt; 00:03:32.477
+<!-- raw HTML omitted -->right so.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/450-0
+00:03:34.027 &ndash;&gt; 00:03:36.307
+<!-- raw HTML omitted -->But the config forgot timeout.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/456-0
+00:03:35.267 &ndash;&gt; 00:03:38.809
+<!-- raw HTML omitted -->Right. And do you know if what,
+what version we had made the change to<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/456-1
+00:03:38.809 &ndash;&gt; 00:03:39.707
+<!-- raw HTML omitted -->address the issue?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/458-0
+00:03:40.527 &ndash;&gt; 00:03:41.087
+<!-- raw HTML omitted -->I forget.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/465-0
+00:03:40.997 &ndash;&gt; 00:03:43.157
+<!-- raw HTML omitted -->I think I think 3.0.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/461-0
+00:03:41.087 &ndash;&gt; 00:03:41.647
+<!-- raw HTML omitted -->Was it?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/478-0
+00:03:46.537 &ndash;&gt; 00:03:48.457
+<!-- raw HTML omitted -->Surya, can you correct me if I&rsquo;m wrong OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/475-0
+00:03:47.797 &ndash;&gt; 00:03:48.677
+<!-- raw HTML omitted -->Yeah, I still don&rsquo;t know.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/479-0
+00:03:48.677 &ndash;&gt; 00:03:49.917
+<!-- raw HTML omitted -->Yeah, it&rsquo;s 3.0.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/490-0
+00:03:51.507 &ndash;&gt; 00:03:55.387
+<!-- raw HTML omitted -->The git config uh bit as part of the
+change log was delivered.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/494-0
+00:03:56.867 &ndash;&gt; 00:03:57.507
+<!-- raw HTML omitted -->In the 3.0.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/501-0
+00:03:58.347 &ndash;&gt; 00:03:59.147
+<!-- raw HTML omitted -->Yep, cool.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/498-0
+00:03:58.797 &ndash;&gt; 00:03:59.197
+<!-- raw HTML omitted -->OK then.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/503-0
+00:03:59.197 &ndash;&gt; 00:04:00.237
+<!-- raw HTML omitted -->Yeah, then it wouldn&rsquo;t.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/519-0
+00:04:00.237 &ndash;&gt; 00:04:04.097
+<!-- raw HTML omitted -->It wouldn&rsquo;t be a 15 second for that one.
+We increase the default,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/519-1
+00:04:04.097 &ndash;&gt; 00:04:06.437
+<!-- raw HTML omitted -->I think to to 60 or something like that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/515-0
+00:04:04.817 &ndash;&gt; 00:04:05.217
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/524-0
+00:04:06.657 &ndash;&gt; 00:04:09.377
+<!-- raw HTML omitted -->Alright, so whatever the default is Ken,
+sorry.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/527-0
+00:04:10.177 &ndash;&gt; 00:04:10.817
+<!-- raw HTML omitted -->No, no problem.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/538-0
+00:04:10.817 &ndash;&gt; 00:04:13.377
+<!-- raw HTML omitted -->Just wanted to make sure I knew what we
+were looking at.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/534-0
+00:04:11.857 &ndash;&gt; 00:04:12.337
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/537-0
+00:04:12.617 &ndash;&gt; 00:04:13.617
+<!-- raw HTML omitted -->All right, no problem.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/546-0
+00:04:17.547 &ndash;&gt; 00:04:21.387
+<!-- raw HTML omitted -->So what we have observed is that it times
+out after the default.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/555-0
+00:04:23.427 &ndash;&gt; 00:04:26.027
+<!-- raw HTML omitted -->With config timeout is set right so.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/568-0
+00:04:27.787 &ndash;&gt; 00:04:31.427
+<!-- raw HTML omitted -->What we can also see Rahul,
+do you have the credentials?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/573-0
+00:04:32.217 &ndash;&gt; 00:04:33.377
+<!-- raw HTML omitted -->Yeah, yeah, I have that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/580-0
+00:04:34.447 &ndash;&gt; 00:04:36.687
+<!-- raw HTML omitted -->And you can delete the token after this
+Rende.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/584-0
+00:04:36.297 &ndash;&gt; 00:04:37.297
+<!-- raw HTML omitted -->Yeah. Yeah, I will.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/587-0
+00:04:37.377 &ndash;&gt; 00:04:38.777
+<!-- raw HTML omitted -->Yeah, this is a temporary one.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/603-0
+00:04:39.067 &ndash;&gt; 00:04:43.067
+<!-- raw HTML omitted -->This is something that can be not able to
+figure out why it happens, right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/606-0
+00:04:43.067 &ndash;&gt; 00:04:44.867
+<!-- raw HTML omitted -->Because the network rules are the same.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/614-0
+00:04:46.307 &ndash;&gt; 00:04:48.467
+<!-- raw HTML omitted -->Obviously there is functionality
+difference.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/633-0
+00:04:50.227 &ndash;&gt; 00:04:56.072
+<!-- raw HTML omitted -->Between this workaround and when SRM
+waits for user name and password screen<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/633-1
+00:04:56.072 &ndash;&gt; 00:04:56.907
+<!-- raw HTML omitted -->to come up.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/642-0
+00:04:57.187 &ndash;&gt; 00:05:02.307
+<!-- raw HTML omitted -->So when we use this in such username,
+password in such an such.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/644-0
+00:05:03.907 &ndash;&gt; 00:05:03.947
+<!-- raw HTML omitted -->A.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/651-0
+00:05:03.947 &ndash;&gt; 00:05:08.307
+<!-- raw HTML omitted -->Such a way that it the request gets
+completed.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/654-0
+00:05:08.657 &ndash;&gt; 00:05:10.177
+<!-- raw HTML omitted -->Didn&rsquo;t listen 2 seconds.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/658-0
+00:05:11.077 &ndash;&gt; 00:05:11.397
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/661-0
+00:05:11.397 &ndash;&gt; 00:05:12.837
+<!-- raw HTML omitted -->Was this the what, Ryan?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/679-0
+00:05:12.837 &ndash;&gt; 00:05:17.784
+<!-- raw HTML omitted -->I forget on on the support there was this
+how we had recommended they provide the<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/679-1
+00:05:17.784 &ndash;&gt; 00:05:20.077
+<!-- raw HTML omitted -->URL. I think it might have been right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/691-0
+00:05:19.477 &ndash;&gt; 00:05:23.717
+<!-- raw HTML omitted -->And so this was one of the workarounds
+that you guys had suggested.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/694-0
+00:05:24.947 &ndash;&gt; 00:05:25.187
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/699-0
+00:05:25.077 &ndash;&gt; 00:05:25.437
+<!-- raw HTML omitted -->This.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/708-0
+00:05:25.187 &ndash;&gt; 00:05:28.283
+<!-- raw HTML omitted -->Yeah,
+I&rsquo;m not sure if it&rsquo;s a workaround or or<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/708-1
+00:05:28.283 &ndash;&gt; 00:05:29.427
+<!-- raw HTML omitted -->what is required.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/716-0
+00:05:30.787 &ndash;&gt; 00:05:33.027
+<!-- raw HTML omitted -->This was Surya he identified.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/714-0
+00:05:31.067 &ndash;&gt; 00:05:31.587
+<!-- raw HTML omitted -->Alright.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/721-0
+00:05:34.507 &ndash;&gt; 00:05:35.747
+<!-- raw HTML omitted -->An alternative, Mehdi.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/722-0
+00:05:37.227 &ndash;&gt; 00:05:37.507
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/742-0
+00:05:38.987 &ndash;&gt; 00:05:43.474
+<!-- raw HTML omitted -->So it is the same set of functionalities.
+Perhaps that is being invoked internally<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/742-1
+00:05:43.474 &ndash;&gt; 00:05:45.907
+<!-- raw HTML omitted -->in SRM in order to connect to this Git
+repo.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/744-0
+00:05:46.947 &ndash;&gt; 00:05:47.307
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/758-0
+00:05:47.787 &ndash;&gt; 00:05:52.387
+<!-- raw HTML omitted -->But one that succeeds in under 2 two
+seconds and other that takes.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/770-0
+00:05:53.947 &ndash;&gt; 00:05:55.387
+<!-- raw HTML omitted -->All the way to 60 seconds or whatever.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/774-0
+00:05:55.387 &ndash;&gt; 00:05:57.387
+<!-- raw HTML omitted -->The timeout set that is set right so.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/778-0
+00:05:59.107 &ndash;&gt; 00:05:59.587
+<!-- raw HTML omitted -->We don&rsquo;t.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/786-0
+00:05:59.587 &ndash;&gt; 00:06:01.347
+<!-- raw HTML omitted -->We&rsquo;re not able to figure out why this is
+happening.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/792-0
+00:06:02.267 &ndash;&gt; 00:06:05.747
+<!-- raw HTML omitted -->There are some process changes that we
+had to do internally.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/818-0
+00:06:06.097 &ndash;&gt; 00:06:11.305
+<!-- raw HTML omitted -->In order to communicate this way of
+integrating with GitHub,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/818-1
+00:06:11.305 &ndash;&gt; 00:06:17.537
+<!-- raw HTML omitted -->so that is where our hesitation is,
+we need to update our documentation.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/821-0
+00:06:17.537 &ndash;&gt; 00:06:19.457
+<!-- raw HTML omitted -->We need to retrain our staff in order to.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/830-0
+00:06:20.817 &ndash;&gt; 00:06:23.977
+<!-- raw HTML omitted -->Connect to get in this way so that aside.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/846-0
+00:06:22.957 &ndash;&gt; 00:06:26.658
+<!-- raw HTML omitted -->Also,
+it doesn&rsquo;t provide the persistence that<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/846-1
+00:06:26.658 &ndash;&gt; 00:06:29.797
+<!-- raw HTML omitted -->we won&rsquo;t be able to save it every time.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/851-0
+00:06:29.797 &ndash;&gt; 00:06:31.877
+<!-- raw HTML omitted -->They will have to use their to clone it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/857-0
+00:06:32.057 &ndash;&gt; 00:06:34.217
+<!-- raw HTML omitted -->It won&rsquo;t necessarily always be here.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/860-0
+00:06:37.227 &ndash;&gt; 00:06:38.827
+<!-- raw HTML omitted -->Oh, you mean change the branch?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/894-0
+00:06:39.867 &ndash;&gt; 00:06:43.476
+<!-- raw HTML omitted -->No, no, no, sorry.
+The I I was just adding to your your<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/894-1
+00:06:43.476 &ndash;&gt; 00:06:48.760
+<!-- raw HTML omitted -->thing like for example if we if if we are
+using it the way username token@github.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/894-2
+00:06:48.760 &ndash;&gt; 00:06:52.627
+<!-- raw HTML omitted -->com if the the URL will persist but the
+token will be open.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/905-0
+00:06:52.607 &ndash;&gt; 00:06:55.647
+<!-- raw HTML omitted -->Yeah, the end of the.
+Also the token expires.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/908-0
+00:06:55.647 &ndash;&gt; 00:06:58.447
+<!-- raw HTML omitted -->So those challenges are there.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/910-0
+00:06:59.987 &ndash;&gt; 00:07:00.107
+<!-- raw HTML omitted -->Ken.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/914-0
+00:07:01.747 &ndash;&gt; 00:07:02.227
+<!-- raw HTML omitted -->So.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/922-0
+00:07:02.317 &ndash;&gt; 00:07:05.855
+<!-- raw HTML omitted -->Yeah,
+I mean the the token can expire no matter<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/922-1
+00:07:05.855 &ndash;&gt; 00:07:07.477
+<!-- raw HTML omitted -->what, alright, I mean.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/926-0
+00:07:08.477 &ndash;&gt; 00:07:08.517
+<!-- raw HTML omitted -->F.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/927-0
+00:07:09.117 &ndash;&gt; 00:07:09.757
+<!-- raw HTML omitted -->No, agreed.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/931-0
+00:07:09.757 &ndash;&gt; 00:07:11.397
+<!-- raw HTML omitted -->So this is something that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/939-0
+00:07:13.337 &ndash;&gt; 00:07:16.297
+<!-- raw HTML omitted -->Works much faster than the default.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/938-0
+00:07:15.537 &ndash;&gt; 00:07:15.817
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/949-0
+00:07:17.947 &ndash;&gt; 00:07:20.227
+<!-- raw HTML omitted -->Default mechanism that is provided by SRM.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/961-0
+00:07:20.227 &ndash;&gt; 00:07:21.827
+<!-- raw HTML omitted -->So we just wanted to understand why that
+SRM.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/965-0
+00:07:20.907 &ndash;&gt; 00:07:23.312
+<!-- raw HTML omitted -->It&rsquo;s not just faster.
+The other one doesn&rsquo;t work at all.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/965-1
+00:07:23.312 &ndash;&gt; 00:07:23.987
+<!-- raw HTML omitted -->Is that correct?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/979-0
+00:07:23.987 &ndash;&gt; 00:07:27.867
+<!-- raw HTML omitted -->Or if you if you increase the timeout it
+it does eventually work.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/984-0
+00:07:26.257 &ndash;&gt; 00:07:29.497
+<!-- raw HTML omitted -->If we increase this timeout sufficiently,
+it works.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/985-0
+00:07:30.317 &ndash;&gt; 00:07:30.957
+<!-- raw HTML omitted -->Interesting.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1016-0
+00:07:31.797 &ndash;&gt; 00:07:37.188
+<!-- raw HTML omitted -->Yeah, so so off late.
+What we are seeing is that in one of our<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/992-0
+00:07:32.347 &ndash;&gt; 00:07:33.027
+<!-- raw HTML omitted -->Yeah, that&rsquo;s odd. Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1016-1
+00:07:37.188 &ndash;&gt; 00:07:41.895
+<!-- raw HTML omitted -->environments,
+when we increase it to two minutes it it<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1016-2
+00:07:41.895 &ndash;&gt; 00:07:42.837
+<!-- raw HTML omitted -->is working.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1026-0
+00:07:42.837 &ndash;&gt; 00:07:46.185
+<!-- raw HTML omitted -->So we&rsquo;ve been working internally with our
+networking team to fine tune our rules<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1026-1
+00:07:46.185 &ndash;&gt; 00:07:46.557
+<!-- raw HTML omitted -->etcetera.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1043-0
+00:07:47.557 &ndash;&gt; 00:07:52.317
+<!-- raw HTML omitted -->And what we&rsquo;ve observed is that in one of
+the environment which we will go to next.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1053-0
+00:07:53.787 &ndash;&gt; 00:07:55.987
+<!-- raw HTML omitted -->Where the timeout is set to two minutes.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1061-0
+00:07:55.987 &ndash;&gt; 00:08:00.747
+<!-- raw HTML omitted -->It works and it takes a minute and a half
+to complete the authentication.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1077-0
+00:08:02.587 &ndash;&gt; 00:08:05.899
+<!-- raw HTML omitted -->Yeah,
+I mean I I it&rsquo;s hard to know what might<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1077-1
+00:08:05.899 &ndash;&gt; 00:08:07.987
+<!-- raw HTML omitted -->be slowing things down there.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1087-0
+00:08:09.797 &ndash;&gt; 00:08:12.837
+<!-- raw HTML omitted -->This is the dev where timeout is not set.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1104-0
+00:08:12.837 &ndash;&gt; 00:08:17.234
+<!-- raw HTML omitted -->Ken, as Mehdi was mentioning,
+this is our sorry this is our dev<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1104-1
+00:08:17.234 &ndash;&gt; 00:08:21.357
+<!-- raw HTML omitted -->instance where it does not connect to the
+same one however.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1098-0
+00:08:18.317 &ndash;&gt; 00:08:18.517
+<!-- raw HTML omitted -->Mm hmm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1115-0
+00:08:22.787 &ndash;&gt; 00:08:25.267
+<!-- raw HTML omitted -->This is our non prod so like dev test.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1142-0
+00:08:25.267 &ndash;&gt; 00:08:28.614
+<!-- raw HTML omitted -->So this is our test instance close to
+production.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1142-1
+00:08:28.614 &ndash;&gt; 00:08:33.567
+<!-- raw HTML omitted -->This one we have the timeout setup and
+and what we have observed is after<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1142-2
+00:08:33.567 &ndash;&gt; 00:08:38.387
+<!-- raw HTML omitted -->putting the timeout and and working with
+the networking team this this.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1186-0
+00:08:38.937 &ndash;&gt; 00:08:43.397
+<!-- raw HTML omitted -->Kind of succeeds, however,
+as as Mehdi mentioned this,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1186-1
+00:08:43.397 &ndash;&gt; 00:08:50.208
+<!-- raw HTML omitted -->this takes much longer than if we do that
+you username at at the same same host and<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1186-2
+00:08:50.208 &ndash;&gt; 00:08:54.181
+<!-- raw HTML omitted -->most likely it&rsquo;s taking the same route.
+However,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1186-3
+00:08:54.181 &ndash;&gt; 00:08:59.857
+<!-- raw HTML omitted -->there is a big deficit when is one minute
+50 seconds or close to two.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1195-0
+00:08:59.857 &ndash;&gt; 00:09:03.297
+<!-- raw HTML omitted -->Minutes and when is under one millisecond,
+I mean one second.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1199-0
+00:09:03.297 &ndash;&gt; 00:09:04.857
+<!-- raw HTML omitted -->So it was 781.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1206-0
+00:09:05.487 &ndash;&gt; 00:09:06.127
+<!-- raw HTML omitted -->Wait a second.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1205-0
+00:09:05.587 &ndash;&gt; 00:09:06.547
+<!-- raw HTML omitted -->Milliseconds or something.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1220-0
+00:09:09.617 &ndash;&gt; 00:09:14.688
+<!-- raw HTML omitted -->In the is the network team able to to
+understand what might be going wrong<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1220-1
+00:09:14.688 &ndash;&gt; 00:09:15.297
+<!-- raw HTML omitted -->there or?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1226-0
+00:09:16.697 &ndash;&gt; 00:09:17.177
+<!-- raw HTML omitted -->All happening.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1229-0
+00:09:16.747 &ndash;&gt; 00:09:19.107
+<!-- raw HTML omitted -->Do you have any insight into what&rsquo;s
+taking so long?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1232-0
+00:09:19.547 &ndash;&gt; 00:09:20.187
+<!-- raw HTML omitted -->What&rsquo;s that?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1247-0
+00:09:20.797 &ndash;&gt; 00:09:23.349
+<!-- raw HTML omitted -->This is all happening within the. Sorry,
+sorry, sorry.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1247-1
+00:09:23.349 &ndash;&gt; 00:09:25.437
+<!-- raw HTML omitted -->This is all happening within the SRM
+itself.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1252-0
+00:09:25.437 &ndash;&gt; 00:09:27.277
+<!-- raw HTML omitted -->Yeah, the connection itself.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1262-0
+00:09:27.277 &ndash;&gt; 00:09:29.917
+<!-- raw HTML omitted -->They can see that connection is going up
+or or or not.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1273-0
+00:09:29.917 &ndash;&gt; 00:09:32.717
+<!-- raw HTML omitted -->Surya may be able to jump in, but what?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1285-0
+00:09:32.117 &ndash;&gt; 00:09:36.157
+<!-- raw HTML omitted -->I mean I think SRM is just making making
+calls out to the Git repo and it&rsquo;s taking<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1283-0
+00:09:35.517 &ndash;&gt; 00:09:36.197
+<!-- raw HTML omitted -->That&rsquo;s right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1285-1
+00:09:36.157 &ndash;&gt; 00:09:37.277
+<!-- raw HTML omitted -->a long time, right? So.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1292-0
+00:09:38.787 &ndash;&gt; 00:09:39.307
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1297-0
+00:09:38.827 &ndash;&gt; 00:09:41.107
+<!-- raw HTML omitted -->Yeah, like for instance,
+you know how you saw this one?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1318-0
+00:09:41.107 &ndash;&gt; 00:09:44.751
+<!-- raw HTML omitted -->Yeah, it took almost a minute and a half,
+sort of a thing.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1318-1
+00:09:44.751 &ndash;&gt; 00:09:49.199
+<!-- raw HTML omitted -->But if I put the token in here,
+and if I if I if I&rsquo;ll show you the same<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1318-2
+00:09:49.199 &ndash;&gt; 00:09:50.187
+<!-- raw HTML omitted -->same case there.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1332-0
+00:09:51.707 &ndash;&gt; 00:09:57.387
+<!-- raw HTML omitted -->And and what took that long would just
+finish in finishing in, in, in,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1332-1
+00:09:57.387 &ndash;&gt; 00:09:59.307
+<!-- raw HTML omitted -->like a jiffy. We&rsquo;ll see.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1340-0
+00:10:00.817 &ndash;&gt; 00:10:02.697
+<!-- raw HTML omitted -->And you see it&rsquo;s it&rsquo;s just finished.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1355-0
+00:10:02.767 &ndash;&gt; 00:10:06.780
+<!-- raw HTML omitted -->The same URL,
+but if I remove this now for instance it<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1355-1
+00:10:06.780 &ndash;&gt; 00:10:09.407
+<!-- raw HTML omitted -->it will it will take its sweet time.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1369-0
+00:10:09.937 &ndash;&gt; 00:10:13.476
+<!-- raw HTML omitted -->Yeah. And also, Ken,
+one of the improvements that we had<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1369-1
+00:10:13.476 &ndash;&gt; 00:10:14.097
+<!-- raw HTML omitted -->suggested.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1382-0
+00:10:15.617 &ndash;&gt; 00:10:18.817
+<!-- raw HTML omitted -->It may have got lost in all of the case
+updates.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1399-0
+00:10:18.857 &ndash;&gt; 00:10:25.007
+<!-- raw HTML omitted -->Is that with every key press on these two
+fields it is sending a request back to<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1399-1
+00:10:25.007 &ndash;&gt; 00:10:27.057
+<!-- raw HTML omitted -->the get report to validate.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1404-0
+00:10:27.017 &ndash;&gt; 00:10:29.857
+<!-- raw HTML omitted -->And it that was by design.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1411-0
+00:10:30.097 &ndash;&gt; 00:10:31.657
+<!-- raw HTML omitted -->We are making changes to that but.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1409-0
+00:10:30.477 &ndash;&gt; 00:10:30.717
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1423-0
+00:10:33.177 &ndash;&gt; 00:10:36.617
+<!-- raw HTML omitted -->That was by design.
+For UX like we didn&rsquo;t want.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1422-0
+00:10:35.897 &ndash;&gt; 00:10:36.257
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1440-0
+00:10:38.217 &ndash;&gt; 00:10:42.005
+<!-- raw HTML omitted -->You know we have separate buttons that
+the user would have to Click to to check<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1440-1
+00:10:42.005 &ndash;&gt; 00:10:42.337
+<!-- raw HTML omitted -->things.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1462-0
+00:10:42.337 &ndash;&gt; 00:10:46.357
+<!-- raw HTML omitted -->So we felt that most users would just be
+copying pasting the URL,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1462-1
+00:10:46.357 &ndash;&gt; 00:10:50.377
+<!-- raw HTML omitted -->not manually typing it actually has like
+a little bit of a delay.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1454-0
+00:10:46.417 &ndash;&gt; 00:10:47.417
+<!-- raw HTML omitted -->Facing it. Yep.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1477-0
+00:10:50.377 &ndash;&gt; 00:10:52.328
+<!-- raw HTML omitted -->So if if you type at,
+you know a nice speed,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1465-0
+00:10:51.547 &ndash;&gt; 00:10:51.667
+<!-- raw HTML omitted -->Hmm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1477-1
+00:10:52.328 &ndash;&gt; 00:10:55.710
+<!-- raw HTML omitted -->it&rsquo;s it&rsquo;s not gonna make those requests.
+Only when you pause does it make the<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1475-0
+00:10:54.567 &ndash;&gt; 00:10:54.847
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1477-2
+00:10:55.710 &ndash;&gt; 00:10:56.057
+<!-- raw HTML omitted -->request.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1487-0
+00:10:56.647 &ndash;&gt; 00:10:58.167
+<!-- raw HTML omitted -->So that was March, the UX decision.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1488-0
+00:10:58.167 &ndash;&gt; 00:10:58.687
+<!-- raw HTML omitted -->But we are.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1500-0
+00:10:58.657 &ndash;&gt; 00:11:01.137
+<!-- raw HTML omitted -->And I&rsquo;ll all good, all good.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1496-0
+00:10:58.687 &ndash;&gt; 00:11:00.167
+<!-- raw HTML omitted -->We are going to make that change anyway.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1507-0
+00:11:01.577 &ndash;&gt; 00:11:03.057
+<!-- raw HTML omitted -->It shouldn&rsquo;t be causing any problems,
+but yeah,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1507-1
+00:11:03.057 &ndash;&gt; 00:11:04.137
+<!-- raw HTML omitted -->we are looking to make that change.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1544-0
+00:11:05.267 &ndash;&gt; 00:11:09.160
+<!-- raw HTML omitted -->Sure, sure, Ken.
+One of the other things that you guys had<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1513-0
+00:11:06.137 &ndash;&gt; 00:11:06.737
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1544-1
+00:11:09.160 &ndash;&gt; 00:11:14.438
+<!-- raw HTML omitted -->suggested is can we try and do the git
+commands from the container directly and<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1544-2
+00:11:14.438 &ndash;&gt; 00:11:19.189
+<!-- raw HTML omitted -->see whether there is a holdup there.
+I think Surya you would be able to<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1544-3
+00:11:19.189 &ndash;&gt; 00:11:20.707
+<!-- raw HTML omitted -->demonstrate that, yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1552-0
+00:11:23.947 &ndash;&gt; 00:11:26.507
+<!-- raw HTML omitted -->I think the conclusion there is that
+there there was no hold up, right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1564-0
+00:11:26.987 &ndash;&gt; 00:11:28.907
+<!-- raw HTML omitted -->Yeah, there is no hold up if we.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1562-0
+00:11:28.057 &ndash;&gt; 00:11:29.137
+<!-- raw HTML omitted -->Yeah, I don&rsquo;t need to see.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1571-0
+00:11:29.137 &ndash;&gt; 00:11:32.137
+<!-- raw HTML omitted -->Yeah, yeah, I I,
+I I don&rsquo;t believe you on that one.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1576-0
+00:11:33.817 &ndash;&gt; 00:11:34.057
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1581-0
+00:11:34.007 &ndash;&gt; 00:11:35.527
+<!-- raw HTML omitted -->So we are happy.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1619-0
+00:11:35.607 &ndash;&gt; 00:11:39.076
+<!-- raw HTML omitted -->See will you?
+Do you think that the logs would be<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1619-1
+00:11:39.076 &ndash;&gt; 00:11:43.446
+<!-- raw HTML omitted -->suggesting anything different in these
+two separate instances,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1619-2
+00:11:43.446 &ndash;&gt; 00:11:46.568
+<!-- raw HTML omitted -->one with the username,
+password combination,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1619-3
+00:11:46.568 &ndash;&gt; 00:11:48.927
+<!-- raw HTML omitted -->the URL and the one that does not?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1629-0
+00:11:49.007 &ndash;&gt; 00:11:52.847
+<!-- raw HTML omitted -->We are happy to supply you with the logs
+in these two instances.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1651-0
+00:11:55.327 &ndash;&gt; 00:11:59.380
+<!-- raw HTML omitted -->Because all our network,
+the network teams investigation so far is<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1651-1
+00:11:59.380 &ndash;&gt; 00:12:03.797
+<!-- raw HTML omitted -->that they can see connections coming
+through from the container and then<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1651-2
+00:12:03.797 &ndash;&gt; 00:12:05.007
+<!-- raw HTML omitted -->nothing beyond that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1659-0
+00:12:08.157 &ndash;&gt; 00:12:09.997
+<!-- raw HTML omitted -->Because it&rsquo;s the same route that is
+happening.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1670-0
+00:12:08.617 &ndash;&gt; 00:12:13.509
+<!-- raw HTML omitted -->And just to recapping,
+what&rsquo;s the problem with putting the token<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1670-1
+00:12:13.509 &ndash;&gt; 00:12:14.337
+<!-- raw HTML omitted -->in the URL.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1672-0
+00:12:15.657 &ndash;&gt; 00:12:16.297
+<!-- raw HTML omitted -->No.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1685-0
+00:12:18.217 &ndash;&gt; 00:12:22.217
+<!-- raw HTML omitted -->It&rsquo;s user reeducation and updation of all
+our internal communications.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1690-0
+00:12:22.217 &ndash;&gt; 00:12:24.017
+<!-- raw HTML omitted -->All internal documentation et cetera.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1696-0
+00:12:24.107 &ndash;&gt; 00:12:25.627
+<!-- raw HTML omitted -->User user education.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1705-0
+00:12:25.627 &ndash;&gt; 00:12:28.227
+<!-- raw HTML omitted -->But they&rsquo;re not.
+No one&rsquo;s been able to use this right or.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1707-0
+00:12:26.527 &ndash;&gt; 00:12:29.167
+<!-- raw HTML omitted -->Yeah. So, no, no, no, no.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1724-0
+00:12:29.607 &ndash;&gt; 00:12:34.527
+<!-- raw HTML omitted -->So we have over 2500 projects that are
+configured in SRM.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1731-0
+00:12:35.367 &ndash;&gt; 00:12:37.767
+<!-- raw HTML omitted -->So if we have to make, sorry.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1729-0
+00:12:35.517 &ndash;&gt; 00:12:36.877
+<!-- raw HTML omitted -->But none of them work right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1735-0
+00:12:38.377 &ndash;&gt; 00:12:39.377
+<!-- raw HTML omitted -->But none of them work right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1746-0
+00:12:39.377 &ndash;&gt; 00:12:42.217
+<!-- raw HTML omitted -->They&rsquo;re all they all has this work before
+we&rsquo;re like well.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1754-0
+00:12:42.517 &ndash;&gt; 00:12:44.757
+<!-- raw HTML omitted -->It works for private public repos, right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1758-0
+00:12:44.757 &ndash;&gt; 00:12:46.997
+<!-- raw HTML omitted -->So the problem was only for private repos.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1760-0
+00:12:49.007 &ndash;&gt; 00:12:49.367
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1769-0
+00:12:52.007 &ndash;&gt; 00:12:52.927
+<!-- raw HTML omitted -->So there are a lot of.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1784-0
+00:12:52.137 &ndash;&gt; 00:12:57.341
+<!-- raw HTML omitted -->I think I think if you want Mary,
+as I can recap the issue for you,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1775-0
+00:12:55.037 &ndash;&gt; 00:12:55.357
+<!-- raw HTML omitted -->Sorry.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1784-1
+00:12:57.341 &ndash;&gt; 00:13:00.097
+<!-- raw HTML omitted -->if you want for, for and re show it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1788-0
+00:13:03.477 &ndash;&gt; 00:13:04.597
+<!-- raw HTML omitted -->Sorry, what?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1793-0
+00:13:05.117 &ndash;&gt; 00:13:06.317
+<!-- raw HTML omitted -->Rahul, sorry I didn&rsquo;t understand.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1815-0
+00:13:06.737 &ndash;&gt; 00:13:09.687
+<!-- raw HTML omitted -->Sorry,
+I think that I can reatticulate the the<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1815-1
+00:13:09.687 &ndash;&gt; 00:13:14.583
+<!-- raw HTML omitted -->issue again and and reshare the screen
+and show the public and and private as<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1820-0
+00:13:14.177 &ndash;&gt; 00:13:14.937
+<!-- raw HTML omitted -->Yeah, sure, sure.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1815-2
+00:13:14.583 &ndash;&gt; 00:13:14.897
+<!-- raw HTML omitted -->well.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1840-0
+00:13:16.177 &ndash;&gt; 00:13:19.543
+<!-- raw HTML omitted -->So Ken,
+where there is private repos that are<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1840-1
+00:13:19.543 &ndash;&gt; 00:13:23.348
+<!-- raw HTML omitted -->configured,
+we are trying to tell them that this is<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1840-2
+00:13:23.348 &ndash;&gt; 00:13:25.177
+<!-- raw HTML omitted -->how you would be able to.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1845-0
+00:13:27.877 &ndash;&gt; 00:13:30.117
+<!-- raw HTML omitted -->Again,
+reconnect to git if that makes sense.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1855-0
+00:13:33.217 &ndash;&gt; 00:13:37.577
+<!-- raw HTML omitted -->Yeah, I mean, I guess whatever they,
+they have their for the private repo.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1869-0
+00:13:39.137 &ndash;&gt; 00:13:45.417
+<!-- raw HTML omitted -->Is has not worked and is not working and
+so it sounds like a fix.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1878-0
+00:13:45.417 &ndash;&gt; 00:13:48.337
+<!-- raw HTML omitted -->What would be to change the URL for to
+make it work?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1874-0
+00:13:45.727 &ndash;&gt; 00:13:46.767
+<!-- raw HTML omitted -->Also.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1890-0
+00:13:49.827 &ndash;&gt; 00:13:53.107
+<!-- raw HTML omitted -->And that is what we are telling as of now,
+right, So what?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1887-0
+00:13:52.827 &ndash;&gt; 00:13:53.027
+<!-- raw HTML omitted -->Uh huh.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1901-0
+00:13:53.107 &ndash;&gt; 00:13:57.947
+<!-- raw HTML omitted -->The the other observation is that if the
+and it used to work in the past, right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1922-0
+00:13:57.947 &ndash;&gt; 00:14:04.376
+<!-- raw HTML omitted -->And something has changed sometime
+between September release of you guys and<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1922-1
+00:14:04.376 &ndash;&gt; 00:14:09.134
+<!-- raw HTML omitted -->November release,
+something has changed either in SRM or<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1922-2
+00:14:09.134 &ndash;&gt; 00:14:10.387
+<!-- raw HTML omitted -->our side we we.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1932-0
+00:14:12.257 &ndash;&gt; 00:14:16.657
+<!-- raw HTML omitted -->Some config has changed which is not
+playing nicely with the Git config.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1976-0
+00:14:17.087 &ndash;&gt; 00:14:23.045
+<!-- raw HTML omitted -->Right. So what we have also observed, Ken,
+is that if the Git config was set up<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1940-0
+00:14:19.987 &ndash;&gt; 00:14:20.187
+<!-- raw HTML omitted -->Speak.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1976-1
+00:14:23.045 &ndash;&gt; 00:14:28.408
+<!-- raw HTML omitted -->prior to that particular date,
+then it continues to work because we are<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1976-2
+00:14:28.408 &ndash;&gt; 00:14:33.920
+<!-- raw HTML omitted -->not changing the Git config and it
+continues to persist with the username<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1976-3
+00:14:33.920 &ndash;&gt; 00:14:36.527
+<!-- raw HTML omitted -->and password that is already saved.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1986-0
+00:14:41.367 &ndash;&gt; 00:14:44.303
+<!-- raw HTML omitted -->What was the date again?
+You said between the September release<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1988-0
+00:14:43.957 &ndash;&gt; 00:14:45.317
+<!-- raw HTML omitted -->And so.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/1986-1
+00:14:44.303 &ndash;&gt; 00:14:44.487
+<!-- raw HTML omitted -->and.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2004-0
+00:14:47.777 &ndash;&gt; 00:14:50.633
+<!-- raw HTML omitted -->September,
+we started seeing this problem sometime<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2004-1
+00:14:50.633 &ndash;&gt; 00:14:52.257
+<!-- raw HTML omitted -->October, November time frame.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2007-0
+00:14:52.537 &ndash;&gt; 00:14:55.257
+<!-- raw HTML omitted -->So up until that time this used to work.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2040-0
+00:14:56.547 &ndash;&gt; 00:14:59.894
+<!-- raw HTML omitted -->You know,
+particular SRM version that so it sounds<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2019-0
+00:14:59.427 &ndash;&gt; 00:14:59.827
+<!-- raw HTML omitted -->And.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2040-1
+00:14:59.894 &ndash;&gt; 00:15:04.947
+<!-- raw HTML omitted -->like you maybe maybe you&rsquo;re thinking that
+after a an upgrade of a particular<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2040-2
+00:15:04.947 &ndash;&gt; 00:15:07.507
+<!-- raw HTML omitted -->version of SRM this stopped working or?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2048-0
+00:15:06.787 &ndash;&gt; 00:15:10.147
+<!-- raw HTML omitted -->And that has been the that has been the
+frustrating part, can we?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2063-0
+00:15:10.147 &ndash;&gt; 00:15:14.317
+<!-- raw HTML omitted -->We&rsquo;re not able to pinpoint the exact
+version of SRM from where we had started<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2063-1
+00:15:14.317 &ndash;&gt; 00:15:15.387
+<!-- raw HTML omitted -->seeing this problem.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2098-0
+00:15:16.397 &ndash;&gt; 00:15:21.271
+<!-- raw HTML omitted -->I mean &lsquo;cause &lsquo;cause like one test is to
+is for us to try and you know to install<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2098-1
+00:15:21.271 &ndash;&gt; 00:15:25.907
+<!-- raw HTML omitted -->an older version of SRM to confirm that
+&lsquo;cause it&rsquo;s either like you&rsquo;re saying<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2082-0
+00:15:22.097 &ndash;&gt; 00:15:22.817
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2098-2
+00:15:25.907 &ndash;&gt; 00:15:30.186
+<!-- raw HTML omitted -->it&rsquo;s either a a change that happened in
+SRM or there&rsquo;s a change in your<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2098-3
+00:15:30.186 &ndash;&gt; 00:15:31.197
+<!-- raw HTML omitted -->environment that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2103-0
+00:15:31.357 &ndash;&gt; 00:15:31.997
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2115-0
+00:15:32.117 &ndash;&gt; 00:15:36.277
+<!-- raw HTML omitted -->That&rsquo;s causing things to to no longer
+work that used to work.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2123-0
+00:15:33.607 &ndash;&gt; 00:15:38.207
+<!-- raw HTML omitted -->Yeah. And we, we,
+we try to retrace all of that, right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2169-0
+00:15:38.207 &ndash;&gt; 00:15:42.219
+<!-- raw HTML omitted -->We try to install an older version of SRM
+to see whether it works,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2169-1
+00:15:42.219 &ndash;&gt; 00:15:47.249
+<!-- raw HTML omitted -->but unfortunately there are policies that
+are enforced at a Kubernetes level on our<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2169-2
+00:15:47.249 &ndash;&gt; 00:15:49.884
+<!-- raw HTML omitted -->end,
+which requires a particular version of<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2169-3
+00:15:49.884 &ndash;&gt; 00:15:53.777
+<!-- raw HTML omitted -->kubectl and we are not able to go back to
+an older version of S.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2172-0
+00:15:53.777 &ndash;&gt; 00:15:54.887
+<!-- raw HTML omitted -->Due to that fact.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2213-0
+00:15:56.087 &ndash;&gt; 00:16:01.071
+<!-- raw HTML omitted -->I mean another option is to is to install
+our our basic kind of native installer<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2213-1
+00:16:01.071 &ndash;&gt; 00:16:05.871
+<!-- raw HTML omitted -->that you just run on a Linux or Windows
+box and it sets up everything and you<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2213-2
+00:16:05.871 &ndash;&gt; 00:16:10.487
+<!-- raw HTML omitted -->know you wouldn&rsquo;t have to worry about
+Kubernetes or or anything like that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2218-0
+00:16:10.927 &ndash;&gt; 00:16:12.527
+<!-- raw HTML omitted -->And that&rsquo;s a much bigger change.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2221-0
+00:16:12.527 &ndash;&gt; 00:16:13.527
+<!-- raw HTML omitted -->Can unfortunately.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2232-0
+00:16:14.217 &ndash;&gt; 00:16:18.271
+<!-- raw HTML omitted -->I mean, this is just for testing purposes.
+What I&rsquo;m saying like just so we can know<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2232-1
+00:16:18.271 &ndash;&gt; 00:16:18.657
+<!-- raw HTML omitted -->whether.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2242-0
+00:16:20.217 &ndash;&gt; 00:16:22.617
+<!-- raw HTML omitted -->You know it&rsquo;s an SRM change or or
+something else but.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2244-0
+00:16:24.737 &ndash;&gt; 00:16:25.217
+<!-- raw HTML omitted -->Anyway.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2247-0
+00:16:28.437 &ndash;&gt; 00:16:29.117
+<!-- raw HTML omitted -->Yeah, I mean, I don&rsquo;t.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2250-0
+00:16:29.117 &ndash;&gt; 00:16:29.637
+<!-- raw HTML omitted -->I don&rsquo;t know.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2251-0
+00:16:29.637 &ndash;&gt; 00:16:29.677
+<!-- raw HTML omitted -->I.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2258-0
+00:16:29.837 &ndash;&gt; 00:16:32.037
+<!-- raw HTML omitted -->I don&rsquo;t know of anything in SRM that
+would have changed.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2262-0
+00:16:33.657 &ndash;&gt; 00:16:34.417
+<!-- raw HTML omitted -->Based on that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2261-0
+00:16:34.947 &ndash;&gt; 00:16:35.147
+<!-- raw HTML omitted -->Mm hmm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2269-0
+00:16:36.337 &ndash;&gt; 00:16:38.497
+<!-- raw HTML omitted -->But we we we can, we can.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2284-0
+00:16:38.577 &ndash;&gt; 00:16:41.086
+<!-- raw HTML omitted -->We can take another,
+closer look to see if,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2284-1
+00:16:41.086 &ndash;&gt; 00:16:44.337
+<!-- raw HTML omitted -->if anything might have been a change and
+you don&rsquo;t know.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2295-0
+00:16:44.337 &ndash;&gt; 00:16:47.810
+<!-- raw HTML omitted -->You don&rsquo;t know what version it would have
+been that it was working on and then<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2295-1
+00:16:47.810 &ndash;&gt; 00:16:48.777
+<!-- raw HTML omitted -->stopped working right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2300-0
+00:16:48.777 &ndash;&gt; 00:16:49.457
+<!-- raw HTML omitted -->Like but.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2306-0
+00:16:49.777 &ndash;&gt; 00:16:52.017
+<!-- raw HTML omitted -->It would have to be an educated guess.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2305-0
+00:16:51.897 &ndash;&gt; 00:16:52.017
+<!-- raw HTML omitted -->Not.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2333-0
+00:16:52.217 &ndash;&gt; 00:16:58.123
+<!-- raw HTML omitted -->I can&rsquo;t be for knowing for sure, Ken,
+but we did go back in time to have a look<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2311-0
+00:16:53.497 &ndash;&gt; 00:16:53.657
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2315-0
+00:16:55.177 &ndash;&gt; 00:16:55.377
+<!-- raw HTML omitted -->Great.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2333-1
+00:16:58.123 &ndash;&gt; 00:17:03.217
+<!-- raw HTML omitted -->at our testing records when we upgraded
+from one version to another.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2343-0
+00:17:04.617 &ndash;&gt; 00:17:06.137
+<!-- raw HTML omitted -->And that&rsquo;s what we are basing off.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2346-0
+00:17:06.497 &ndash;&gt; 00:17:08.377
+<!-- raw HTML omitted -->So probably sometime around October.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2348-0
+00:17:08.377 &ndash;&gt; 00:17:09.977
+<!-- raw HTML omitted -->November is when it stopped working.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2350-0
+00:17:11.217 &ndash;&gt; 00:17:11.457
+<!-- raw HTML omitted -->Uh huh.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2353-0
+00:17:12.097 &ndash;&gt; 00:17:13.217
+<!-- raw HTML omitted -->And we had.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2372-0
+00:17:14.937 &ndash;&gt; 00:17:18.585
+<!-- raw HTML omitted -->202024.6, I believe,
+but I&rsquo;ll I&rsquo;ll confirm. Yeah,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2372-1
+00:17:18.585 &ndash;&gt; 00:17:21.577
+<!-- raw HTML omitted -->I&rsquo;ll confirm based on my testing records.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2389-0
+00:17:22.487 &ndash;&gt; 00:17:25.993
+<!-- raw HTML omitted -->Right. And and so just you know,
+when we&rsquo;re looking at that test earlier,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2389-1
+00:17:25.993 &ndash;&gt; 00:17:27.367
+<!-- raw HTML omitted -->was that a brand new project?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2399-0
+00:17:27.367 &ndash;&gt; 00:17:30.118
+<!-- raw HTML omitted -->So this is if you create a brand new
+project in SRM,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2399-1
+00:17:30.118 &ndash;&gt; 00:17:31.727
+<!-- raw HTML omitted -->you&rsquo;re gonna have this problem.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2400-0
+00:17:31.727 &ndash;&gt; 00:17:32.247
+<!-- raw HTML omitted -->Is that correct?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2419-0
+00:17:33.587 &ndash;&gt; 00:17:37.982
+<!-- raw HTML omitted -->Yeah. So usually as part of our testing,
+we create a new brand,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2419-1
+00:17:37.982 &ndash;&gt; 00:17:41.827
+<!-- raw HTML omitted -->new Git config and not necessarily a
+brand new project.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2435-0
+00:17:41.827 &ndash;&gt; 00:17:45.731
+<!-- raw HTML omitted -->Or it may be a brand new project also,
+but generally the approach is we have<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2435-1
+00:17:45.731 &ndash;&gt; 00:17:48.267
+<!-- raw HTML omitted -->bunch of testing projects that are
+created there.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2447-0
+00:17:48.267 &ndash;&gt; 00:17:53.258
+<!-- raw HTML omitted -->Some of it may not have Git config set up,
+and we try to create git config for those<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2447-1
+00:17:53.258 &ndash;&gt; 00:17:53.787
+<!-- raw HTML omitted -->projects.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2449-0
+00:17:59.317 &ndash;&gt; 00:17:59.437
+<!-- raw HTML omitted -->Umm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2466-0
+00:18:01.507 &ndash;&gt; 00:18:05.891
+<!-- raw HTML omitted -->Is it possible to create a fresh new
+project as a test right now and try and<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2465-0
+00:18:05.497 &ndash;&gt; 00:18:06.137
+<!-- raw HTML omitted -->OK, sure.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2466-1
+00:18:05.891 &ndash;&gt; 00:18:06.347
+<!-- raw HTML omitted -->connect?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2471-0
+00:18:07.617 &ndash;&gt; 00:18:08.377
+<!-- raw HTML omitted -->Yeah, I will do that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2472-0
+00:18:08.377 &ndash;&gt; 00:18:09.137
+<!-- raw HTML omitted -->Rahul, can you?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2479-0
+00:18:09.457 &ndash;&gt; 00:18:12.217
+<!-- raw HTML omitted -->Yeah,
+you don&rsquo;t happen to have a different.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2482-0
+00:18:13.977 &ndash;&gt; 00:18:14.137
+<!-- raw HTML omitted -->Repo.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2493-0
+00:18:16.687 &ndash;&gt; 00:18:18.607
+<!-- raw HTML omitted -->To test with, besides this test 1.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2490-0
+00:18:17.847 &ndash;&gt; 00:18:18.327
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2528-0
+00:18:18.607 &ndash;&gt; 00:18:23.150
+<!-- raw HTML omitted -->So just a little bit of background like I
+think the way SRM works,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2528-1
+00:18:23.150 &ndash;&gt; 00:18:28.575
+<!-- raw HTML omitted -->it will reuse or share any git clones
+that are made and so if you have multiple<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2528-2
+00:18:28.575 &ndash;&gt; 00:18:32.372
+<!-- raw HTML omitted -->projects in SRM that are pointing to the
+same git repo,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2514-0
+00:18:29.747 &ndash;&gt; 00:18:30.187
+<!-- raw HTML omitted -->Sure.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2528-3
+00:18:32.372 &ndash;&gt; 00:18:35.017
+<!-- raw HTML omitted -->it&rsquo;s going to it&rsquo;s going to share that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2527-0
+00:18:33.887 &ndash;&gt; 00:18:33.967
+<!-- raw HTML omitted -->Mm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2533-0
+00:18:35.017 &ndash;&gt; 00:18:35.727
+<!-- raw HTML omitted -->It&rsquo;s going to reuse it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2535-0
+00:18:36.397 &ndash;&gt; 00:18:36.957
+<!-- raw HTML omitted -->That&rsquo;s fine.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2544-0
+00:18:36.997 &ndash;&gt; 00:18:39.717
+<!-- raw HTML omitted -->We&rsquo;ll we&rsquo;ll use a different in the same
+org.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2539-0
+00:18:38.127 &ndash;&gt; 00:18:38.527
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2546-0
+00:18:39.717 &ndash;&gt; 00:18:40.837
+<!-- raw HTML omitted -->We&rsquo;ll use a different repo.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2548-0
+00:18:41.727 &ndash;&gt; 00:18:42.007
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2582-0
+00:18:43.927 &ndash;&gt; 00:18:49.022
+<!-- raw HTML omitted -->The other thing Mary also identified,
+I&rsquo;m not sure how closely related to it is<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2582-1
+00:18:49.022 &ndash;&gt; 00:18:53.289
+<!-- raw HTML omitted -->when it stopped working,
+we started looking at that GitHub actions<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2582-2
+00:18:53.289 &ndash;&gt; 00:18:55.327
+<!-- raw HTML omitted -->and the same way GitHub actions.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2574-0
+00:18:53.997 &ndash;&gt; 00:18:54.317
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2586-0
+00:18:55.327 &ndash;&gt; 00:18:56.567
+<!-- raw HTML omitted -->Sorry, Maddy. You. Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2601-0
+00:18:56.717 &ndash;&gt; 00:18:58.640
+<!-- raw HTML omitted -->Sorry Rahul,
+but did they did confirm that it&rsquo;s a<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2601-1
+00:18:58.640 &ndash;&gt; 00:19:00.717
+<!-- raw HTML omitted -->different functionality and they use
+different? Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2606-0
+00:18:59.617 &ndash;&gt; 00:19:02.977
+<!-- raw HTML omitted -->It&rsquo;s a different it&rsquo;s a different
+functionality, but.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2614-0
+00:19:04.687 &ndash;&gt; 00:19:06.447
+<!-- raw HTML omitted -->The repos were also coming in, of course.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2622-0
+00:19:06.447 &ndash;&gt; 00:19:09.407
+<!-- raw HTML omitted -->It could be different endpoints,
+but just deciding to it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2624-0
+00:19:11.727 &ndash;&gt; 00:19:12.647
+<!-- raw HTML omitted -->This one is.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2626-0
+00:19:14.167 &ndash;&gt; 00:19:14.407
+<!-- raw HTML omitted -->Master.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2639-0
+00:19:28.917 &ndash;&gt; 00:19:31.997
+<!-- raw HTML omitted -->In the same organization,
+it&rsquo;s a different test, not a web goat one.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2649-0
+00:19:31.997 &ndash;&gt; 00:19:33.037
+<!-- raw HTML omitted -->And as Maddy mentioned.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2644-0
+00:19:32.507 &ndash;&gt; 00:19:33.107
+<!-- raw HTML omitted -->Yeah, yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2647-0
+00:19:33.107 &ndash;&gt; 00:19:33.507
+<!-- raw HTML omitted -->Thank you.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2652-0
+00:19:33.507 &ndash;&gt; 00:19:34.747
+<!-- raw HTML omitted -->Yeah, that was just helpful.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2653-0
+00:19:34.887 &ndash;&gt; 00:19:35.407
+<!-- raw HTML omitted -->No problem.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2668-0
+00:19:39.477 &ndash;&gt; 00:19:42.227
+<!-- raw HTML omitted -->And and can as of now,
+in this particular environment,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2668-1
+00:19:42.227 &ndash;&gt; 00:19:44.677
+<!-- raw HTML omitted -->I believe we have the default logging
+level set.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2672-0
+00:19:44.957 &ndash;&gt; 00:19:46.557
+<!-- raw HTML omitted -->I don&rsquo;t think trace is enabled.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2674-0
+00:19:46.637 &ndash;&gt; 00:19:47.877
+<!-- raw HTML omitted -->Surya can confirm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2688-0
+00:19:51.037 &ndash;&gt; 00:19:53.949
+<!-- raw HTML omitted -->No.
+No traces are number here because can<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2688-1
+00:19:53.949 &ndash;&gt; 00:19:56.237
+<!-- raw HTML omitted -->actually reply to add right here.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2694-0
+00:19:56.707 &ndash;&gt; 00:19:58.467
+<!-- raw HTML omitted -->Yeah,
+I don&rsquo;t think we want the trace logging.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2700-0
+00:19:58.467 &ndash;&gt; 00:19:59.747
+<!-- raw HTML omitted -->It&rsquo;s just gonna be too much.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2714-0
+00:20:04.877 &ndash;&gt; 00:20:05.077
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2716-0
+00:20:05.147 &ndash;&gt; 00:20:05.907
+<!-- raw HTML omitted -->To be there.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2722-0
+00:20:06.217 &ndash;&gt; 00:20:06.337
+<!-- raw HTML omitted -->Umm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2723-0
+00:20:07.727 &ndash;&gt; 00:20:09.487
+<!-- raw HTML omitted -->Currently Maddy I&rsquo;m testing in Dev.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2728-0
+00:20:09.487 &ndash;&gt; 00:20:11.007
+<!-- raw HTML omitted -->Yeah, just just.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2727-0
+00:20:10.227 &ndash;&gt; 00:20:11.067
+<!-- raw HTML omitted -->Yeah, yeah, that&rsquo;s fine.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2744-0
+00:20:19.237 &ndash;&gt; 00:20:21.321
+<!-- raw HTML omitted -->Yeah.
+So this is the default get timeout in<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2736-0
+00:20:20.267 &ndash;&gt; 00:20:20.587
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2744-1
+00:20:21.321 &ndash;&gt; 00:20:22.837
+<!-- raw HTML omitted -->whatever 60 seconds or whatever.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2743-0
+00:20:22.657 &ndash;&gt; 00:20:23.057
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2761-0
+00:20:29.557 &ndash;&gt; 00:20:32.599
+<!-- raw HTML omitted -->And in the same, when,
+as Maddy mentioned previously,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2761-1
+00:20:32.599 &ndash;&gt; 00:20:36.317
+<!-- raw HTML omitted -->the public one has been working.
+The only issue is with when the.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2768-0
+00:20:37.757 &ndash;&gt; 00:20:39.917
+<!-- raw HTML omitted -->When the issue comes with the actual.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2780-0
+00:20:41.557 &ndash;&gt; 00:20:46.157
+<!-- raw HTML omitted -->Internal or internal or or private
+reproofs?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2782-0
+00:20:47.307 &ndash;&gt; 00:20:47.747
+<!-- raw HTML omitted -->Right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2791-0
+00:20:53.807 &ndash;&gt; 00:20:58.807
+<!-- raw HTML omitted -->Yeah. So this if we look at the timing,
+it&rsquo;s 8 seconds or.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2797-0
+00:21:00.317 &ndash;&gt; 00:21:00.477
+<!-- raw HTML omitted -->Yep.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2801-0
+00:21:00.517 &ndash;&gt; 00:21:01.797
+<!-- raw HTML omitted -->Millise milliseconds could be.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2805-0
+00:21:02.037 &ndash;&gt; 00:21:04.277
+<!-- raw HTML omitted -->But yeah, this one,
+this one is public one.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2825-0
+00:21:22.507 &ndash;&gt; 00:21:27.987
+<!-- raw HTML omitted -->Yeah. And so if you, if you,
+if you did set the timeout longer.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2832-0
+00:21:28.477 &ndash;&gt; 00:21:30.997
+<!-- raw HTML omitted -->Yeah. So we&rsquo;ll show.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2842-0
+00:21:29.987 &ndash;&gt; 00:21:34.947
+<!-- raw HTML omitted -->Then then you think it&rsquo;s gonna.
+It sounds like it&rsquo;s probably gonna work.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2858-0
+00:21:34.947 &ndash;&gt; 00:21:40.284
+<!-- raw HTML omitted -->And then the and then the the.
+I guess the the question is why does it<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2858-1
+00:21:40.284 &ndash;&gt; 00:21:41.787
+<!-- raw HTML omitted -->take so long, right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2861-0
+00:21:43.057 &ndash;&gt; 00:21:43.537
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2862-0
+00:21:43.847 &ndash;&gt; 00:21:44.287
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2879-0
+00:21:45.327 &ndash;&gt; 00:21:48.691
+<!-- raw HTML omitted -->So I mean, yeah,
+I guess that&rsquo;s a work around,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2879-1
+00:21:48.691 &ndash;&gt; 00:21:52.127
+<!-- raw HTML omitted -->but it&rsquo;s not clear why it why it takes so
+long.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2886-0
+00:21:53.557 &ndash;&gt; 00:21:54.277
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2919-0
+00:21:53.627 &ndash;&gt; 00:21:57.355
+<!-- raw HTML omitted -->Which is interesting that it that it
+actually succeeds at all like you would<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2919-1
+00:21:57.355 &ndash;&gt; 00:22:00.648
+<!-- raw HTML omitted -->think. If it&rsquo;s not gonna work, it&rsquo;s,
+you know, it&rsquo;s not gonna work.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2919-2
+00:22:00.648 &ndash;&gt; 00:22:03.263
+<!-- raw HTML omitted -->Like I don&rsquo;t know why after after 2
+minutes it would,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2909-0
+00:22:01.657 &ndash;&gt; 00:22:02.137
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2919-3
+00:22:03.263 &ndash;&gt; 00:22:04.667
+<!-- raw HTML omitted -->it would start to work right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2921-0
+00:22:04.667 &ndash;&gt; 00:22:06.027
+<!-- raw HTML omitted -->That that seems a little strange.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2925-0
+00:22:07.677 &ndash;&gt; 00:22:09.157
+<!-- raw HTML omitted -->Yeah, because, see.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2930-0
+00:22:10.637 &ndash;&gt; 00:22:11.997
+<!-- raw HTML omitted -->One the other solution here.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2951-0
+00:22:13.877 &ndash;&gt; 00:22:17.857
+<!-- raw HTML omitted -->Ken is to increase the timeout to
+relatively high value as per your e-mail<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2951-1
+00:22:17.857 &ndash;&gt; 00:22:19.237
+<!-- raw HTML omitted -->to 10 minutes or whatever.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2953-0
+00:22:20.557 &ndash;&gt; 00:22:20.757
+<!-- raw HTML omitted -->Mm hmm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2976-0
+00:22:20.997 &ndash;&gt; 00:22:26.303
+<!-- raw HTML omitted -->But that&rsquo;s only going to work until such
+time that the endpoint is not overly busy<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2976-1
+00:22:26.303 &ndash;&gt; 00:22:28.157
+<!-- raw HTML omitted -->to respond within 10 minutes.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2979-0
+00:22:28.157 &ndash;&gt; 00:22:28.997
+<!-- raw HTML omitted -->I&rsquo;m I&rsquo;m not.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2992-0
+00:22:29.037 &ndash;&gt; 00:22:34.074
+<!-- raw HTML omitted -->I can&rsquo;t think of a scenario where GitHub
+is now drawing going to respond for 10<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2992-1
+00:22:34.074 &ndash;&gt; 00:22:35.837
+<!-- raw HTML omitted -->minutes, but that certainly.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/2994-0
+00:22:37.857 &ndash;&gt; 00:22:38.777
+<!-- raw HTML omitted -->Could work.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3014-0
+00:22:40.437 &ndash;&gt; 00:22:46.122
+<!-- raw HTML omitted -->For those scenarios where we don&rsquo;t go
+ahead and change those configs where we<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3014-1
+00:22:46.122 &ndash;&gt; 00:22:49.037
+<!-- raw HTML omitted -->have username password added to the URL.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3016-0
+00:22:50.107 &ndash;&gt; 00:22:51.107
+<!-- raw HTML omitted -->Right, right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3041-0
+00:22:52.587 &ndash;&gt; 00:22:55.518
+<!-- raw HTML omitted -->And it may be just a slowness at the,
+you know,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3041-1
+00:22:55.518 &ndash;&gt; 00:22:58.267
+<!-- raw HTML omitted -->the first first time or first
+configuration.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3049-0
+00:22:56.477 &ndash;&gt; 00:23:00.997
+<!-- raw HTML omitted -->Yeah. So this, no,
+this lowness happens twice.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3053-0
+00:23:01.037 &ndash;&gt; 00:23:02.837
+<!-- raw HTML omitted -->Actually not observation so far.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3090-0
+00:23:02.837 &ndash;&gt; 00:23:08.977
+<!-- raw HTML omitted -->One is to resolve and present with the
+user name and password iframe and then<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3090-1
+00:23:08.977 &ndash;&gt; 00:23:14.880
+<!-- raw HTML omitted -->once you are providing the userman
+password it also take additional minute<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3090-2
+00:23:14.880 &ndash;&gt; 00:23:19.997
+<!-- raw HTML omitted -->and 1/2 or so in order to start the
+process uploading et cetera.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3092-0
+00:23:21.057 &ndash;&gt; 00:23:21.257
+<!-- raw HTML omitted -->Mm hmm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3096-0
+00:23:22.917 &ndash;&gt; 00:23:23.957
+<!-- raw HTML omitted -->Yeah, I mean, it&rsquo;s just.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3115-0
+00:23:23.957 &ndash;&gt; 00:23:28.175
+<!-- raw HTML omitted -->It&rsquo;s just really strange that it would.
+It would succeed at all, you know,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3115-1
+00:23:28.175 &ndash;&gt; 00:23:31.437
+<!-- raw HTML omitted -->like there&rsquo;s there&rsquo;s it doesn&rsquo;t really
+make sense, right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3151-0
+00:23:31.437 &ndash;&gt; 00:23:35.043
+<!-- raw HTML omitted -->Like if it&rsquo;s,
+if it&rsquo;s gonna fail and time out then then<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3151-1
+00:23:35.043 &ndash;&gt; 00:23:40.388
+<!-- raw HTML omitted -->it it should do that fast if it&rsquo;s but if
+it&rsquo;s you know if you increase the timeout<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3124-0
+00:23:35.147 &ndash;&gt; 00:23:35.627
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3151-2
+00:23:40.388 &ndash;&gt; 00:23:45.347
+<!-- raw HTML omitted -->and then it&rsquo;s it&rsquo;s working that indicates
+it&rsquo;s just slow to respond to those<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3151-3
+00:23:45.347 &ndash;&gt; 00:23:46.957
+<!-- raw HTML omitted -->requests for some reason.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3153-0
+00:23:47.627 &ndash;&gt; 00:23:47.987
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3155-0
+00:23:54.637 &ndash;&gt; 00:23:55.037
+<!-- raw HTML omitted -->Meow.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3173-0
+00:24:00.017 &ndash;&gt; 00:24:04.445
+<!-- raw HTML omitted -->And I guess there&rsquo;s some firewall or
+proxy that this is going through that<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3173-1
+00:24:04.445 &ndash;&gt; 00:24:04.977
+<!-- raw HTML omitted -->might be.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3180-0
+00:24:05.857 &ndash;&gt; 00:24:08.337
+<!-- raw HTML omitted -->Filtering things or slowing things down
+in some way.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3191-0
+00:24:11.497 &ndash;&gt; 00:24:12.417
+<!-- raw HTML omitted -->But then it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3186-0
+00:24:11.577 &ndash;&gt; 00:24:12.057
+<!-- raw HTML omitted -->I think so.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3192-0
+00:24:11.797 &ndash;&gt; 00:24:12.437
+<!-- raw HTML omitted -->Like I I don&rsquo;t.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3212-0
+00:24:12.437 &ndash;&gt; 00:24:17.248
+<!-- raw HTML omitted -->I also explain the timeout like I don&rsquo;t
+like you know it&rsquo;s it&rsquo;s it&rsquo;s working,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3205-0
+00:24:16.437 &ndash;&gt; 00:24:17.077
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3212-1
+00:24:17.248 &ndash;&gt; 00:24:20.517
+<!-- raw HTML omitted -->it&rsquo;s working but it&rsquo;s just taking a long
+time right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3224-0
+00:24:20.517 &ndash;&gt; 00:24:25.597
+<!-- raw HTML omitted -->And I don&rsquo;t know how anything on the SRM
+side would cause that to be a problem.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3231-0
+00:24:25.597 &ndash;&gt; 00:24:27.477
+<!-- raw HTML omitted -->Like it&rsquo;s just it&rsquo;s just making requests
+and.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3237-0
+00:24:28.807 &ndash;&gt; 00:24:30.727
+<!-- raw HTML omitted -->Waiting for the response and.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3258-0
+00:24:33.307 &ndash;&gt; 00:24:36.347
+<!-- raw HTML omitted -->In the same way,
+if we put that username and password it<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3245-0
+00:24:33.977 &ndash;&gt; 00:24:34.497
+<!-- raw HTML omitted -->Yes.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3258-1
+00:24:36.347 &ndash;&gt; 00:24:37.947
+<!-- raw HTML omitted -->it works very quickly as well.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3266-0
+00:24:37.947 &ndash;&gt; 00:24:39.187
+<!-- raw HTML omitted -->So there is that scenario.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3269-0
+00:24:38.647 &ndash;&gt; 00:24:41.527
+<!-- raw HTML omitted -->Yeah, I understand. I understand. Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3288-0
+00:24:42.937 &ndash;&gt; 00:24:46.537
+<!-- raw HTML omitted -->And Surya can probably help you
+understand a bit more in terms of the<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3288-1
+00:24:46.537 &ndash;&gt; 00:24:49.314
+<!-- raw HTML omitted -->network hops,
+what are in between and you also raised<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3288-2
+00:24:49.314 &ndash;&gt; 00:24:49.777
+<!-- raw HTML omitted -->his hand.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3290-0
+00:24:49.777 &ndash;&gt; 00:24:50.957
+<!-- raw HTML omitted -->Surya, sorry ow to you.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3313-0
+00:24:54.467 &ndash;&gt; 00:24:58.343
+<!-- raw HTML omitted -->No,
+I just wanted to ask and is there any<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3313-1
+00:24:58.343 &ndash;&gt; 00:25:04.987
+<!-- raw HTML omitted -->timeline that you specify in the JD like
+in the SRM within your SRM UI?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3321-0
+00:25:11.267 &ndash;&gt; 00:25:14.467
+<!-- raw HTML omitted -->Any timeout for the UI itself you&rsquo;re
+saying?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3322-0
+00:25:14.277 &ndash;&gt; 00:25:14.877
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3330-0
+00:25:19.307 &ndash;&gt; 00:25:23.107
+<!-- raw HTML omitted -->Nothing that you would see here like this
+is all just.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3338-0
+00:25:24.627 &ndash;&gt; 00:25:26.347
+<!-- raw HTML omitted -->On the connection to the the Git stuff.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3355-0
+00:25:29.367 &ndash;&gt; 00:25:32.384
+<!-- raw HTML omitted -->You know the you know we&rsquo;re we&rsquo;re not
+running into anything else.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3355-1
+00:25:32.384 &ndash;&gt; 00:25:34.807
+<!-- raw HTML omitted -->The session timeout and stuff like that,
+that&rsquo;s all.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3368-0
+00:25:35.997 &ndash;&gt; 00:25:37.397
+<!-- raw HTML omitted -->Yeah, I was wondering like when?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3371-0
+00:25:36.267 &ndash;&gt; 00:25:38.467
+<!-- raw HTML omitted -->Also configurable but but you would you
+would see that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3392-0
+00:25:39.387 &ndash;&gt; 00:25:42.031
+<!-- raw HTML omitted -->Yeah,
+I was wondering when I was when we were<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3392-1
+00:25:42.031 &ndash;&gt; 00:25:46.400
+<!-- raw HTML omitted -->able to provide or pass these an MND,
+the token phrase in the URL directly,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3392-2
+00:25:46.400 &ndash;&gt; 00:25:48.067
+<!-- raw HTML omitted -->then the connection is quick.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3394-0
+00:25:49.717 &ndash;&gt; 00:25:49.797
+<!-- raw HTML omitted -->So.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3406-0
+00:25:52.837 &ndash;&gt; 00:25:55.877
+<!-- raw HTML omitted -->I understand that you guys are using Ajit
+Pay initials provider, right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3408-0
+00:25:55.877 &ndash;&gt; 00:25:57.717
+<!-- raw HTML omitted -->So is there any way?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3422-0
+00:26:02.287 &ndash;&gt; 00:26:06.783
+<!-- raw HTML omitted -->Maybe it&rsquo;s directly connected to the pray
+way to reposteries that say plus point<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3422-1
+00:26:06.783 &ndash;&gt; 00:26:07.727
+<!-- raw HTML omitted -->there in the git.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3431-0
+00:26:09.197 &ndash;&gt; 00:26:11.997
+<!-- raw HTML omitted -->When we are providing reason 1 password
+but without that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3446-0
+00:26:13.877 &ndash;&gt; 00:26:19.037
+<!-- raw HTML omitted -->Then I think Git will actually validate
+first whenever a request comes to it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3460-0
+00:26:20.957 &ndash;&gt; 00:26:25.077
+<!-- raw HTML omitted -->Where the whether it has to,
+you know authenticate it or not right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3467-0
+00:26:25.917 &ndash;&gt; 00:26:30.197
+<!-- raw HTML omitted -->So I think that authentication is
+actually taking the time so.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3481-0
+00:26:31.187 &ndash;&gt; 00:26:35.085
+<!-- raw HTML omitted -->If you&rsquo;re passing the username password
+directly in the URL so that our<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3481-1
+00:26:35.085 &ndash;&gt; 00:26:36.547
+<!-- raw HTML omitted -->organization is very quick.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3486-0
+00:26:39.277 &ndash;&gt; 00:26:40.677
+<!-- raw HTML omitted -->I&rsquo;m I&rsquo;m trying to understand.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3487-0
+00:26:39.927 &ndash;&gt; 00:26:40.407
+<!-- raw HTML omitted -->Gotcha.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3489-0
+00:26:41.827 &ndash;&gt; 00:26:42.387
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3491-0
+00:26:45.397 &ndash;&gt; 00:26:45.477
+<!-- raw HTML omitted -->So.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3493-0
+00:26:48.687 &ndash;&gt; 00:26:48.807
+<!-- raw HTML omitted -->Umm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3510-0
+00:26:50.587 &ndash;&gt; 00:26:56.707
+<!-- raw HTML omitted -->Is there somewhere in the UI itself like
+or in the libraries that you&rsquo;re using?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3524-0
+00:26:58.117 &ndash;&gt; 00:27:01.757
+<!-- raw HTML omitted -->That actually because now you&rsquo;re waiting
+for the git config.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3537-0
+00:27:01.757 &ndash;&gt; 00:27:05.037
+<!-- raw HTML omitted -->So when we prod the Git config timeout,
+that is 2 minutes here.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3547-0
+00:27:05.637 &ndash;&gt; 00:27:10.558
+<!-- raw HTML omitted -->So that is actually helping get to
+actually respond and authenticate back.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3547-1
+00:27:10.558 &ndash;&gt; 00:27:11.477
+<!-- raw HTML omitted -->Is that right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3563-0
+00:27:13.277 &ndash;&gt; 00:27:16.207
+<!-- raw HTML omitted -->I mean,
+like I don&rsquo;t why where this timeout is<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3563-1
+00:27:16.207 &ndash;&gt; 00:27:18.077
+<!-- raw HTML omitted -->actually connected to your UI.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3574-0
+00:27:20.067 &ndash;&gt; 00:27:22.507
+<!-- raw HTML omitted -->How will this actually helping trend
+understand?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3584-0
+00:27:23.307 &ndash;&gt; 00:27:28.069
+<!-- raw HTML omitted -->But when we&rsquo;re not providing this,
+so BT&rsquo;s actually taking time to respond<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3584-1
+00:27:28.069 &ndash;&gt; 00:27:28.387
+<!-- raw HTML omitted -->back.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3590-0
+00:27:29.387 &ndash;&gt; 00:27:31.387
+<!-- raw HTML omitted -->And then it is finally getting timeout.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3592-0
+00:27:33.397 &ndash;&gt; 00:27:33.877
+<!-- raw HTML omitted -->So.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3602-0
+00:27:36.617 &ndash;&gt; 00:27:39.577
+<!-- raw HTML omitted -->The way we communicate to the git,
+maybe that is where.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3611-0
+00:27:41.277 &ndash;&gt; 00:27:44.277
+<!-- raw HTML omitted -->Something that we can improve in the UI
+or?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3632-0
+00:27:46.317 &ndash;&gt; 00:27:52.398
+<!-- raw HTML omitted -->Or maybe at the I&rsquo;m trying to figure out
+whether it&rsquo;s at the at the Kubernetes end<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3632-1
+00:27:52.398 &ndash;&gt; 00:27:54.157
+<!-- raw HTML omitted -->or at the at the UI end.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3672-0
+00:28:00.187 &ndash;&gt; 00:28:03.002
+<!-- raw HTML omitted -->Yeah,
+I mean it it it seems like at at the<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3672-1
+00:28:03.002 &ndash;&gt; 00:28:07.781
+<!-- raw HTML omitted -->point where it&rsquo;s trying to connect to git
+like that&rsquo;s already, you know,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3672-2
+00:28:07.781 &ndash;&gt; 00:28:11.448
+<!-- raw HTML omitted -->the operations already started kind of on
+the back end.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3672-3
+00:28:11.448 &ndash;&gt; 00:28:16.227
+<!-- raw HTML omitted -->And so I wouldn&rsquo;t think the UI would
+would come into play at that point.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3674-0
+00:28:19.847 &ndash;&gt; 00:28:20.327
+<!-- raw HTML omitted -->But.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3676-0
+00:28:22.027 &ndash;&gt; 00:28:22.107
+<!-- raw HTML omitted -->Uh.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3683-0
+00:28:24.547 &ndash;&gt; 00:28:25.507
+<!-- raw HTML omitted -->Anyway, yeah, this is.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3694-0
+00:28:25.507 &ndash;&gt; 00:28:29.387
+<!-- raw HTML omitted -->This is providing some good information
+that we can work with some other folks on.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3691-0
+00:28:27.947 &ndash;&gt; 00:28:28.267
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3697-0
+00:28:32.067 &ndash;&gt; 00:28:32.667
+<!-- raw HTML omitted -->And.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3700-0
+00:28:32.847 &ndash;&gt; 00:28:33.687
+<!-- raw HTML omitted -->Can we?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3727-0
+00:28:34.007 &ndash;&gt; 00:28:38.243
+<!-- raw HTML omitted -->Will we send you the logs for both the
+environments which we have used in<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3704-0
+00:28:34.547 &ndash;&gt; 00:28:34.707
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3727-1
+00:28:38.243 &ndash;&gt; 00:28:41.506
+<!-- raw HTML omitted -->testing today?
+One that shows that it is able to connect<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3721-0
+00:28:40.347 &ndash;&gt; 00:28:40.787
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3727-2
+00:28:41.506 &ndash;&gt; 00:28:43.567
+<!-- raw HTML omitted -->and then the other it is timing out?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3754-0
+00:28:46.757 &ndash;&gt; 00:28:51.235
+<!-- raw HTML omitted -->You also mentioned that you know you are
+having a relook at that particular screen<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3754-1
+00:28:51.235 &ndash;&gt; 00:28:53.717
+<!-- raw HTML omitted -->where it validates the git config,
+et cetera.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3762-0
+00:28:53.757 &ndash;&gt; 00:28:57.797
+<!-- raw HTML omitted -->So any idea when that is likely to be
+relooked into?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3752-0
+00:28:54.577 &ndash;&gt; 00:28:54.777
+<!-- raw HTML omitted -->Mm hmm.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3770-0
+00:28:59.777 &ndash;&gt; 00:29:02.401
+<!-- raw HTML omitted -->Yeah,
+it&rsquo;s currently planned for next feature<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3770-1
+00:29:02.401 &ndash;&gt; 00:29:02.857
+<!-- raw HTML omitted -->release.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3772-0
+00:29:04.897 &ndash;&gt; 00:29:05.137
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3775-0
+00:29:06.667 &ndash;&gt; 00:29:07.907
+<!-- raw HTML omitted -->Yeah, so in June.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3778-0
+00:29:08.717 &ndash;&gt; 00:29:09.117
+<!-- raw HTML omitted -->All Co.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3783-0
+00:29:09.117 &ndash;&gt; 00:29:10.197
+<!-- raw HTML omitted -->All good.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3785-0
+00:29:10.047 &ndash;&gt; 00:29:10.687
+<!-- raw HTML omitted -->Yeah, yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3802-0
+00:29:10.197 &ndash;&gt; 00:29:15.875
+<!-- raw HTML omitted -->Just a suggestion from our side,
+if we can replicate the same behavior or<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3802-1
+00:29:15.875 &ndash;&gt; 00:29:18.637
+<!-- raw HTML omitted -->the UI as the GitHub actions screen.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3809-0
+00:29:20.037 &ndash;&gt; 00:29:22.037
+<!-- raw HTML omitted -->To us, that was much more use of.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3838-0
+00:29:24.437 &ndash;&gt; 00:29:29.331
+<!-- raw HTML omitted -->Workable in our context because the user
+name and password is not mandatory for<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3838-1
+00:29:29.331 &ndash;&gt; 00:29:34.409
+<!-- raw HTML omitted -->public repos and you can just press enter
+when you are done with providing all the<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3838-2
+00:29:34.409 &ndash;&gt; 00:29:34.837
+<!-- raw HTML omitted -->inputs.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3841-0
+00:29:34.837 &ndash;&gt; 00:29:36.717
+<!-- raw HTML omitted -->But again, I&rsquo;ll leave it with you guys.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3845-0
+00:29:37.717 &ndash;&gt; 00:29:38.717
+<!-- raw HTML omitted -->Yeah, I know that makes sense.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3847-0
+00:29:40.587 &ndash;&gt; 00:29:41.107
+<!-- raw HTML omitted -->Makes sense?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3849-0
+00:29:42.787 &ndash;&gt; 00:29:43.107
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3872-0
+00:29:43.107 &ndash;&gt; 00:29:47.538
+<!-- raw HTML omitted -->So yeah. So we&rsquo;ll,
+we&rsquo;ll look into this further at from what<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3872-1
+00:29:47.538 &ndash;&gt; 00:29:52.987
+<!-- raw HTML omitted -->I&rsquo;m understanding is it seemed like this
+problem started at at some point.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3906-0
+00:29:54.097 &ndash;&gt; 00:29:58.667
+<!-- raw HTML omitted -->Yeah, we we observe it in November.
+So we may have done an upgrade in<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3881-0
+00:29:54.827 &ndash;&gt; 00:29:55.907
+<!-- raw HTML omitted -->And yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3906-1
+00:29:58.667 &ndash;&gt; 00:30:01.866
+<!-- raw HTML omitted -->September, October, September.
+If I&rsquo;m not wrong,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3906-2
+00:30:01.866 &ndash;&gt; 00:30:05.457
+<!-- raw HTML omitted -->there was a feature release or some sort
+at that time.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3902-0
+00:30:04.707 &ndash;&gt; 00:30:05.067
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3928-0
+00:30:05.527 &ndash;&gt; 00:30:10.539
+<!-- raw HTML omitted -->Look into that like it might be possible
+that the underlying J Git library was<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3928-1
+00:30:10.539 &ndash;&gt; 00:30:15.487
+<!-- raw HTML omitted -->upgraded and and for whatever reason that
+caused things to have this problem.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3925-0
+00:30:14.097 &ndash;&gt; 00:30:14.457
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3944-0
+00:30:15.487 &ndash;&gt; 00:30:20.589
+<!-- raw HTML omitted -->So we&rsquo;ll take a look at that and yeah,
+and then it seems like, you know,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3934-0
+00:30:18.067 &ndash;&gt; 00:30:18.427
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3944-1
+00:30:20.589 &ndash;&gt; 00:30:22.407
+<!-- raw HTML omitted -->increasing the timeout is.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3955-0
+00:30:23.857 &ndash;&gt; 00:30:26.697
+<!-- raw HTML omitted -->An option,
+but you know it&rsquo;s it&rsquo;s odd that it would.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3954-0
+00:30:26.297 &ndash;&gt; 00:30:26.737
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3977-0
+00:30:26.697 &ndash;&gt; 00:30:31.477
+<!-- raw HTML omitted -->It would require that long adding the
+your you know the token in the URL as an<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3962-0
+00:30:29.177 &ndash;&gt; 00:30:29.497
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3977-1
+00:30:31.477 &ndash;&gt; 00:30:34.079
+<!-- raw HTML omitted -->option,
+although that&rsquo;s not perfect either<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3977-2
+00:30:34.079 &ndash;&gt; 00:30:36.257
+<!-- raw HTML omitted -->because you&rsquo;d have to change things.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/3980-0
+00:30:37.037 &ndash;&gt; 00:30:37.477
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4003-0
+00:30:37.287 &ndash;&gt; 00:30:40.539
+<!-- raw HTML omitted -->And then the other option is something I
+mention in the e-mail,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4003-1
+00:30:40.539 &ndash;&gt; 00:30:43.487
+<!-- raw HTML omitted -->which is to to send the source outside of
+this mechanism.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4042-0
+00:30:43.487 &ndash;&gt; 00:30:46.564
+<!-- raw HTML omitted -->So rather than rather than SRM making
+that request,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4001-0
+00:30:43.917 &ndash;&gt; 00:30:44.397
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4042-1
+00:30:46.564 &ndash;&gt; 00:30:49.582
+<!-- raw HTML omitted -->you know you probably already have your,
+you know,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4042-2
+00:30:49.582 &ndash;&gt; 00:30:54.317
+<!-- raw HTML omitted -->CI pipeline or other pipeline in place
+that you&rsquo;re you&rsquo;re pulling the source as<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4025-0
+00:30:52.627 &ndash;&gt; 00:30:53.187
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4042-3
+00:30:54.317 &ndash;&gt; 00:30:58.518
+<!-- raw HTML omitted -->part of your builds and testing.
+You can send the source directly from<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4042-4
+00:30:58.518 &ndash;&gt; 00:31:00.057
+<!-- raw HTML omitted -->there which which I point.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4048-0
+00:31:00.057 &ndash;&gt; 00:31:01.887
+<!-- raw HTML omitted -->In the e-mail has a lot of other.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4058-0
+00:31:02.617 &ndash;&gt; 00:31:06.377
+<!-- raw HTML omitted -->Advantages over this approach to pulling
+in source?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4060-0
+00:31:07.487 &ndash;&gt; 00:31:08.287
+<!-- raw HTML omitted -->You know that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4068-0
+00:31:09.147 &ndash;&gt; 00:31:11.107
+<!-- raw HTML omitted -->We&rsquo;ll explore that, Ken.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4064-0
+00:31:09.777 &ndash;&gt; 00:31:10.097
+<!-- raw HTML omitted -->You know.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4098-0
+00:31:11.307 &ndash;&gt; 00:31:16.887
+<!-- raw HTML omitted -->So far, the way we are so as I said,
+there are 2000 plus projects and we have<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4069-0
+00:31:12.457 &ndash;&gt; 00:31:12.577
+<!-- raw HTML omitted -->You.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4098-1
+00:31:16.887 &ndash;&gt; 00:31:22.754
+<!-- raw HTML omitted -->relied on a script to manually update the
+Git config as in when we start creating<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4098-2
+00:31:22.754 &ndash;&gt; 00:31:23.827
+<!-- raw HTML omitted -->these projects.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4126-0
+00:31:25.377 &ndash;&gt; 00:31:31.347
+<!-- raw HTML omitted -->We&rsquo;ll have to slightly change the way Git
+is referenced or the source code is<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4126-1
+00:31:31.347 &ndash;&gt; 00:31:36.017
+<!-- raw HTML omitted -->referenced in SRM if we are going to
+populate it via the CI.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4128-0
+00:31:37.737 &ndash;&gt; 00:31:38.057
+<!-- raw HTML omitted -->Let me.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4143-0
+00:31:38.327 &ndash;&gt; 00:31:43.533
+<!-- raw HTML omitted -->Explore that possibility and see how much
+of additional disruption that would cause<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4143-1
+00:31:43.533 &ndash;&gt; 00:31:43.967
+<!-- raw HTML omitted -->in the.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4153-0
+00:31:45.697 &ndash;&gt; 00:31:47.577
+<!-- raw HTML omitted -->Ci Steps, so leave that with me.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4156-0
+00:31:46.747 &ndash;&gt; 00:31:47.747
+<!-- raw HTML omitted -->Sure, sure.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4155-0
+00:31:47.577 &ndash;&gt; 00:31:48.497
+<!-- raw HTML omitted -->Let me have a look at it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4160-0
+00:31:49.297 &ndash;&gt; 00:31:49.857
+<!-- raw HTML omitted -->Yeah, cool.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4179-0
+00:31:49.857 &ndash;&gt; 00:31:51.874
+<!-- raw HTML omitted -->Yeah,
+I&rsquo;m just putting it out there as as as an<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4172-0
+00:31:51.577 &ndash;&gt; 00:31:52.377
+<!-- raw HTML omitted -->No. Understood.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4179-1
+00:31:51.874 &ndash;&gt; 00:31:54.817
+<!-- raw HTML omitted -->option and the other option,
+which I think was mentioned was the SSH.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4185-0
+00:31:54.817 &ndash;&gt; 00:31:56.457
+<!-- raw HTML omitted -->I don&rsquo;t know if that would work better.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4191-0
+00:31:56.417 &ndash;&gt; 00:31:57.057
+<!-- raw HTML omitted -->No, I.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4219-0
+00:31:56.457 &ndash;&gt; 00:31:59.759
+<!-- raw HTML omitted -->I understand that that&rsquo;s not so easy to
+make that adjustment,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4198-0
+00:31:59.197 &ndash;&gt; 00:31:59.517
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4219-1
+00:31:59.759 &ndash;&gt; 00:32:04.232
+<!-- raw HTML omitted -->but that is also that mean I think that&rsquo;s
+what is a common way of authenticating is<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4208-0
+00:32:00.447 &ndash;&gt; 00:32:01.007
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4219-2
+00:32:04.232 &ndash;&gt; 00:32:05.457
+<!-- raw HTML omitted -->through is through SSH.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4223-0
+00:32:04.397 &ndash;&gt; 00:32:05.237
+<!-- raw HTML omitted -->Let&rsquo;s do it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4239-0
+00:32:05.997 &ndash;&gt; 00:32:09.103
+<!-- raw HTML omitted -->Yeah,
+we we only have approval for usage over<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4239-1
+00:32:09.103 &ndash;&gt; 00:32:12.277
+<!-- raw HTML omitted -->HTTPS,
+although one could argue that you know.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4261-0
+00:32:13.817 &ndash;&gt; 00:32:18.567
+<!-- raw HTML omitted -->It is still encrypted if it is over SSH
+and we should not have a problem in<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4261-1
+00:32:18.567 &ndash;&gt; 00:32:19.817
+<!-- raw HTML omitted -->getting it endorsed.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4276-0
+00:32:20.137 &ndash;&gt; 00:32:24.925
+<!-- raw HTML omitted -->But we have to go through a design
+approval first, followed by if I will,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4276-1
+00:32:24.925 &ndash;&gt; 00:32:26.737
+<!-- raw HTML omitted -->rules, et cetera, et cetera.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4281-0
+00:32:26.737 &ndash;&gt; 00:32:29.097
+<!-- raw HTML omitted -->So that is something we are happy to look
+into.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4292-0
+00:32:29.687 &ndash;&gt; 00:32:33.927
+<!-- raw HTML omitted -->But would would need some time as well in
+getting the approvals.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4315-0
+00:32:33.647 &ndash;&gt; 00:32:35.805
+<!-- raw HTML omitted -->Yeah,
+I think it&rsquo;s normally considered more<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4315-1
+00:32:35.805 &ndash;&gt; 00:32:39.581
+<!-- raw HTML omitted -->secure. But yeah, I understand. What?
+What you know what&rsquo;s been approved and<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4305-0
+00:32:37.847 &ndash;&gt; 00:32:38.127
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4315-2
+00:32:39.581 &ndash;&gt; 00:32:40.807
+<!-- raw HTML omitted -->what&rsquo;s not been approved.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4326-0
+00:32:40.927 &ndash;&gt; 00:32:43.494
+<!-- raw HTML omitted -->It&rsquo;s not so easy to to make those kinds
+of changes, but yeah,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4326-1
+00:32:43.494 &ndash;&gt; 00:32:44.447
+<!-- raw HTML omitted -->just just throwing out.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4330-0
+00:32:43.827 &ndash;&gt; 00:32:45.307
+<!-- raw HTML omitted -->Yeah, no.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4347-0
+00:32:44.447 &ndash;&gt; 00:32:48.504
+<!-- raw HTML omitted -->There is another another option.
+If if we can&rsquo;t get any further with this<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4335-0
+00:32:45.307 &ndash;&gt; 00:32:45.667
+<!-- raw HTML omitted -->All good.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4342-0
+00:32:45.667 &ndash;&gt; 00:32:46.747
+<!-- raw HTML omitted -->All good, I understood.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4347-1
+00:32:48.504 &ndash;&gt; 00:32:49.327
+<!-- raw HTML omitted -->other stuff so.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4354-0
+00:32:50.817 &ndash;&gt; 00:32:51.617
+<!-- raw HTML omitted -->Yeah. So yeah, definitely.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4378-0
+00:32:51.617 &ndash;&gt; 00:32:54.851
+<!-- raw HTML omitted -->This is really,
+really helpful and sorry that this has<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4378-1
+00:32:54.851 &ndash;&gt; 00:32:58.203
+<!-- raw HTML omitted -->been going on for so long and and well,
+yeah, we&rsquo;ll get,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4372-0
+00:32:56.277 &ndash;&gt; 00:32:57.837
+<!-- raw HTML omitted -->I appreciate your help, Ken.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4378-2
+00:32:58.203 &ndash;&gt; 00:33:00.497
+<!-- raw HTML omitted -->we&rsquo;ll get to the bottom of it. So yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4381-0
+00:33:00.637 &ndash;&gt; 00:33:01.477
+<!-- raw HTML omitted -->Thank you.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4389-0
+00:33:01.517 &ndash;&gt; 00:33:02.957
+<!-- raw HTML omitted -->Thanks. I will send the logs through.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4393-0
+00:33:02.027 &ndash;&gt; 00:33:04.267
+<!-- raw HTML omitted -->All right. OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4396-0
+00:33:02.957 &ndash;&gt; 00:33:05.529
+<!-- raw HTML omitted -->Yeah.
+Anything else can you would like to know<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4396-1
+00:33:05.529 &ndash;&gt; 00:33:06.077
+<!-- raw HTML omitted -->as of now?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4401-0
+00:33:07.047 &ndash;&gt; 00:33:07.807
+<!-- raw HTML omitted -->No, I think this is.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4405-0
+00:33:07.807 &ndash;&gt; 00:33:08.407
+<!-- raw HTML omitted -->This is great.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4407-0
+00:33:08.407 &ndash;&gt; 00:33:09.287
+<!-- raw HTML omitted -->I really appreciate it.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4410-0
+00:33:09.737 &ndash;&gt; 00:33:11.097
+<!-- raw HTML omitted -->All right, all good, all good.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4415-0
+00:33:11.097 &ndash;&gt; 00:33:12.457
+<!-- raw HTML omitted -->And the team all good.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4416-0
+00:33:11.587 &ndash;&gt; 00:33:12.627
+<!-- raw HTML omitted -->Thanks again thanks.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4418-0
+00:33:15.117 &ndash;&gt; 00:33:16.157
+<!-- raw HTML omitted -->Thank you all good.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4420-0
+00:33:17.017 &ndash;&gt; 00:33:17.377
+<!-- raw HTML omitted -->All right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4423-0
+00:33:17.377 &ndash;&gt; 00:33:18.377
+<!-- raw HTML omitted -->Thanks everyone.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4426-0
+00:33:18.377 &ndash;&gt; 00:33:20.137
+<!-- raw HTML omitted -->Thanks Ryan for setting this up. Cheers.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4428-0
+00:33:20.877 &ndash;&gt; 00:33:20.957
+<!-- raw HTML omitted -->Me.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4431-0
+00:33:21.877 &ndash;&gt; 00:33:23.037
+<!-- raw HTML omitted -->Cheers. Thank you. Bye.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4436-0
+00:33:23.337 &ndash;&gt; 00:33:24.017
+<!-- raw HTML omitted -->Thank you.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4439-0
+00:33:25.027 &ndash;&gt; 00:33:25.867
+<!-- raw HTML omitted -->Thank everyone.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4441-0
+00:33:25.987 &ndash;&gt; 00:33:26.657
+<!-- raw HTML omitted -->Bye bye.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4450-0
+00:33:27.087 &ndash;&gt; 00:33:28.927
+<!-- raw HTML omitted -->Thank you, Kim. Thank you all.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4449-0
+00:33:27.957 &ndash;&gt; 00:33:29.157
+<!-- raw HTML omitted -->Thank you, Ken.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4452-0
+00:33:30.167 &ndash;&gt; 00:33:30.927
+<!-- raw HTML omitted -->Yeah, no problem.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4456-0
+00:33:37.197 &ndash;&gt; 00:33:37.357
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4458-0
+00:33:38.427 &ndash;&gt; 00:33:38.747
+<!-- raw HTML omitted -->Thank you.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4460-0
+00:33:38.747 &ndash;&gt; 00:33:39.867
+<!-- raw HTML omitted -->Right. Bye for now.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4471-0
+00:33:41.337 &ndash;&gt; 00:33:44.857
+<!-- raw HTML omitted -->Oh yeah, that is a good meeting because.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4464-0
+00:33:41.347 &ndash;&gt; 00:33:41.667
+<!-- raw HTML omitted -->I think.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4469-0
+00:33:43.187 &ndash;&gt; 00:33:43.547
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4481-0
+00:33:46.747 &ndash;&gt; 00:33:48.707
+<!-- raw HTML omitted -->Identify that that is not easy.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4484-0
+00:33:50.987 &ndash;&gt; 00:33:51.307
+<!-- raw HTML omitted -->Easy, easy.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4490-0
+00:33:52.027 &ndash;&gt; 00:33:52.707
+<!-- raw HTML omitted -->Yes.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4488-0
+00:33:52.187 &ndash;&gt; 00:33:53.227
+<!-- raw HTML omitted -->That is not easy case.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4497-0
+00:33:53.227 &ndash;&gt; 00:33:55.307
+<!-- raw HTML omitted -->So they understand the situations.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4508-0
+00:33:55.667 &ndash;&gt; 00:34:00.787
+<!-- raw HTML omitted -->Yes, yes, I think it is very necessary,
+but do do they have the old version?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4531-0
+00:34:00.827 &ndash;&gt; 00:34:06.393
+<!-- raw HTML omitted -->So do you have like any case reference to
+the older version so that we can tell Ken,<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4531-1
+00:34:06.393 &ndash;&gt; 00:34:09.667
+<!-- raw HTML omitted -->I guess Noel right?
+Like I just checked the case.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4542-0
+00:34:09.397 &ndash;&gt; 00:34:14.008
+<!-- raw HTML omitted -->You you mean that that the engine already
+mentioned that old version don&rsquo;t have<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4542-1
+00:34:14.008 &ndash;&gt; 00:34:14.757
+<!-- raw HTML omitted -->these issues?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4555-0
+00:34:14.757 &ndash;&gt; 00:34:21.157
+<!-- raw HTML omitted -->So they&rsquo;re I think that they are at
+Apple&rsquo;s today, this woman.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4547-0
+00:34:14.967 &ndash;&gt; 00:34:15.567
+<!-- raw HTML omitted -->Right.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4557-0
+00:34:23.187 &ndash;&gt; 00:34:23.507
+<!-- raw HTML omitted -->At post.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4561-0
+00:34:24.907 &ndash;&gt; 00:34:25.547
+<!-- raw HTML omitted -->This issue.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4570-0
+00:34:27.467 &ndash;&gt; 00:34:30.027
+<!-- raw HTML omitted -->Raised on 2024 that nine for that.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4577-0
+00:34:30.027 &ndash;&gt; 00:34:35.387
+<!-- raw HTML omitted -->So I think that 2024 match version maybe.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4581-0
+00:34:36.867 &ndash;&gt; 00:34:37.827
+<!-- raw HTML omitted -->There are there are no issues.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4584-0
+00:34:37.827 &ndash;&gt; 00:34:40.947
+<!-- raw HTML omitted -->So the I I guess.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4609-0
+00:34:42.667 &ndash;&gt; 00:34:50.098
+<!-- raw HTML omitted -->2020 for March 4 is maybe working well,
+but at first time they raise the this<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4609-1
+00:34:50.098 &ndash;&gt; 00:34:53.147
+<!-- raw HTML omitted -->issue in SRM 20249.4 version so.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4611-0
+00:34:53.497 &ndash;&gt; 00:34:54.057
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4614-0
+00:34:55.127 &ndash;&gt; 00:34:55.607
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4620-0
+00:34:55.887 &ndash;&gt; 00:34:57.167
+<!-- raw HTML omitted -->So we still can.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4622-0
+00:34:56.347 &ndash;&gt; 00:34:58.787
+<!-- raw HTML omitted -->Bajajung baby works? Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4624-0
+00:34:59.677 &ndash;&gt; 00:35:00.317
+<!-- raw HTML omitted -->Yeah. OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4630-0
+00:35:01.797 &ndash;&gt; 00:35:03.957
+<!-- raw HTML omitted -->20249 version right?<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4639-0
+00:35:05.207 &ndash;&gt; 00:35:09.407
+<!-- raw HTML omitted -->Yeah. Prog 9 was issue happens. Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4641-0
+00:35:09.377 &ndash;&gt; 00:35:10.457
+<!-- raw HTML omitted -->OK, OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4642-0
+00:35:10.867 &ndash;&gt; 00:35:11.027
+<!-- raw HTML omitted -->Yeah.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4644-0
+00:35:12.757 &ndash;&gt; 00:35:13.077
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4647-0
+00:35:13.077 &ndash;&gt; 00:35:13.877
+<!-- raw HTML omitted -->Thank you.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4656-0
+00:35:14.037 &ndash;&gt; 00:35:14.997
+<!-- raw HTML omitted -->Yeah. Thank you.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4660-0
+00:35:15.357 &ndash;&gt; 00:35:17.837
+<!-- raw HTML omitted -->Collect the logs, then get to Chen.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4655-0
+00:35:15.427 &ndash;&gt; 00:35:16.347
+<!-- raw HTML omitted -->Yeah. Bye, bye.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4670-0
+00:35:17.837 &ndash;&gt; 00:35:20.477
+<!-- raw HTML omitted -->Yeah, we&rsquo;ll see what happens,
+but I think it will.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4673-0
+00:35:20.717 &ndash;&gt; 00:35:22.797
+<!-- raw HTML omitted -->Maybe we need another call later.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4680-0
+00:35:25.477 &ndash;&gt; 00:35:25.797
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4677-0
+00:35:25.537 &ndash;&gt; 00:35:25.777
+<!-- raw HTML omitted -->OK.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4679-0
+00:35:25.777 &ndash;&gt; 00:35:26.697
+<!-- raw HTML omitted -->Thank you. Bye bye.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4684-0
+00:35:27.067 &ndash;&gt; 00:35:27.867
+<!-- raw HTML omitted -->Yeah. Bye for now.<!-- raw HTML omitted --></p>
+<p>9f30d60e-e160-4571-80eb-7a69413b5cb2/4704-0
+00:36:20.797 &ndash;&gt; 00:36:20.917
+<!-- raw HTML omitted -->Hmm.<!-- raw HTML omitted --></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

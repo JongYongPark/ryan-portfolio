@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Apt on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/apt/</link>
+    <description>Recent content in Apt on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 14 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/apt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apt proxy issue</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/apt/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/apt/</guid>
+      <description>&lt;h1 id=&#34;apt-proxy-issue&#34;&gt;Apt proxy issue&lt;/h1&gt;
+&lt;p&gt;Ubuntu에서 발생한 APT 업데이트 문제의 원인과 해결 방법을 정리해드리겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;문제-원인&#34;&gt;문제 원인&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;APT(Advanced Package Tool)가 패키지 정보를 업데이트하려 할 때 프록시 서버(10.4.241.231:3142)를 통해 연결을 시도했습니다.&lt;/li&gt;
+&lt;li&gt;해당 프록시 서버에 연결할 수 없어 모든 저장소에 대한 연결이 타임아웃되었습니다.&lt;/li&gt;
+&lt;li&gt;문제는 &lt;code&gt;/etc/apt/apt.conf&lt;/code&gt; 파일에 설정된 프록시 설정이었습니다. 이 설정은 APT가 인터넷에 직접 연결하지 않고 프록시 서버를 통해 연결하도록 지시합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;진단-과정&#34;&gt;진단 과정&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;프록시 설정 확인:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cat /etc/apt/apt.conf.d/* | grep -i proxy
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;이 명령어로는 apt.conf.d 디렉토리 내의 파일들에서 프록시 설정을 찾을 수 없었습니다.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

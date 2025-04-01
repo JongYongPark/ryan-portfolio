@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="내 작업
+v1
+Visual Studio에서 clang-cl.exe 컴파일러를 사용한 샘플 코드를 작성해 드리겠습니다. 제공해주신 로그를 살펴보니 nlohmann::json 라이브러리를 사용하는 C&#43;&#43; 코드에서 컴파일 오류가 발생했습니다. 특히 C&#43;&#43;20 개념(concepts)과 관련된 오류가 보입니다.
+Visual Studio에서 clang-cl.exe 컴파일러를 사용하는 샘플 프로젝트를 만들었습니다. 제공해주신 로그를 분석한 결과, nlohmann::json 라이브러리와 C&#43;&#43;20 기능을 사용할 때 발생하는 문제를 해결하는 코드를 작성했습니다.
+주요 구성 요소
+
+
+샘플 코드 (main.cpp)
+
+API 스펙을 정의하고 관리하는 클래스
+nlohmann::json을 사용한 JSON 직렬화/역직렬화 기능
+컴파일러 오류를 피하기 위한 적절한 C&#43;&#43; 문법 사용
+
+
+
+Visual Studio Clang-cl 설정 방법">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/technical-support/coverity/msvc-clangcl-repro/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/technical-support/coverity/msvc-clangcl-repro/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="내-작업">내 작업<a hidden class="anchor" aria-hidden="true" href="#내-작업">#</a></h1>
+<h1 id="v1">v1<a hidden class="anchor" aria-hidden="true" href="#v1">#</a></h1>
+<p>Visual Studio에서 clang-cl.exe 컴파일러를 사용한 샘플 코드를 작성해 드리겠습니다. 제공해주신 로그를 살펴보니 nlohmann::json 라이브러리를 사용하는 C++ 코드에서 컴파일 오류가 발생했습니다. 특히 C++20 개념(concepts)과 관련된 오류가 보입니다.</p>
+<p>Visual Studio에서 clang-cl.exe 컴파일러를 사용하는 샘플 프로젝트를 만들었습니다. 제공해주신 로그를 분석한 결과, nlohmann::json 라이브러리와 C++20 기능을 사용할 때 발생하는 문제를 해결하는 코드를 작성했습니다.</p>
+<h2 id="주요-구성-요소">주요 구성 요소<a hidden class="anchor" aria-hidden="true" href="#주요-구성-요소">#</a></h2>
+<ol>
+<li>
+<p><strong>샘플 코드 (main.cpp)</strong></p>
+<ul>
+<li>API 스펙을 정의하고 관리하는 클래스</li>
+<li>nlohmann::json을 사용한 JSON 직렬화/역직렬화 기능</li>
+<li>컴파일러 오류를 피하기 위한 적절한 C++ 문법 사용</li>
+</ul>
+</li>
+<li>
+<p><strong>Visual Studio Clang-cl 설정 방법</strong></p>
+<ul>
+<li>Clang-cl 컴파일러를 사용하기 위한 Visual Studio 설정 가이드</li>
+<li><code>--target=amd64-pc-windows-msvc</code> 및 <code>-mno-avx</code> 옵션 설정 방법</li>
+<li>nlohmann/json 라이브러리 통합 방법</li>
+</ul>
+</li>
+<li>
+<p><strong>Visual Studio 속성 시트 (props 파일)</strong></p>
+<ul>
+<li>Clang-cl 컴파일러 사용을 위한 사전 설정 제공</li>
+<li>C++20 표준 활성화</li>
+<li>필요한 컴파일러 옵션 설정</li>
+</ul>
+</li>
+<li>
+<p><strong>CMake 구성 파일</strong></p>
+<ul>
+<li>CMake를 사용하는 프로젝트에서 Clang-cl 설정하는 방법</li>
+<li>필요한 컴파일러 플래그 설정</li>
+</ul>
+</li>
+</ol>
+<h2 id="로그에서-발견된-문제-해결">로그에서 발견된 문제 해결<a hidden class="anchor" aria-hidden="true" href="#로그에서-발견된-문제-해결">#</a></h2>
+<p>로그에서 발견된 주요 오류는 C++20의 개념(concepts) 기능과 관련된 것이었습니다. 이를 해결하기 위해:</p>
+<ol>
+<li><code>typename</code> 키워드 사용 문제: 템플릿 종속 타입 앞에 <code>typename</code> 키워드를 사용했습니다.</li>
+<li>&ldquo;atomic constraint depends on itself&rdquo; 오류: 순환 참조 없이 코드를 작성했습니다.</li>
+<li>컴파일러 호환성 이슈: 최신 Clang 컴파일러를 사용하도록 설정했습니다.</li>
+</ol>
+<h2 id="사용-방법">사용 방법<a hidden class="anchor" aria-hidden="true" href="#사용-방법">#</a></h2>
+<ol>
+<li>Visual Studio에서 새 C++ 프로젝트를 생성합니다.</li>
+<li>제공된 가이드에 따라 Clang-cl 컴파일러를 설정합니다.</li>
+<li>샘플 코드를 복사하여 main.cpp에 붙여넣습니다.</li>
+<li>nlohmann/json 라이브러리를 설치합니다 (vcpkg 사용 권장).</li>
+<li>프로젝트를 빌드하고 실행합니다.</li>
+</ol>
+<p>작성된 샘플 코드는 API 스펙을 관리하는 기능을 제공하며, Visual Studio에서 Clang-cl 컴파일러를 사용할 때 발생할 수 있는 문제를 피할 수 있도록 설계되었습니다.</p>
+<h1 id="v11">v1.1<a hidden class="anchor" aria-hidden="true" href="#v11">#</a></h1>
+<p>안타깝게도 실제 파일을 압축하여 직접 제공해드릴 수는 없습니다. 하지만 Visual Studio에서 프로젝트를 쉽게 설정할 수 있도록 단계별 가이드를 제공해 드리겠습니다.</p>
+<h2 id="visual-studio에서-clang-cl-프로젝트-생성-단계">Visual Studio에서 Clang-cl 프로젝트 생성 단계<a hidden class="anchor" aria-hidden="true" href="#visual-studio에서-clang-cl-프로젝트-생성-단계">#</a></h2>
+<ol>
+<li>
+<p><strong>새 프로젝트 생성</strong>:</p>
+<ul>
+<li>Visual Studio 실행</li>
+<li>&ldquo;파일 &gt; 새로 만들기 &gt; 프로젝트&rdquo; 선택</li>
+<li>&ldquo;콘솔 앱&rdquo; 선택 (C++)</li>
+<li>프로젝트 이름 지정 (예: &ldquo;ApiSpecSample&rdquo;)</li>
+</ul>
+</li>
+<li>
+<p><strong>Clang-cl 컴파일러 설정</strong>:</p>
+<ul>
+<li>솔루션 탐색기에서 프로젝트 우클릭 &gt; &ldquo;속성&rdquo; 선택</li>
+<li>&ldquo;구성 속성 &gt; 일반 &gt; 플랫폼 도구 집합&rdquo; &gt; &ldquo;LLVM (clang-cl)&rdquo; 선택</li>
+<li>&ldquo;C/C++ &gt; 명령줄&quot;에 다음 추가:
+<pre tabindex="0"><code>--target=amd64-pc-windows-msvc -mno-avx
+</code></pre></li>
+<li>&ldquo;C/C++ &gt; 언어&rdquo; &gt; &ldquo;C++ 언어 표준&rdquo; &gt; &ldquo;C++20&rdquo; 선택</li>
+</ul>
+</li>
+<li>
+<p><strong>nlohmann/json 라이브러리 설치</strong> (vcpkg 사용):</p>
+<pre tabindex="0"><code>vcpkg install nlohmann-json:x64-windows
+vcpkg integrate install
+</code></pre></li>
+<li>
+<p><strong>소스 코드 파일 교체</strong>:</p>
+<ul>
+<li>제공된 <code>main.cpp</code> 코드를 복사하여 프로젝트의 main.cpp에 붙여넣기</li>
+</ul>
+</li>
+<li>
+<p><strong>프로젝트 빌드 및 실행</strong>:</p>
+<ul>
+<li>F7 키 (빌드)</li>
+<li>F5 키 (실행)</li>
+</ul>
+</li>
+</ol>
+<h2 id="파일-구조">파일 구조<a hidden class="anchor" aria-hidden="true" href="#파일-구조">#</a></h2>
+<p>프로젝트는 다음과 같은 구조로 구성됩니다:</p>
+<pre tabindex="0"><code>ApiSpecSample/
+├── ApiSpecSample.vcxproj      (VS 프로젝트 파일)
+├── ApiSpecSample.vcxproj.filters
+├── ClangCl.props             (선택적 속성 시트)
+├── main.cpp                  (샘플 소스 코드)
+└── CMakeLists.txt           (CMake 사용 시)
+</code></pre><p>만약 프로젝트 설정이나 코드에 대해 추가 질문이 있으시면 말씀해 주세요. Visual Studio에서 구현하는 동안 겪는 어려움이 있다면 도움을 드리겠습니다.</p>
+<h1 id="v12">v1.2<a hidden class="anchor" aria-hidden="true" href="#v12">#</a></h1>
+<p>vcpkg를 사용하기 위해서는 먼저 vcpkg를 설치하고 설정해야 합니다. 다음은 vcpkg를 설치하고 nlohmann-json 라이브러리를 설치하는 단계입니다:</p>
+<h3 id="vcpkg-설치-및-nlohmann-json-라이브러리-설치하기">vcpkg 설치 및 nlohmann-json 라이브러리 설치하기<a hidden class="anchor" aria-hidden="true" href="#vcpkg-설치-및-nlohmann-json-라이브러리-설치하기">#</a></h3>
+<ol>
+<li>
+<p><strong>vcpkg 다운로드 및 설치</strong>:</p>
+<pre tabindex="0"><code>git clone https://github.com/Microsoft/vcpkg.git
+cd vcpkg
+.\bootstrap-vcpkg.bat
+</code></pre></li>
+<li>
+<p><strong>nlohmann-json 라이브러리 설치</strong>:</p>
+<pre tabindex="0"><code>.\vcpkg install nlohmann-json:x64-windows
+</code></pre></li>
+<li>
+<p><strong>Visual Studio와 통합</strong>:</p>
+<pre tabindex="0"><code>.\vcpkg integrate install
+</code></pre></li>
+</ol>
+<h3 id="visual-studio-프로젝트에-직접-nlohmannjson-설치하기-vcpkg-없이">Visual Studio 프로젝트에 직접 nlohmann/json 설치하기 (vcpkg 없이)<a hidden class="anchor" aria-hidden="true" href="#visual-studio-프로젝트에-직접-nlohmannjson-설치하기-vcpkg-없이">#</a></h3>
+<p>vcpkg를 사용하지 않으려면 다음 방법으로 nlohmann/json을 직접 추가할 수 있습니다:</p>
+<ol>
+<li>
+<p><strong>GitHub에서 다운로드</strong>:</p>
+<ul>
+<li><a href="https://github.com/nlohmann/json">https://github.com/nlohmann/json</a> 방문</li>
+<li>&ldquo;Code&rdquo; 버튼 클릭 &gt; &ldquo;Download ZIP&rdquo; 선택</li>
+<li>ZIP 파일 압축 해제</li>
+</ul>
+</li>
+<li>
+<p><strong>헤더 파일만 프로젝트에 추가</strong>:</p>
+<ul>
+<li>압축 해제된 폴더에서 <code>include/nlohmann/json.hpp</code> 파일 찾기</li>
+<li>이 파일을 프로젝트 폴더에 복사 (예: &lsquo;include/nlohmann/json.hpp&rsquo;)</li>
+</ul>
+</li>
+<li>
+<p><strong>Visual Studio 프로젝트 설정</strong>:</p>
+<ul>
+<li>프로젝트 속성 &gt; C/C++ &gt; 일반 &gt; 추가 포함 디렉터리에 <code>include</code> 경로 추가</li>
+<li>소스 코드에서 <code>#include &lt;nlohmann/json.hpp&gt;</code> 사용</li>
+</ul>
+</li>
+</ol>
+<h3 id="간단한-대안-단일-헤더-파일-사용">간단한 대안: 단일 헤더 파일 사용<a hidden class="anchor" aria-hidden="true" href="#간단한-대안-단일-헤더-파일-사용">#</a></h3>
+<p>가장 간단한 방법은 단일 헤더 파일 버전을 사용하는 것입니다:</p>
+<ol>
+<li><a href="https://github.com/nlohmann/json/releases">https://github.com/nlohmann/json/releases</a> 페이지 방문</li>
+<li>최신 릴리스에서 <code>json.hpp</code> 다운로드</li>
+<li>이 파일을 프로젝트에 추가</li>
+<li>소스 코드에서 <code>#include &quot;json.hpp&quot;</code> 사용하여 포함</li>
+</ol>
+<p>이 방법이 가장 간단하며 외부 도구나 복잡한 설정이 필요하지 않습니다.</p>
+<h1 id="v13--사사용자에게-더-많은-결과를-보여주는-코드">v1.3 : 사사용자에게 더 많은 결과를 보여주는 코드<a hidden class="anchor" aria-hidden="true" href="#v13--사사용자에게-더-많은-결과를-보여주는-코드">#</a></h1>
+<p>물론입니다! 사용자에게 더 많은 결과를 보여주는 코드를 추가하겠습니다. API 스펙을 콘솔에 시각적으로 표시하고 간단한 사용자 인터랙션도 넣어보겠습니다.</p>
+<p>main.cpp 파일을 업데이트했습니다. 이제 사용자에게 더 풍부한 시각적 결과를 보여주는 코드가 추가되었습니다. 주요 변경사항은 다음과 같습니다:</p>
+<ol>
+<li>
+<p><strong>콘솔 색상 및 서식 기능</strong>:</p>
+<ul>
+<li>색상 코드를 사용하여 출력을 더 시각적으로 구분</li>
+<li>헤더, 서브헤더, 성공/오류 메시지 등 다양한 출력 스타일 적용</li>
+</ul>
+</li>
+<li>
+<p><strong>추가 엔드포인트 및 상세 표시</strong>:</p>
+<ul>
+<li>새로운 파일 업로드 엔드포인트 추가</li>
+<li>엔드포인트 상세 정보를 시각적으로 보기 좋게 표시</li>
+</ul>
+</li>
+<li>
+<p><strong>사용자 상호작용 시뮬레이션</strong>:</p>
+<ul>
+<li>다양한 엔드포인트 검색 시뮬레이션</li>
+<li>찾은 엔드포인트와 찾지 못한 엔드포인트의 처리 차이 표시</li>
+</ul>
+</li>
+<li>
+<p><strong>실용적인 샘플 출력</strong>:</p>
+<ul>
+<li>각 API 엔드포인트에 대한 curl 커맨드 생성</li>
+<li>테스트 URL 및 필요한 헤더 정보 표시</li>
+</ul>
+</li>
+<li>
+<p><strong>Windows 호환성 개선</strong>:</p>
+<ul>
+<li>Windows에서 유니코드 문자가 제대로 표시되도록 콘솔 인코딩 설정</li>
+<li><code>windows.h</code> 헤더 포함</li>
+</ul>
+</li>
+</ol>
+<p>이 코드를 실행하면 콘솔에서 색상과 서식이 적용된 출력을 볼 수 있으며, API 스펙의 생성, 직렬화, 역직렬화, 조회 과정을 시각적으로 확인할 수 있습니다. 마지막에는 사용자 입력을 기다려 프로그램이 즉시 종료되지 않도록 했습니다.</p>
+<p>Visual Studio에서 이 코드를 실행하면 더 풍부한 콘솔 출력을 확인하실 수 있습니다.</p>
+<h1 id="v14--pwshexepowershell-core의-실행-파일-오류-메시지">v1.4 : PWsh.exe(PowerShell Core의 실행 파일) 오류 메시지<a hidden class="anchor" aria-hidden="true" href="#v14--pwshexepowershell-core의-실행-파일-오류-메시지">#</a></h1>
+<p>PWsh.exe(PowerShell Core의 실행 파일) 오류 메시지가 나타나는 것은 Visual Studio의 빌드 후 이벤트 또는 사용자 지정 빌드 단계에서 PowerShell Core를 실행하려고 시도하는 것 같습니다.</p>
+<p>이 오류는 빌드에 영향을 주지 않는 것으로 보입니다(빌드는 성공했다고 표시됨). 다음과 같은 원인이 있을 수 있습니다:</p>
+<ol>
+<li>
+<p><strong>프로젝트 설정의 빌드 후 이벤트</strong>: 프로젝트에 PowerShell 스크립트를 실행하는 빌드 후 이벤트가 설정되어 있을 수 있습니다.</p>
+</li>
+<li>
+<p><strong>Visual Studio 확장 또는 도구</strong>: 설치된 확장 프로그램이 빌드 완료 후 pwsh.exe를 호출하려고 시도할 수 있습니다.</p>
+</li>
+<li>
+<p><strong>빌드 사용자 지정 단계</strong>: 프로젝트에 PowerShell Core를 사용하는 사용자 지정 빌드 단계가 있을 수 있습니다.</p>
+</li>
+</ol>
+<p>이 문제를 해결하려면:</p>
+<ol>
+<li>
+<p><strong>프로젝트 속성 확인하기</strong>:</p>
+<ul>
+<li>프로젝트를 마우스 오른쪽 버튼으로 클릭하고 &ldquo;속성&rdquo; 선택</li>
+<li>&ldquo;빌드 이벤트&rdquo; 탭에서 &ldquo;빌드 후 이벤트 명령줄&quot;에 pwsh.exe 관련 명령이 있는지 확인</li>
+<li>있다면 제거하거나 주석 처리(:: 사용)</li>
+</ul>
+</li>
+<li>
+<p><strong>솔루션 탐색기에서 .vcxproj 파일 내용 확인</strong>:</p>
+<ul>
+<li>메모장 등으로 .vcxproj 파일을 열어 pwsh.exe 관련 항목이 있는지 확인</li>
+<li><code>&lt;PostBuildEvent&gt;</code> 태그에서 pwsh.exe 호출이 있는지 확인</li>
+</ul>
+</li>
+</ol>
+<p>이 오류는 프로그램 실행에는 영향을 주지 않으므로, 당장 급하지 않다면 무시해도 됩니다. 빌드는 성공적으로 완료되었고 실행 파일이 생성되었기 때문입니다.</p>
+<h1 id="v15">v1.5<a hidden class="anchor" aria-hidden="true" href="#v15">#</a></h1>
+<p>Visual Studio 프로젝트를 MSBuild와 CMake로 각각 빌드하고 실행하는 방법을 알려드리겠습니다.</p>
+<h2 id="msbuild로-빌드하고-실행하기">MSBuild로 빌드하고 실행하기<a hidden class="anchor" aria-hidden="true" href="#msbuild로-빌드하고-실행하기">#</a></h2>
+<h3 id="명령-프롬프트cmd에서-빌드">명령 프롬프트(CMD)에서 빌드:<a hidden class="anchor" aria-hidden="true" href="#명령-프롬프트cmd에서-빌드">#</a></h3>
+<ol>
+<li>
+<p><strong>개발자 명령 프롬프트 열기</strong>:</p>
+<ul>
+<li>시작 메뉴에서 &ldquo;Developer Command Prompt for VS&rdquo; 또는 &ldquo;x64 Native Tools Command Prompt for VS&rdquo; 실행</li>
+</ul>
+</li>
+<li>
+<p><strong>프로젝트 디렉토리로 이동</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span><span style="color:#66d9ef">cd</span> C:\path\to\ApiSpecSample
+</span></span></code></pre></div></li>
+<li>
+<p><strong>MSBuild로 빌드</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>msbuild ApiSpecSample.vcxproj /p:Configuration=Debug /p:Platform=x64
+</span></span></code></pre></div></li>
+<li>
+<p><strong>결과물 실행</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>x64\Debug\ApiSpecSample.exe
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="릴리스-빌드">릴리스 빌드:<a hidden class="anchor" aria-hidden="true" href="#릴리스-빌드">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>msbuild ApiSpecSample.vcxproj /p:Configuration=Release /p:Platform=x64
+</span></span><span style="display:flex;"><span>x64\Release\ApiSpecSample.exe
+</span></span></code></pre></div><h2 id="cmake로-빌드하고-실행하기">CMake로 빌드하고 실행하기<a hidden class="anchor" aria-hidden="true" href="#cmake로-빌드하고-실행하기">#</a></h2>
+<h3 id="명령-프롬프트에서">명령 프롬프트에서:<a hidden class="anchor" aria-hidden="true" href="#명령-프롬프트에서">#</a></h3>
+<ol>
+<li>
+<p><strong>빌드 디렉토리 생성 및 이동</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span><span style="color:#66d9ef">mkdir</span> build
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">cd</span> build
+</span></span></code></pre></div></li>
+<li>
+<p><strong>CMake 설정</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;Visual Studio 17 2022&#34;</span> -A x64 -T ClangCL ..
+</span></span></code></pre></div><p>(Visual Studio 버전에 따라 &ldquo;Visual Studio 16 2019&rdquo;, &ldquo;Visual Studio 17 2022&rdquo; 등으로 조정)</p>
+</li>
+<li>
+<p><strong>빌드 실행</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>cmake --build . --config Debug
+</span></span></code></pre></div></li>
+<li>
+<p><strong>결과물 실행</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>Debug\ApiSpecSample.exe
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="릴리스-빌드-1">릴리스 빌드:<a hidden class="anchor" aria-hidden="true" href="#릴리스-빌드-1">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>cmake --build . --config Release
+</span></span><span style="display:flex;"><span>Release\ApiSpecSample.exe
+</span></span></code></pre></div><h3 id="powershell에서-cmake-빌드-및-실행-한-번에">PowerShell에서 CMake 빌드 및 실행 (한 번에):<a hidden class="anchor" aria-hidden="true" href="#powershell에서-cmake-빌드-및-실행-한-번에">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>mkdir -Force build; cd build; cmake -G <span style="color:#e6db74">&#34;Visual Studio 17 2022&#34;</span> -A x64 -T ClangCL ..; cmake --build . --config Debug; .\Debug\ApiSpecSample.exe
+</span></span></code></pre></div><h2 id="추가-팁">추가 팁<a hidden class="anchor" aria-hidden="true" href="#추가-팁">#</a></h2>
+<h3 id="clang-cl-컴파일러-지정-msbuild">Clang-cl 컴파일러 지정 (MSBuild):<a hidden class="anchor" aria-hidden="true" href="#clang-cl-컴파일러-지정-msbuild">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>msbuild ApiSpecSample.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=LLVM
+</span></span></code></pre></div><h3 id="병렬-빌드-속도-향상">병렬 빌드 (속도 향상):<a hidden class="anchor" aria-hidden="true" href="#병렬-빌드-속도-향상">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>msbuild ApiSpecSample.vcxproj /p:Configuration=Debug /p:Platform=x64 /m
+</span></span><span style="display:flex;"><span>cmake --build . --config Debug --parallel
+</span></span></code></pre></div><h3 id="visual-studio-없이-cmake-빌드-ninja-사용">Visual Studio 없이 CMake 빌드 (Ninja 사용):<a hidden class="anchor" aria-hidden="true" href="#visual-studio-없이-cmake-빌드-ninja-사용">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span><span style="color:#66d9ef">mkdir</span> build-ninja
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">cd</span> build-ninja
+</span></span><span style="display:flex;"><span>cmake -G Ninja -DCMAKE_C_COMPILER=clang-cl -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_BUILD_TYPE=Debug ..
+</span></span><span style="display:flex;"><span>cmake --build .
+</span></span><span style="display:flex;"><span>.\ApiSpecSample.exe
+</span></span></code></pre></div><p>두 방식 모두 Clang-cl 컴파일러를 사용하여 API 스펙 샘플 프로젝트를 빌드할 수 있습니다.</p>
+<h1 id="v16--cmake에서-항상-클린-빌드를-수행">v1.6 : CMake에서 항상 클린 빌드를 수행<a hidden class="anchor" aria-hidden="true" href="#v16--cmake에서-항상-클린-빌드를-수행">#</a></h1>
+<p>CMake에서 항상 클린 빌드를 수행하도록 명령을 수정해드리겠습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>cmake --build . --target clean &amp;&amp; cmake --build . --config Debug
+</span></span></code></pre></div><p>위 명령은 먼저 <code>clean</code> 타겟을 빌드하여 이전 빌드 결과물을 모두 제거한 후, Debug 구성으로 새롭게 빌드합니다.</p>
+<p>PowerShell에서는 다음과 같이 사용할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cmake --build . --target clean; cmake --build . --config Debug
+</span></span></code></pre></div><p>Ninja 빌드 시스템을 사용하는 경우:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>cmake --build . --clean-first --config Debug
+</span></span></code></pre></div><p>또는 더 확실하게 클린 빌드를 위해 빌드 디렉토리를 삭제하고 다시 만드는 방법:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span><span style="color:#66d9ef">rmdir</span> /s /q build
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">mkdir</span> build
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">cd</span> build
+</span></span><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;Visual Studio 17 2022&#34;</span> -A x64 -T ClangCL ..
+</span></span><span style="display:flex;"><span>cmake --build . --config Debug
+</span></span></code></pre></div><p>PowerShell에서는:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Remove-Item -Recurse -Force -Path build -ErrorAction SilentlyContinue
+</span></span><span style="display:flex;"><span>mkdir -Force build
+</span></span><span style="display:flex;"><span>cd build
+</span></span><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;Visual Studio 17 2022&#34;</span> -A x64 -T ClangCL ..
+</span></span><span style="display:flex;"><span>cmake --build . --config Debug
+</span></span></code></pre></div><p>이 방법을 사용하면 항상 완전히 새로운 빌드가 보장됩니다.</p>
+<h1 id="v17--pwshexe-오류">v1.7 : PWsh.exe 오류<a hidden class="anchor" aria-hidden="true" href="#v17--pwshexe-오류">#</a></h1>
+<p>PWsh.exe 오류는 Visual Studio 또는 MSBuild가 빌드 후 이벤트에서 PowerShell Core(pwsh.exe)를 실행하려고 시도하고 있지만, 시스템에 설치되어 있지 않거나 PATH에 없어서 발생하는 문제입니다.</p>
+<p>이 문제를 해결하는 방법은 다음과 같습니다:</p>
+<ol>
+<li>
+<p><strong>빌드 후 이벤트 확인 및 수정</strong>:</p>
+<p>CMakeLists.txt 파일을 열고 다음과 같은 부분이 있는지 확인하세요:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>add_custom_command(<span style="color:#e6db74">TARGET</span> <span style="color:#e6db74">ApiSpecSample</span> <span style="color:#e6db74">POST_BUILD</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">pwsh.exe</span> <span style="color:#e6db74">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">...</span>
+</span></span><span style="display:flex;"><span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>이런 부분이 있다면 pwsh.exe를 powershell.exe로 변경하거나 해당 줄을 제거/주석 처리하세요.</p>
+</li>
+<li>
+<p><strong>Visual Studio 프로젝트 파일 수정</strong>:</p>
+<p>build 디렉토리에 있는 ApiSpecSample.vcxproj 파일을 텍스트 편집기로 열고 다음과 같은 부분을 찾으세요:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;PostBuildEvent&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;Command&gt;</span>pwsh.exe ...<span style="color:#f92672">&lt;/Command&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/PostBuildEvent&gt;</span>
+</span></span></code></pre></div><p>이 부분을 찾아 삭제하거나 다음과 같이 변경하세요:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;PostBuildEvent&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;Command&gt;</span>rem 주석 처리된 명령<span style="color:#f92672">&lt;/Command&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/PostBuildEvent&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>CMake 캐시 초기화</strong>:</p>
+<p>완전히 새로 빌드하려면 빌드 디렉토리를 삭제하고 다시 생성하세요:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span><span style="color:#66d9ef">cd</span> C:\workspace\jonpark-work\ApiSpecSample
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">rmdir</span> /s /q build
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">mkdir</span> build
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">cd</span> build
+</span></span><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;Visual Studio 17 2022&#34;</span> -A x64 -T ClangCL ..
+</span></span><span style="display:flex;"><span>cmake --build . --config Debug
+</span></span></code></pre></div></li>
+</ol>
+<p>이렇게 하면 pwsh.exe를 찾을 수 없다는 오류 메시지가 더 이상 표시되지 않을 것입니다. 그래도 오류가 계속 발생한다면, Visual Studio에서 프로젝트 속성을 열고 빌드 이벤트 탭을 확인하여 pwsh.exe를 참조하는 모든 명령을 제거하거나 수정하세요.</p>
+<h1 id="v18--pwshexe-오류">v1.8 : pwsh.exe 오류<a hidden class="anchor" aria-hidden="true" href="#v18--pwshexe-오류">#</a></h1>
+<p>로그를 확인해보니 pwsh.exe 오류의 정확한 원인이 파악되었습니다. 이 오류는 빌드 과정 자체에서 발생하는 것이 아니라, vcpkg의 AppLocalFromInstalled 단계에서 발생하고 있습니다.</p>
+<p>vcpkg는 빌드된 실행 파일이 필요한 DLL을 자동으로 복사하기 위해 PowerShell Core(pwsh.exe)를 사용하려고 시도하고 있습니다. 하지만 pwsh.exe가 없어서 실패한 후, 자동으로 대체 방안으로 일반 PowerShell(powershell.exe)을 사용하여 성공적으로 완료하고 있습니다.</p>
+<p>로그에서 확인된 사항:</p>
+<ol>
+<li>vcpkg가 <code>applocal.ps1</code> 스크립트를 pwsh.exe로 실행하려고 시도합니다.</li>
+<li>pwsh.exe를 찾지 못해 오류가 발생합니다. (오류 코드: 9009)</li>
+<li>시스템이 자동으로 일반 PowerShell(<code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</code>)로 대체하여 실행합니다.</li>
+<li>최종 빌드는 성공적으로 완료됩니다. (0 경고, 0 오류)</li>
+</ol>
+<p>따라서 이 메시지는 오류처럼 보이지만 실제로는 빌드 과정에 영향을 주지 않는 경고 메시지입니다. vcpkg가 PowerShell Core를 첫 번째로 시도하고, 없을 경우 자동으로 일반 PowerShell로 대체하는 폴백 메커니즘을 사용하고 있기 때문입니다.</p>
+<p>이 메시지를 완전히 제거하려면 다음 옵션이 있습니다:</p>
+<ol>
+<li>
+<p>PowerShell Core(pwsh.exe) 설치하기:</p>
+<pre tabindex="0"><code>winget install Microsoft.PowerShell
+</code></pre><p>또는</p>
+<pre tabindex="0"><code>choco install powershell-core
+</code></pre></li>
+<li>
+<p>vcpkg 구성 파일 수정하기:
+vcpkg 디렉토리의 scripts/buildsystems/msbuild/applocal.targets 파일을 편집하여 pwsh.exe 대신 powershell.exe를 직접 사용하도록 설정</p>
+</li>
+</ol>
+<p>하지만 빌드 자체는 성공적으로 완료되고 있으므로, 단순히 출력 메시지만 신경 쓰인다면 무시해도 됩니다. 이 메시지는 빌드나 결과물의 품질에 영향을 주지 않습니다.</p>
+<h1 id="v19--powershell을-유지하면서-이-오류-메시지를-제거하는-방법">v1.9 : PowerShell을 유지하면서 이 오류 메시지를 제거하는 방법<a hidden class="anchor" aria-hidden="true" href="#v19--powershell을-유지하면서-이-오류-메시지를-제거하는-방법">#</a></h1>
+<p>네, 이미 사용 중인 PowerShell을 유지하면서 이 오류 메시지를 제거하는 방법이 있습니다. vcpkg가 PWsh.exe를 찾는 대신 바로 일반 PowerShell을 사용하도록 설정할 수 있습니다.</p>
+<p>다음과 같은 방법으로 설정할 수 있습니다:</p>
+<h3 id="방법-1-vcpkg-환경-변수-설정">방법 1: vcpkg 환경 변수 설정<a hidden class="anchor" aria-hidden="true" href="#방법-1-vcpkg-환경-변수-설정">#</a></h3>
+<p>PowerShell 세션에서 다음 환경 변수를 설정하세요:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$env:VCPKG_FORCE_SYSTEM_BINARIES = <span style="color:#e6db74">&#34;1&#34;</span>
+</span></span></code></pre></div><p>이 변수는 vcpkg가 시스템 바이너리(powershell.exe)를 사용하도록 강제합니다. 매번 설정하지 않으려면 PowerShell 프로필에 추가하거나 시스템 환경 변수로 설정할 수 있습니다.</p>
+<h3 id="방법-2-vcpkg-설정-파일-수정">방법 2: vcpkg 설정 파일 수정<a hidden class="anchor" aria-hidden="true" href="#방법-2-vcpkg-설정-파일-수정">#</a></h3>
+<p>vcpkg 디렉토리에 있는 <code>scripts/buildsystems/msbuild/applocal.targets</code> 파일을 찾아 수정합니다:</p>
+<ol>
+<li>텍스트 편집기로 파일을 엽니다.</li>
+<li>다음과 같은 줄을 찾습니다:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;Exec</span> <span style="color:#a6e22e">Command=</span><span style="color:#e6db74">&#34;pwsh.exe -ExecutionPolicy Bypass -noprofile -File ...&#34;</span> <span style="color:#960050;background-color:#1e0010">...</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div></li>
+<li>해당 줄을 다음과 같이 변경합니다:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;Exec</span> <span style="color:#a6e22e">Command=</span><span style="color:#e6db74">&#34;powershell.exe -ExecutionPolicy Bypass -noprofile -File ...&#34;</span> <span style="color:#960050;background-color:#1e0010">...</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="방법-3-프로젝트-수준에서-설정">방법 3: 프로젝트 수준에서 설정<a hidden class="anchor" aria-hidden="true" href="#방법-3-프로젝트-수준에서-설정">#</a></h3>
+<p>프로젝트 파일(.vcxproj)을 수정하여 vcpkg 자동 통합 기능을 비활성화하거나 수정할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;PropertyGroup&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;VcpkgEnabled&gt;</span>true<span style="color:#f92672">&lt;/VcpkgEnabled&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;VcpkgUsePowerShellCore&gt;</span>false<span style="color:#f92672">&lt;/VcpkgUsePowerShellCore&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/PropertyGroup&gt;</span>
+</span></span></code></pre></div><p>이 설정을 추가하면 vcpkg가 PowerShell Core 대신 일반 PowerShell을 사용하게 됩니다.</p>
+<h3 id="방법-4-powershell-별칭-설정">방법 4: PowerShell 별칭 설정<a hidden class="anchor" aria-hidden="true" href="#방법-4-powershell-별칭-설정">#</a></h3>
+<p>PowerShell에서 pwsh.exe에 대한 별칭을 설정하는 방법도 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Set-Alias -Name pwsh -Value powershell
+</span></span></code></pre></div><p>이 명령을 PowerShell 프로필에 추가하면 pwsh 명령이 일반 PowerShell을 실행하게 됩니다.</p>
+<p>가장 간단한 방법은 방법 1의 환경 변수를 설정하는 것입니다. 이렇게 하면 vcpkg의 소스 코드를 수정하지 않고도 원하는 동작을 얻을 수 있습니다.</p>
+<h1 id="v110--vcpkg-디렉토리의-applocaltargets-파일을-수정하는-방법">v1.10 : vcpkg 디렉토리의 applocal.targets 파일을 수정하는 방법<a hidden class="anchor" aria-hidden="true" href="#v110--vcpkg-디렉토리의-applocaltargets-파일을-수정하는-방법">#</a></h1>
+<p>vcpkg 디렉토리의 applocal.targets 파일을 수정하는 방법을 자세히 알려드리겠습니다:</p>
+<h3 id="단계별-applocaltargets-파일-수정-방법">단계별 applocal.targets 파일 수정 방법<a hidden class="anchor" aria-hidden="true" href="#단계별-applocaltargets-파일-수정-방법">#</a></h3>
+<ol>
+<li>
+<p><strong>파일 위치 찾기</strong>:
+로그에서 보이는 경로를 바탕으로, 다음 위치에 파일이 있을 것입니다:</p>
+<pre tabindex="0"><code>C:\workspace\jonpark-work\vcpkg\scripts\buildsystems\msbuild\applocal.targets
+</code></pre></li>
+<li>
+<p><strong>파일 백업하기</strong> (선택 사항이지만 권장):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Copy-Item <span style="color:#e6db74">&#34;C:\workspace\jonpark-work\vcpkg\scripts\buildsystems\msbuild\applocal.targets&#34;</span> <span style="color:#e6db74">&#34;C:\workspace\jonpark-work\vcpkg\scripts\buildsystems\msbuild\applocal.targets.backup&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>파일 편집하기</strong>:
+텍스트 편집기(메모장, VS Code 등)로 파일을 엽니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># 메모장 사용</span>
+</span></span><span style="display:flex;"><span>notepad <span style="color:#e6db74">&#34;C:\workspace\jonpark-work\vcpkg\scripts\buildsystems\msbuild\applocal.targets&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 또는 VS Code 사용</span>
+</span></span><span style="display:flex;"><span>code <span style="color:#e6db74">&#34;C:\workspace\jonpark-work\vcpkg\scripts\buildsystems\msbuild\applocal.targets&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>수정할 부분 찾기</strong>:
+파일 내에서 <code>pwsh.exe</code>를 검색합니다. 다음과 같은 XML 코드 블록을 찾게 될 것입니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;Target</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">&#34;AppLocalFromInstalled&#34;</span> <span style="color:#a6e22e">AfterTargets=</span><span style="color:#e6db74">&#34;LinkSkippedExecution&#34;</span> <span style="color:#a6e22e">BeforeTargets=</span><span style="color:#e6db74">&#34;CopyFilesToOutputDirectory&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;Exec</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Command=</span><span style="color:#e6db74">&#34;pwsh.exe -ExecutionPolicy Bypass -noprofile -File &amp;quot;$(MSBuildThisFileDirectory)applocal.ps1&amp;quot; &amp;quot;$(TargetPath)&amp;quot; &amp;quot;$(VcpkgInstalledDir)$(VcpkgTriplet)\bin&amp;quot; &amp;quot;$(TLogLocation)$(ProjectName).write.1u.tlog&amp;quot; &amp;quot;$(IntDir)vcpkg.applocal.log&amp;quot;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">StandardOutputImportance=</span><span style="color:#e6db74">&#34;Normal&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">StandardErrorImportance=</span><span style="color:#e6db74">&#34;Normal&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ContinueOnError=</span><span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">&lt;!-- ... 다른 코드가 있을 수 있음 ... --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/Target&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>코드 수정하기</strong>:
+<code>pwsh.exe</code>를 <code>powershell.exe</code>로 변경합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;Target</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">&#34;AppLocalFromInstalled&#34;</span> <span style="color:#a6e22e">AfterTargets=</span><span style="color:#e6db74">&#34;LinkSkippedExecution&#34;</span> <span style="color:#a6e22e">BeforeTargets=</span><span style="color:#e6db74">&#34;CopyFilesToOutputDirectory&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;Exec</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Command=</span><span style="color:#e6db74">&#34;powershell.exe -ExecutionPolicy Bypass -noprofile -File &amp;quot;$(MSBuildThisFileDirectory)applocal.ps1&amp;quot; &amp;quot;$(TargetPath)&amp;quot; &amp;quot;$(VcpkgInstalledDir)$(VcpkgTriplet)\bin&amp;quot; &amp;quot;$(TLogLocation)$(ProjectName).write.1u.tlog&amp;quot; &amp;quot;$(IntDir)vcpkg.applocal.log&amp;quot;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">StandardOutputImportance=</span><span style="color:#e6db74">&#34;Normal&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">StandardErrorImportance=</span><span style="color:#e6db74">&#34;Normal&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ContinueOnError=</span><span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">&lt;!-- ... 다른 코드는 그대로 유지 ... --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/Target&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>파일 저장하기</strong>:
+변경 사항을 저장합니다.</p>
+</li>
+<li>
+<p><strong>빌드 테스트하기</strong>:
+수정 후 프로젝트를 다시 빌드하여 pwsh.exe 오류가 더 이상 나타나지 않는지 확인합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>msbuild ApiSpecSample.vcxproj /p:Configuration=Release /p:Platform=x64 /t:Rebuild
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="주의-사항">주의 사항<a hidden class="anchor" aria-hidden="true" href="#주의-사항">#</a></h3>
+<ol>
+<li>
+<p>vcpkg를 업데이트하면 이 파일이 다시 원래 상태로 돌아갈 수 있습니다. 이 경우 다시 수정해야 할 수 있습니다.</p>
+</li>
+<li>
+<p>다른 방법으로는 앞서 언급한 시스템 환경 변수를 설정하는 것이 있습니다:</p>
+<ul>
+<li>시스템 속성 &gt; 고급 &gt; 환경 변수 &gt; 새로 만들기</li>
+<li>변수 이름: <code>VCPKG_FORCE_SYSTEM_BINARIES</code></li>
+<li>변수 값: <code>1</code></li>
+</ul>
+</li>
+</ol>
+<p>이렇게 수정하면 vcpkg가 빌드 후 단계에서 pwsh.exe를 찾으려고 시도하지 않고 직접 powershell.exe를 사용하게 되어 오류 메시지가 나타나지 않을 것입니다.</p>
+<h1 id="v-111--vcpkgtargets">v 1.11 : vcpkg.targets<a hidden class="anchor" aria-hidden="true" href="#v-111--vcpkgtargets">#</a></h1>
+<p>applocal.targets 파일이 없는 것 같습니다. 실제로 vcpkg의 최신 버전에서는 파일 구조가 변경되었을 수 있습니다. 이 경우, vcpkg.targets 파일이 applocal.targets의 기능을 포함하고 있을 가능성이 높습니다.</p>
+<p>다음 단계에 따라 vcpkg.targets 파일을 수정하여 pwsh.exe 오류를 해결해 보겠습니다:</p>
+<ol>
+<li>
+<p><strong>vcpkg.targets 파일 열기</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>notepad <span style="color:#e6db74">&#34;C:\workspace\jonpark-work\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets&#34;</span>
+</span></span></code></pre></div><p>또는 VS Code 같은 에디터로 열어도 됩니다.</p>
+</li>
+<li>
+<p><strong>파일 내용 확인</strong>:
+파일 내용을 살펴보고 pwsh.exe를 참조하는 부분을 찾습니다. 다음과 같은 형태일 것입니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;Exec</span> <span style="color:#a6e22e">Command=</span><span style="color:#e6db74">&#34;pwsh.exe -ExecutionPolicy Bypass -noprofile -File ...&#34;</span> <span style="color:#960050;background-color:#1e0010">...</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>pwsh.exe를 powershell.exe로 변경</strong>:
+모든 pwsh.exe 참조를 powershell.exe로 변경합니다. 여러 위치에 있을 수 있으니 찾아서 모두 변경하세요.</p>
+</li>
+<li>
+<p><strong>변경 사항 저장 후 빌드 테스트</strong>:
+파일을 저장하고 프로젝트를 다시 빌드하여 오류가 해결되었는지 확인합니다.</p>
+</li>
+</ol>
+<p>만약 위 방법으로도 해결되지 않는다면, 시스템 환경 변수를 설정하는 방법을 시도해 볼 수 있습니다:</p>
+<ol>
+<li>
+<p><strong>PowerShell에서 환경 변수 설정</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$env:VCPKG_FORCE_SYSTEM_BINARIES = <span style="color:#e6db74">&#34;1&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>영구 환경 변수로 설정</strong>:</p>
+<ul>
+<li>시작 &gt; 시스템 환경 변수 편집 &gt; 환경 변수 &gt; 새로 만들기</li>
+<li>변수 이름: <code>VCPKG_FORCE_SYSTEM_BINARIES</code></li>
+<li>변수 값: <code>1</code></li>
+</ul>
+</li>
+</ol>
+<p>이 환경 변수는 vcpkg가 시스템 바이너리(즉, pwsh.exe 대신 powershell.exe)를 사용하도록 강제합니다. 이 방법이 파일 수정보다 더 간단하고 vcpkg 업데이트에도 영향을 받지 않습니다.</p>
+<h1 id="v112--visual-studio-clang-cl-프로젝트에서-pwshexe-오류-해결-방법">v1.12 : Visual Studio Clang-cl 프로젝트에서 PWsh.exe 오류 해결 방법<a hidden class="anchor" aria-hidden="true" href="#v112--visual-studio-clang-cl-프로젝트에서-pwshexe-오류-해결-방법">#</a></h1>
+<p>Visual Studio에서 vcpkg를 사용하는 Clang-cl 프로젝트를 빌드할 때 &ldquo;pwsh.exe is not recognized&rdquo; 오류가 발생하는 경우가 있습니다. 이 오류는 빌드에 영향을 주지 않지만, 깔끔한 빌드 출력을 원한다면 다음과 같이 해결할 수 있습니다.</p>
+<h2 id="원인">원인<a hidden class="anchor" aria-hidden="true" href="#원인">#</a></h2>
+<p>vcpkg는 빌드 후 단계에서 PowerShell Core(pwsh.exe)를 사용하여 필요한 DLL을 복사하려고 시도합니다. 그러나 PowerShell Core가 설치되어 있지 않으면 오류 메시지가 발생합니다.</p>
+<h2 id="해결-방법-vcpkgtargets-파일-수정">해결 방법: vcpkg.targets 파일 수정<a hidden class="anchor" aria-hidden="true" href="#해결-방법-vcpkgtargets-파일-수정">#</a></h2>
+<ol>
+<li>
+<p><strong>vcpkg.targets 파일 찾기</strong>:</p>
+<pre tabindex="0"><code>C:\path\to\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets
+</code></pre></li>
+<li>
+<p><strong>파일 편집하기</strong>:</p>
+<ul>
+<li>텍스트 편집기로 vcpkg.targets 파일을 엽니다.</li>
+<li>pwsh.exe를 참조하는 모든 부분을 찾습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>pwsh.exe를 powershell.exe로 변경</strong>:</p>
+<ul>
+<li>모든 <code>pwsh.exe</code> 문자열을 <code>powershell.exe</code>로 변경합니다.</li>
+<li>다음과 같은 형태를 찾아 변경합니다:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;Exec</span> <span style="color:#a6e22e">Command=</span><span style="color:#e6db74">&#34;pwsh.exe -ExecutionPolicy Bypass -noprofile -File ...&#34;</span> <span style="color:#960050;background-color:#1e0010">...</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div>↓ 변경 후
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;Exec</span> <span style="color:#a6e22e">Command=</span><span style="color:#e6db74">&#34;powershell.exe -ExecutionPolicy Bypass -noprofile -File ...&#34;</span> <span style="color:#960050;background-color:#1e0010">...</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>파일 저장 및 빌드 테스트</strong>:</p>
+<ul>
+<li>변경 사항을 저장합니다.</li>
+<li>프로젝트를 다시 빌드하여 오류 메시지가 사라졌는지 확인합니다:
+<pre tabindex="0"><code>msbuild YourProject.vcxproj /p:Configuration=Release /p:Platform=x64
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<h2 id="대체-해결-방법">대체 해결 방법<a hidden class="anchor" aria-hidden="true" href="#대체-해결-방법">#</a></h2>
+<p>파일 수정 외에도 환경 변수를 설정하여 해결할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># PowerShell 세션용 (임시)</span>
+</span></span><span style="display:flex;"><span>$env:VCPKG_FORCE_SYSTEM_BINARIES = <span style="color:#e6db74">&#34;1&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 또는 시스템 환경 변수로 설정 (영구적)</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">Environment</span>]::SetEnvironmentVariable(<span style="color:#e6db74">&#34;VCPKG_FORCE_SYSTEM_BINARIES&#34;</span>, <span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#e6db74">&#34;User&#34;</span>)
+</span></span></code></pre></div><p>이 환경 변수는 vcpkg가 PowerShell Core 대신 시스템에 설치된 PowerShell을 사용하도록 지시합니다.</p>
+<h2 id="참고-사항">참고 사항<a hidden class="anchor" aria-hidden="true" href="#참고-사항">#</a></h2>
+<ul>
+<li>vcpkg를 업데이트하면 vcpkg.targets 파일이 초기화될 수 있으므로 환경 변수 방식이 더 견고한 해결책입니다.</li>
+<li>이 오류는 빌드 결과물에 영향을 주지 않으므로 무시해도 됩니다.</li>
+<li>대안으로 PowerShell Core를 설치하여 해결할 수도 있습니다: <code>winget install Microsoft.PowerShell</code></li>
+</ul>
+<h1 id="v2---내-작업">v2 - 내 작업<a hidden class="anchor" aria-hidden="true" href="#v2---내-작업">#</a></h1>
+<h2 id="native-compile-명령어">native compile 명령어<a hidden class="anchor" aria-hidden="true" href="#native-compile-명령어">#</a></h2>
+<p>msbuild ApiSpecSample.vcxproj /p:Configuration=Release /p:Platform=x64 /t:Rebuild</p>
+<p>cd build
+cmake &ndash;build . &ndash;target clean &amp;&amp; cmake &ndash;build . &ndash;config Debug</p>
+<p>Powershell 창 열기</p>
+<p>cd C:\workspace\jonpark-work\ApiSpecSample</p>
+<h1 id="coverity-명령어">coverity 명령어<a hidden class="anchor" aria-hidden="true" href="#coverity-명령어">#</a></h1>
+<p>rm -r cdir idir</p>
+<p>rm -r idir</p>
+<p>cov-configure -c cdir/c.xml &ndash;compiler clang-cl &ndash;comptype clangclcc &ndash;template</p>
+<p>cov-build -c cdir/c.xml &ndash;dir idir msbuild ApiSpecSample.vcxproj /p:Configuration=Release /p:Platform=x64 /t:Rebuild</p>
+<p>Get-Content -Path idir/build-log.txt -Tail 10</p>
+<p>mv idir idir-clangclcc</p>
+<p>mv cdir cdir-clangclcc</p>
+<p>cov-configure -c cdir/c.xml &ndash;compiler clang-cl &ndash;comptype msvc &ndash;template</p>
+<p>cov-build -c cdir/c.xml &ndash;dir idir msbuild ApiSpecSample.vcxproj /p:Configuration=Release /p:Platform=x64 /t:Rebuild</p>
+<p>Get-Content -Path idir/build-log.txt -Tail 10</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

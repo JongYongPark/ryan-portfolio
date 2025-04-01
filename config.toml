@@ -1,13 +1,16 @@
 baseURL = "https://jongyongpark.github.io/portfolio/"
 publishDir = "public"
-title = "Ryan's Portfolio"
+title = "RyanLabs"
 theme = "PaperMod"
 languageCode = "ko"
 defaultContentLanguage = "ko"
 
 ignoreFiles = ["/private/"]
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c954130 (update)
 [params]
   homeInfoParams = false
 
@@ -16,11 +19,11 @@ ignoreFiles = ["/private/"]
     title = "Ryan"
     subtitle = "💻 DevSecOps Engineer"
     imageUrl = "images/profile.png"
-    imageTitle = "Ryan Profile"
+    imageTitle = "RyanLabs"
 
     [[params.profileMode.buttons]]
       name = "📧 Email"
-      url = "mailto:ryan@example.com"
+      url = "mailto:lovemoneyjoy@gmail.com"
 
     [[params.profileMode.buttons]]
       name = "🌐 Website"
@@ -32,7 +35,7 @@ ignoreFiles = ["/private/"]
 
     [[params.profileMode.buttons]]
       name = "🐙 GitHub"
-      url = "https://github.com/ryanpark"
+      url = "https://github.com/JongYongPark"
 
     [[params.profileMode.buttons]]
       name = "📸 Instagram"

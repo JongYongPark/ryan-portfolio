@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ubuntu on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 14 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apt proxy issue</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/apt/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/apt/</guid>
+      <description>&lt;h1 id=&#34;apt-proxy-issue&#34;&gt;Apt proxy issue&lt;/h1&gt;
+&lt;p&gt;Ubuntu에서 발생한 APT 업데이트 문제의 원인과 해결 방법을 정리해드리겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;문제-원인&#34;&gt;문제 원인&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;APT(Advanced Package Tool)가 패키지 정보를 업데이트하려 할 때 프록시 서버(10.4.241.231:3142)를 통해 연결을 시도했습니다.&lt;/li&gt;
+&lt;li&gt;해당 프록시 서버에 연결할 수 없어 모든 저장소에 대한 연결이 타임아웃되었습니다.&lt;/li&gt;
+&lt;li&gt;문제는 &lt;code&gt;/etc/apt/apt.conf&lt;/code&gt; 파일에 설정된 프록시 설정이었습니다. 이 설정은 APT가 인터넷에 직접 연결하지 않고 프록시 서버를 통해 연결하도록 지시합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;진단-과정&#34;&gt;진단 과정&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;프록시 설정 확인:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cat /etc/apt/apt.conf.d/* | grep -i proxy
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;이 명령어로는 apt.conf.d 디렉토리 내의 파일들에서 프록시 설정을 찾을 수 없었습니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Special characters</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/special-chars/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/special-chars/</guid>
+      <description>&lt;h1 id=&#34;자주-사용되는-특수-문자-및-설명&#34;&gt;&lt;strong&gt;자주 사용되는 특수 문자 및 설명&lt;/strong&gt;&lt;/h1&gt;
+&lt;h3 id=&#34;1-기본적인-특수-문자&#34;&gt;&lt;strong&gt;1. 기본적인 특수 문자&lt;/strong&gt;&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;기호&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;이름 (영어)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;설명 (한국어)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;_&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Underscore&lt;/td&gt;
+          &lt;td&gt;언더스코어 (밑줄)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Hyphen&lt;/td&gt;
+          &lt;td&gt;하이픈 (대시, 붙임표)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;–&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;En dash&lt;/td&gt;
+          &lt;td&gt;엔 대시 (숫자 범위에서 사용, 예: 2020–2025)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;—&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Em dash&lt;/td&gt;
+          &lt;td&gt;엠 대시 (긴 대시, 문장 구분에 사용)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;=&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Equal sign&lt;/td&gt;
+          &lt;td&gt;등호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;+&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Plus sign&lt;/td&gt;
+          &lt;td&gt;더하기 기호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;*&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Asterisk&lt;/td&gt;
+          &lt;td&gt;별표, 곱셈 연산자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Slash, Forward slash&lt;/td&gt;
+          &lt;td&gt;슬래시, 경로 구분자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;\&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Backslash&lt;/td&gt;
+          &lt;td&gt;백슬래시, Windows 경로 구분자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;`&lt;/td&gt;
+          &lt;td&gt;`&lt;/td&gt;
+          &lt;td&gt;Vertical bar, Pipe&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;!&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Exclamation mark&lt;/td&gt;
+          &lt;td&gt;느낌표&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;@&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;At sign&lt;/td&gt;
+          &lt;td&gt;골뱅이, 이메일에서 사용&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;#&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Hash, Pound sign&lt;/td&gt;
+          &lt;td&gt;해시, 샵 (SNS 태그, 주석 표시)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;$&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Dollar sign&lt;/td&gt;
+          &lt;td&gt;달러 기호, 변수 기호 (Bash, PHP)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;%&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Percent sign&lt;/td&gt;
+          &lt;td&gt;퍼센트 기호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;^&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Caret&lt;/td&gt;
+          &lt;td&gt;캐럿 (지수 표현, 텍스트 강조)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;amp;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Ampersand&lt;/td&gt;
+          &lt;td&gt;앰퍼샌드 (AND 연산자)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-괄호-및-인용부호&#34;&gt;&lt;strong&gt;2. 괄호 및 인용부호&lt;/strong&gt;&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;기호&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;이름 (영어)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;설명 (한국어)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Parentheses&lt;/td&gt;
+          &lt;td&gt;소괄호 (괄호)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Square brackets&lt;/td&gt;
+          &lt;td&gt;대괄호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Curly brackets, Braces&lt;/td&gt;
+          &lt;td&gt;중괄호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Angle brackets&lt;/td&gt;
+          &lt;td&gt;꺾쇠 괄호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&#39;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Single quote, Apostrophe&lt;/td&gt;
+          &lt;td&gt;작은따옴표, 아포스트로피&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;quot;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Double quote&lt;/td&gt;
+          &lt;td&gt;큰따옴표&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;`&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Backtick&lt;/td&gt;
+          &lt;td&gt;백틱 (역따옴표, Markdown, JavaScript 등에서 사용)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-프로그래밍-및-명령어에서-자주-사용되는-특수-문자&#34;&gt;&lt;strong&gt;3. 프로그래밍 및 명령어에서 자주 사용되는 특수 문자&lt;/strong&gt;&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;기호&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;이름 (영어)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;설명 (한국어)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;~&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Tilde&lt;/td&gt;
+          &lt;td&gt;물결표 (홈 디렉토리 표현, 대략적인 의미)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;:&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Colon&lt;/td&gt;
+          &lt;td&gt;콜론 (경로, 시간, 네임스페이스에서 사용)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Semicolon&lt;/td&gt;
+          &lt;td&gt;세미콜론 (문장 구분자)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Period, Dot&lt;/td&gt;
+          &lt;td&gt;마침표 (파일 확장자, 숨김 파일)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;,&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Comma&lt;/td&gt;
+          &lt;td&gt;쉼표&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;?&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Question mark&lt;/td&gt;
+          &lt;td&gt;물음표 (쿼리스트링, 조건문)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;lt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Less than&lt;/td&gt;
+          &lt;td&gt;작다 (비교 연산자)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Greater than&lt;/td&gt;
+          &lt;td&gt;크다 (비교 연산자)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Left shift&lt;/td&gt;
+          &lt;td&gt;비트 연산자, 리디렉션 (Bash)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Right shift&lt;/td&gt;
+          &lt;td&gt;비트 연산자, 파일 추가 (Bash)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4-주요-사용-예시&#34;&gt;&lt;strong&gt;4. 주요 사용 예시&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;프로그래밍&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, World!&amp;#34;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;# 큰따옴표 사용&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;x is greater than or equal to 10&amp;#34;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;# 비교 연산자 `&amp;gt;=`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bash 명령어&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, &lt;/span&gt;$USER&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#75715e&#34;&gt;# $ (변수)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls -l /home/user      &lt;span style=&#34;color:#75715e&#34;&gt;# - (옵션)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd ~/Documents        &lt;span style=&#34;color:#75715e&#34;&gt;# ~ (홈 디렉토리)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Markdown&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;**Bold Text**  # 굵은 글씨 (별표 사용)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`Code`&lt;/span&gt;  # 인라인 코드 (백틱 사용)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-결론&#34;&gt;&lt;strong&gt;🔹 결론&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;파일명: &lt;code&gt;_&lt;/code&gt;(언더스코어)와 &lt;code&gt;-&lt;/code&gt;(하이픈) 사용 추천&lt;/li&gt;
+&lt;li&gt;변수명: &lt;code&gt;_&lt;/code&gt;(언더스코어) 주로 사용&lt;/li&gt;
+&lt;li&gt;프로그래밍: &lt;code&gt;;&lt;/code&gt;, &lt;code&gt;:&lt;/code&gt; 등 문법적 기호 많이 사용&lt;/li&gt;
+&lt;li&gt;터미널/명령어: &lt;code&gt;$&lt;/code&gt;, &lt;code&gt;~&lt;/code&gt;, &lt;code&gt;|&lt;/code&gt; 등 필수 기호 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;📌 &lt;strong&gt;상황에 따라 적절한 특수 문자를 사용하면 코드 가독성과 명령어 실행이 편리해집니다!&lt;/strong&gt; 🚀&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

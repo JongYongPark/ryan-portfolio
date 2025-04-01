@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Deno on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/deno/</link>
+    <description>Recent content in Deno on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Thu, 27 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/deno/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deno Install</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/deno-install/</link>
+      <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/deno-install/</guid>
+      <description>&lt;h1 id=&#34;install&#34;&gt;Install&lt;/h1&gt;
+&lt;p&gt;Deno는 JavaScript와 TypeScript를 위한 현대적인 런타임 환경으로, 설치 및 사용이 매우 간단합니다. 아래에 Deno를 설치하고 &amp;ldquo;Hello, World!&amp;rdquo; 프로그램을 작성하여 실행하는 방법을 안내해 드리겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-deno-설치하기&#34;&gt;1. Deno 설치하기&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;macOS 및 Linux&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;터미널을 열고 다음 명령어를 입력하여 Deno를 설치할 수 있습니다:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -fsSL https://deno.land/install.sh | sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 명령어는 공식 설치 스크립트를 다운로드하여 실행합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;PowerShell을 관리자 권한으로 열고 다음 명령어를 실행합니다:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;iwr https&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;//deno.land/install.ps1 -useb | iex
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;또는, Windows에서 &lt;a href=&#34;https://chocolatey.org/&#34;&gt;Chocolatey&lt;/a&gt; 패키지 관리자를 사용 중이라면, 다음과 같이 설치할 수 있습니다:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

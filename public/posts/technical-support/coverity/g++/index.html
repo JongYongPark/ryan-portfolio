@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="g&#43;&#43; : preprocessed
+C&#43;&#43;에서 Preprocessed File 생성 방법
+C&#43;&#43; 코드를 전처리(preprocessing) 단계까지 실행하면, 컴파일러는 헤더 파일 확장, 매크로 대체, 조건부 컴파일 처리 등의 작업을 수행한 결과를 담은 **전처리된 파일(preprocessed file)**을 생성합니다.
+
+1. 전처리 파일 생성
+(1) GCC 또는 Clang 사용
+g&#43;&#43; -E source.cpp -o preprocessed.cpp
+
+-E: 컴파일러가 전처리만 수행하고 결과를 출력합니다.
+source.cpp: 전처리할 소스 파일.
+-o preprocessed.cpp: 출력 파일 이름 지정.
+
+(2) MSVC (Microsoft C&#43;&#43; Compiler) 사용
+cl /P source.cpp
+
+/P: 전처리된 출력 파일 생성.
+source.cpp: 전처리할 소스 파일.
+결과 파일은 source.i로 저장됩니다.
+
+
+2. 전처리 파일의 내용
+전처리 파일은 컴파일러가 모든 헤더 파일 확장 및 매크로 치환을 완료한 코드입니다. 이를 통해 컴파일러는 소스 코드를 직접 컴파일할 준비를 합니다.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/technical-support/coverity/g&#43;&#43;/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/technical-support/coverity/g&#43;&#43;/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="g--preprocessed">g++ : preprocessed<a hidden class="anchor" aria-hidden="true" href="#g--preprocessed">#</a></h1>
+<h3 id="c에서-preprocessed-file-생성-방법"><strong>C++에서 Preprocessed File 생성 방법</strong><a hidden class="anchor" aria-hidden="true" href="#c에서-preprocessed-file-생성-방법">#</a></h3>
+<p>C++ 코드를 전처리(preprocessing) 단계까지 실행하면, 컴파일러는 <strong>헤더 파일 확장</strong>, 매크로 대체, 조건부 컴파일 처리 등의 작업을 수행한 결과를 담은 **전처리된 파일(preprocessed file)**을 생성합니다.</p>
+<hr>
+<h3 id="1-전처리-파일-생성">1. <strong>전처리 파일 생성</strong><a hidden class="anchor" aria-hidden="true" href="#1-전처리-파일-생성">#</a></h3>
+<h4 id="1-gcc-또는-clang-사용">(1) GCC 또는 Clang 사용<a hidden class="anchor" aria-hidden="true" href="#1-gcc-또는-clang-사용">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>g++ -E source.cpp -o preprocessed.cpp
+</span></span></code></pre></div><ul>
+<li><code>-E</code>: 컴파일러가 전처리만 수행하고 결과를 출력합니다.</li>
+<li><code>source.cpp</code>: 전처리할 소스 파일.</li>
+<li><code>-o preprocessed.cpp</code>: 출력 파일 이름 지정.</li>
+</ul>
+<h4 id="2-msvc-microsoft-c-compiler-사용">(2) MSVC (Microsoft C++ Compiler) 사용<a hidden class="anchor" aria-hidden="true" href="#2-msvc-microsoft-c-compiler-사용">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>cl /P source.cpp
+</span></span></code></pre></div><ul>
+<li><code>/P</code>: 전처리된 출력 파일 생성.</li>
+<li><code>source.cpp</code>: 전처리할 소스 파일.</li>
+<li>결과 파일은 <code>source.i</code>로 저장됩니다.</li>
+</ul>
+<hr>
+<h3 id="2-전처리-파일의-내용">2. <strong>전처리 파일의 내용</strong><a hidden class="anchor" aria-hidden="true" href="#2-전처리-파일의-내용">#</a></h3>
+<p>전처리 파일은 컴파일러가 <strong>모든 헤더 파일 확장</strong> 및 <strong>매크로 치환</strong>을 완료한 코드입니다. 이를 통해 컴파일러는 소스 코드를 직접 컴파일할 준비를 합니다.</p>
+<h4 id="전처리-파일에-포함된-내용"><strong>전처리 파일에 포함된 내용</strong><a hidden class="anchor" aria-hidden="true" href="#전처리-파일에-포함된-내용">#</a></h4>
+<ol>
+<li>
+<p><strong>헤더 파일 내용</strong></p>
+<ul>
+<li><code>#include</code>로 참조된 헤더 파일의 내용이 모두 확장됩니다.</li>
+<li>예: <code>&lt;iostream&gt;</code>의 모든 내부 정의가 포함됩니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>매크로 치환</strong></p>
+<ul>
+<li><code>#define</code>으로 정의된 매크로가 치환됩니다.</li>
+<li>예: <code>#define MAX 100</code> → 모든 <code>MAX</code>가 <code>100</code>으로 대체.</li>
+</ul>
+</li>
+<li>
+<p><strong>조건부 컴파일 처리</strong></p>
+<ul>
+<li><code>#ifdef</code>, <code>#ifndef</code>, <code>#if</code> 등의 조건문이 해석되어 적절한 코드만 남습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>주석 제거</strong></p>
+<ul>
+<li>주석은 전처리 파일에서 제거됩니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="3-예제와-결과">3. <strong>예제와 결과</strong><a hidden class="anchor" aria-hidden="true" href="#3-예제와-결과">#</a></h3>
+<h4 id="1-예제-소스-코드">(1) <strong>예제 소스 코드</strong><a hidden class="anchor" aria-hidden="true" href="#1-예제-소스-코드">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define MAX 100
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> MAX;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Value: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> value <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="2-전처리-결과-파일">(2) <strong>전처리 결과 파일</strong><a hidden class="anchor" aria-hidden="true" href="#2-전처리-결과-파일">#</a></h4>
+<p>(일부 생략된 헤더 파일 내용 포함)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;source.cpp&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;&lt;built-in&gt;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;&lt;command-line&gt;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;source.cpp&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Value: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> value <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="4-전처리-파일-내용-이해하기">4. <strong>전처리 파일 내용 이해하기</strong><a hidden class="anchor" aria-hidden="true" href="#4-전처리-파일-내용-이해하기">#</a></h3>
+<ul>
+<li><strong>헤더 확장</strong>:
+<ul>
+<li><code>&lt;iostream&gt;</code>의 전체 내용이 포함되며, 보통 많은 줄로 확장됩니다. 대부분 컴파일러는 내부 헤더 내용을 주석 처리하거나 간략하게 표시합니다.</li>
+</ul>
+</li>
+<li><strong>매크로 대체</strong>:
+<ul>
+<li><code>#define</code> 매크로가 실제 값으로 치환됩니다.</li>
+</ul>
+</li>
+<li><strong>조건부 컴파일 처리</strong>:
+<ul>
+<li><code>#ifdef</code>, <code>#ifndef</code> 등의 조건문이 해석되어 실제로 포함될 코드만 남습니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-활용">5. <strong>활용</strong><a hidden class="anchor" aria-hidden="true" href="#5-활용">#</a></h3>
+<ul>
+<li><strong>디버깅</strong>:
+<ul>
+<li>매크로 치환과 헤더 파일 확장의 문제를 분석하는 데 사용됩니다.</li>
+</ul>
+</li>
+<li><strong>코드 최적화</strong>:
+<ul>
+<li>전처리 결과를 분석하여 불필요한 헤더 포함 등을 제거할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<p>추가 질문이 있으면 언제든 말씀해주세요! 😊</p>
+<hr>
+<h1 id="string---preprocessed">string - preprocessed<a hidden class="anchor" aria-hidden="true" href="#string---preprocessed">#</a></h1>
+<p>C++에서 <code>&lt;string&gt;</code> 라이브러리를 사용하는 간단한 예제를 작성하고, 전처리 파일을 생성하여 그 안에 포함된 실제 내용(특히 <code>&lt;string&gt;</code> 라이브러리의 함수 정의)을 확인해보겠습니다.</p>
+<hr>
+<h3 id="1-간단한-c-예제"><strong>1. 간단한 C++ 예제</strong><a hidden class="anchor" aria-hidden="true" href="#1-간단한-c-예제">#</a></h3>
+<p>아래는 <code>&lt;string&gt;</code> 헤더를 사용하는 간단한 예제입니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;OpenAI&#34;</span>;
+</span></span><span style="display:flex;"><span>    name.append(<span style="color:#e6db74">&#34; GPT&#34;</span>);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Name: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>위 코드는 <code>std::string</code> 객체를 생성하고, <code>append</code> 메서드를 사용하여 문자열을 확장한 뒤 출력합니다.</p>
+<hr>
+<h3 id="2-전처리-파일-생성"><strong>2. 전처리 파일 생성</strong><a hidden class="anchor" aria-hidden="true" href="#2-전처리-파일-생성">#</a></h3>
+<p>위 코드를 <code>source.cpp</code>로 저장한 뒤, <strong>전처리 파일</strong>을 생성합니다.</p>
+<h4 id="gcc-또는-clang-명령">GCC 또는 Clang 명령:<a hidden class="anchor" aria-hidden="true" href="#gcc-또는-clang-명령">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>g++ -E source.cpp -o preprocessed.cpp
+</span></span></code></pre></div><h4 id="msvc-명령">MSVC 명령:<a hidden class="anchor" aria-hidden="true" href="#msvc-명령">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>cl /P source.cpp
+</span></span></code></pre></div><hr>
+<h3 id="3-전처리-파일-내용-확인"><strong>3. 전처리 파일 내용 확인</strong><a hidden class="anchor" aria-hidden="true" href="#3-전처리-파일-내용-확인">#</a></h3>
+<p>전처리 파일은 매우 길기 때문에, <strong>중요한 부분만 발췌</strong>하여 설명하겠습니다.</p>
+<h4 id="전처리-파일-주요-내용">전처리 파일 주요 내용<a hidden class="anchor" aria-hidden="true" href="#전처리-파일-주요-내용">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;source.cpp&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;&lt;built-in&gt;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;&lt;command-line&gt;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;source.cpp&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;/usr/include/c++/v1/string&#34;  </span><span style="color:#75715e">// &lt;string&gt; 헤더 파일 경로
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// string 클래스와 관련된 정의가 포함됨
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">namespace</span> std {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">_CharT</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">_Traits</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">_Allocator</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">basic_string</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 주요 멤버 함수들
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>            basic_string();
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">~</span>basic_string();
+</span></span><span style="display:flex;"><span>            basic_string<span style="color:#f92672">&amp;</span> append(<span style="color:#66d9ef">const</span> basic_string<span style="color:#f92672">&amp;</span>);
+</span></span><span style="display:flex;"><span>            size_type <span style="color:#a6e22e">size</span>() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">noexcept</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> _CharT<span style="color:#f92672">*</span> <span style="color:#a6e22e">c_str</span>() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">noexcept</span>;
+</span></span><span style="display:flex;"><span>            ...
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">typedef</span> basic_string<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span>, allocator<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;</span> string;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="추가-내용">추가 내용:<a hidden class="anchor" aria-hidden="true" href="#추가-내용">#</a></h4>
+<ul>
+<li><strong>헤더 확장</strong>: <code>&lt;string&gt;</code>의 모든 정의가 포함됩니다.</li>
+<li><strong>매크로 및 템플릿</strong>: <code>basic_string</code> 템플릿 정의가 확장되고, <code>std::string</code>은 <code>basic_string&lt;char&gt;</code>로 정의됩니다.</li>
+</ul>
+<hr>
+<h3 id="4-string-라이브러리의-주요-함수"><strong>4. <code>&lt;string&gt;</code> 라이브러리의 주요 함수</strong><a hidden class="anchor" aria-hidden="true" href="#4-string-라이브러리의-주요-함수">#</a></h3>
+<p>C++의 <code>&lt;string&gt;</code> 라이브러리는 <code>std::basic_string</code> 클래스를 기반으로 합니다. 주요 함수 목록은 아래와 같습니다.</p>
+<h4 id="생성자-및-소멸자"><strong>생성자 및 소멸자</strong><a hidden class="anchor" aria-hidden="true" href="#생성자-및-소멸자">#</a></h4>
+<ul>
+<li><code>string()</code> - 기본 생성자</li>
+<li><code>string(const char*)</code> - C 스타일 문자열로 초기화</li>
+<li><code>string(const string&amp;)</code> - 복사 생성자</li>
+<li><code>~string()</code> - 소멸자</li>
+</ul>
+<h4 id="멤버-함수"><strong>멤버 함수</strong><a hidden class="anchor" aria-hidden="true" href="#멤버-함수">#</a></h4>
+<ul>
+<li>
+<p><strong>문자열 수정</strong></p>
+<ul>
+<li><code>append()</code> - 문자열 덧붙이기</li>
+<li><code>insert()</code> - 특정 위치에 삽입</li>
+<li><code>erase()</code> - 특정 범위 삭제</li>
+<li><code>replace()</code> - 문자열 교체</li>
+<li><code>clear()</code> - 문자열 비우기</li>
+</ul>
+</li>
+<li>
+<p><strong>문자열 조회</strong></p>
+<ul>
+<li><code>size()</code> 또는 <code>length()</code> - 문자열 길이</li>
+<li><code>empty()</code> - 문자열이 비었는지 확인</li>
+<li><code>substr()</code> - 부분 문자열 반환</li>
+<li><code>at()</code> - 특정 위치 문자 반환</li>
+<li><code>front()</code> / <code>back()</code> - 첫/마지막 문자 반환</li>
+</ul>
+</li>
+<li>
+<p><strong>문자열 비교</strong></p>
+<ul>
+<li><code>compare()</code> - 문자열 비교</li>
+<li><code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code> 연산자</li>
+</ul>
+</li>
+<li>
+<p><strong>문자열 검색</strong></p>
+<ul>
+<li><code>find()</code> - 부분 문자열 검색</li>
+<li><code>rfind()</code> - 역방향 검색</li>
+<li><code>find_first_of()</code> - 특정 문자 검색</li>
+<li><code>find_last_of()</code> - 마지막 문자 검색</li>
+</ul>
+</li>
+<li>
+<p><strong>C 스타일 호환</strong></p>
+<ul>
+<li><code>c_str()</code> - C 스타일 문자열 반환</li>
+<li><code>data()</code> - 내부 데이터 포인터 반환</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-실제-활용"><strong>5. 실제 활용</strong><a hidden class="anchor" aria-hidden="true" href="#5-실제-활용">#</a></h3>
+<p>위에서 확인한 주요 함수는 전처리 파일을 통해 <code>basic_string</code> 클래스 내부에 정의되어 있습니다. 전처리 파일은 클래스의 전체 구조와 컴파일러가 사용한 세부 구현을 확인하는 데 유용합니다.</p>
+<hr>
+<h3 id="추가-작업"><strong>추가 작업</strong><a hidden class="anchor" aria-hidden="true" href="#추가-작업">#</a></h3>
+<ul>
+<li><strong>전처리 파일 분석</strong>: 필요하면 특정 함수 정의 부분만 추가로 추출하여 설명드릴 수 있습니다.</li>
+<li><strong>특정 플랫폼에 따른 차이</strong>: 사용하는 컴파일러(GCC, MSVC 등)에 따라 전처리 결과가 다를 수 있으므로, 환경에 따라 파일을 맞춰 분석할 수 있습니다.</li>
+</ul>
+<p>도움이 더 필요하면 언제든 말씀해주세요! 😊</p>
+<h1 id="전처리기-디버그-정보">전처리기 디버그 정보<a hidden class="anchor" aria-hidden="true" href="#전처리기-디버그-정보">#</a></h1>
+<p>C++ 전처리 파일에서 <code>#</code> 뒤에 나오는 숫자는 <strong>전처리기 디버그 정보</strong>로, 컴파일러와 디버거가 소스 코드와 전처리 파일 간의 매핑을 이해하는 데 사용됩니다. 이 정보는 주로 파일과 줄 번호를 나타내며, 다음과 같은 의미를 가집니다.</p>
+<hr>
+<h3 id="전처리기의--숫자-의미"><strong>전처리기의 <code>#</code> 숫자 의미</strong><a hidden class="anchor" aria-hidden="true" href="#전처리기의--숫자-의미">#</a></h3>
+<ol>
+<li>
+<p><strong><code># &lt;line_number&gt; &quot;&lt;file_path&gt;&quot;</code></strong></p>
+<ul>
+<li><code>line_number</code>: 원래 소스 코드의 줄 번호.</li>
+<li><code>file_path</code>: 원래 소스 파일 또는 포함된 헤더 파일의 경로.</li>
+<li>이 정보는 디버거가 전처리 파일에서 원래의 소스 코드와 연관성을 유지하도록 돕습니다.</li>
+</ul>
+<p>예:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;source.cpp&#34;
+</span></span></span></code></pre></div><ul>
+<li>원래 소스 파일 <code>source.cpp</code>의 1번째 줄에 해당하는 내용이 시작됨을 의미합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong><code># &lt;line_number&gt;</code> (파일 경로 없이)</strong></p>
+<ul>
+<li>줄 번호만 있는 경우, 전처리 과정에서 <strong>줄 번호 업데이트</strong>를 나타냅니다.</li>
+<li>이전 파일 컨텍스트를 유지한 상태에서, 해당 줄 번호로 이동했다는 뜻입니다.</li>
+</ul>
+<p>예:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 10
+</span></span></span></code></pre></div><ul>
+<li>이전에 처리 중인 파일의 10번째 줄에서 코드를 읽고 있음을 나타냅니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>파일이 바뀌었을 때</strong></p>
+<ul>
+<li>파일을 포함(<code>#include</code>)하거나 헤더 파일로 전환할 때마다 새로운 파일과 줄 번호가 기록됩니다.</li>
+</ul>
+<p>예:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;/usr/include/c++/v1/string&#34;
+</span></span></span></code></pre></div><ul>
+<li><code>/usr/include/c++/v1/string</code> 파일의 1번째 줄에서 처리가 시작되었음을 의미합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>전처리 명령 또는 내부 구분</strong></p>
+<ul>
+<li>전처리 중 파일 경계, 매크로 확장, 조건부 컴파일 등이 발생할 때마다 이 정보가 업데이트됩니다.</li>
+<li>예를 들어:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;macro_expansion.h&#34; 2
+</span></span></span></code></pre></div><ul>
+<li><code>2</code>: 파일이 매크로 확장 또는 조건부 컴파일 결과로 포함되었음을 나타냅니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="전처리기-디버그-정보의-활용"><strong>전처리기 디버그 정보의 활용</strong><a hidden class="anchor" aria-hidden="true" href="#전처리기-디버그-정보의-활용">#</a></h3>
+<ul>
+<li><strong>디버깅</strong>: 컴파일러는 전처리 파일을 기반으로 디버그 정보를 생성합니다. 디버거는 전처리 파일에서 원래 소스 파일과 줄 번호를 역추적할 수 있습니다.</li>
+<li><strong>에러 메시지 매핑</strong>: 컴파일러 경고와 오류 메시지는 전처리 파일이 아닌 원래 소스 코드의 줄 번호를 기준으로 출력됩니다.</li>
+<li><strong>헤더 파일 추적</strong>: 전처리 파일에서 특정 헤더 파일이 포함된 위치를 확인할 수 있습니다.</li>
+</ul>
+<hr>
+<h3 id="예시"><strong>예시</strong><a hidden class="anchor" aria-hidden="true" href="#예시">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;source.cpp&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;header.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;header.h&#34; 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> x;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2 &#34;header.h&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> y;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3 &#34;source.cpp&#34; 2
+</span></span></span></code></pre></div><ul>
+<li><code># 1 &quot;source.cpp&quot;</code>: 전처리기의 시작 위치가 <code>source.cpp</code> 파일의 1번째 줄임을 의미.</li>
+<li><code># 1 &quot;header.h&quot; 1</code>: <code>header.h</code> 파일이 포함되었으며, 이는 원래 <code>source.cpp</code>에서 2번째 줄에 위치.</li>
+<li><code># 3 &quot;source.cpp&quot; 2</code>: 다시 원래 파일로 돌아왔으며, <code>source.cpp</code>의 3번째 줄로 이동.</li>
+</ul>
+<hr>
+<p>추가로 더 궁금한 점이 있다면 말씀해주세요! 😊</p>
+<h1 id="전처리-파일-해석">전처리 파일 해석<a hidden class="anchor" aria-hidden="true" href="#전처리-파일-해석">#</a></h1>
+<h2 id="제공된-데이타">제공된 데이타<a hidden class="anchor" aria-hidden="true" href="#제공된-데이타">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 49 &#34;/usr/include/c++/13/string&#34; 2 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;/usr/include/c++/13/bits/stl_function.h&#34; 1 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 63 &#34;/usr/include/c++/13/bits/stl_function.h&#34; 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">namespace</span> std <span style="color:#a6e22e">__attribute__</span> ((__visibility__ (<span style="color:#e6db74">&#34;default&#34;</span>)))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 116 &#34;/usr/include/c++/13/bits/stl_function.h&#34; 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> _Arg, <span style="color:#66d9ef">typename</span> _Result<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">unary_function</span>
+</span></span></code></pre></div><p>주어진 전처리 파일의 일부를 분석하여 각 줄의 의미를 해석해 보겠습니다. 이 코드는 C++ 표준 라이브러리의 일부(<code>std::unary_function</code>)를 나타내며, 각 줄은 특정 전처리 정보와 C++ 코드 구조를 설명합니다.</p>
+<hr>
+<h3 id="1-코드-분석"><strong>1. 코드 분석</strong><a hidden class="anchor" aria-hidden="true" href="#1-코드-분석">#</a></h3>
+<h4 id="첫-번째-줄"><strong>첫 번째 줄</strong><a hidden class="anchor" aria-hidden="true" href="#첫-번째-줄">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 49 &#34;/usr/include/c++/13/string&#34; 2 3
+</span></span></span></code></pre></div><ul>
+<li><strong><code># 49</code></strong>: 현재 처리 중인 줄 번호가 49번임을 나타냅니다.</li>
+<li><strong><code>&quot;/usr/include/c++/13/string&quot;</code></strong>: 현재 파일이 <code>/usr/include/c++/13/string</code>임을 나타냅니다.</li>
+<li><strong><code>2</code></strong>: 이 파일은 포함된 파일(헤더 파일)이라는 것을 나타냅니다. 즉, 이 파일은 <code>#include</code>로 확장되었습니다.</li>
+<li><strong><code>3</code></strong>: 이 파일은 시스템 헤더(system header)임을 나타냅니다. 따라서 컴파일러는 이 파일에서 경고 메시지를 출력하지 않을 수 있습니다.</li>
+</ul>
+<hr>
+<h4 id="두-번째-줄"><strong>두 번째 줄</strong><a hidden class="anchor" aria-hidden="true" href="#두-번째-줄">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;/usr/include/c++/13/bits/stl_function.h&#34; 1 3
+</span></span></span></code></pre></div><ul>
+<li><strong><code># 1</code></strong>: 현재 처리 중인 줄 번호가 1번임을 나타냅니다.</li>
+<li><strong><code>&quot;/usr/include/c++/13/bits/stl_function.h&quot;</code></strong>: 이제 이 파일(<code>stl_function.h</code>)의 첫 번째 줄을 처리 중임을 나타냅니다.</li>
+<li><strong><code>1</code></strong>: 이 파일은 새로 시작된 파일(포함된 첫 번째 파일)이라는 것을 나타냅니다.</li>
+<li><strong><code>3</code></strong>: 이 파일도 시스템 헤더로, 컴파일러는 이 파일에서 발생하는 경고를 억제할 수 있습니다.</li>
+</ul>
+<hr>
+<h4 id="세-번째-줄"><strong>세 번째 줄</strong><a hidden class="anchor" aria-hidden="true" href="#세-번째-줄">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 63 &#34;/usr/include/c++/13/bits/stl_function.h&#34; 3
+</span></span></span></code></pre></div><ul>
+<li><strong><code># 63</code></strong>: 현재 처리 중인 줄 번호가 63번임을 나타냅니다.</li>
+<li><strong><code>&quot;/usr/include/c++/13/bits/stl_function.h&quot;</code></strong>: 여전히 같은 파일을 처리 중입니다.</li>
+<li><strong><code>3</code></strong>: 이 파일은 시스템 헤더입니다.</li>
+</ul>
+<hr>
+<h4 id="네-번째-줄"><strong>네 번째 줄</strong><a hidden class="anchor" aria-hidden="true" href="#네-번째-줄">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> std <span style="color:#a6e22e">__attribute__</span> ((__visibility__ (<span style="color:#e6db74">&#34;default&#34;</span>)))
+</span></span><span style="display:flex;"><span>{
+</span></span></code></pre></div><ul>
+<li><strong><code>namespace std</code></strong>: <code>std</code> 네임스페이스 정의의 시작입니다. <code>std</code>는 C++ 표준 라이브러리의 모든 구성 요소를 포함하는 네임스페이스입니다.</li>
+<li><strong><code>__attribute__ ((__visibility__ (&quot;default&quot;)))</code></strong>:
+<ul>
+<li><strong><code>__attribute__</code></strong>: GNU 컴파일러(GCC)의 확장 기능으로, 객체의 속성을 설정합니다.</li>
+<li><strong><code>__visibility__(&quot;default&quot;)</code></strong>: 이 네임스페이스 또는 코드 블록 내의 심볼(예: 함수, 클래스)이 외부에서 접근 가능하도록(공유 라이브러리에서 노출) 설정합니다.</li>
+<li>이 속성은 보통 동적 라이브러리(Shared Library)에서 특정 심볼이 외부에서 사용할 수 있도록 할 때 사용됩니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="다섯-번째-줄"><strong>다섯 번째 줄</strong><a hidden class="anchor" aria-hidden="true" href="#다섯-번째-줄">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> _Arg, <span style="color:#66d9ef">typename</span> _Result<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">unary_function</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>template&lt;typename _Arg, typename _Result&gt;</code></strong>:</p>
+<ul>
+<li><strong>템플릿</strong>: <code>unary_function</code>은 <strong>템플릿 구조체</strong>로, 두 개의 타입 매개변수(<code>_Arg</code>, <code>_Result</code>)를 사용합니다.</li>
+<li><code>_Arg</code>: 함수의 입력 타입.</li>
+<li><code>_Result</code>: 함수의 반환 타입.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>struct unary_function</code></strong>:</p>
+<ul>
+<li><code>std::unary_function</code> 구조체는 C++98에서 함수 객체(function object)를 정의하기 위해 사용되었습니다.</li>
+<li>이 구조체는 사용자 정의 함수 객체를 쉽게 구현하기 위해 설계되었습니다.</li>
+<li>예전 스타일의 C++ 코드에서 널리 사용되었지만, <strong>C++11 이후로는 <code>std::function</code> 또는 람다 함수가 이를 대체</strong>하였습니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="6-예제-unary_function의-역할"><strong>6. 예제: <code>unary_function</code>의 역할</strong><a hidden class="anchor" aria-hidden="true" href="#6-예제-unary_function의-역할">#</a></h3>
+<h4 id="정의된-구조체">정의된 구조체:<a hidden class="anchor" aria-hidden="true" href="#정의된-구조체">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> _Arg, <span style="color:#66d9ef">typename</span> _Result<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">unary_function</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">typedef</span> _Arg argument_type;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">typedef</span> _Result result_type;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong><code>argument_type</code></strong>: 함수 객체의 입력 타입 정의.</li>
+<li><strong><code>result_type</code></strong>: 함수 객체의 반환 타입 정의.</li>
+</ul>
+<h4 id="사용-예제">사용 예제:<a hidden class="anchor" aria-hidden="true" href="#사용-예제">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Increment</span> <span style="color:#f92672">:</span> std<span style="color:#f92672">::</span>unary_function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> x) <span style="color:#66d9ef">const</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>Increment</code>는 <code>std::unary_function&lt;int, int&gt;</code>를 상속받아 입력과 반환 타입을 명시합니다.</li>
+<li>이후 호출 시:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Increment inc;
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> inc(<span style="color:#ae81ff">5</span>); <span style="color:#75715e">// 출력: 6
+</span></span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="요약"><strong>요약</strong><a hidden class="anchor" aria-hidden="true" href="#요약">#</a></h3>
+<ul>
+<li><code>#</code> 뒤의 숫자는 전처리기의 파일, 줄 번호, 그리고 파일 속성(시스템 헤더 등)을 설명합니다.</li>
+<li><code>std::unary_function</code>은 입력 타입(<code>_Arg</code>)과 결과 타입(<code>_Result</code>)을 정의하는 간단한 구조체로, C++11 이전 스타일의 함수 객체를 지원하기 위해 사용되었습니다.</li>
+<li><strong>C++11 이후</strong>로는 <code>std::function</code>과 람다 함수가 더 현대적이고 선호되는 대안입니다.</li>
+</ul>
+<p>궁금한 점이 더 있으면 말씀해주세요! 😊</p>
+<h1 id="매크로-확장">매크로 확장<a hidden class="anchor" aria-hidden="true" href="#매크로-확장">#</a></h1>
+<p>C++ 전처리기의 동작에서 전처리 파일에 나오는 다음과 같은 줄:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 49 &#34;/usr/include/c++/13/string&#34; 2 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;/usr/include/c++/13/bits/stl_function.h&#34; 1 3
+</span></span></span></code></pre></div><p>이 의미는 <strong><code>/usr/include/c++/13/string</code> 파일의 49번째 줄에서 <code>/usr/include/c++/13/bits/stl_function.h</code> 파일이 포함되었다는 것</strong>입니다. 따라서, 49번째 줄에서 <code>#include</code> 지시문이 실행되었고, 해당 지시문이 확장되어 전처리 파일에 <code>stl_function.h</code>의 내용이 추가되었음을 나타냅니다.</p>
+<hr>
+<h3 id="매크로-확장인지-직접-호출인지-구분-방법"><strong>매크로 확장인지 직접 호출인지 구분 방법</strong><a hidden class="anchor" aria-hidden="true" href="#매크로-확장인지-직접-호출인지-구분-방법">#</a></h3>
+<h4 id="1-직접-호출-include">1. <strong>직접 호출 (<code>#include</code>)</strong><a hidden class="anchor" aria-hidden="true" href="#1-직접-호출-include">#</a></h4>
+<p>만약 <code>/usr/include/c++/13/string</code> 파일의 49번째 줄이 아래처럼 단순한 <code>#include</code> 문이라면, 이는 직접 호출된 경우입니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stl_function.h&gt;</span><span style="color:#75715e">
+</span></span></span></code></pre></div><h4 id="2-매크로-확장">2. <strong>매크로 확장</strong><a hidden class="anchor" aria-hidden="true" href="#2-매크로-확장">#</a></h4>
+<p>만약 매크로가 <code>stl_function.h</code>를 포함하도록 정의되어 있다면, 매크로 확장에 의해 해당 파일이 포함될 수 있습니다. 예를 들어:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#define INCLUDE_STL_FUNCTION #include &lt;bits/stl_function.h&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>INCLUDE_STL_FUNCTION
+</span></span></code></pre></div><p>이 경우, 전처리 과정에서 매크로가 확장되어 실제로 <code>#include &lt;bits/stl_function.h&gt;</code>와 동일하게 동작합니다.</p>
+<h4 id="확인-방법">확인 방법:<a hidden class="anchor" aria-hidden="true" href="#확인-방법">#</a></h4>
+<ul>
+<li>전처리 파일에 매크로 확장 정보가 나타나지 않았으므로, 이 경우는 단순히 <strong><code>#include</code> 지시문이 직접 실행된 경우</strong>로 볼 수 있습니다.</li>
+</ul>
+<hr>
+<h3 id="추가-정보"><strong>추가 정보</strong><a hidden class="anchor" aria-hidden="true" href="#추가-정보">#</a></h3>
+<p>전처리기는 다음과 같은 작업을 수행합니다:</p>
+<ol>
+<li><code>#include</code>를 만나면 해당 파일의 내용을 전처리 파일에 삽입합니다.</li>
+<li>매크로 확장은 별도로 전처리 파일에 명시적으로 기록되며, 보통 매크로 확장 전후의 파일/줄 번호 정보가 포함됩니다.</li>
+</ol>
+<p>전처리 파일에서 해당 파일이 매크로로 확장되었다면, 전처리 파일에 다음과 같은 정보가 포함되었을 것입니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e"># 49 &#34;/usr/include/c++/13/string&#34; 2 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 &#34;/usr/include/c++/13/bits/stl_function.h&#34; 1 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// 추가적인 매크로 관련 주석이나 정보
+</span></span></span></code></pre></div><p>이 경우 매크로 확장에 대한 디버그 정보를 통해 확장 여부를 명확히 확인할 수 있습니다.</p>
+<hr>
+<h3 id="결론"><strong>결론</strong><a hidden class="anchor" aria-hidden="true" href="#결론">#</a></h3>
+<p>주어진 전처리 파일을 보면 <code>/usr/include/c++/13/string</code> 파일의 49번째 줄에서 직접적으로 <code>#include &lt;bits/stl_function.h&gt;</code>를 호출한 것으로 보입니다. 매크로 확장은 이 코드 조각에 나타나지 않았습니다.</p>
+<p>추가로 해당 파일 구조를 더 자세히 살펴보거나, 매크로 관련 의심이 있다면 말씀해주세요! 😊</p>
+<h1 id="c-에서-string-라이브러리-사용하는-코드에서-버그가-있는-코드를-작성">c++ 에서 string 라이브러리 사용하는 코드에서 버그가 있는 코드를 작성<a hidden class="anchor" aria-hidden="true" href="#c-에서-string-라이브러리-사용하는-코드에서-버그가-있는-코드를-작성">#</a></h1>
+<p>다음은 C++에서 <code>&lt;string&gt;</code> 라이브러리를 사용하는 코드 중, 특정한 상황에서 <strong>버그</strong>를 유발할 수 있는 예제입니다. 이 코드는 의도적으로 작성된 버그를 포함하고 있으며, 설명과 함께 문제점을 분석합니다.</p>
+<hr>
+<h3 id="버그가-있는-코드-예제"><strong>버그가 있는 코드 예제</strong><a hidden class="anchor" aria-hidden="true" href="#버그가-있는-코드-예제">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processString</span>(std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> str) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 잘못된 인덱스를 사용하여 예외 발생 가능
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    str[<span style="color:#ae81ff">100</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X&#39;</span>; <span style="color:#75715e">// 문자열이 이 크기를 초과하면 Undefined Behavior
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string myString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, World!&#34;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 문자열 크기를 잘못 판단하고 호출
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    processString(myString);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Modified string: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> myString <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="문제점-분석"><strong>문제점 분석</strong><a hidden class="anchor" aria-hidden="true" href="#문제점-분석">#</a></h3>
+<ol>
+<li>
+<p><strong><code>str[100]</code> 접근</strong></p>
+<ul>
+<li><code>processString</code> 함수에서 <code>std::string</code> 객체에 잘못된 인덱스로 접근합니다.</li>
+<li>만약 <code>myString</code>의 크기가 100보다 작다면, 이는 <strong>Undefined Behavior</strong>(UB)로 이어집니다.</li>
+<li>대부분의 경우 프로그램이 충돌하거나, 예기치 못한 결과를 초래합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>예외가 발생하지 않음</strong></p>
+<ul>
+<li><code>std::string::operator[]</code>는 **경계 검사(boundary check)**를 수행하지 않으므로, 잘못된 인덱스에 대해 예외를 발생시키지 않습니다.</li>
+<li>이와는 달리, <code>std::string::at()</code>는 경계 검사를 수행하며, 잘못된 인덱스에 대해 <code>std::out_of_range</code> 예외를 발생시킵니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="수정-방법"><strong>수정 방법</strong><a hidden class="anchor" aria-hidden="true" href="#수정-방법">#</a></h3>
+<p><code>operator[]</code> 대신, <strong>경계 검사가 포함된</strong> <code>std::string::at()</code>를 사용하여 버그를 방지할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processString</span>(std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> str) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 안전한 경계 검사 수행
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        str.at(<span style="color:#ae81ff">100</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X&#39;</span>; <span style="color:#75715e">// 예외 발생 가능
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>out_of_range<span style="color:#f92672">&amp;</span> e) {
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Index out of range: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> e.what() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string myString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, World!&#34;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    processString(myString);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Modified string: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> myString <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="추가-버그-예제"><strong>추가 버그 예제</strong><a hidden class="anchor" aria-hidden="true" href="#추가-버그-예제">#</a></h3>
+<h4 id="use-after-free-문제"><strong>Use-After-Free 문제</strong><a hidden class="anchor" aria-hidden="true" href="#use-after-free-문제">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string<span style="color:#f92672">*</span> str <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> std<span style="color:#f92672">::</span>string(<span style="color:#e6db74">&#34;Hello, World!&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> str; <span style="color:#75715e">// 문자열 메모리 해제
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Use-After-Free: 해제된 메모리에 접근
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>str <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="문제점"><strong>문제점</strong>:<a hidden class="anchor" aria-hidden="true" href="#문제점">#</a></h4>
+<ul>
+<li>메모리를 해제한 뒤에 해당 포인터(<code>str</code>)를 사용하면, <strong>Use-After-Free</strong> 버그가 발생합니다.</li>
+<li>이는 Undefined Behavior를 초래하며, 심각한 프로그램 오류로 이어질 수 있습니다.</li>
+</ul>
+<h4 id="수정-방법-1"><strong>수정 방법</strong>:<a hidden class="anchor" aria-hidden="true" href="#수정-방법-1">#</a></h4>
+<ul>
+<li>포인터를 사용하지 않고, <code>std::string</code> 객체를 직접 사용하거나 스마트 포인터(<code>std::unique_ptr</code>, <code>std::shared_ptr</code>)를 사용합니다.</li>
+</ul>
+<hr>
+<h3 id="결론-1"><strong>결론</strong><a hidden class="anchor" aria-hidden="true" href="#결론-1">#</a></h3>
+<p>위 코드 예제들은 <code>&lt;string&gt;</code> 라이브러리를 사용할 때 발생할 수 있는 <strong>대표적인 버그</strong>를 보여줍니다:</p>
+<ol>
+<li>잘못된 인덱스 접근으로 인한 Undefined Behavior.</li>
+<li>메모리 관리 실수로 인한 Use-After-Free.</li>
+</ol>
+<p>이러한 문제를 방지하려면:</p>
+<ul>
+<li>경계 검사를 지원하는 <code>std::string::at()</code> 사용.</li>
+<li>RAII(Resource Acquisition Is Initialization) 패턴을 활용하여 메모리 관리를 안전하게 수행.</li>
+</ul>
+<p>더 많은 예제나 다른 상황에 대한 분석이 필요하면 말씀해주세요! 😊</p>
+<h1 id="string-라이브러리-함수에서-결함을-발생하게끔-코드를-작성">string 라이브러리 함수에서 결함을 발생하게끔 코드를 작성<a hidden class="anchor" aria-hidden="true" href="#string-라이브러리-함수에서-결함을-발생하게끔-코드를-작성">#</a></h1>
+<p>다음은 C++ <code>&lt;string&gt;</code> 라이브러리 함수에서 <strong>결함</strong>을 유발할 수 있는 코드입니다. 이 코드는 의도적으로 특정 함수 호출에 결함을 유발하도록 작성된 예제이며, 각 결함에 대한 분석도 포함됩니다.</p>
+<hr>
+<h3 id="1-잘못된-stdstringsubstr-사용"><strong>1. 잘못된 <code>std::string::substr()</code> 사용</strong><a hidden class="anchor" aria-hidden="true" href="#1-잘못된-stdstringsubstr-사용">#</a></h3>
+<h4 id="코드">코드:<a hidden class="anchor" aria-hidden="true" href="#코드">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string myString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, World!&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 잘못된 인덱스를 사용하여 substr 호출
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>string sub <span style="color:#f92672">=</span> myString.substr(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">5</span>); <span style="color:#75715e">// 50번째 인덱스는 존재하지 않음
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Substring: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> sub <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="결함-설명"><strong>결함 설명</strong>:<a hidden class="anchor" aria-hidden="true" href="#결함-설명">#</a></h4>
+<ul>
+<li><code>substr</code> 함수는 시작 인덱스가 문자열 길이를 초과하면 <strong><code>std::out_of_range</code> 예외</strong>를 발생시킵니다.</li>
+<li>이 경우 <code>myString</code>의 길이는 13이지만, 50번째 인덱스를 접근하려고 시도합니다.</li>
+</ul>
+<h4 id="수정-방법-2"><strong>수정 방법</strong>:<a hidden class="anchor" aria-hidden="true" href="#수정-방법-2">#</a></h4>
+<ul>
+<li><code>substr</code> 호출 전에 인덱스 범위를 검사하거나, 예외 처리를 추가합니다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">50</span> <span style="color:#f92672">&lt;</span> myString.size()) {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string sub <span style="color:#f92672">=</span> myString.substr(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="2-stdstringresize로-초과된-인덱스-접근"><strong>2. <code>std::string::resize()</code>로 초과된 인덱스 접근</strong><a hidden class="anchor" aria-hidden="true" href="#2-stdstringresize로-초과된-인덱스-접근">#</a></h3>
+<h4 id="코드-1">코드:<a hidden class="anchor" aria-hidden="true" href="#코드-1">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string myString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello&#34;</span>;
+</span></span><span style="display:flex;"><span>    myString.resize(<span style="color:#ae81ff">3</span>); <span style="color:#75715e">// 문자열 크기를 3으로 줄임
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 축소된 범위 밖의 요소에 접근
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> ch <span style="color:#f92672">=</span> myString[<span style="color:#ae81ff">4</span>]; <span style="color:#75715e">// 4번째 인덱스는 존재하지 않음
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Character: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> ch <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="결함-설명-1"><strong>결함 설명</strong>:<a hidden class="anchor" aria-hidden="true" href="#결함-설명-1">#</a></h4>
+<ul>
+<li><code>resize</code>로 문자열 크기를 줄인 후, 초과된 인덱스에 접근하면 **Undefined Behavior(UB)**가 발생합니다.</li>
+<li><code>std::string::operator[]</code>는 범위 검사를 수행하지 않기 때문에, 런타임 오류 없이 메모리 손상이 발생할 수 있습니다.</li>
+</ul>
+<h4 id="수정-방법-3"><strong>수정 방법</strong>:<a hidden class="anchor" aria-hidden="true" href="#수정-방법-3">#</a></h4>
+<ul>
+<li>크기를 줄인 후에는 접근 전에 항상 범위를 확인합니다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">4</span> <span style="color:#f92672">&lt;</span> myString.size()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> ch <span style="color:#f92672">=</span> myString[<span style="color:#ae81ff">4</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="3-stdstringerase로-잘못된-범위-삭제"><strong>3. <code>std::string::erase()</code>로 잘못된 범위 삭제</strong><a hidden class="anchor" aria-hidden="true" href="#3-stdstringerase로-잘못된-범위-삭제">#</a></h3>
+<h4 id="코드-2">코드:<a hidden class="anchor" aria-hidden="true" href="#코드-2">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string myString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, World!&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 범위를 벗어난 위치에서 erase 호출
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    myString.erase(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">5</span>); <span style="color:#75715e">// 20번째 인덱스는 존재하지 않음
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Modified string: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> myString <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="결함-설명-2"><strong>결함 설명</strong>:<a hidden class="anchor" aria-hidden="true" href="#결함-설명-2">#</a></h4>
+<ul>
+<li><code>erase(pos, n)</code> 함수에서 <code>pos</code>가 문자열의 길이를 초과하면 <strong><code>std::out_of_range</code> 예외</strong>가 발생합니다.</li>
+</ul>
+<h4 id="수정-방법-4"><strong>수정 방법</strong>:<a hidden class="anchor" aria-hidden="true" href="#수정-방법-4">#</a></h4>
+<ul>
+<li>삭제하려는 시작 위치가 유효한지 확인합니다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">20</span> <span style="color:#f92672">&lt;</span> myString.size()) {
+</span></span><span style="display:flex;"><span>    myString.erase(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="4-잘못된-stdstringassign-사용"><strong>4. 잘못된 <code>std::string::assign()</code> 사용</strong><a hidden class="anchor" aria-hidden="true" href="#4-잘못된-stdstringassign-사용">#</a></h3>
+<h4 id="코드-3">코드:<a hidden class="anchor" aria-hidden="true" href="#코드-3">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string myString;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 비정상적으로 큰 크기로 assign 호출
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    myString.assign(<span style="color:#ae81ff">1000000000</span>, <span style="color:#e6db74">&#39;A&#39;</span>); <span style="color:#75715e">// 메모리 부족 가능
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;String: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> myString <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="결함-설명-3"><strong>결함 설명</strong>:<a hidden class="anchor" aria-hidden="true" href="#결함-설명-3">#</a></h4>
+<ul>
+<li><code>assign(size_t n, char c)</code> 함수는 <code>n</code>의 크기가 지나치게 클 경우 <strong>메모리 부족</strong> 문제를 발생시킬 수 있습니다.</li>
+<li>시스템 메모리 한도를 초과하면 <strong>std::bad_alloc 예외</strong>가 발생하거나 프로그램이 종료될 수 있습니다.</li>
+</ul>
+<h4 id="수정-방법-5"><strong>수정 방법</strong>:<a hidden class="anchor" aria-hidden="true" href="#수정-방법-5">#</a></h4>
+<ul>
+<li>메모리 요구량을 제한하거나, 할당 전에 크기를 확인합니다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&lt;=</span> MAX_ALLOWED_SIZE) {
+</span></span><span style="display:flex;"><span>    myString.assign(n, <span style="color:#e6db74">&#39;A&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="5-잘못된-stdstringreplace-사용"><strong>5. 잘못된 <code>std::string::replace()</code> 사용</strong><a hidden class="anchor" aria-hidden="true" href="#5-잘못된-stdstringreplace-사용">#</a></h3>
+<h4 id="코드-4">코드:<a hidden class="anchor" aria-hidden="true" href="#코드-4">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string myString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, World!&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 잘못된 범위를 지정하여 replace 호출
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    myString.replace(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#e6db74">&#34;Oops&#34;</span>); <span style="color:#75715e">// 10번째부터 10개를 대체하려 하지만 범위를 초과
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Modified string: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> myString <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="결함-설명-4"><strong>결함 설명</strong>:<a hidden class="anchor" aria-hidden="true" href="#결함-설명-4">#</a></h4>
+<ul>
+<li><code>replace</code> 함수는 대체 범위가 문자열 끝을 초과하면 <strong><code>std::out_of_range</code> 예외</strong>를 발생시킵니다.</li>
+</ul>
+<h4 id="수정-방법-6"><strong>수정 방법</strong>:<a hidden class="anchor" aria-hidden="true" href="#수정-방법-6">#</a></h4>
+<ul>
+<li>시작 위치와 대체 범위가 유효한지 확인합니다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">10</span> <span style="color:#f92672">&lt;</span> myString.size()) {
+</span></span><span style="display:flex;"><span>    myString.replace(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#e6db74">&#34;Oops&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="결론-2"><strong>결론</strong><a hidden class="anchor" aria-hidden="true" href="#결론-2">#</a></h3>
+<p>위 코드들은 <code>&lt;string&gt;</code> 라이브러리의 함수에서 발생할 수 있는 주요 결함을 의도적으로 포함하고 있습니다. 이러한 버그를 방지하려면:</p>
+<ol>
+<li><strong>경계 검사</strong>: 함수 호출 전에 항상 입력 범위를 확인합니다.</li>
+<li><strong>예외 처리</strong>: <code>std::string</code> 함수는 예외를 발생시킬 수 있으므로, 적절한 예외 처리를 추가합니다.</li>
+<li><strong>메모리 사용 주의</strong>: 할당량과 크기를 제한하여 메모리 부족 문제를 방지합니다.</li>
+</ol>
+<p>추가로 다른 시나리오나 자세한 분석이 필요하면 말씀해주세요! 😊</p>
+<h1 id="알려준것-들-중에서-결함을-발견할-수-있는-coverity-checker를-알려줘">알려준것 들 중에서 결함을 발견할 수 있는 coverity checker를 알려줘<a hidden class="anchor" aria-hidden="true" href="#알려준것-들-중에서-결함을-발견할-수-있는-coverity-checker를-알려줘">#</a></h1>
+<p>Coverity는 코드 정적 분석 도구로, C++ 코드에서 다양한 결함을 탐지할 수 있는 체커(checker)를 제공합니다. 위에서 설명한 <code>&lt;string&gt;</code> 라이브러리 함수에서 발생할 수 있는 주요 결함들을 탐지할 수 있는 Coverity 체커를 아래에 정리했습니다.</p>
+<hr>
+<h3 id="1-경계-초과-접근-out-of-bounds-access">1. <strong>경계 초과 접근 (Out-of-Bounds Access)</strong><a hidden class="anchor" aria-hidden="true" href="#1-경계-초과-접근-out-of-bounds-access">#</a></h3>
+<h4 id="관련-코드">관련 코드:<a hidden class="anchor" aria-hidden="true" href="#관련-코드">#</a></h4>
+<ul>
+<li><strong>잘못된 <code>std::string::substr()</code> 사용</strong></li>
+<li><strong><code>resize</code> 후 초과 인덱스 접근</strong></li>
+</ul>
+<h4 id="탐지-가능한-coverity-체커">탐지 가능한 Coverity 체커:<a hidden class="anchor" aria-hidden="true" href="#탐지-가능한-coverity-체커">#</a></h4>
+<ul>
+<li>
+<p><strong><code>OUT_OF_BOUNDS</code></strong></p>
+<ul>
+<li>배열이나 문자열에서 유효하지 않은 인덱스를 접근하는 문제를 감지.</li>
+<li>예: <code>str[100]</code> 또는 <code>substr(50, 5)</code>처럼 잘못된 인덱스를 사용하는 경우.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>STRING_OVERFLOW</code></strong></p>
+<ul>
+<li>문자열 크기를 초과하여 데이터를 읽거나 쓰려고 할 때 탐지.</li>
+<li>예: <code>std::string::operator[]</code>나 <code>std::string::substr()</code> 호출 시 잘못된 범위를 설정한 경우.</li>
+</ul>
+</li>
+</ul>
+<h4 id="해결-방법">해결 방법:<a hidden class="anchor" aria-hidden="true" href="#해결-방법">#</a></h4>
+<ul>
+<li>문자열 크기를 검사하거나, 범위 검사가 포함된 <code>std::string::at()</code>를 사용하는 것이 권장됩니다.</li>
+</ul>
+<hr>
+<h3 id="2-범위를-벗어난-삭제대체-out-of-bounds-erasereplace">2. <strong>범위를 벗어난 삭제/대체 (Out-of-Bounds Erase/Replace)</strong><a hidden class="anchor" aria-hidden="true" href="#2-범위를-벗어난-삭제대체-out-of-bounds-erasereplace">#</a></h3>
+<h4 id="관련-코드-1">관련 코드:<a hidden class="anchor" aria-hidden="true" href="#관련-코드-1">#</a></h4>
+<ul>
+<li><strong><code>std::string::erase()</code>로 잘못된 범위 삭제</strong></li>
+<li><strong><code>std::string::replace()</code>로 잘못된 범위 대체</strong></li>
+</ul>
+<h4 id="탐지-가능한-coverity-체커-1">탐지 가능한 Coverity 체커:<a hidden class="anchor" aria-hidden="true" href="#탐지-가능한-coverity-체커-1">#</a></h4>
+<ul>
+<li>
+<p><strong><code>NEGATIVE_RETURNS</code></strong></p>
+<ul>
+<li>함수가 반환하는 음수 값을 활용해 잘못된 범위가 설정될 가능성을 탐지.</li>
+<li>예: <code>erase</code>와 <code>replace</code>에서 잘못된 시작 위치나 범위를 설정한 경우.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>USE_AFTER_FREE</code></strong></p>
+<ul>
+<li>이미 해제된 메모리나 잘못된 메모리를 사용하는 경우를 감지. 잘못된 <code>replace</code> 호출로 인해 발생할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-메모리-부족-및-할당-문제-memory-allocation-issues">3. <strong>메모리 부족 및 할당 문제 (Memory Allocation Issues)</strong><a hidden class="anchor" aria-hidden="true" href="#3-메모리-부족-및-할당-문제-memory-allocation-issues">#</a></h3>
+<h4 id="관련-코드-2">관련 코드:<a hidden class="anchor" aria-hidden="true" href="#관련-코드-2">#</a></h4>
+<ul>
+<li><strong>잘못된 <code>std::string::assign()</code> 사용</strong></li>
+</ul>
+<h4 id="탐지-가능한-coverity-체커-2">탐지 가능한 Coverity 체커:<a hidden class="anchor" aria-hidden="true" href="#탐지-가능한-coverity-체커-2">#</a></h4>
+<ul>
+<li>
+<p><strong><code>RESOURCE_LEAK</code></strong></p>
+<ul>
+<li>메모리를 할당했지만 제대로 해제되지 않은 경우를 감지.</li>
+<li><code>assign</code>을 과도하게 호출하여 메모리가 부족한 상황에서 리소스 누수가 발생할 가능성을 탐지.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>BAD_ALLOC</code></strong></p>
+<ul>
+<li><code>std::bad_alloc</code> 예외를 발생시킬 수 있는 메모리 할당 문제를 감지.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-일반적인-문자열-처리-오류">4. <strong>일반적인 문자열 처리 오류</strong><a hidden class="anchor" aria-hidden="true" href="#4-일반적인-문자열-처리-오류">#</a></h3>
+<h4 id="탐지-가능한-coverity-체커-3">탐지 가능한 Coverity 체커:<a hidden class="anchor" aria-hidden="true" href="#탐지-가능한-coverity-체커-3">#</a></h4>
+<ul>
+<li>
+<p><strong><code>UNINIT</code> (Uninitialized Variable)</strong></p>
+<ul>
+<li>초기화되지 않은 <code>std::string</code> 객체나 관련 변수가 사용되는 경우를 감지.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>FORWARD_NULL</code></strong></p>
+<ul>
+<li>포인터가 nullptr로 초기화되거나, 잘못된 메모리를 참조하는 경우를 탐지.</li>
+<li>문자열 관련 함수 호출 시 잘못된 포인터를 전달하면 발생.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>UNUSED_VALUE</code></strong></p>
+<ul>
+<li>값이 설정되었지만 이후 사용되지 않는 경우를 감지.</li>
+<li>문자열 함수 호출 후 반환값이 무시되는 경우 발생 가능.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-스레드-안전성-문제-thread-safety-issues">5. <strong>스레드 안전성 문제 (Thread Safety Issues)</strong><a hidden class="anchor" aria-hidden="true" href="#5-스레드-안전성-문제-thread-safety-issues">#</a></h3>
+<h4 id="탐지-가능한-coverity-체커-4">탐지 가능한 Coverity 체커:<a hidden class="anchor" aria-hidden="true" href="#탐지-가능한-coverity-체커-4">#</a></h4>
+<ul>
+<li>
+<p><strong><code>GUARDED_BY_VIOLATION</code></strong></p>
+<ul>
+<li><code>std::string</code> 객체에 대해 여러 스레드가 동시에 접근할 때 보호되지 않은 경우 탐지.</li>
+<li>특히, 멀티스레드 환경에서 문자열 수정 시 동기화가 없는 경우 문제 발생 가능.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>ATOMICITY_VIOLATION</code></strong></p>
+<ul>
+<li>여러 스레드가 공유 자원을 수정하면서 원자성이 깨질 위험을 탐지.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="예제-코드와-coverity-체커-매핑">예제 코드와 Coverity 체커 매핑<a hidden class="anchor" aria-hidden="true" href="#예제-코드와-coverity-체커-매핑">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>코드 문제</strong></th>
+          <th><strong>탐지 가능한 Coverity 체커</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>잘못된 <code>std::string::substr()</code> 호출</td>
+          <td><code>OUT_OF_BOUNDS</code>, <code>STRING_OVERFLOW</code></td>
+      </tr>
+      <tr>
+          <td><code>resize</code> 후 초과 인덱스 접근</td>
+          <td><code>OUT_OF_BOUNDS</code>, <code>STRING_OVERFLOW</code></td>
+      </tr>
+      <tr>
+          <td>잘못된 <code>std::string::erase()</code> 호출</td>
+          <td><code>NEGATIVE_RETURNS</code>, <code>OUT_OF_BOUNDS</code></td>
+      </tr>
+      <tr>
+          <td>잘못된 <code>std::string::replace()</code> 호출</td>
+          <td><code>NEGATIVE_RETURNS</code>, <code>OUT_OF_BOUNDS</code></td>
+      </tr>
+      <tr>
+          <td>과도한 <code>assign</code> 호출로 메모리 부족 발생</td>
+          <td><code>RESOURCE_LEAK</code>, <code>BAD_ALLOC</code></td>
+      </tr>
+      <tr>
+          <td>초기화되지 않은 문자열 사용</td>
+          <td><code>UNINIT</code></td>
+      </tr>
+      <tr>
+          <td>멀티스레드 환경에서 <code>std::string</code> 동시 접근</td>
+          <td><code>GUARDED_BY_VIOLATION</code>, <code>ATOMICITY_VIOLATION</code></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="추가적으로-해야-할-작업"><strong>추가적으로 해야 할 작업</strong><a hidden class="anchor" aria-hidden="true" href="#추가적으로-해야-할-작업">#</a></h3>
+<ol>
+<li>
+<p><strong>Coverity 설정 최적화</strong>:</p>
+<ul>
+<li>기본 설정으로 탐지되지 않는 경우, 다음과 같은 옵션을 사용하여 분석을 강화합니다:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cov-analyze --dir &lt;output-directory&gt; --enable-callgraph-metrics --enable-checkers STRING_OVERFLOW OUT_OF_BOUNDS
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>결과 검증</strong>:</p>
+<ul>
+<li>Coverity가 제공하는 경고 메시지와 위치 정보를 기반으로 결함을 검증합니다.</li>
+<li>코드에서 수정이 필요한 부분을 정확히 식별하고, 안전한 함수 호출이나 예외 처리를 추가합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>테스트와 반복 분석</strong>:</p>
+<ul>
+<li>코드 변경 후 Coverity를 다시 실행하여 결함이 해결되었는지 확인합니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>추가로 더 궁금한 점이나 다른 문제를 확인하고 싶으시면 말씀해주세요! 😊</p>
+<h1 id="결함을-포함하는-소스-코드를-파일-하나로-작성한-예제와-해당-코드를-컴파일하고-coverity로-분석하는-명령어">결함을 포함하는 소스 코드를 파일 하나로 작성한 예제와, 해당 코드를 컴파일하고 Coverity로 분석하는 명령어<a hidden class="anchor" aria-hidden="true" href="#결함을-포함하는-소스-코드를-파일-하나로-작성한-예제와-해당-코드를-컴파일하고-coverity로-분석하는-명령어">#</a></h1>
+<p>아래는 결함을 포함하는 소스 코드를 파일 하나로 작성한 예제와, 해당 코드를 컴파일하고 Coverity로 분석하는 명령어를 함께 제공합니다.</p>
+<hr>
+<h3 id="결함을-포함하는-소스-코드-buggy_string_examplecpp"><strong>결함을 포함하는 소스 코드 (<code>buggy_string_example.cpp</code>)</strong><a hidden class="anchor" aria-hidden="true" href="#결함을-포함하는-소스-코드-buggy_string_examplecpp">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processString</span>(std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> str) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 잘못된 인덱스 접근
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    str[<span style="color:#ae81ff">100</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X&#39;</span>; <span style="color:#75715e">// 문자열 크기를 초과한 접근 (Undefined Behavior)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eraseOutOfBounds</span>(std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> str) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 범위를 벗어난 위치에서 erase 호출
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    str.erase(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">5</span>); <span style="color:#75715e">// 20번째 인덱스는 존재하지 않음
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assignExcessiveMemory</span>(std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> str) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 지나치게 큰 크기로 문자열 할당
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    str.assign(<span style="color:#ae81ff">1000000000</span>, <span style="color:#e6db74">&#39;A&#39;</span>); <span style="color:#75715e">// 메모리 부족 발생 가능
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>string myString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, World!&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 1. 잘못된 인덱스 접근
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        processString(myString);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 2. 범위를 벗어난 erase 호출
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        eraseOutOfBounds(myString);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 3. 과도한 메모리 할당
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        assignExcessiveMemory(myString);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Final string: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> myString <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>exception<span style="color:#f92672">&amp;</span> e) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 예외 처리
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Exception caught: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> e.what() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="컴파일-명령"><strong>컴파일 명령</strong><a hidden class="anchor" aria-hidden="true" href="#컴파일-명령">#</a></h3>
+<p>이 코드를 컴파일하려면 다음 명령어를 사용합니다:</p>
+<h4 id="gcc-컴파일러">GCC 컴파일러:<a hidden class="anchor" aria-hidden="true" href="#gcc-컴파일러">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>g++ -o buggy_string_example buggy_string_example.cpp
+</span></span></code></pre></div><h4 id="clang-컴파일러">Clang 컴파일러:<a hidden class="anchor" aria-hidden="true" href="#clang-컴파일러">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>clang++ -o buggy_string_example buggy_string_example.cpp
+</span></span></code></pre></div><h4 id="msvc-컴파일러">MSVC 컴파일러:<a hidden class="anchor" aria-hidden="true" href="#msvc-컴파일러">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>cl buggy_string_example.cpp
+</span></span></code></pre></div><hr>
+<h3 id="coverity-분석-명령"><strong>Coverity 분석 명령</strong><a hidden class="anchor" aria-hidden="true" href="#coverity-분석-명령">#</a></h3>
+<ol>
+<li>
+<p><strong>Coverity 빌드 캡처</strong><br>
+Coverity가 코드를 분석하려면 빌드 프로세스를 캡처해야 합니다. <code>cov-build</code> 명령을 사용하여 실행합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cov-build --dir cov-output g++ -o buggy_string_example buggy_string_example.cpp
+</span></span></code></pre></div><ul>
+<li><code>--dir cov-output</code>: Coverity가 분석 데이터를 저장할 디렉터리 지정.</li>
+<li><code>g++</code>: 사용된 컴파일러 명령어.</li>
+</ul>
+</li>
+<li>
+<p><strong>Coverity 분석 실행</strong><br>
+캡처된 데이터를 기반으로 결함 분석을 수행합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cov-analyze --dir cov-output
+</span></span></code></pre></div></li>
+<li>
+<p><strong>결과 확인</strong><br>
+분석 결과를 Coverity Web View 또는 명령줄에서 확인할 수 있습니다. HTML 형식으로 출력하려면 다음 명령을 사용합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cov-format-errors --dir cov-output --html-output cov-report
+</span></span></code></pre></div><ul>
+<li>결과는 <code>cov-report</code> 디렉터리에 HTML 파일로 저장됩니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="결함-유형과-탐지-기대"><strong>결함 유형과 탐지 기대</strong><a hidden class="anchor" aria-hidden="true" href="#결함-유형과-탐지-기대">#</a></h3>
+<p>이 코드에서 Coverity는 다음 결함을 탐지할 수 있습니다:</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>결함 유형</strong></th>
+          <th><strong>Coverity 체커</strong></th>
+          <th><strong>발생 위치</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>잘못된 인덱스 접근</td>
+          <td><code>OUT_OF_BOUNDS</code></td>
+          <td><code>processString</code> 함수의 <code>str[100]</code></td>
+      </tr>
+      <tr>
+          <td>범위를 벗어난 <code>erase</code> 호출</td>
+          <td><code>NEGATIVE_RETURNS</code></td>
+          <td><code>eraseOutOfBounds</code> 함수의 <code>erase</code></td>
+      </tr>
+      <tr>
+          <td>과도한 메모리 할당</td>
+          <td><code>RESOURCE_LEAK</code>, <code>BAD_ALLOC</code></td>
+          <td><code>assignExcessiveMemory</code>의 <code>assign</code></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="추가-정보-1"><strong>추가 정보</strong><a hidden class="anchor" aria-hidden="true" href="#추가-정보-1">#</a></h3>
+<ul>
+<li>위 코드는 주로 <code>std::string</code>의 범위 초과 및 메모리 관리 문제를 의도적으로 포함한 예제입니다.</li>
+<li>컴파일러 경고와 Coverity 분석 결과를 비교하면서 문제를 확인할 수 있습니다.</li>
+</ul>
+<p>더 궁금한 사항이나 추가 설정이 필요하면 말씀해주세요! 😊</p>
+<h1 id="android--libbasepropertiescpp">android : libbase/properties.cpp<a hidden class="anchor" aria-hidden="true" href="#android--libbasepropertiescpp">#</a></h1>
+<p>Android 소스 코드에서 <code>libbase/properties.cpp</code> 파일은 Android NDK의 일부이며, 주로 Android 시스템 속성을 관리하는 함수들을 포함하고 있습니다. 이 파일에서 사용하는 문자열 처리 라이브러리는 <strong>C++ 표준 라이브러리의 <code>&lt;string&gt;</code></strong> 및 일부 <strong>Android 전용 유틸리티 함수</strong>를 혼합하여 사용합니다.</p>
+<hr>
+<h3 id="사용되는-주요-문자열-라이브러리"><strong>사용되는 주요 문자열 라이브러리</strong><a hidden class="anchor" aria-hidden="true" href="#사용되는-주요-문자열-라이브러리">#</a></h3>
+<ol>
+<li>
+<p><strong>C++ 표준 라이브러리</strong></p>
+<ul>
+<li><code>&lt;string&gt;</code>: <code>std::string</code> 클래스를 사용하여 문자열 관리.</li>
+<li><code>&lt;sstream&gt;</code>: 문자열 변환 및 스트림 조작.</li>
+</ul>
+<p>예:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>string property_value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;default_value&#34;</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Android NDK 유틸리티</strong></p>
+<ul>
+<li><code>android::base::</code> 네임스페이스에 포함된 문자열 관련 유틸리티 함수.</li>
+<li>Android 플랫폼에서 더 효율적으로 동작하도록 최적화된 함수들.</li>
+</ul>
+<p>예:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;android-base/strings.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>string trimmed <span style="color:#f92672">=</span> android<span style="color:#f92672">::</span>base<span style="color:#f92672">::</span>Trim(<span style="color:#e6db74">&#34;   hello   &#34;</span>);
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h3 id="libbasepropertiescpp에서-사용하는-문자열-처리-함수"><strong><code>libbase/properties.cpp</code>에서 사용하는 문자열 처리 함수</strong><a hidden class="anchor" aria-hidden="true" href="#libbasepropertiescpp에서-사용하는-문자열-처리-함수">#</a></h3>
+<h4 id="주요-문자열-함수-및-사용-예"><strong>주요 문자열 함수 및 사용 예</strong><a hidden class="anchor" aria-hidden="true" href="#주요-문자열-함수-및-사용-예">#</a></h4>
+<ol>
+<li>
+<p><strong><code>std::string</code></strong></p>
+<ul>
+<li>일반적인 문자열 저장 및 조작에 사용.</li>
+<li>예: 시스템 속성의 키/값을 저장.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;property_name&#34;</span>;
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string value <span style="color:#f92672">=</span> GetProperty(key, <span style="color:#e6db74">&#34;default_value&#34;</span>);
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong><code>android::base::Trim</code></strong></p>
+<ul>
+<li>문자열의 앞뒤 공백을 제거.</li>
+<li>정의: <code>android-base/strings.h</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string property <span style="color:#f92672">=</span> android<span style="color:#f92672">::</span>base<span style="color:#f92672">::</span>Trim(<span style="color:#e6db74">&#34;   property_value   &#34;</span>);
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong><code>android::base::StringPrintf</code></strong></p>
+<ul>
+<li><code>printf</code> 스타일 포맷 문자열 처리.</li>
+<li>정의: <code>android-base/stringprintf.h</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string message <span style="color:#f92672">=</span> android<span style="color:#f92672">::</span>base<span style="color:#f92672">::</span>StringPrintf(<span style="color:#e6db74">&#34;Property %s=%s&#34;</span>, key.c_str(), value.c_str());
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong><code>std::stoi</code> / <code>std::stol</code></strong></p>
+<ul>
+<li>문자열을 정수형으로 변환.</li>
+<li>예: 속성 값을 숫자로 변환.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> property_value <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stoi(GetProperty(<span style="color:#e6db74">&#34;property_int&#34;</span>, <span style="color:#e6db74">&#34;42&#34;</span>));
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong><code>std::to_string</code></strong></p>
+<ul>
+<li>숫자를 문자열로 변환.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string property <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>to_string(<span style="color:#ae81ff">123</span>);
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="예제-코드-libbasepropertiescpp-일부-발췌-스타일-예제"><strong>예제 코드 (<code>libbase/properties.cpp</code> 일부 발췌 스타일 예제)</strong><a hidden class="anchor" aria-hidden="true" href="#예제-코드-libbasepropertiescpp-일부-발췌-스타일-예제">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;android-base/properties.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;android-base/strings.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> android {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> base {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string GetProperty(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> key, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> default_value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Get property value from the system
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>string value <span style="color:#f92672">=</span> __system_property_get(key.c_str());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> value.empty() <span style="color:#f92672">?</span> default_value : value;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SetProperty</span>(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> key, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Trim the property key and value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>string trimmed_key <span style="color:#f92672">=</span> Trim(key);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string trimmed_value <span style="color:#f92672">=</span> Trim(value);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Set system property
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    __system_property_set(trimmed_key.c_str(), trimmed_value.c_str());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}  <span style="color:#75715e">// namespace base
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}  <span style="color:#75715e">// namespace android
+</span></span></span></code></pre></div><hr>
+<h3 id="결론-3"><strong>결론</strong><a hidden class="anchor" aria-hidden="true" href="#결론-3">#</a></h3>
+<ul>
+<li><strong>기본 문자열 라이브러리</strong>: <code>std::string</code> (C++ 표준 라이브러리).</li>
+<li><strong>Android 전용 유틸리티</strong>: <code>android::base::Trim</code>, <code>android::base::StringPrintf</code>, 등.</li>
+<li><strong>헤더 파일 의존성</strong>: <code>&lt;android-base/properties.h&gt;</code>, <code>&lt;android-base/strings.h&gt;</code>.</li>
+</ul>
+<hr>
+<p>이와 관련된 더 구체적인 분석이나 설명이 필요하면 언제든 말씀해주세요! 😊</p>
+<h1 id="getproperty-함수를-일반-리눅스로-포팅한다면">GetProperty 함수를 일반 리눅스로 포팅한다면<a hidden class="anchor" aria-hidden="true" href="#getproperty-함수를-일반-리눅스로-포팅한다면">#</a></h1>
+<p>Android에서 사용하는 <code>GetProperty</code> 함수는 시스템 속성을 조회하는 기능으로, Android NDK의 <code>__system_property_get</code> 함수를 기반으로 동작합니다. 일반 리눅스 환경에는 이와 동일한 시스템 속성 관리 메커니즘이 없으므로, 아래와 같은 방식으로 포팅할 수 있습니다.</p>
+<hr>
+<h3 id="1-일반-리눅스용-getproperty-구현"><strong>1. 일반 리눅스용 GetProperty 구현</strong><a hidden class="anchor" aria-hidden="true" href="#1-일반-리눅스용-getproperty-구현">#</a></h3>
+<p>일반 리눅스에서는 환경 변수를 사용하거나 파일 기반 설정 시스템(예: <code>/etc</code> 디렉토리의 설정 파일)을 이용해 시스템 속성을 대체할 수 있습니다.</p>
+<h4 id="환경-변수-기반-구현"><strong>환경 변수 기반 구현</strong><a hidden class="anchor" aria-hidden="true" href="#환경-변수-기반-구현">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string GetProperty(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> key, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> default_value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// getenv는 C 스타일 문자열을 반환하므로 nullptr 검사 필요
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> value <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>getenv(key.c_str());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> value <span style="color:#f92672">?</span> std<span style="color:#f92672">::</span>string(value) <span style="color:#f92672">:</span> default_value;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="사용-예">사용 예:<a hidden class="anchor" aria-hidden="true" href="#사용-예">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 환경 변수 &#34;MY_PROPERTY&#34; 값을 읽어오거나 기본값 &#34;default_value&#34; 사용
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>string value <span style="color:#f92672">=</span> GetProperty(<span style="color:#e6db74">&#34;MY_PROPERTY&#34;</span>, <span style="color:#e6db74">&#34;default_value&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Property Value: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> value <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>환경 변수 설정</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export MY_PROPERTY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my_value&#34;</span>
+</span></span><span style="display:flex;"><span>./program
+</span></span></code></pre></div></li>
+<li>
+<p>출력:</p>
+<pre tabindex="0"><code>Property Value: my_value
+</code></pre></li>
+</ul>
+<hr>
+<h3 id="2-설정-파일-기반-구현"><strong>2. 설정 파일 기반 구현</strong><a hidden class="anchor" aria-hidden="true" href="#2-설정-파일-기반-구현">#</a></h3>
+<h4 id="설정-파일-예-etcmy_propertiesconf"><strong>설정 파일 예 (<code>/etc/my_properties.conf</code>):</strong><a hidden class="anchor" aria-hidden="true" href="#설정-파일-예-etcmy_propertiesconf">#</a></h4>
+<pre tabindex="0"><code>MY_PROPERTY=my_value
+ANOTHER_PROPERTY=another_value
+</code></pre><h4 id="파일-기반-getproperty-구현"><strong>파일 기반 GetProperty 구현</strong><a hidden class="anchor" aria-hidden="true" href="#파일-기반-getproperty-구현">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;fstream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sstream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unordered_map&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>unordered_map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> LoadProperties(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> filepath) {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>unordered_map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> properties;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>ifstream file(filepath);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>file.is_open()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> properties; <span style="color:#75715e">// 빈 맵 반환
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string line;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (std<span style="color:#f92672">::</span>getline(file, line)) {
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>istringstream iss(line);
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>string key, value;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (std<span style="color:#f92672">::</span>getline(iss, key, <span style="color:#e6db74">&#39;=&#39;</span>) <span style="color:#f92672">&amp;&amp;</span> std<span style="color:#f92672">::</span>getline(iss, value)) {
+</span></span><span style="display:flex;"><span>            properties[key] <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> properties;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string GetProperty(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> key, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> default_value, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>unordered_map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;&amp;</span> properties) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> properties.find(key);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> it <span style="color:#f92672">!=</span> properties.end() <span style="color:#f92672">?</span> it<span style="color:#f92672">-&gt;</span>second : default_value;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="사용-예-1">사용 예:<a hidden class="anchor" aria-hidden="true" href="#사용-예-1">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unordered_map&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 설정 파일 경로
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string config_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/etc/my_properties.conf&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 설정 파일 읽기
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>unordered_map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> properties <span style="color:#f92672">=</span> LoadProperties(config_path);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 속성 읽기
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>string value <span style="color:#f92672">=</span> GetProperty(<span style="color:#e6db74">&#34;MY_PROPERTY&#34;</span>, <span style="color:#e6db74">&#34;default_value&#34;</span>, properties);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Property Value: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> value <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>설정 파일 준비</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;MY_PROPERTY=my_value&#34;</span> &gt; /etc/my_properties.conf
+</span></span></code></pre></div></li>
+<li>
+<p><strong>출력</strong>:</p>
+<pre tabindex="0"><code>Property Value: my_value
+</code></pre></li>
+</ul>
+<hr>
+<h3 id="3-기능-요약-및-비교"><strong>3. 기능 요약 및 비교</strong><a hidden class="anchor" aria-hidden="true" href="#3-기능-요약-및-비교">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>기능</strong></th>
+          <th><strong>Android</strong></th>
+          <th><strong>일반 리눅스 (환경 변수)</strong></th>
+          <th><strong>일반 리눅스 (설정 파일)</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>데이터 소스</strong></td>
+          <td><code>__system_property_get</code></td>
+          <td><code>std::getenv</code></td>
+          <td>설정 파일 (예: <code>/etc/*.conf</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>동작 속도</strong></td>
+          <td>빠름 (NDK 최적화)</td>
+          <td>빠름</td>
+          <td>설정 파일 크기에 따라 다름</td>
+      </tr>
+      <tr>
+          <td><strong>구현 복잡도</strong></td>
+          <td>Android API 사용</td>
+          <td>간단</td>
+          <td>조금 더 복잡</td>
+      </tr>
+      <tr>
+          <td><strong>사용 시나리오</strong></td>
+          <td>Android 전용 시스템 속성 관리</td>
+          <td>간단한 시스템 설정</td>
+          <td>복잡한 구성 또는 영속성 필요 시</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="추가-설명"><strong>추가 설명</strong><a hidden class="anchor" aria-hidden="true" href="#추가-설명">#</a></h3>
+<ol>
+<li>
+<p><strong>환경 변수 방식</strong>:</p>
+<ul>
+<li>간단하고 대부분의 리눅스 배포판에서 지원합니다.</li>
+<li>단, 영속성이 부족하고, 런타임 시 <code>setenv</code>를 통해 동적으로 설정해야 합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>설정 파일 방식</strong>:</p>
+<ul>
+<li>복잡한 구성 관리에 적합하며, 영속성을 제공합니다.</li>
+<li>파일 크기가 크거나, 동시 읽기/쓰기가 필요한 경우 추가 처리가 필요합니다.</li>
+</ul>
+</li>
+</ol>
+<p>필요에 따라 위 두 가지 방법을 조합하거나, 더 구체적인 구현이 필요하면 알려주세요! 😊</p>
+<h1 id="coverity-에서-예제-코드">Coverity 에서 예제 코드<a hidden class="anchor" aria-hidden="true" href="#coverity-에서-예제-코드">#</a></h1>
+<p>Coverity는 정적 분석 도구로, C++ 코드를 분석하여 메모리 누수, 널 포인터 역참조, 경쟁 상태 등 다양한 결함과 보안 취약점을 식별합니다. 이를 통해 개발자는 코드 품질을 향상시키고 잠재적인 버그를 조기에 발견하여 수정할 수 있습니다. citeturn0search9</p>
+<p>Coverity에서 발견할 수 있는 일반적인 오류 유형과 그에 대한 예제는 다음과 같습니다:</p>
+<ol>
+<li>
+<p><strong>메모리 오류</strong></p>
+<ul>
+<li><strong>USE_AFTER_FREE</strong>: 해제된 메모리를 다시 사용하는 경우 발생합니다.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">exampleFunction</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> ptr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> ptr;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>ptr <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;  <span style="color:#75715e">// USE_AFTER_FREE: 해제된 메모리 접근
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
+<li><strong>MEMORY_LEAK</strong>: 할당된 메모리를 해제하지 않아 메모리 누수가 발생하는 경우입니다.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">exampleFunction</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> ptr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// MEMORY_LEAK: 할당된 메모리가 해제되지 않음
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>널 포인터 오류</strong></p>
+<ul>
+<li><strong>NULL_POINTER</strong>: 널 포인터를 역참조하려고 할 때 발생합니다.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">exampleFunction</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> ptr <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>ptr <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;  <span style="color:#75715e">// NULL_POINTER: 널 포인터 역참조
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>경쟁 상태 오류</strong></p>
+<ul>
+<li><strong>DATA_RACE</strong>: 여러 스레드가 동기화 없이 동일한 메모리 위치에 접근하여 데이터 불일치가 발생할 수 있습니다.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;thread&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sharedData <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">increment</span>() {
+</span></span><span style="display:flex;"><span>    sharedData<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span><span style="color:#66d9ef">thread</span> t1(increment);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span><span style="color:#66d9ef">thread</span> t2(increment);
+</span></span><span style="display:flex;"><span>    t1.join();
+</span></span><span style="display:flex;"><span>    t2.join();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// DATA_RACE: 동기화 없이 공유 데이터에 접근
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<p>이러한 예제들은 Coverity가 감지할 수 있는 다양한 오류 유형을 보여줍니다. 정적 분석 도구를 활용하여 코드의 잠재적인 문제를 조기에 발견하고 수정함으로써 소프트웨어의 안정성과 보안성을 높일 수 있습니다.</p>
+<h1 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h1>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Native on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/native/</link>
+    <description>Recent content in Native on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Mon, 17 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/native/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React Native</title>
+      <link>http://localhost:1313/portfolio/posts/developer/javascipt/react-native/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/javascipt/react-native/</guid>
+      <description>&lt;h1 id=&#34;react-native-와-react-의-차이&#34;&gt;React Native 와 React 의 차이&lt;/h1&gt;
+&lt;p&gt;React Native는 React의 개념과 철학을 기반으로 하지만, 주로 모바일 앱 개발(안드로이드와 iOS)을 위해 설계된 프레임워크입니다. 아래에서는 React Native의 주요 특징과 React(Web)와의 차이점을 자세히 설명합니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-react-native란&#34;&gt;1. React Native란?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;목적:&lt;/strong&gt;&lt;br&gt;
+React Native는 JavaScript와 React의 컴포넌트 기반 아키텍처를 활용하여 네이티브 모바일 앱(안드로이드, iOS)을 개발할 수 있도록 해줍니다.&lt;br&gt;
+웹 브라우저가 아닌, 모바일 기기의 네이티브 UI 컴포넌트(예: &lt;code&gt;View&lt;/code&gt;, &lt;code&gt;Text&lt;/code&gt;, &lt;code&gt;Image&lt;/code&gt;)를 사용하여 사용자 인터페이스를 구성합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;구조 및 실행 방식:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;JS 코드와 네이티브 브리지:&lt;/strong&gt;&lt;br&gt;
+React Native 앱은 JavaScript 코드로 작성되며, 이 코드는 JavaScript 엔진(V8, Hermes 등)에서 실행됩니다.&lt;br&gt;
+JavaScript와 네이티브 플랫폼 간의 통신은 &amp;ldquo;브리지(Bridge)&amp;ldquo;를 통해 이뤄지며, 이로 인해 JavaScript 코드에서 네이티브 UI 컴포넌트나 기능을 호출할 수 있습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;플랫폼별 네이티브 컴포넌트:&lt;/strong&gt;&lt;br&gt;
+React Native는 플랫폼에 최적화된 네이티브 UI 컴포넌트를 사용하여, 높은 성능과 원활한 사용자 경험을 제공합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-react-web와-react-native의-차이점&#34;&gt;2. React (Web)와 React Native의 차이점&lt;/h2&gt;
+&lt;h3 id=&#34;21-렌더링-대상&#34;&gt;2.1 렌더링 대상&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;React (Web):&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

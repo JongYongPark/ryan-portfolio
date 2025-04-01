@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="내 작업
+notepad $PROFILE.CurrentUserAllHosts
+v1
+PowerShell 프로필 파일은 PowerShell 세션이 시작될 때 자동으로 로드되는 스크립트입니다. 두 파일의 차이점은 적용 범위에 있습니다:
+
+
+Profile.ps1:
+
+경로: C:\Users\RyanPark\OneDrive - Black Duck Software\Documents\WindowsPowerShell\profile.ps1
+적용 범위: 시스템의 모든 사용자와 모든 PowerShell 호스트(콘솔, ISE 등)에 적용됩니다
+이 파일은 &ldquo;AllUsersAllHosts&rdquo; 프로필에 해당합니다
+
+
+
+Microsoft.PowerShell_profile.ps1:
+
+경로: C:\Users\RyanPark\OneDrive - Black Duck Software\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+적용 범위: 현재 사용자(RyanPark)와 PowerShell 콘솔 호스트에만 적용됩니다
+이 파일은 &ldquo;CurrentUserCurrentHost&rdquo; 프로필에 해당합니다
+
+
+
+주요 차이점:
+
+profile.ps1은 더 일반적인 프로필로, 모든 PowerShell 환경에 적용됩니다
+Microsoft.PowerShell_profile.ps1은 PowerShell 콘솔에서만 적용되며, Visual Studio Code의 PowerShell 터미널이나 PowerShell ISE에는 적용되지 않습니다
+
+PowerShell에는 다음과 같은 4가지 프로필 범위가 있습니다:">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/sdlc/powershell/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/sdlc/powershell/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="내-작업">내 작업<a hidden class="anchor" aria-hidden="true" href="#내-작업">#</a></h1>
+<p>notepad $PROFILE.CurrentUserAllHosts</p>
+<h1 id="v1">v1<a hidden class="anchor" aria-hidden="true" href="#v1">#</a></h1>
+<p>PowerShell 프로필 파일은 PowerShell 세션이 시작될 때 자동으로 로드되는 스크립트입니다. 두 파일의 차이점은 적용 범위에 있습니다:</p>
+<ol>
+<li>
+<p><strong>Profile.ps1</strong>:</p>
+<ul>
+<li>경로: <code>C:\Users\RyanPark\OneDrive - Black Duck Software\Documents\WindowsPowerShell\profile.ps1</code></li>
+<li>적용 범위: 시스템의 모든 사용자와 모든 PowerShell 호스트(콘솔, ISE 등)에 적용됩니다</li>
+<li>이 파일은 &ldquo;AllUsersAllHosts&rdquo; 프로필에 해당합니다</li>
+</ul>
+</li>
+<li>
+<p><strong>Microsoft.PowerShell_profile.ps1</strong>:</p>
+<ul>
+<li>경로: <code>C:\Users\RyanPark\OneDrive - Black Duck Software\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1</code></li>
+<li>적용 범위: 현재 사용자(RyanPark)와 PowerShell 콘솔 호스트에만 적용됩니다</li>
+<li>이 파일은 &ldquo;CurrentUserCurrentHost&rdquo; 프로필에 해당합니다</li>
+</ul>
+</li>
+</ol>
+<p>주요 차이점:</p>
+<ul>
+<li><code>profile.ps1</code>은 더 일반적인 프로필로, 모든 PowerShell 환경에 적용됩니다</li>
+<li><code>Microsoft.PowerShell_profile.ps1</code>은 PowerShell 콘솔에서만 적용되며, Visual Studio Code의 PowerShell 터미널이나 PowerShell ISE에는 적용되지 않습니다</li>
+</ul>
+<p>PowerShell에는 다음과 같은 4가지 프로필 범위가 있습니다:</p>
+<ol>
+<li>AllUsersAllHosts (모든 사용자, 모든 호스트)</li>
+<li>AllUsersCurrentHost (모든 사용자, 현재 호스트)</li>
+<li>CurrentUserAllHosts (현재 사용자, 모든 호스트)</li>
+<li>CurrentUserCurrentHost (현재 사용자, 현재 호스트)</li>
+</ol>
+<p>일반적으로 개인 설정은 CurrentUserCurrentHost나 CurrentUserAllHosts 프로필에 추가하는 것이 좋습니다.</p>
+<h1 id="v11">v1.1<a hidden class="anchor" aria-hidden="true" href="#v11">#</a></h1>
+<p>PowerShell에서 특정 프로필 파일을 직접 호출하는 방법은 다음과 같습니다:</p>
+<p>Current User, All Hosts 프로필 파일인 <code>profile.ps1</code>을 열기 위해서는 <code>$PROFILE.CurrentUserAllHosts</code> 변수를 사용하면 됩니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>notepad $PROFILE.CurrentUserAllHosts
+</span></span></code></pre></div><p>이 명령어는 <code>C:\Users\RyanPark\OneDrive - Black Duck Software\Documents\WindowsPowerShell\profile.ps1</code> 파일을 메모장으로 열어줍니다.</p>
+<p>참고로, PowerShell에서 사용할 수 있는 모든 프로필 경로는 다음과 같이 확인할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$PROFILE | Get-Member -MemberType NoteProperty | Select-Object Name, Definition
+</span></span></code></pre></div><p>각 프로필 파일에 접근하는 방법:</p>
+<ul>
+<li>Current User, Current Host (기본값): <code>$PROFILE</code> 또는 <code>$PROFILE.CurrentUserCurrentHost</code></li>
+<li>Current User, All Hosts: <code>$PROFILE.CurrentUserAllHosts</code></li>
+<li>All Users, Current Host: <code>$PROFILE.AllUsersCurrentHost</code></li>
+<li>All Users, All Hosts: <code>$PROFILE.AllUsersAllHosts</code></li>
+</ul>
+<p>프로필 파일을 직접 실행(로드)하려면 다음 명령어를 사용합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>. $PROFILE.CurrentUserAllHosts
+</span></span></code></pre></div><p>이 명령어는 프로필 파일을 현재 PowerShell 세션에 로드합니다.</p>
+<h1 id="v2-powershell-에서-cmd-명령어-사용용">v2 powershell 에서 cmd 명령어 사용용<a hidden class="anchor" aria-hidden="true" href="#v2-powershell-에서-cmd-명령어-사용용">#</a></h1>
+<p>CMD에서 자주 사용하는 명령어들을 PowerShell 프로필에 별칭으로 설정하는 방법을 알려드리겠습니다. 아래 코드를 PowerShell 프로필에 추가하면 됩니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># CMD 명령어 PowerShell 별칭 설정</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 파일 시스템 명령어</span>
+</span></span><span style="display:flex;"><span>Set-Alias -Name dir -Value Get-ChildItem
+</span></span><span style="display:flex;"><span>Set-Alias -Name cls -Value Clear-Host
+</span></span><span style="display:flex;"><span>Set-Alias -Name copy -Value Copy-Item
+</span></span><span style="display:flex;"><span>Set-Alias -Name move -Value Move-Item
+</span></span><span style="display:flex;"><span>Set-Alias -Name del -Value Remove-Item
+</span></span><span style="display:flex;"><span>Set-Alias -Name type -Value Get-Content
+</span></span><span style="display:flex;"><span>Set-Alias -Name md -Value New-Item
+</span></span><span style="display:flex;"><span>Set-Alias -Name rd -Value Remove-Item
+</span></span><span style="display:flex;"><span>Set-Alias -Name cd -Value Set-Location
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 네트워크 명령어</span>
+</span></span><span style="display:flex;"><span>Set-Alias -Name ipconfig -Value Get-NetIPConfiguration
+</span></span><span style="display:flex;"><span>Set-Alias -Name ping -Value Test-Connection
+</span></span><span style="display:flex;"><span>Set-Alias -Name netstat -Value Get-NetTCPConnection
+</span></span><span style="display:flex;"><span>Set-Alias -Name nslookup -Value Resolve-DnsName
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 프로세스 관련 명령어</span>
+</span></span><span style="display:flex;"><span>Set-Alias -Name tasklist -Value Get-Process
+</span></span><span style="display:flex;"><span>Set-Alias -Name taskkill -Value Stop-Process
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 기타 유용한 CMD 명령어 별칭</span>
+</span></span><span style="display:flex;"><span>Set-Alias -Name find -Value Select-String
+</span></span><span style="display:flex;"><span>Set-Alias -Name sort -Value Sort-Object
+</span></span><span style="display:flex;"><span>Set-Alias -Name fc -Value Compare-Object
+</span></span><span style="display:flex;"><span>Set-Alias -Name where -Value Where-Object
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 직접 구현이 필요한 명령어 함수</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> tracert { 
+</span></span><span style="display:flex;"><span>    cmd /c tracert $args 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> ipconfig-all {
+</span></span><span style="display:flex;"><span>    Get-NetIPConfiguration -Detailed
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> systeminfo {
+</span></span><span style="display:flex;"><span>    Get-ComputerInfo
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> findstr {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span>([<span style="color:#66d9ef">string</span>]$pattern, [<span style="color:#66d9ef">string</span>]$file)
+</span></span><span style="display:flex;"><span>    Get-Content $file | Select-String $pattern
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> hostname {
+</span></span><span style="display:flex;"><span>    $env:COMPUTERNAME
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> whoami {
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">Security.Principal.WindowsIdentity</span>]::GetCurrent().Name
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 추가 유틸리티 함수</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> which {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span>([<span style="color:#66d9ef">string</span>]$command)
+</span></span><span style="display:flex;"><span>    Get-Command $command | Select-Object -ExpandProperty Source
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 명령어 프롬프트 기능을 위한 함수</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> prompt {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 기본 PowerShell 프롬프트를 CMD 스타일로 변경</span>
+</span></span><span style="display:flex;"><span>    $path = Get-Location
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;</span>$path<span style="color:#e6db74">&gt; &#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>이 코드를 PowerShell 프로필에 추가하는 방법:</p>
+<ol>
+<li>PowerShell을 관리자 권한으로 실행</li>
+<li>다음 명령어로 프로필 파일 열기:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>notepad $PROFILE
+</span></span></code></pre></div></li>
+<li>위 코드를 파일에 붙여넣기</li>
+<li>저장 후 종료</li>
+<li>PowerShell 세션을 다시 시작하거나 다음 명령어로 프로필 다시 로드:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>. $PROFILE
+</span></span></code></pre></div></li>
+</ol>
+<p>이제 PowerShell에서 CMD 명령어를 별칭으로 사용할 수 있습니다. 예를 들어 <code>dir</code>, <code>cls</code>, <code>ipconfig</code> 등의 명령어가 PowerShell에서 작동할 것입니다.</p>
+<p>추가 명령어가 필요하면 같은 형식으로 <code>Set-Alias</code> 또는 함수를 더 정의하여 확장할 수 있습니다.</p>
+<h1 id="v21-수정">v2.1 수정<a hidden class="anchor" aria-hidden="true" href="#v21-수정">#</a></h1>
+<p>제공해주신 오류 메시지를 분석해보니 PowerShell에서 이미 존재하는 별칭들과 충돌이 발생했습니다. 이를 문제가 되는 것과 문제가 되지 않는 것으로 구분하겠습니다.</p>
+<h2 id="문제가-되는-별칭-이미-존재하는-별칭">문제가 되는 별칭 (이미 존재하는 별칭)<a hidden class="anchor" aria-hidden="true" href="#문제가-되는-별칭-이미-존재하는-별칭">#</a></h2>
+<h3 id="allscope-옵션이-있어-제거할-수-없는-별칭">AllScope 옵션이 있어 제거할 수 없는 별칭<a hidden class="anchor" aria-hidden="true" href="#allscope-옵션이-있어-제거할-수-없는-별칭">#</a></h3>
+<ol>
+<li><code>dir</code> (Get-ChildItem)</li>
+<li><code>cls</code> (Clear-Host)</li>
+<li><code>copy</code> (Copy-Item)</li>
+<li><code>move</code> (Move-Item)</li>
+<li><code>del</code> (Remove-Item)</li>
+<li><code>type</code> (Get-Content)</li>
+<li><code>md</code> (New-Item)</li>
+<li><code>rd</code> (Remove-Item)</li>
+<li><code>cd</code> (Set-Location)</li>
+</ol>
+<h3 id="읽기-전용이거나-상수로-설정된-별칭">읽기 전용이거나 상수로 설정된 별칭<a hidden class="anchor" aria-hidden="true" href="#읽기-전용이거나-상수로-설정된-별칭">#</a></h3>
+<ol>
+<li><code>sort</code> (Sort-Object)</li>
+<li><code>fc</code> (Compare-Object)</li>
+<li><code>where</code> (Where-Object)</li>
+</ol>
+<h2 id="문제가-되지-않는-별칭-설정-가능한-별칭">문제가 되지 않는 별칭 (설정 가능한 별칭)<a hidden class="anchor" aria-hidden="true" href="#문제가-되지-않는-별칭-설정-가능한-별칭">#</a></h2>
+<p>다음 별칭들은 오류 메시지가 없었으므로 문제없이 설정 가능합니다:</p>
+<ol>
+<li><code>ipconfig</code> (Get-NetIPConfiguration)</li>
+<li><code>ping</code> (Test-Connection)</li>
+<li><code>netstat</code> (Get-NetTCPConnection)</li>
+<li><code>nslookup</code> (Resolve-DnsName)</li>
+<li><code>tasklist</code> (Get-Process)</li>
+<li><code>taskkill</code> (Stop-Process)</li>
+<li><code>find</code> (Select-String)</li>
+</ol>
+<p>따라서 프로필 파일에서는 문제가 되는 별칭 설정은 제거하고, 문제가 되지 않는 별칭만 설정하거나 함수 형태로 구현하는 것이 좋습니다.</p>
+<h1 id="v3-mv-move-item">v3 mv Move-Item<a hidden class="anchor" aria-hidden="true" href="#v3-mv-move-item">#</a></h1>
+<p>PowerShell에서 Unix/Linux의 <code>mv</code> 명령어에 해당하는 것은 <code>Move-Item</code> cmdlet입니다. 이 명령어는 파일이나 디렉토리를 한 위치에서 다른 위치로 이동할 때 사용합니다.</p>
+<p>기본 사용법:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Move-Item -Path <span style="color:#e6db74">&#34;소스경로&#34;</span> -Destination <span style="color:#e6db74">&#34;목적지경로&#34;</span>
+</span></span></code></pre></div><p>예시:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># 파일 이동</span>
+</span></span><span style="display:flex;"><span>Move-Item -Path <span style="color:#e6db74">&#34;C:\temp\document.txt&#34;</span> -Destination <span style="color:#e6db74">&#34;C:\Documents\&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 디렉토리 이동</span>
+</span></span><span style="display:flex;"><span>Move-Item -Path <span style="color:#e6db74">&#34;C:\OldFolder&#34;</span> -Destination <span style="color:#e6db74">&#34;C:\NewLocation\&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 파일 이름 변경 (같은 디렉토리 내에서 이동)</span>
+</span></span><span style="display:flex;"><span>Move-Item -Path <span style="color:#e6db74">&#34;C:\temp\old.txt&#34;</span> -Destination <span style="color:#e6db74">&#34;C:\temp\new.txt&#34;</span>
+</span></span></code></pre></div><p>PowerShell은 이미 <code>move</code>라는 <code>Move-Item</code>에 대한 내장 별칭을 제공합니다. 그러나 <code>mv</code>는 기본적으로 별칭이 설정되어 있지 않습니다.</p>
+<p><code>mv</code> 별칭을 만들고 싶다면 PowerShell 프로필에 다음 코드를 추가할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Set-Alias -Name mv -Value Move-Item
+</span></span></code></pre></div><p>이렇게 하면 <code>mv</code> 명령어를 Unix/Linux처럼 사용할 수 있습니다.</p>
+<h1 id="v4-ls">v4 ls<a hidden class="anchor" aria-hidden="true" href="#v4-ls">#</a></h1>
+<p>PowerShell에서 <code>ls</code> 명령어(Get-ChildItem의 별칭)를 더 이쁘게 표시하는 방법은 여러 가지가 있습니다:</p>
+<h2 id="1-format-table-사용하기">1. Format-Table 사용하기<a hidden class="anchor" aria-hidden="true" href="#1-format-table-사용하기">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ls | Format-Table Name, Length, LastWriteTime -AutoSize
+</span></span></code></pre></div><h2 id="2-컬러-지정-및-그룹화">2. 컬러 지정 및 그룹화<a hidden class="anchor" aria-hidden="true" href="#2-컬러-지정-및-그룹화">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ls | Sort-Object Extension | Format-Wide -Column <span style="color:#ae81ff">4</span> -Property Name
+</span></span></code></pre></div><h2 id="3-powershell-함수로-커스텀-ls-만들기">3. PowerShell 함수로 커스텀 ls 만들기<a hidden class="anchor" aria-hidden="true" href="#3-powershell-함수로-커스텀-ls-만들기">#</a></h2>
+<p>PowerShell 프로필에 다음 함수를 추가하면 컬러풀한 ls를 사용할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Show-ColorLS {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>        [<span style="color:#66d9ef">string</span>]$Path = <span style="color:#e6db74">&#34;.&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    $items = Get-ChildItem -Path $Path
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">foreach</span> ($item <span style="color:#66d9ef">in</span> $items) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($item.PSIsContainer) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 디렉토리는 파란색으로 표시</span>
+</span></span><span style="display:flex;"><span>            Write-Host $item.Name -ForegroundColor Blue -NoNewline
+</span></span><span style="display:flex;"><span>            Write-Host <span style="color:#e6db74">&#34;\&#34;</span> -ForegroundColor Blue
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 파일 확장자에 따라 다른 색상 적용</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> <span style="color:#f92672">-Regex</span> ($item.Extension) {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;\.exe$|\.bat$|\.cmd$|\.ps1$&#39;</span> { 
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e"># 실행 파일은 녹색</span>
+</span></span><span style="display:flex;"><span>                    Write-Host $item.Name -ForegroundColor Green 
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;\.txt$|\.log$|\.md$&#39;</span> { 
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e"># 텍스트 파일은 노란색</span>
+</span></span><span style="display:flex;"><span>                    Write-Host $item.Name -ForegroundColor Yellow 
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;\.jpg$|\.png$|\.gif$|\.bmp$&#39;</span> { 
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e"># 이미지 파일은 마젠타</span>
+</span></span><span style="display:flex;"><span>                    Write-Host $item.Name -ForegroundColor Magenta 
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">default</span> { 
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e"># 기타 파일은 흰색</span>
+</span></span><span style="display:flex;"><span>                    Write-Host $item.Name -ForegroundColor White 
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Set-Alias -Name cls -Value Show-ColorLS
+</span></span></code></pre></div><h2 id="4-외부-모듈-사용하기">4. 외부 모듈 사용하기<a hidden class="anchor" aria-hidden="true" href="#4-외부-모듈-사용하기">#</a></h2>
+<p>PowerShell 갤러리에서 <code>Terminal-Icons</code> 모듈을 설치하고 사용할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Install-Module -Name Terminal-Icons -Repository PSGallery
+</span></span><span style="display:flex;"><span>Import-Module -Name Terminal-Icons
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 프로필에 추가하면 자동으로 적용됨</span>
+</span></span><span style="display:flex;"><span>ls
+</span></span></code></pre></div><h2 id="5-간단한-별칭-설정">5. 간단한 별칭 설정<a hidden class="anchor" aria-hidden="true" href="#5-간단한-별칭-설정">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># 가장 유용한 정보만 보여주는 ls 별칭</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-NiceDir {
+</span></span><span style="display:flex;"><span>    Get-ChildItem | Select-Object Mode, LastWriteTime, 
+</span></span><span style="display:flex;"><span>    @{Name=<span style="color:#e6db74">&#34;Size(KB)&#34;</span>; Expression={<span style="color:#e6db74">&#34;{0:N2}&#34;</span> <span style="color:#f92672">-f</span> ($_.Length / <span style="color:#ae81ff">1</span>KB)}}, Name
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Set-Alias -Name ll -Value Get-NiceDir
+</span></span></code></pre></div><p>PowerShell 7 이상에서는 <code>Get-ChildItem</code>의 결과가 기본적으로 더 보기 좋게 표시됩니다. PowerShell 7을 사용하고 있다면 <code>ls</code>를 그냥 사용해도 꽤 괜찮은 결과를 얻을 수 있습니다.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

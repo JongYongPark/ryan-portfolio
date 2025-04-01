@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>React Hook | RyanLabs</title>
+<meta name="keywords" content="React, Hook">
+<meta name="description" content="React Hook
+React의 함수형 컴포넌트는 매 렌더링마다 컴포넌트 함수를 호출합니다. 이때 React는 내부적으로 **hook 체인(혹은 hook 리스트)**를 유지하며, 각 hook 호출마다 고유한 상태(예: useState의 상태, useEffect의 효과 정보 등)를 저장합니다. 이 구조와 재호출 과정을 자세히 설명하면 다음과 같습니다.
+
+1. Hook 체인의 기본 구조
+
+
+Fiber와 Hook 리스트:
+React는 각 컴포넌트 인스턴스(실제로는 Fiber 노드)에 hook 정보를 저장합니다. 이 정보는 hook들이 호출된 순서대로 배열(혹은 연결 리스트)로 관리되며, 각 hook은 해당 컴포넌트의 렌더링 상태와 관련된 데이터를 보관합니다.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/developer/javascipt/react-hook/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/developer/javascipt/react-hook/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      React Hook
+    </h1>
+    <div class="post-meta"><span title='2025-02-17 00:00:00 +0000 UTC'>2월 17, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="react-hook">React Hook<a hidden class="anchor" aria-hidden="true" href="#react-hook">#</a></h1>
+<p>React의 함수형 컴포넌트는 매 렌더링마다 컴포넌트 함수를 호출합니다. 이때 React는 내부적으로 **hook 체인(혹은 hook 리스트)**를 유지하며, 각 hook 호출마다 고유한 상태(예: useState의 상태, useEffect의 효과 정보 등)를 저장합니다. 이 구조와 재호출 과정을 자세히 설명하면 다음과 같습니다.</p>
+<hr>
+<h3 id="1-hook-체인의-기본-구조">1. Hook 체인의 기본 구조<a hidden class="anchor" aria-hidden="true" href="#1-hook-체인의-기본-구조">#</a></h3>
+<ul>
+<li>
+<p><strong>Fiber와 Hook 리스트:</strong><br>
+React는 각 컴포넌트 인스턴스(실제로는 Fiber 노드)에 hook 정보를 저장합니다. 이 정보는 hook들이 호출된 순서대로 배열(혹은 연결 리스트)로 관리되며, 각 hook은 해당 컴포넌트의 렌더링 상태와 관련된 데이터를 보관합니다.</p>
+</li>
+<li>
+<p><strong>순서의 중요성:</strong><br>
+함수형 컴포넌트 내에서 hook은 항상 같은 순서로 호출되어야 합니다. 그렇지 않으면 React가 이전 렌더링의 hook 체인과 새 렌더링의 hook 호출 순서를 일치시키지 못하여, 상태를 잘못 매핑하게 됩니다.</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-컴포넌트-재호출-시-hook의-동작-과정">2. 컴포넌트 재호출 시 Hook의 동작 과정<a hidden class="anchor" aria-hidden="true" href="#2-컴포넌트-재호출-시-hook의-동작-과정">#</a></h3>
+<ol>
+<li>
+<p><strong>컴포넌트 함수 호출:</strong><br>
+컴포넌트가 업데이트되어 다시 렌더링될 때, React는 해당 함수 컴포넌트를 호출합니다. 이때 함수 내부에서 useState, useEffect, useMemo, useCallback 등 hook들이 순서대로 실행됩니다.</p>
+</li>
+<li>
+<p><strong>Hook 체인과 현재 포인터:</strong><br>
+React는 내부적으로 현재 렌더링 중인 컴포넌트의 hook 체인을 관리하는 포인터를 사용합니다. 첫 번째 hook 호출은 체인의 첫 번째 노드와 매핑되고, 두 번째 호출은 두 번째 노드와 매핑되는 식입니다.</p>
+</li>
+<li>
+<p><strong>상태 값 재사용:</strong><br>
+각 hook 호출 시, React는 이전 렌더링에서 저장한 hook 상태를 반환합니다. 예를 들어, useState의 경우:</p>
+<ul>
+<li>첫 렌더링에서 useState(0)을 호출하면, 초기 상태 0이 할당된 hook 노드가 생성됩니다.</li>
+<li>재렌더링 시 동일한 순서의 useState 호출이 이루어지면, React는 해당 hook 노드를 찾아 이전 상태(변경된 값일 수도 있음)를 반환합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>업데이트 및 재계산:</strong><br>
+만약 상태 업데이트가 발생하면, 해당 hook의 상태가 변경되고, 이로 인해 컴포넌트 함수가 다시 호출됩니다. 이때 hook 체인의 순서를 그대로 따라가며, 각 hook은 업데이트된 상태 값을 기반으로 동작합니다.</p>
+</li>
+<li>
+<p><strong>정리 함수 호출 (useEffect 등):</strong><br>
+useEffect의 경우, 의존성 배열이 변경되었거나 컴포넌트가 언마운트될 때 정리 함수(clean-up function)가 호출됩니다. 이 역시 이전 렌더링의 hook 체인 내에서 관리됩니다.</p>
+</li>
+</ol>
+<hr>
+<h3 id="3-메모리와-생명주기-관점에서의-설명">3. 메모리와 생명주기 관점에서의 설명<a hidden class="anchor" aria-hidden="true" href="#3-메모리와-생명주기-관점에서의-설명">#</a></h3>
+<ul>
+<li>
+<p><strong>메모리 관리:</strong><br>
+각 hook의 상태는 컴포넌트의 Fiber 내에 저장되며, 이 메모리는 컴포넌트의 생명주기 동안 유지됩니다. 함수형 컴포넌트 자체는 호출 후 스택에서 사라지지만, hook 상태는 Fiber에 의해 지속적으로 관리되어 다음 렌더링 시 재사용됩니다.</p>
+</li>
+<li>
+<p><strong>생명주기와 재연결:</strong><br>
+함수형 컴포넌트가 재호출되면, 이전 렌더링 시 생성된 hook 체인의 상태와 새로 실행되는 함수의 hook 호출 순서가 일치합니다. 이렇게 해서 각 hook은 “연결(연관)”되어, 이전 상태를 그대로 유지한 채 새로운 렌더링 로직과 연결됩니다.<br>
+이 메커니즘 덕분에, useState나 useEffect 등에서 선언한 상태와 부수 효과가 컴포넌트의 생명주기 동안 올바르게 동작하게 됩니다.</p>
+</li>
+</ul>
+<hr>
+<h3 id="4-요약">4. 요약<a hidden class="anchor" aria-hidden="true" href="#4-요약">#</a></h3>
+<ul>
+<li>
+<p><strong>Hook 체인:</strong><br>
+React는 각 컴포넌트 Fiber에 hook 체인을 유지하여, hook들이 호출된 순서대로 상태를 저장합니다.</p>
+</li>
+<li>
+<p><strong>재렌더링 시 동작:</strong><br>
+컴포넌트 함수가 재호출될 때, hook 호출 순서에 따라 이전에 저장된 상태를 재사용하며, 새로운 상태 업데이트 및 부수 효과를 적용합니다.</p>
+</li>
+<li>
+<p><strong>메모리 유지:</strong><br>
+함수형 컴포넌트 자체는 스택에 존재했다가 호출이 끝나면 사라지지만, hook 상태는 컴포넌트 Fiber에 저장되어 다음 렌더링 시 재사용되므로, 컴포넌트의 전체 생명주기 동안 유지됩니다.</p>
+</li>
+</ul>
+<p>이러한 구조 덕분에 함수형 컴포넌트와 Hook은 가볍고 효율적으로 상태를 관리하면서도, 재렌더링 시에도 이전 상태를 안정적으로 유지할 수 있습니다.</p>
+<hr>
+<h1 id="hook-자세한-설명">Hook 자세한 설명<a hidden class="anchor" aria-hidden="true" href="#hook-자세한-설명">#</a></h1>
+<p>아래는 함수형 컴포넌트에서 Hook이 메모리와 생명주기 측면에서 어떻게 동작하는지, 그리고 컴포넌트가 재렌더링될 때 Hook들이 어떻게 다시 연결되는지를 도식적으로 설명한 내용입니다.</p>
+<hr>
+<h3 id="1-초기-렌더링-시-hook-체인-구성">1. 초기 렌더링 시 Hook 체인 구성<a hidden class="anchor" aria-hidden="true" href="#1-초기-렌더링-시-hook-체인-구성">#</a></h3>
+<p>함수형 컴포넌트가 처음 렌더링될 때, React는 내부 Fiber 노드에 **Hook 체인(리스트)**를 생성합니다.<br>
+예를 들어, 아래와 같이 작성된 컴포넌트가 있다고 가정합니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">MyComponent</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">count</span>, <span style="color:#a6e22e">setCount</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>(<span style="color:#ae81ff">0</span>);       <span style="color:#75715e">// Hook 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">memoValue</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useMemo</span>(() =&gt; <span style="color:#a6e22e">computeExpensiveValue</span>(<span style="color:#a6e22e">count</span>), [<span style="color:#a6e22e">count</span>]); <span style="color:#75715e">// Hook 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">useEffect</span>(() =&gt; {                            <span style="color:#75715e">// Hook 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 부수 효과 (예: API 호출)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> () =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 정리(clean-up) 코드
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    };
+</span></span><span style="display:flex;"><span>  }, [<span style="color:#a6e22e">count</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">p</span>&gt;<span style="color:#a6e22e">Count</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">count</span>}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">p</span>&gt;<span style="color:#a6e22e">Memoized</span> <span style="color:#a6e22e">Value</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">memoValue</span>}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">setCount</span>(<span style="color:#a6e22e">count</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)}&gt;<span style="color:#a6e22e">Increment</span>&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>도식 1: 초기 렌더링 시 Hook 체인</strong></p>
+<pre tabindex="0"><code>+-----------------------------------------------+
+|            MyComponent Fiber                  |
+|  +-----------------------------------------+  |
+|  | Hook Chain (순서대로 저장됨)           |  |
+|  |---------------------------------------|  |
+|  | Hook 1: useState(초기값 0)             |  |
+|  | Hook 2: useMemo(..., [count])          |  |
+|  | Hook 3: useEffect(..., [count])        |  |
+|  +-----------------------------------------+  |
++-----------------------------------------------+
+</code></pre><ul>
+<li>
+<p><strong>메모리 관점:</strong><br>
+함수형 컴포넌트 자체는 호출되고 나면 스택에서 사라지지만, 이때 생성된 Hook 상태는 Fiber 노드 내에 저장되어 컴포넌트의 전체 생명주기 동안 유지됩니다.</p>
+</li>
+<li>
+<p><strong>생명주기 관점:</strong><br>
+Hook 체인은 컴포넌트가 마운트된 이후 업데이트 및 언마운트 시에도 계속 유지되며, 각 Hook은 지정한 의존성 배열에 따라 재실행 혹은 정리(clean-up)됩니다.</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-재렌더링-시-hook의-재호출-및-연결-과정">2. 재렌더링 시 Hook의 재호출 및 연결 과정<a hidden class="anchor" aria-hidden="true" href="#2-재렌더링-시-hook의-재호출-및-연결-과정">#</a></h3>
+<p>상태 업데이트(예: <code>setCount</code> 호출)로 인해 컴포넌트가 다시 렌더링될 때, React는 <strong>동일한 순서</strong>로 Hook들을 다시 호출합니다.<br>
+이때, 이전 렌더링 시 생성된 Hook 체인과 호출 순서가 일치해야 올바른 상태가 재사용됩니다.</p>
+<p><strong>도식 2: 재렌더링 과정</strong></p>
+<pre tabindex="0"><code>[렌더링 1]
+MyComponent() 호출 → Hook 체인 생성: [H1, H2, H3]
+
+   상태: H1(count)=0, H2(memoValue)=computedValue, H3(effect)=등록됨
+
+   ────────── 상태 업데이트 (setCount 호출) ──────────
+
+[렌더링 2]
+MyComponent() 다시 호출 → 
+React 내부에서는 Hook 포인터를 초기화하여,
+   - 첫 번째 호출: useState → 기존 H1(count)의 값(예: 0 혹은 업데이트된 값) 반환
+   - 두 번째 호출: useMemo → 의존성([count])에 따라 H2의 값을 재계산하거나 이전 값을 재사용
+   - 세 번째 호출: useEffect → 의존성에 따라 H3의 효과를 재실행하거나 그대로 유지
+</code></pre><ul>
+<li>
+<p><strong>메모리 관점:</strong><br>
+함수형 컴포넌트가 재호출되어 스택에 올라가고 실행이 끝나면 스택에서는 사라지지만, Hook 체인에 저장된 상태는 Fiber 내에서 그대로 남아 다음 렌더링 시 재사용됩니다.</p>
+</li>
+<li>
+<p><strong>생명주기 관점:</strong><br>
+각 Hook은 자신의 생명주기(마운트, 업데이트, 언마운트)를 Fiber 내 Hook 체인과 연결하여 관리됩니다. 예를 들어, <code>useEffect</code>는 의존성 배열이 변경되면 정리 함수를 호출하고 새로운 효과를 설정하며, 컴포넌트 언마운트 시 정리 함수가 실행됩니다.</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-요약">3. 요약<a hidden class="anchor" aria-hidden="true" href="#3-요약">#</a></h3>
+<ul>
+<li>
+<p><strong>초기 렌더링:</strong></p>
+<ul>
+<li>컴포넌트 함수가 처음 호출될 때, React는 Hook 체인을 생성하여 각 Hook의 초기 상태를 Fiber에 저장합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>재렌더링:</strong></p>
+<ul>
+<li>상태 업데이트 후 컴포넌트 함수가 다시 호출되면, Hook들이 호출된 순서에 따라 이전의 Hook 체인과 매핑되어 저장된 상태를 반환하거나 업데이트합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>메모리 관리:</strong></p>
+<ul>
+<li>함수형 컴포넌트 함수는 호출 후 스택에서 사라지지만, Hook 상태는 Fiber에 저장되어 컴포넌트의 전체 생명주기 동안 유지됩니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>생명주기 관리:</strong></p>
+<ul>
+<li>Hook들은 각각의 생명주기(마운트, 업데이트, 언마운트)를 관리하며, 정리 함수 등을 통해 리소스를 해제합니다.</li>
+</ul>
+</li>
+</ul>
+<p>이와 같이, React는 Hook 체인을 이용하여 함수형 컴포넌트의 상태와 부수 효과를 효과적으로 관리하며, 컴포넌트가 재렌더링될 때마다 이전 상태와 생명주기 정보를 안전하게 재사용합니다.</p>
+<hr>
+<h1 id="여러-hook-의-동작-설명">여러 Hook 의 동작 설명<a hidden class="anchor" aria-hidden="true" href="#여러-hook-의-동작-설명">#</a></h1>
+<p>아래는 React에서 기본적으로 지원하는 주요 Hook들과 각 Hook의 예제 코드 및 동작 원리에 대한 자세한 설명입니다.</p>
+<hr>
+<h2 id="1-usestate">1. useState<a hidden class="anchor" aria-hidden="true" href="#1-usestate">#</a></h2>
+<p><strong>역할:</strong><br>
+함수형 컴포넌트 내에서 상태 변수를 선언하고, 해당 상태를 업데이트하며 컴포넌트를 재렌더링합니다.</p>
+<p><strong>예제 코드:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useState</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Counter</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 초기 상태값 0을 가진 count 변수를 선언하고, setCount 함수를 통해 업데이트합니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">count</span>, <span style="color:#a6e22e">setCount</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">p</span>&gt;<span style="color:#a6e22e">현재</span> <span style="color:#a6e22e">카운트</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">count</span>}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">setCount</span>(<span style="color:#a6e22e">count</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)}&gt;<span style="color:#a6e22e">증가</span>&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">Counter</span>;
+</span></span></code></pre></div><p><strong>동작 원리:</strong></p>
+<ul>
+<li><strong>초기 렌더링:</strong>
+<ul>
+<li><code>useState</code>는 컴포넌트의 초기 상태를 설정하고, React 내부 Fiber에 해당 상태를 저장합니다.</li>
+</ul>
+</li>
+<li><strong>업데이트:</strong>
+<ul>
+<li><code>setCount</code>를 호출하면 새로운 상태가 Fiber에 업데이트되고, 컴포넌트가 재렌더링됩니다.</li>
+</ul>
+</li>
+<li><strong>상태 유지:</strong>
+<ul>
+<li>함수형 컴포넌트는 호출이 끝난 후 스택에서 사라지지만, hook 상태는 Fiber에 저장되어 컴포넌트의 전체 생명주기 동안 유지됩니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-useeffect">2. useEffect<a hidden class="anchor" aria-hidden="true" href="#2-useeffect">#</a></h2>
+<p><strong>역할:</strong><br>
+부수 효과(side effects)를 처리합니다. 예를 들어, 데이터 페칭, 구독, 타이머 설정 등이 해당됩니다.<br>
+클래스형 컴포넌트의 <code>componentDidMount</code>, <code>componentDidUpdate</code>, <code>componentWillUnmount</code>를 통합한 역할을 합니다.</p>
+<p><strong>예제 코드:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useState</span>, <span style="color:#a6e22e">useEffect</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Timer</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">seconds</span>, <span style="color:#a6e22e">setSeconds</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 의존성 배열이 빈 배열이면 마운트/언마운트 시에만 실행됩니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">useEffect</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">intervalId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">setInterval</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">setSeconds</span>(<span style="color:#a6e22e">prev</span> =&gt; <span style="color:#a6e22e">prev</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }, <span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 정리(clean-up) 함수: 컴포넌트 언마운트 시 타이머를 해제합니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> () =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">clearInterval</span>(<span style="color:#a6e22e">intervalId</span>);
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>  }, []);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">p</span>&gt;<span style="color:#a6e22e">타이머</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">seconds</span>}<span style="color:#a6e22e">초</span>&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">Timer</span>;
+</span></span></code></pre></div><p><strong>동작 원리:</strong></p>
+<ul>
+<li><strong>마운트 시:</strong>
+<ul>
+<li>컴포넌트가 처음 렌더링되면 <code>useEffect</code>의 콜백이 실행되어 타이머가 설정됩니다.</li>
+</ul>
+</li>
+<li><strong>업데이트 시:</strong>
+<ul>
+<li>의존성 배열에 포함된 값이 변경되면 효과가 재실행됩니다.</li>
+</ul>
+</li>
+<li><strong>언마운트 시:</strong>
+<ul>
+<li><code>useEffect</code>에서 반환한 정리 함수가 호출되어 타이머와 같은 부수 효과가 정리됩니다.</li>
+</ul>
+</li>
+<li><strong>메모리 관리:</strong>
+<ul>
+<li>부수 효과에 의해 할당된 리소스(예: 타이머)는 정리 함수로 해제하여 메모리 누수를 방지합니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-usecontext">3. useContext<a hidden class="anchor" aria-hidden="true" href="#3-usecontext">#</a></h2>
+<p><strong>역할:</strong><br>
+React의 Context API를 사용하여 전역 상태를 쉽게 공유할 수 있도록 합니다.<br>
+상위 컴포넌트에서 제공한 값을 하위 컴포넌트에서 간편하게 접근할 수 있습니다.</p>
+<p><strong>예제 코드:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">createContext</span>, <span style="color:#a6e22e">useContext</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Context 생성
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ThemeContext</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createContext</span>(<span style="color:#e6db74">&#39;light&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ThemedComponent</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// useContext를 통해 상위에서 제공한 값을 읽어옵니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">theme</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useContext</span>(<span style="color:#a6e22e">ThemeContext</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span>&gt;<span style="color:#a6e22e">현재</span> <span style="color:#a6e22e">테마</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">theme</span>}&lt;/<span style="color:#f92672">div</span>&gt;;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">App</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Provider를 통해 하위 컴포넌트에 값 제공
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    &lt;<span style="color:#f92672">ThemeContext.Provider</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dark&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">ThemedComponent</span> /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">ThemeContext.Provider</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;
+</span></span></code></pre></div><p><strong>동작 원리:</strong></p>
+<ul>
+<li><strong>Provider:</strong>
+<ul>
+<li>상위 컴포넌트에서 <code>ThemeContext.Provider</code>를 사용하여 전역 값을 설정합니다.</li>
+</ul>
+</li>
+<li><strong>소비:</strong>
+<ul>
+<li>하위 컴포넌트는 <code>useContext</code>를 호출하여 Provider로부터 전달된 값을 읽어옵니다.</li>
+</ul>
+</li>
+<li><strong>메모리 관리:</strong>
+<ul>
+<li>Context 값은 React 트리 전체에 저장되어, 필요한 컴포넌트에서 재사용됩니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-usereducer">4. useReducer<a hidden class="anchor" aria-hidden="true" href="#4-usereducer">#</a></h2>
+<p><strong>역할:</strong><br>
+복잡한 상태 업데이트 로직을 보다 예측 가능하게 관리하기 위해 사용됩니다.<br>
+Redux의 reducer 개념과 유사하며, 상태와 액션을 인자로 받아 새로운 상태를 반환하는 순수 함수를 사용합니다.</p>
+<p><strong>예제 코드:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useReducer</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 상태 업데이트를 위한 리듀서 함수 정의
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">reducer</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">action</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">type</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;increment&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">count</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">count</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;decrement&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">count</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">count</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">state</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Counter</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">dispatch</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useReducer</span>(<span style="color:#a6e22e">reducer</span>, { <span style="color:#a6e22e">count</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span> });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">p</span>&gt;<span style="color:#a6e22e">카운트</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">count</span>}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">dispatch</span>({ <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;increment&#39;</span> })}&gt;<span style="color:#a6e22e">증가</span>&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">dispatch</span>({ <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;decrement&#39;</span> })}&gt;<span style="color:#a6e22e">감소</span>&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">Counter</span>;
+</span></span></code></pre></div><p><strong>동작 원리:</strong></p>
+<ul>
+<li><strong>초기 상태 설정:</strong>
+<ul>
+<li><code>useReducer</code>는 초기 상태와 리듀서 함수를 받아 내부 Fiber에 상태를 저장합니다.</li>
+</ul>
+</li>
+<li><strong>상태 업데이트:</strong>
+<ul>
+<li><code>dispatch</code>를 호출하면, 리듀서 함수가 현재 상태와 액션을 인자로 받아 새로운 상태를 반환하고, 컴포넌트가 재렌더링됩니다.</li>
+</ul>
+</li>
+<li><strong>메모리 관리:</strong>
+<ul>
+<li>리듀서에 의해 관리되는 상태는 컴포넌트의 전체 생명주기 동안 유지되며, 변경 시마다 업데이트됩니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="5-usecallback">5. useCallback<a hidden class="anchor" aria-hidden="true" href="#5-usecallback">#</a></h2>
+<p><strong>역할:</strong><br>
+함수의 재생성을 방지하여, 불필요한 렌더링이나 성능 저하를 막습니다.<br>
+특히, 하위 컴포넌트에 콜백 함수를 props로 전달할 때 유용합니다.</p>
+<p><strong>예제 코드:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useState</span>, <span style="color:#a6e22e">useCallback</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ParentComponent</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">count</span>, <span style="color:#a6e22e">setCount</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// useCallback을 사용하여 handleClick 함수의 참조가 변경되지 않도록 합니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handleClick</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useCallback</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setCount</span>(<span style="color:#a6e22e">prevCount</span> =&gt; <span style="color:#a6e22e">prevCount</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>  }, []);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">p</span>&gt;<span style="color:#a6e22e">카운트</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">count</span>}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">ChildComponent</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">handleClick</span>} /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ChildComponent</span>({ <span style="color:#a6e22e">onClick</span> }) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;ChildComponent 렌더링&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">onClick</span>}&gt;<span style="color:#a6e22e">클릭</span>&lt;/<span style="color:#f92672">button</span>&gt;;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">ParentComponent</span>;
+</span></span></code></pre></div><p><strong>동작 원리:</strong></p>
+<ul>
+<li><strong>함수 메모이제이션:</strong>
+<ul>
+<li><code>useCallback</code>은 의존성 배열이 변경되지 않는 한 동일한 함수 객체를 반환합니다.</li>
+</ul>
+</li>
+<li><strong>성능 최적화:</strong>
+<ul>
+<li>하위 컴포넌트에 props로 전달되는 콜백 함수가 변경되지 않으므로, 불필요한 재렌더링을 방지할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>메모리 관리:</strong>
+<ul>
+<li>함수 객체의 참조가 동일하게 유지되어, 매 렌더링 시 새로운 함수를 생성하지 않습니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-usememo">6. useMemo<a hidden class="anchor" aria-hidden="true" href="#6-usememo">#</a></h2>
+<p><strong>역할:</strong><br>
+연산 비용이 큰 함수의 결과를 메모이제이션하여, 불필요한 재계산을 방지합니다.</p>
+<p><strong>예제 코드:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useMemo</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ExpensiveCalculation</span>({ <span style="color:#a6e22e">number</span> }) {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// number가 변경될 때만 계산을 다시 수행합니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">computedValue</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useMemo</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000000</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">result</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">number</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">i</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>  }, [<span style="color:#a6e22e">number</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span>&gt;<span style="color:#a6e22e">계산</span> <span style="color:#a6e22e">결과</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">computedValue</span>}&lt;/<span style="color:#f92672">div</span>&gt;;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">ExpensiveCalculation</span>;
+</span></span></code></pre></div><p><strong>동작 원리:</strong></p>
+<ul>
+<li><strong>메모이제이션:</strong>
+<ul>
+<li><code>useMemo</code>는 의존성 배열의 값이 변경되지 않는 한 이전에 계산된 값을 반환합니다.</li>
+</ul>
+</li>
+<li><strong>성능 최적화:</strong>
+<ul>
+<li>복잡한 계산을 반복하지 않고, 저장된 결과를 재사용하여 CPU 사용량을 줄입니다.</li>
+</ul>
+</li>
+<li><strong>메모리 관리:</strong>
+<ul>
+<li>계산 결과가 내부에 저장되어 컴포넌트 렌더링 간 유지됩니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="7-useref">7. useRef<a hidden class="anchor" aria-hidden="true" href="#7-useref">#</a></h2>
+<p><strong>역할:</strong><br>
+DOM 요소에 직접 접근하거나, 컴포넌트 전반에 걸쳐 변경되지만 렌더링에 영향을 주지 않는 값을 저장하는 데 사용됩니다.</p>
+<p><strong>예제 코드:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useRef</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">TextInput</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// useRef를 사용하여 DOM 요소에 대한 참조를 생성합니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">inputRef</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useRef</span>(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">focusInput</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// inputRef.current를 사용하여 실제 DOM 요소에 접근합니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">inputRef</span>.<span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">focus</span>();
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">ref</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">inputRef</span>} <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">focusInput</span>}&gt;<span style="color:#a6e22e">포커스</span> <span style="color:#a6e22e">주기</span>&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">TextInput</span>;
+</span></span></code></pre></div><p><strong>동작 원리:</strong></p>
+<ul>
+<li><strong>참조 유지:</strong>
+<ul>
+<li><code>useRef</code>로 생성된 객체는 <code>.current</code> 프로퍼티를 통해 값을 저장합니다.</li>
+</ul>
+</li>
+<li><strong>재렌더링 영향 없음:</strong>
+<ul>
+<li>ref의 값이 변경되어도 컴포넌트는 재렌더링되지 않으므로, 상태 업데이트 없이도 데이터를 보관할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>DOM 접근:</strong>
+<ul>
+<li>주로 DOM 요소에 직접 접근하거나, 외부 라이브러리와의 연동에 사용됩니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="8-uselayouteffect">8. useLayoutEffect<a hidden class="anchor" aria-hidden="true" href="#8-uselayouteffect">#</a></h2>
+<p><strong>역할:</strong><br>
+<code>useEffect</code>와 유사하지만, 브라우저가 화면에 페인팅(paint)하기 전에 동기적으로 실행되어 DOM 변경 사항을 즉시 반영할 수 있습니다.</p>
+<p><strong>예제 코드:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useLayoutEffect</span>, <span style="color:#a6e22e">useRef</span>, <span style="color:#a6e22e">useState</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">LayoutComponent</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">divRef</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useRef</span>(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">width</span>, <span style="color:#a6e22e">setWidth</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// useLayoutEffect는 브라우저 페인팅 전에 실행됩니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">useLayoutEffect</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">divRef</span>.<span style="color:#a6e22e">current</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">setWidth</span>(<span style="color:#a6e22e">divRef</span>.<span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">getBoundingClientRect</span>().<span style="color:#a6e22e">width</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }, []);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">ref</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">divRef</span>} <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;50%&#39;</span> }}&gt;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">박스</span>
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">p</span>&gt;<span style="color:#a6e22e">박스</span> <span style="color:#a6e22e">너비</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">width</span>}<span style="color:#a6e22e">px</span>&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">LayoutComponent</span>;
+</span></span></code></pre></div><p><strong>동작 원리:</strong></p>
+<ul>
+<li><strong>동기적 실행:</strong>
+<ul>
+<li><code>useLayoutEffect</code>는 DOM 변경 후 브라우저가 페인팅하기 전에 실행되므로, 레이아웃이나 측정값을 즉시 업데이트할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>성능 고려:</strong>
+<ul>
+<li>동기적으로 실행되므로, 렌더링 성능에 영향을 줄 수 있어 꼭 필요한 경우에만 사용하는 것이 좋습니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="9-요약-및-hook-동작-원리">9. 요약 및 Hook 동작 원리<a hidden class="anchor" aria-hidden="true" href="#9-요약-및-hook-동작-원리">#</a></h2>
+<p>React는 각 함수형 컴포넌트 렌더링 시, 호출된 순서대로 Hook들을 <strong>Hook 체인</strong>에 저장합니다.</p>
+<ul>
+<li><strong>초기 렌더링:</strong>
+<ul>
+<li>각 Hook이 호출되어 초기 값(또는 계산된 값)을 내부 Fiber에 저장합니다.</li>
+</ul>
+</li>
+<li><strong>재렌더링:</strong>
+<ul>
+<li>컴포넌트 함수가 다시 호출되면, React는 동일한 순서의 Hook 호출을 통해 기존 상태(혹은 값)를 재사용하거나 업데이트합니다.</li>
+</ul>
+</li>
+<li><strong>메모리와 생명주기:</strong>
+<ul>
+<li>함수형 컴포넌트는 호출 후 스택에서 사라지지만, Hook 상태는 Fiber에 저장되어 컴포넌트의 전체 생명주기 동안 유지됩니다.</li>
+<li><code>useEffect</code>와 <code>useLayoutEffect</code>는 컴포넌트의 마운트, 업데이트, 언마운트 시에 필요한 부수 효과와 정리 작업을 관리합니다.</li>
+<li><code>useRef</code>는 재렌더링 간에 변경되어도 유지되는 값을 보관하여 DOM 접근이나 값 저장에 활용됩니다.</li>
+</ul>
+</li>
+</ul>
+<p>이와 같이, React의 Hook들은 각기 다른 용도로 상태, 부수 효과, 메모이제이션, DOM 참조 등을 관리하며, 컴포넌트의 효율적인 렌더링과 메모리 관리를 지원합니다.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/portfolio/tags/react/">React</a></li>
+      <li><a href="http://localhost:1313/portfolio/tags/hook/">Hook</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
+<<<<<<< HEAD
     <title>Categories on Ryan&#39;s Portfolio</title>
     <link>http://localhost:1313/portfolio/categories/</link>
     <description>Recent content in Categories on Ryan&#39;s Portfolio</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>ko</language>
     <lastBuildDate>Sun, 24 Mar 2024 00:00:00 +0000</lastBuildDate>
+=======
+    <title>Categories on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/categories/</link>
+    <description>Recent content in Categories on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Tue, 01 Apr 2025 00:00:00 +0000</lastBuildDate>
+>>>>>>> c954130 (update)
     <atom:link href="http://localhost:1313/portfolio/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Category1</title>
       <link>http://localhost:1313/portfolio/categories/category1/</link>
+<<<<<<< HEAD
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
+=======
+      <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+>>>>>>> c954130 (update)
       <guid>http://localhost:1313/portfolio/categories/category1/</guid>
       <description></description>
     </item>
     <item>
       <title>DevSecOps</title>
       <link>http://localhost:1313/portfolio/categories/devsecops/</link>
+<<<<<<< HEAD
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
+=======
+      <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+>>>>>>> c954130 (update)
       <guid>http://localhost:1313/portfolio/categories/devsecops/</guid>
       <description></description>
     </item>

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="delete all directories
+To delete all directories named .terraform found using find . -type d -name .terraform, you can use the following command:
+find . -type d -name .terraform -exec rm -rf {} &#43;
+
+Explanation:
+
+find . – Start searching from the current directory (.).
+-type d – Search for directories only.
+-name .terraform – Match directories with the name .terraform.
+-exec – Execute a command on the found results.
+rm -rf {} – Remove the found directories and their contents recursively.
+
+r – Recursive deletion.
+f – Force deletion without prompting for confirmation.
+
+
+&#43; – Optimizes the deletion by passing multiple directories at once to rm.
+
+
+Important Notes:
+
+Backup: Double-check that you want to delete these directories, as this command cannot be undone.
+Dry-run (Optional): To see what will be deleted without actually deleting, run:
+find . -type d -name .terraform
+This will list all .terraform directories.
+
+Let me know if you&rsquo;d like additional safety measures or scripts! 😊">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/technical-support/linux-utils/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/technical-support/linux-utils/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="delete-all-directories">delete all directories<a hidden class="anchor" aria-hidden="true" href="#delete-all-directories">#</a></h1>
+<p>To <strong>delete all directories</strong> named <code>.terraform</code> found using <code>find . -type d -name .terraform</code>, you can use the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>find . -type d -name .terraform -exec rm -rf <span style="color:#f92672">{}</span> +
+</span></span></code></pre></div><hr>
+<h3 id="explanation"><strong>Explanation:</strong><a hidden class="anchor" aria-hidden="true" href="#explanation">#</a></h3>
+<ul>
+<li><code>find .</code> – Start searching from the current directory (<code>.</code>).</li>
+<li><code>-type d</code> – Search for directories only.</li>
+<li><code>-name .terraform</code> – Match directories with the name <code>.terraform</code>.</li>
+<li><code>-exec</code> – Execute a command on the found results.</li>
+<li><code>rm -rf {}</code> – Remove the found directories and their contents recursively.
+<ul>
+<li><code>r</code> – Recursive deletion.</li>
+<li><code>f</code> – Force deletion without prompting for confirmation.</li>
+</ul>
+</li>
+<li><code>+</code> – Optimizes the deletion by passing multiple directories at once to <code>rm</code>.</li>
+</ul>
+<hr>
+<h3 id="important-notes"><strong>Important Notes:</strong><a hidden class="anchor" aria-hidden="true" href="#important-notes">#</a></h3>
+<ol>
+<li><strong>Backup</strong>: Double-check that you want to delete these directories, as this command <strong>cannot be undone</strong>.</li>
+<li><strong>Dry-run (Optional)</strong>: To see what will be deleted without actually deleting, run:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>find . -type d -name .terraform
+</span></span></code></pre></div>This will list all <code>.terraform</code> directories.</li>
+</ol>
+<p>Let me know if you&rsquo;d like additional safety measures or scripts! 😊</p>
+<hr>
+<h1 id="archive-a-folder-named-cnc-without-compression-and-generate-a-single-7z-file-using-7z">Archive a folder named <code>cnc</code> without compression and generate a single <code>.7z</code> file using <code>7z</code><a hidden class="anchor" aria-hidden="true" href="#archive-a-folder-named-cnc-without-compression-and-generate-a-single-7z-file-using-7z">#</a></h1>
+<p>To <strong>archive a folder named <code>cnc</code> without compression</strong> and <strong>generate a single <code>.7z</code> file</strong> using <code>7z</code>, you can use the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>7z a -t7z -mx0 archive.7z cnc/
+</span></span></code></pre></div><hr>
+<h3 id="explanation-of-the-command"><strong>Explanation of the command:</strong><a hidden class="anchor" aria-hidden="true" href="#explanation-of-the-command">#</a></h3>
+<ul>
+<li><code>7z</code> – The 7-Zip command-line tool.</li>
+<li><code>a</code> – Add files or directories to an archive.</li>
+<li><code>-t7z</code> – Specify the archive type as <code>.7z</code>.</li>
+<li><code>-mx0</code> – Set <strong>no compression</strong> (fastest mode, only stores files).</li>
+<li><code>archive.7z</code> – The output archive name.</li>
+<li><code>cnc/</code> – The folder you want to archive.</li>
+</ul>
+<hr>
+<h3 id="example-output"><strong>Example Output:</strong><a hidden class="anchor" aria-hidden="true" href="#example-output">#</a></h3>
+<p>If the folder structure is:</p>
+<pre tabindex="0"><code>cnc/
+├── file1.txt
+├── file2.txt
+└── subfolder/
+    └── file3.txt
+</code></pre><p>The result will be <code>archive.7z</code> containing the <code>cnc</code> folder with the exact structure but no compression applied.</p>
+<hr>
+<p>Let me know if you’d like an explanation of multi-part archiving or more options! 😊</p>
+<hr>
+<h1 id="archive-a-folder-named-cnc-without-compression-and-generate-a-single-7z-file-using-7z-with-each-file-split-at-1-gb">Archive a folder named <code>cnc</code> without compression and generate a single <code>.7z</code> file using <code>7z</code> with each file split at 1 GB<a hidden class="anchor" aria-hidden="true" href="#archive-a-folder-named-cnc-without-compression-and-generate-a-single-7z-file-using-7z-with-each-file-split-at-1-gb">#</a></h1>
+<p>To <strong>archive a folder</strong> named <code>cnc</code> into a <strong>multi-volume <code>.7z</code> archive</strong>, with <strong>each file split at 1 GB</strong>, use the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>7z a -t7z -v1g archive.7z cnc/
+</span></span></code></pre></div><hr>
+<h3 id="explanation-of-the-command-1"><strong>Explanation of the command:</strong><a hidden class="anchor" aria-hidden="true" href="#explanation-of-the-command-1">#</a></h3>
+<ul>
+<li><code>7z</code> – The 7-Zip command-line tool.</li>
+<li><code>a</code> – Add files or directories to an archive.</li>
+<li><code>-t7z</code> – Specify the archive type as <code>.7z</code>.</li>
+<li><code>-v1g</code> – Split the archive into <strong>1 GB</strong> parts (<code>1g</code> stands for 1 gigabyte).</li>
+<li><code>archive.7z</code> – The base name for the output archive files.</li>
+<li><code>cnc/</code> – The folder you want to archive.</li>
+</ul>
+<hr>
+<h3 id="result"><strong>Result:</strong><a hidden class="anchor" aria-hidden="true" href="#result">#</a></h3>
+<p>This command will produce files like:</p>
+<pre tabindex="0"><code>archive.7z.001  (first 1 GB)
+archive.7z.002  (next 1 GB)
+archive.7z.003  (and so on...)
+</code></pre><p>The files can be recombined by extracting the first file (<code>archive.7z.001</code>) using <code>7z x archive.7z.001</code>.</p>
+<hr>
+<p>Let me know if you’d like to specify a different size or use a different format! 😊</p>
+<hr>
+<h1 id="command-to-extract-the-split-archive">Command to Extract the Split Archive<a hidden class="anchor" aria-hidden="true" href="#command-to-extract-the-split-archive">#</a></h1>
+<h3 id="command-to-extract-the-split-archive-1"><strong>Command to Extract the Split Archive</strong><a hidden class="anchor" aria-hidden="true" href="#command-to-extract-the-split-archive-1">#</a></h3>
+<p>To extract the multi-part <code>.7z</code> archive:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>7z x archive.7z.001
+</span></span></code></pre></div><h3 id="explanation-1"><strong>Explanation:</strong><a hidden class="anchor" aria-hidden="true" href="#explanation-1">#</a></h3>
+<ul>
+<li><code>x</code> – Extract files with the full directory structure.</li>
+<li><code>archive.7z.001</code> – The first part of the multi-volume archive (this automatically extracts the entire archive as long as all <code>.001</code>, <code>.002</code>, etc., files are present).</li>
+</ul>
+<hr>
+<h3 id="resulting-folder-structure-after-extraction"><strong>Resulting Folder Structure (after extraction):</strong><a hidden class="anchor" aria-hidden="true" href="#resulting-folder-structure-after-extraction">#</a></h3>
+<pre tabindex="0"><code>📁 archive
+    📁 cnc
+        📄 file1.txt
+        📄 file2.txt
+        📁 subfolder
+            📄 file3.txt
+</code></pre><p>Let me know if you&rsquo;d like any other extraction options or additional examples! 😊</p>
+<hr>
+<h1 id="delete-all-folders-starting-with-idir">delete all folders starting with <code>idir</code><a hidden class="anchor" aria-hidden="true" href="#delete-all-folders-starting-with-idir">#</a></h1>
+<p>To <strong>delete all folders starting with <code>idir</code></strong>, you can use the following command:</p>
+<hr>
+<h3 id="command"><strong>Command:</strong><a hidden class="anchor" aria-hidden="true" href="#command">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>find . -type d -name <span style="color:#e6db74">&#34;idir*&#34;</span> -exec rm -rf <span style="color:#f92672">{}</span> +
+</span></span></code></pre></div><h3 id="explanation-2"><strong>Explanation:</strong><a hidden class="anchor" aria-hidden="true" href="#explanation-2">#</a></h3>
+<ul>
+<li><code>find .</code> – Search in the current directory and subdirectories.</li>
+<li><code>-type d</code> – Search for directories only.</li>
+<li><code>-name &quot;idir*&quot;</code> – Match directories whose names start with <code>idir</code>.</li>
+<li><code>-exec rm -rf {}</code> – Remove the matched directories and their contents.</li>
+<li><code>+</code> – Optimizes the command by running <code>rm</code> for multiple directories at once.</li>
+</ul>
+<hr>
+<h3 id="safety-tip"><strong>Safety Tip:</strong><a hidden class="anchor" aria-hidden="true" href="#safety-tip">#</a></h3>
+<p>To check the directories before deletion, you can run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>find . -type d -name <span style="color:#e6db74">&#34;idir*&#34;</span>
+</span></span></code></pre></div><h2 id="this-lists-the-directories-that-will-be-deleted-let-me-know-if-youd-like-more-customization-">This lists the directories that will be deleted. Let me know if you&rsquo;d like more customization! 😊<a hidden class="anchor" aria-hidden="true" href="#this-lists-the-directories-that-will-be-deleted-let-me-know-if-youd-like-more-customization-">#</a></h2>
+<h1 id="ubuntu에서-휴지통trash을-비우는-cli-명령어">Ubuntu에서 휴지통(Trash)을 비우는 CLI 명령어<a hidden class="anchor" aria-hidden="true" href="#ubuntu에서-휴지통trash을-비우는-cli-명령어">#</a></h1>
+<p>Ubuntu에서 휴지통(Trash)을 비우는 CLI 명령어는 다음과 같습니다:</p>
+<hr>
+<h3 id="명령어"><strong>명령어</strong><a hidden class="anchor" aria-hidden="true" href="#명령어">#</a></h3>
+<ol>
+<li>
+<p><strong>휴지통 내용 확인</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -la ~/.local/share/Trash/files
+</span></span></code></pre></div><ul>
+<li>휴지통에 어떤 파일이 있는지 확인합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>휴지통 비우기</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rm -rf ~/.local/share/Trash/*
+</span></span></code></pre></div><ul>
+<li>이 명령은 휴지통의 모든 파일과 메타데이터를 삭제합니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="단계별-설명"><strong>단계별 설명</strong><a hidden class="anchor" aria-hidden="true" href="#단계별-설명">#</a></h3>
+<ol>
+<li>
+<p><strong>Trash 디렉토리 구조</strong></p>
+<ul>
+<li>Ubuntu에서 휴지통은 <code>~/.local/share/Trash/</code> 디렉토리에 저장됩니다.
+<ul>
+<li><strong><code>files</code></strong>: 삭제된 파일이 저장되는 디렉토리.</li>
+<li><strong><code>info</code></strong>: 삭제된 파일의 원래 경로와 삭제 시간 등의 메타데이터가 저장됩니다.</li>
+</ul>
+</li>
+<li>따라서, 휴지통을 비우려면 이 디렉토리 내의 내용을 모두 삭제해야 합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>실행 권한 필요 시</strong></p>
+<ul>
+<li>루트 권한으로 휴지통을 비워야 하는 경우:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo rm -rf ~/.local/share/Trash/*
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>모든 사용자의 휴지통 비우기</strong></p>
+<ul>
+<li>시스템의 모든 사용자에 대한 휴지통을 비우려면:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo rm -rf /root/.local/share/Trash/*
+</span></span><span style="display:flex;"><span>sudo rm -rf /home/*/.local/share/Trash/*
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="주의사항"><strong>주의사항</strong><a hidden class="anchor" aria-hidden="true" href="#주의사항">#</a></h3>
+<ul>
+<li>이 명령은 휴지통의 내용을 영구적으로 삭제합니다. 복구할 수 없으니 필요한 파일이 없는지 반드시 확인하세요.</li>
+<li><code>rm -rf</code> 명령어는 강력하므로 사용 시 신중히 입력해야 합니다.</li>
+</ul>
+<h2 id="필요한-추가-사항이-있다면-알려주세요-">필요한 추가 사항이 있다면 알려주세요! 😊<a hidden class="anchor" aria-hidden="true" href="#필요한-추가-사항이-있다면-알려주세요-">#</a></h2>
+<h1 id="neovim">NeoVim<a hidden class="anchor" aria-hidden="true" href="#neovim">#</a></h1>
+<h3 id="neovim과-vim-비교"><strong>Neovim과 Vim 비교</strong><a hidden class="anchor" aria-hidden="true" href="#neovim과-vim-비교">#</a></h3>
+<p>Neovim은 Vim의 포크(Fork)로 시작된 프로젝트로, Vim의 강력한 기능을 유지하면서 현대적인 요구 사항에 맞춘 개선과 확장성을 제공합니다. 아래는 Neovim과 Vim을 주요 기능, 성능, 생태계, 사용자 경험 등 다양한 측면에서 비교 분석한 내용입니다.</p>
+<hr>
+<h3 id="1-철학과-목적"><strong>1. 철학과 목적</strong><a hidden class="anchor" aria-hidden="true" href="#1-철학과-목적">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>항목</strong></th>
+          <th><strong>Vim</strong></th>
+          <th><strong>Neovim</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>철학</strong></td>
+          <td>단순하고 빠른 텍스트 편집기. 기존의 방식과 호환성 중시.</td>
+          <td>Vim의 모든 기능을 유지하며, 현대적인 개발 환경에 맞춘 개선과 확장성 제공.</td>
+      </tr>
+      <tr>
+          <td><strong>목적</strong></td>
+          <td>전통적 텍스트 편집기, Unix 철학 유지.</td>
+          <td>비동기, 확장성, 최신 기술 통합으로 더 나은 개발 경험 제공.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="2-주요-기능-비교"><strong>2. 주요 기능 비교</strong><a hidden class="anchor" aria-hidden="true" href="#2-주요-기능-비교">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>기능</strong></th>
+          <th><strong>Vim</strong></th>
+          <th><strong>Neovim</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>비동기 작업</strong></td>
+          <td>플러그인을 통해 제한적으로 지원.</td>
+          <td>네이티브 비동기 작업 지원 (플러그인 실행 속도 향상).</td>
+      </tr>
+      <tr>
+          <td><strong>LSP(Language Server Protocol)</strong></td>
+          <td>별도 플러그인 필요 (예: <code>coc.nvim</code>).</td>
+          <td>내장 LSP 지원. IDE 수준의 코드 완성, 오류 탐지 가능.</td>
+      </tr>
+      <tr>
+          <td><strong>플러그인 관리</strong></td>
+          <td>제한적 (ex. Vimscript로 구현).</td>
+          <td>Lua 기반 플러그인 관리. 성능과 확장성에서 더 우수.</td>
+      </tr>
+      <tr>
+          <td><strong>GUI 및 터미널 지원</strong></td>
+          <td>기본적으로 GUI와 터미널 간 통합 부족.</td>
+          <td>내장 GUI API를 통해 더 나은 터미널 및 GUI 통합 가능.</td>
+      </tr>
+      <tr>
+          <td><strong>커스터마이징</strong></td>
+          <td>Vimscript를 사용 (학습 곡선이 높음).</td>
+          <td>Lua를 지원, 간결하고 강력한 커스터마이징 가능.</td>
+      </tr>
+      <tr>
+          <td><strong>멀티스레드 지원</strong></td>
+          <td>제한적 (단일 스레드 중심).</td>
+          <td>멀티스레드와 비동기 네트워킹으로 더 나은 퍼포먼스 제공.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="3-성능-비교"><strong>3. 성능 비교</strong><a hidden class="anchor" aria-hidden="true" href="#3-성능-비교">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>항목</strong></th>
+          <th><strong>Vim</strong></th>
+          <th><strong>Neovim</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>파일 처리 속도</strong></td>
+          <td>일반적인 파일 크기에서는 빠름. 대규모 파일에서 속도 저하 가능.</td>
+          <td>대규모 파일에서 더 나은 성능 제공.</td>
+      </tr>
+      <tr>
+          <td><strong>플러그인 실행 속도</strong></td>
+          <td>플러그인 실행 시 성능 제약 있음.</td>
+          <td>비동기 지원으로 플러그인 실행 성능 향상.</td>
+      </tr>
+      <tr>
+          <td><strong>LSP 성능</strong></td>
+          <td>플러그인을 통해 지원, 상대적으로 느림.</td>
+          <td>내장 LSP로 성능과 안정성이 뛰어남.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="4-사용자-경험"><strong>4. 사용자 경험</strong><a hidden class="anchor" aria-hidden="true" href="#4-사용자-경험">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>항목</strong></th>
+          <th><strong>Vim</strong></th>
+          <th><strong>Neovim</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>사용자 인터페이스(UI)</strong></td>
+          <td>터미널 중심의 전통적인 UI.</td>
+          <td>GUI 및 더 나은 색상 지원.</td>
+      </tr>
+      <tr>
+          <td><strong>학습 곡선</strong></td>
+          <td>기존 Vim 사용자에게 친숙. 초보자에게는 다소 어려움.</td>
+          <td>Vim 사용자에게 익숙하면서 Lua 기반으로 설정이 더 간결해짐.</td>
+      </tr>
+      <tr>
+          <td><strong>초기 설정</strong></td>
+          <td>많은 수작업 설정이 필요.</td>
+          <td>기본 설정으로도 유용하며, 초기 설정이 더 간단함.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="5-생태계와-커뮤니티"><strong>5. 생태계와 커뮤니티</strong><a hidden class="anchor" aria-hidden="true" href="#5-생태계와-커뮤니티">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>항목</strong></th>
+          <th><strong>Vim</strong></th>
+          <th><strong>Neovim</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>플러그인 생태계</strong></td>
+          <td>광범위하지만 전통적인 Vim 플러그인 사용.</td>
+          <td>Vim 플러그인 + Neovim 전용 플러그인으로 더 다양한 옵션 제공.</td>
+      </tr>
+      <tr>
+          <td><strong>커뮤니티</strong></td>
+          <td>오래되고 안정된 커뮤니티.</td>
+          <td>활발하고 더 최신 트렌드에 맞춘 커뮤니티.</td>
+      </tr>
+      <tr>
+          <td><strong>업데이트 주기</strong></td>
+          <td>느림 (창립자 Bram Moolenaar가 주로 관리).</td>
+          <td>빠름 (오픈 소스 커뮤니티가 활발히 참여).</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="6-호환성"><strong>6. 호환성</strong><a hidden class="anchor" aria-hidden="true" href="#6-호환성">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>항목</strong></th>
+          <th><strong>Vim</strong></th>
+          <th><strong>Neovim</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>플랫폼 호환성</strong></td>
+          <td>Unix 계열 및 Windows.</td>
+          <td>Unix 계열 및 Windows, 더 나은 GUI 호환성.</td>
+      </tr>
+      <tr>
+          <td><strong>설정 파일 호환성</strong></td>
+          <td><code>~/.vimrc</code>와 완벽히 호환.</td>
+          <td>Vim 설정을 그대로 가져올 수 있음 (<code>~/.config/nvim/init.vim</code>).</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="7-결론"><strong>7. 결론</strong><a hidden class="anchor" aria-hidden="true" href="#7-결론">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>상황</strong></th>
+          <th><strong>추천</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>전통적 Vim 경험 유지 + 안정성 중시</strong></td>
+          <td><strong>Vim</strong></td>
+      </tr>
+      <tr>
+          <td><strong>현대적 기능, 확장성, 성능 중시</strong></td>
+          <td><strong>Neovim</strong></td>
+      </tr>
+      <tr>
+          <td><strong>LSP, 비동기 작업, 플러그인 생태계 활용</strong></td>
+          <td><strong>Neovim</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>Neovim은 Vim 사용자가 추가 학습 없이 더 많은 기능과 성능을 얻을 수 있는 선택지입니다. 특히, <strong>LSP 내장 지원</strong>과 <strong>Lua 기반 설정</strong>은 개발자 생산성을 크게 향상시킵니다.</p>
+<p>추가 설정 방법이나 플러그인 추천이 필요하면 알려주세요! 😊</p>
+<hr>
+<h1 id="date">date<a hidden class="anchor" aria-hidden="true" href="#date">#</a></h1>
+<p><code>date</code> 명령어는 시스템의 현재 날짜와 시간을 출력하거나 형식을 지정하여 다양한 형태로 표시할 수 있는 유용한 도구입니다. 또한, 날짜와 시간을 조작하거나 포맷을 변경하는 데도 사용됩니다.</p>
+<p>아래는 <code>date</code> 명령어로 볼 수 있는 여러 형태와 사용 가능한 주요 명령어 예제입니다.</p>
+<hr>
+<h2 id="1-기본-사용법"><strong>1. 기본 사용법</strong><a hidden class="anchor" aria-hidden="true" href="#1-기본-사용법">#</a></h2>
+<h3 id="현재-날짜와-시간-출력"><strong>현재 날짜와 시간 출력</strong><a hidden class="anchor" aria-hidden="true" href="#현재-날짜와-시간-출력">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date
+</span></span></code></pre></div><p>출력 예시:</p>
+<pre tabindex="0"><code>Thu Jan 25 14:30:22 UTC 2025
+</code></pre><hr>
+<h2 id="2-특정-형식으로-날짜와-시간-출력"><strong>2. 특정 형식으로 날짜와 시간 출력</strong><a hidden class="anchor" aria-hidden="true" href="#2-특정-형식으로-날짜와-시간-출력">#</a></h2>
+<p><code>date</code> 명령어는 <code>+</code>와 형식 지정자를 사용하여 출력 형태를 커스터마이징할 수 있습니다.</p>
+<h3 id="21-날짜-관련"><strong>2.1. 날짜 관련</strong><a hidden class="anchor" aria-hidden="true" href="#21-날짜-관련">#</a></h3>
+<ul>
+<li>
+<p><strong>년-월-일 형식</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date <span style="color:#e6db74">&#34;+%Y-%m-%d&#34;</span>
+</span></span></code></pre></div><p>출력: <code>2025-01-25</code></p>
+</li>
+<li>
+<p><strong>일/월/년 형식</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date <span style="color:#e6db74">&#34;+%d/%m/%Y&#34;</span>
+</span></span></code></pre></div><p>출력: <code>25/01/2025</code></p>
+</li>
+<li>
+<p><strong>ISO 8601 형식</strong> (기본 형식):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date --iso-8601
+</span></span></code></pre></div><p>출력: <code>2025-01-25</code></p>
+</li>
+</ul>
+<hr>
+<h3 id="22-시간-관련"><strong>2.2. 시간 관련</strong><a hidden class="anchor" aria-hidden="true" href="#22-시간-관련">#</a></h3>
+<ul>
+<li>
+<p><strong>시:분:초 (24시간 형식)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date <span style="color:#e6db74">&#34;+%H:%M:%S&#34;</span>
+</span></span></code></pre></div><p>출력: <code>14:30:22</code></p>
+</li>
+<li>
+<p><strong>오전/오후 12시간 형식</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date <span style="color:#e6db74">&#34;+%I:%M:%S %p&#34;</span>
+</span></span></code></pre></div><p>출력: <code>02:30:22 PM</code></p>
+</li>
+</ul>
+<hr>
+<h3 id="23-날짜와-시간-함께-출력"><strong>2.3. 날짜와 시간 함께 출력</strong><a hidden class="anchor" aria-hidden="true" href="#23-날짜와-시간-함께-출력">#</a></h3>
+<ul>
+<li>
+<p><strong>표준 형식</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date <span style="color:#e6db74">&#34;+%Y-%m-%d %H:%M:%S&#34;</span>
+</span></span></code></pre></div><p>출력: <code>2025-01-25 14:30:22</code></p>
+</li>
+<li>
+<p><strong>커스터마이즈된 형식</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date <span style="color:#e6db74">&#34;+%A, %d %B %Y, %r&#34;</span>
+</span></span></code></pre></div><p>출력: <code>Thursday, 25 January 2025, 02:30:22 PM</code></p>
+</li>
+</ul>
+<hr>
+<h3 id="24-날짜-및-시간-구성-요소"><strong>2.4. 날짜 및 시간 구성 요소</strong><a hidden class="anchor" aria-hidden="true" href="#24-날짜-및-시간-구성-요소">#</a></h3>
+<ul>
+<li><code>%Y</code>: 연도 (4자리)</li>
+<li><code>%y</code>: 연도 (2자리)</li>
+<li><code>%m</code>: 월 (01~12)</li>
+<li><code>%d</code>: 일 (01~31)</li>
+<li><code>%H</code>: 시간 (24시간 기준)</li>
+<li><code>%I</code>: 시간 (12시간 기준)</li>
+<li><code>%M</code>: 분 (00~59)</li>
+<li><code>%S</code>: 초 (00~59)</li>
+<li><code>%A</code>: 요일 (풀 네임, 예: <code>Monday</code>)</li>
+<li><code>%a</code>: 요일 (약어, 예: <code>Mon</code>)</li>
+<li><code>%B</code>: 월 이름 (풀 네임, 예: <code>January</code>)</li>
+<li><code>%b</code>: 월 이름 (약어, 예: <code>Jan</code>)</li>
+<li><code>%p</code>: AM/PM</li>
+<li><code>%Z</code>: 시간대</li>
+</ul>
+<hr>
+<h2 id="3-시스템-시간-변경-관리자-권한-필요"><strong>3. 시스템 시간 변경 (관리자 권한 필요)</strong><a hidden class="anchor" aria-hidden="true" href="#3-시스템-시간-변경-관리자-권한-필요">#</a></h2>
+<h3 id="현재-시간-설정"><strong>현재 시간 설정</strong><a hidden class="anchor" aria-hidden="true" href="#현재-시간-설정">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo date -s <span style="color:#e6db74">&#34;2025-01-26 15:45:00&#34;</span>
+</span></span></code></pre></div><p>시스템 시간을 <code>2025년 1월 26일 15:45:00</code>으로 변경합니다.</p>
+<hr>
+<h2 id="4-utc-또는-다른-시간대-표시"><strong>4. UTC 또는 다른 시간대 표시</strong><a hidden class="anchor" aria-hidden="true" href="#4-utc-또는-다른-시간대-표시">#</a></h2>
+<h3 id="utc-시간-출력"><strong>UTC 시간 출력</strong><a hidden class="anchor" aria-hidden="true" href="#utc-시간-출력">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date -u
+</span></span></code></pre></div><p>출력: <code>Thu Jan 25 14:30:22 UTC 2025</code></p>
+<h3 id="특정-시간대-설정"><strong>특정 시간대 설정</strong><a hidden class="anchor" aria-hidden="true" href="#특정-시간대-설정">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TZ<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;America/New_York&#34;</span> date
+</span></span></code></pre></div><p>출력: <code>Thu Jan 25 09:30:22 EST 2025</code></p>
+<hr>
+<h2 id="5-과거-또는-미래-날짜-계산"><strong>5. 과거 또는 미래 날짜 계산</strong><a hidden class="anchor" aria-hidden="true" href="#5-과거-또는-미래-날짜-계산">#</a></h2>
+<h3 id="현재-날짜-기준-계산"><strong>현재 날짜 기준 계산</strong><a hidden class="anchor" aria-hidden="true" href="#현재-날짜-기준-계산">#</a></h3>
+<ul>
+<li>
+<p><strong>3일 후</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date --date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3 days&#34;</span>
+</span></span></code></pre></div><p>출력: <code>Sun Jan 28 14:30:22 UTC 2025</code></p>
+</li>
+<li>
+<p><strong>2주 전</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date --date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2 weeks ago&#34;</span>
+</span></span></code></pre></div><p>출력: <code>Thu Jan 11 14:30:22 UTC 2025</code></p>
+</li>
+<li>
+<p><strong>1개월 후</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date --date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;next month&#34;</span>
+</span></span></code></pre></div><p>출력: <code>Mon Feb 25 14:30:22 UTC 2025</code></p>
+</li>
+</ul>
+<h3 id="특정-날짜에서-계산"><strong>특정 날짜에서 계산</strong><a hidden class="anchor" aria-hidden="true" href="#특정-날짜에서-계산">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date --date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2025-02-01 + 5 days&#34;</span>
+</span></span></code></pre></div><p>출력: <code>Thu Feb 06 00:00:00 UTC 2025</code></p>
+<hr>
+<h2 id="6-타임스탬프-다루기"><strong>6. 타임스탬프 다루기</strong><a hidden class="anchor" aria-hidden="true" href="#6-타임스탬프-다루기">#</a></h2>
+<h3 id="unix-타임스탬프-출력"><strong>UNIX 타임스탬프 출력</strong><a hidden class="anchor" aria-hidden="true" href="#unix-타임스탬프-출력">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date +%s
+</span></span></code></pre></div><p>출력: <code>1738162222</code> (1970년 1월 1일부터 경과한 초)</p>
+<h3 id="타임스탬프를-날짜로-변환"><strong>타임스탬프를 날짜로 변환</strong><a hidden class="anchor" aria-hidden="true" href="#타임스탬프를-날짜로-변환">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date -d @1738162222
+</span></span></code></pre></div><p>출력: <code>Thu Jan 25 14:30:22 UTC 2025</code></p>
+<hr>
+<h2 id="7-파일-이름에-날짜-추가"><strong>7. 파일 이름에 날짜 추가</strong><a hidden class="anchor" aria-hidden="true" href="#7-파일-이름에-날짜-추가">#</a></h2>
+<p>파일 이름에 날짜를 포함할 때 유용합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>date <span style="color:#e6db74">&#34;+backup_%Y%m%d_%H%M%S.tar.gz&#34;</span>
+</span></span></code></pre></div><p>출력: <code>backup_20250125_143022.tar.gz</code></p>
+<hr>
+<h2 id="8-시스템-타임-확인-및-동기화"><strong>8. 시스템 타임 확인 및 동기화</strong><a hidden class="anchor" aria-hidden="true" href="#8-시스템-타임-확인-및-동기화">#</a></h2>
+<h3 id="하드웨어-클럭-확인"><strong>하드웨어 클럭 확인</strong><a hidden class="anchor" aria-hidden="true" href="#하드웨어-클럭-확인">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo hwclock --show
+</span></span></code></pre></div><h3 id="시스템-시간-동기화"><strong>시스템 시간 동기화</strong><a hidden class="anchor" aria-hidden="true" href="#시스템-시간-동기화">#</a></h3>
+<p>NTP(Network Time Protocol) 서버와 동기화하려면 다음 명령어를 사용합니다:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo timedatectl set-ntp true
+</span></span></code></pre></div><hr>
+<h3 id="9-사용자-정의-명령어-사용-예"><strong>9. 사용자 정의 명령어 사용 예</strong><a hidden class="anchor" aria-hidden="true" href="#9-사용자-정의-명령어-사용-예">#</a></h3>
+<h4 id="1시간-후와-현재-시간-비교"><strong>1시간 후와 현재 시간 비교</strong><a hidden class="anchor" aria-hidden="true" href="#1시간-후와-현재-시간-비교">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;현재 시간: </span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;1시간 후: </span><span style="color:#66d9ef">$(</span>date --date<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1 hour&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><hr>
+<h3 id="요약"><strong>요약</strong><a hidden class="anchor" aria-hidden="true" href="#요약">#</a></h3>
+<p><code>date</code> 명령어는 날짜 및 시간 표시, 계산, 형식 지정, 시스템 시간 변경 등 다양한 작업에 유용합니다. 위 명령어들을 필요에 따라 조합하여 사용할 수 있습니다.</p>
+<p>추가적으로 궁금한 점이 있다면 언제든 물어보세요! 😊</p>
+<hr>
+<h1 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h1>
+<hr>
+<h1 id="heading-1"><a hidden class="anchor" aria-hidden="true" href="#heading-1">#</a></h1>
+<hr>
+<h1 id="heading-2"><a hidden class="anchor" aria-hidden="true" href="#heading-2">#</a></h1>
+<hr>
+<h1 id="heading-3"><a hidden class="anchor" aria-hidden="true" href="#heading-3">#</a></h1>
+<hr>
+<h1 id="heading-4"><a hidden class="anchor" aria-hidden="true" href="#heading-4">#</a></h1>
+<hr>
+<h1 id="heading-5"><a hidden class="anchor" aria-hidden="true" href="#heading-5">#</a></h1>
+<hr>
+<h1 id="heading-6"><a hidden class="anchor" aria-hidden="true" href="#heading-6">#</a></h1>
+<hr>
+<h1 id="heading-7"><a hidden class="anchor" aria-hidden="true" href="#heading-7">#</a></h1>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

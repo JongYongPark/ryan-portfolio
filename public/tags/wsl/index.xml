@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>WSL on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/wsl/</link>
+    <description>Recent content in WSL on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Mon, 10 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/wsl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows 에서 WSL을 통해 ec2에 접근하기</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/sshfs-win-wsl-ec2/</link>
+      <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/sshfs-win-wsl-ec2/</guid>
+      <description>&lt;h1 id=&#34;windows-에서-wsl을-통해-ec2-에-접근시-symbol-link에-따른-문제점&#34;&gt;Windows 에서 WSL을 통해 ec2 에 접근시 symbol link에 따른 문제점&lt;/h1&gt;
+&lt;h2 id=&#34;내-작업&#34;&gt;내 작업&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;### AWS ec2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Hdd 가 부족해서 하나 더 추가했다 - 이것이 opt/dlami/nvme 임임&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;base&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ubuntu@ip-172-31-26-173:~$ df -Th
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Filesystem                     Type      Size  Used Avail Use% Mounted on
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/root                      ext4      117G   69G   48G  60% /
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs      32G   48M   32G   1% /dev/shm
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs      13G  1.4M   13G   1% /run
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs     5.0M     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  5.0M   0% /run/lock
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;efivarfs                       efivarfs  128K  4.1K  119K   4% /sys/firmware/efi/efivars
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/nvme0n1p15                vfat      105M  6.1M   99M   6% /boot/efi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs     6.3G   68K  6.3G   1% /run/user/126
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/mapper/vg.01-lv_ephemeral ext4      206G   76G  119G  39% /opt/dlami/nvme
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs     6.3G   76K  6.3G   1% /run/user/1000
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;base&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ubuntu@ip-172-31-26-173:~$ ll workspace
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lrwxrwxrwx &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ubuntu ubuntu &lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt; Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; 09:47 workspace -&amp;gt; /opt/dlami/nvme/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;### WSL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ cat .bashrc | grep ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;alias mount_ec2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo sshfs  -o uid=`id -u jonpark`  -o gid=`id -g jonpark`  -o allow_other ubuntu@jonpark-ec2:/home/ubuntu -o IdentityFile=~/jonpark-ec2.pem ~/work_ec2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 수정 : -o follow_symlinks  추가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;alias mount_ec2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo sshfs -o uid=`id -u jonpark` -o gid=`id -g jonpark` -o allow_other -o follow_symlinks ubuntu@jonpark-ec2:/home/ubuntu -o IdentityFile=~/jonpark-ec2.pem ~/work_ec2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 실행 &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ sudo umount ~/work_ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ sudo sshfs -o uid&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;id -u jonpark&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; -o gid&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;id -g jonpark&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; -o allow_other -o follow_symlinks ubuntu@jonpark-ec2:/home/ubuntu -o IdentityFile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;~/jonpark-ec2.pem ~/work_ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;sudo&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; password &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; jonpark:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 결과&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ ll  -d work_ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;drwx------ &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark 4.0K Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 14:13 work_ec2/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ ls  work_ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;blackduck-oidc                          LINUX_PACKAGES_LICENSES                 Public/                                   THIRD_PARTY_SOURCE_CODE_URLS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BUILD_FROM_SOURCE_PACKAGES_LICENCES     LINUX_PACKAGES_LIST                     PYTHON_PACKAGES_LICENSES                  Videos/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Desktop/                                Music/                                  srm-2024.12.1-0-linux-x64-installer.run*  workspace/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Documents/                              nvidia-acknowledgements/                srm-license.txt                           zed-linux-x86_64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Downloads/                              OSSNvidiaDriver_v550.90.07_license.txt  Templates/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;google-chrome-stable_current_amd64.deb  Pictures/                               thinclient_drives/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ ll  -d work_ec2/workspace/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;drwxrwxrwt &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark 4.0K Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; 19:20 work_ec2/workspace//
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ ls  work_ec2/workspace/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ai/  dev_tool/  dockers/  jonpark-work/  lost+found/  miniconda3/  open-webui/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;답변&#34;&gt;답변&lt;/h2&gt;
+&lt;p&gt;이제 문제가 더 명확해졌습니다. EC2에서 &lt;code&gt;workspace&lt;/code&gt;는 &lt;code&gt;/opt/dlami/nvme/&lt;/code&gt;를 가리키는 심볼릭 링크입니다. SSHFS를 통한 마운트 시 심볼릭 링크 처리에 문제가 있는 것으로 보입니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Zone.Identifier</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/wsl-zone.identifier/</link>
+      <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/wsl-zone.identifier/</guid>
+      <description>&lt;h1 id=&#34;windows-에서-wsl로-복사하면-복사한-파일이름-zoneidenifier-파일이-생기지-않게-하는-방법&#34;&gt;windows 에서 wsl로 복사하면 &amp;ldquo;복사한 파일이름 zone.idenifier&amp;rdquo; 파일이 생기지 않게 하는 방법.&lt;/h1&gt;
+&lt;p&gt;Zone.Identifier 파일은 Windows 시스템에서 외부 출처(인터넷, 이메일 등)에서 다운로드한 파일에 자동으로 추가되는 대체 데이터 스트림(Alternate Data Stream, ADS)입니다. 이 파일에는 원본 파일의 출처와 관련된 보안 정보가 포함되어 있습니다.&lt;/p&gt;
+&lt;p&gt;파일을 WSL로 복사할 때 Windows에서는 이 메타데이터를 별도의 Zone.Identifier 파일로 변환합니다. 이는 NTFS 파일 시스템의 기능이지만 Linux 파일 시스템에서는 지원하지 않기 때문입니다.&lt;/p&gt;
+&lt;h2 id=&#34;zoneidentifier-파일이-생성되지-않게-하는-방법&#34;&gt;Zone.Identifier 파일이 생성되지 않게 하는 방법:&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Windows에서 파일 신뢰 설정&lt;/strong&gt;:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

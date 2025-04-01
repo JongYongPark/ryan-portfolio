@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>MariaDB | RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/tags/mariadb/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/portfolio/tags/mariadb/index.xml">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/tags/mariadb/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header">
+  <h1>
+    MariaDB
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">SRM : Reset Admin Password on MariaDB
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>How to reset admin password on MariaDB from SRM (Softeware Risk Manager).
+This script recovers from a lost or forgotten super-admin password. It resets both the super-admin password and the database root user password to the provided value By SRM
+#!/bin/bash # This script recovers from a lost or forgotten super-admin password. # It resets both the super-admin password and the database root user password to the provided value. # By SRM function admin-password-recover-script() { ### Validate input and set SRM installation path if [ &#34;$#&#34; -ne 1 ] &amp;&amp; [ &#34;$#&#34; -ne 0 ]; then echo &#34;Usage: $0 [path to SRM installation folder]&#34; echo &#34;If path contains spaces, wrap it in double quotes.&#34; echo &#34;Example:&#34; echo &#34; $0 /opt/srm&#34; exit 1 fi local SRM_PATH if [ &#34;$#&#34; -eq 1 ]; then SRM_PATH=$1 else echo &#34;Enter path to SRM installation folder:&#34; read -r SRM_PATH fi # Remove trailing slash from the input path SRM_PATH=${SRM_PATH%/} # Check for MariaDB binary file if [ ! -f &#34;$SRM_PATH/mysql/bin/mysqld&#34; ]; then echo &#34;The given SRM directory does not appear to have appropriate mysql files&#34; exit 2 fi ### Get new password echo &#34;Enter new administrator password:&#34; read -rs NEW_PASSWORD ### Create temporary initialization file TEMP_INIT_FILE=$(mktemp) ### Check MariaDB configuration file echo &#34;Looking for MariaDB configuration file...&#34; DB_CONFIG=$SRM_PATH/mysql/my.cnf if [ ! -f &#34;$DB_CONFIG&#34; ]; then echo &#34;$DB_CONFIG not found. Aborting&#34; exit 2 fi ### Check MariaDB data directory from SRM properties file echo &#34;Found MariaDB configuration at $DB_CONFIG&#34; echo &#34;Looking for SRM database...&#34; DB_DATA=$(grep &#34;mysql_data_directory&#34; &#34;$SRM_PATH/properties.ini&#34; | cut -d&#39;=&#39; -f2) if [ ! -d &#34;$DB_DATA&#34; ]; then echo &#34;MariaDB data directory not found (looked at $DB_DATA). Aborting&#34; exit 2 fi ### Verify SRM database echo &#34;Found MariaDB data directory at $DB_DATA&#34; DB_NAME=srm if [ ! -d &#34;$DB_DATA/$DB_NAME&#34; ]; then DB_NAME=bitnami_srm fi if [ ! -d &#34;$DB_DATA/$DB_NAME&#34; ]; then echo &#34;SRM database not found. Aborting&#34; exit 2 fi echo &#34;Found SRM database $DB_NAME&#34; ### Generate MariaDB initialization file echo &#34;Generating MariaDB recovery init file...&#34; { echo &#34;SET PASSWORD FOR &#39;root&#39;@&#39;localhost&#39; = PASSWORD(&#39;${NEW_PASSWORD//\&#39;/\&#39;\&#39;}&#39;);&#34; echo &#34;UPDATE \`$DB_NAME\`.\`LOCAL_USERS\` SET \`PASSWORD\`=SHA2(&#39;${NEW_PASSWORD//\&#39;/\&#39;\&#39;}&#39;, 256) WHERE \`ID\`=1;&#34; echo &#34;SHUTDOWN;&#34; } &gt; &#34;$TEMP_INIT_FILE&#34; ### Stop SRM services echo &#34;Shutting down SRM services&#34; &#34;$SRM_PATH/ctlscript.sh&#34; stop ### Reset passwords echo &#34;Resetting passwords...&#34; # If root user, set file permissions and run as mysql user if (( EUID == 0 )); then chown mysql &#34;$TEMP_INIT_FILE&#34; &#34;$SRM_PATH/mysql/bin/mysqld&#34; --defaults-file=&#34;$DB_CONFIG&#34; --init-file=&#34;$TEMP_INIT_FILE&#34; --console --user=mysql else &#34;$SRM_PATH/mysql/bin/mysqld&#34; --defaults-file=&#34;$DB_CONFIG&#34; --init-file=&#34;$TEMP_INIT_FILE&#34; --console fi ### Clean up and display completion message echo &#34;Removing recovery init file...&#34; rm -f &#34;$TEMP_INIT_FILE&#34; echo &#34;Done! You may start SRM again.&#34; } # Execute the function admin-password-recover-script &#34;$@&#34; Ex) admin-password-recover-script ~/workspace/dev_tool/codedx/srm-2024.12.1/srm </p>
+  </div>
+  <footer class="entry-footer"><span title='2025-02-03 00:00:00 +0000 UTC'>2월 3, 2025</span></footer>
+  <a class="entry-link" aria-label="post link to SRM : Reset Admin Password on MariaDB" href="http://localhost:1313/portfolio/posts/technical-support/srm/srm-reset-mariadb-admin-password/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

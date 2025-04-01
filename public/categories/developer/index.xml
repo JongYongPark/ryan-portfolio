@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Developer on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/categories/developer/</link>
+    <description>Recent content in Developer on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/categories/developer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dart</title>
+      <link>http://localhost:1313/portfolio/posts/developer/dart/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/dart/</guid>
+      <description>&lt;h1 id=&#34;dart-와-javascript-비교교&#34;&gt;Dart 와 JavaScript 비교교&lt;/h1&gt;
+&lt;p&gt;Dart와 JavaScript 중 어떤 언어를 배우는 것이 더 좋은지는 &lt;strong&gt;Ryan의 목표와 개발하려는 서비스의 방향&lt;/strong&gt;에 따라 다릅니다.&lt;/p&gt;
+&lt;h3 id=&#34;-dart를-배우는-것이-좋은-경우&#34;&gt;✅ &lt;strong&gt;Dart를 배우는 것이 좋은 경우&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Flutter를 활용한 크로스 플랫폼 앱 개발&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Ryan이 &lt;strong&gt;모바일 앱 개발(특히 iOS &amp;amp; Android)&lt;/strong&gt; 을 목표로 한다면 &lt;strong&gt;Dart + Flutter&lt;/strong&gt; 조합이 유리합니다.&lt;/li&gt;
+&lt;li&gt;하나의 코드베이스로 iOS, Android, 웹까지 개발 가능하여 유지보수 비용을 절감할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;안정적이고 타입 안정성이 중요한 경우&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Dart는 정적 타입을 제공하여 코드의 안정성이 높고, 유지보수가 쉬운 편입니다.&lt;/li&gt;
+&lt;li&gt;JavaScript보다 더 안전한 프로그래밍이 가능합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Google 생태계에 관심이 있다면&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Dart는 Google이 적극적으로 지원하는 언어이므로, Google 관련 기술과 함께 사용하기 좋습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;-javascript를-배우는-것이-좋은-경우&#34;&gt;✅ &lt;strong&gt;JavaScript를 배우는 것이 좋은 경우&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;웹 서비스 개발이 목표라면&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Ryan이 &lt;strong&gt;웹 기반 서비스(프론트엔드 &amp;amp; 백엔드)&lt;/strong&gt; 를 개발하려면 JavaScript가 훨씬 강력한 선택지입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;React, Vue, Angular&lt;/strong&gt; 등 다양한 웹 프레임워크를 활용할 수 있습니다.&lt;/li&gt;
+&lt;li&gt;서버 개발도 &lt;strong&gt;Node.js&lt;/strong&gt; 를 활용해 JavaScript로 가능하므로 전체 개발이 JavaScript로 통일됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;더 많은 오픈 소스 및 커뮤니티 지원을 원한다면&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;JavaScript는 웹 개발의 표준이며, 가장 많은 라이브러리와 프레임워크가 존재합니다.&lt;/li&gt;
+&lt;li&gt;Dart에 비해 커뮤니티가 훨씬 크며, 문제 해결이 빠릅니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;프론트엔드 개발자가 되고 싶다면&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;JavaScript는 웹 브라우저에서 기본적으로 실행되는 언어이므로, &lt;strong&gt;프론트엔드 개발자&lt;/strong&gt; 를 목표로 한다면 필수입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;-결론-ryan에게-적합한-선택&#34;&gt;⚖️ &lt;strong&gt;결론: Ryan에게 적합한 선택&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;웹 서비스를 중심으로 개발하려면?&lt;/strong&gt; → &lt;strong&gt;JavaScript&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모바일 앱을 중심으로 개발하려면?&lt;/strong&gt; → &lt;strong&gt;Dart + Flutter&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;웹과 모바일을 모두 고려한다면?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;웹이 더 중요하면 &lt;strong&gt;JavaScript&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;모바일이 더 중요하면 &lt;strong&gt;Dart&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Ryan이 만들고 싶은 서비스가 웹 기반이라면 JavaScript가 더 적합할 가능성이 큽니다.&lt;/strong&gt;&lt;br&gt;
+어떤 서비스를 만들고 싶은지 더 구체적으로 이야기해주면 더 적합한 선택을 도와줄 수 있어요!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nest.js</title>
+      <link>http://localhost:1313/portfolio/posts/developer/javascipt/nestjs/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/javascipt/nestjs/</guid>
+      <description>&lt;h1 id=&#34;nextjs-와와-springboot-비교&#34;&gt;Next.js 와와 SpringBoot 비교&lt;/h1&gt;
+&lt;h2 id=&#34;속도비교&#34;&gt;속도비교&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;NestJS&lt;/strong&gt;와 &lt;strong&gt;Spring Boot&lt;/strong&gt;는 각각의 장단점이 있지만, &lt;strong&gt;개발 속도&lt;/strong&gt; 측면에서 비교할 때는 &lt;strong&gt;NestJS&lt;/strong&gt;가 더 빠를 수 있는 몇 가지 이유가 있습니다. 다만, 최종 선택은 프로젝트의 요구 사항과 팀의 경험에 따라 달라질 수 있습니다. 아래에서 두 프레임워크를 비교해보겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-nestjs의-빠른-개발-속도&#34;&gt;1. &lt;strong&gt;NestJS의 빠른 개발 속도&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;JavaScript/TypeScript 기반&lt;/strong&gt;: NestJS는 &lt;strong&gt;TypeScript&lt;/strong&gt;를 기본으로 사용합니다. TypeScript는 자바스크립트를 확장한 언어로, 컴파일 시 타입 검사를 제공하여 코드 작성 중 버그를 미리 잡을 수 있습니다. 또한, &lt;strong&gt;JavaScript&lt;/strong&gt;와 &lt;strong&gt;TypeScript&lt;/strong&gt;는 웹 프론트엔드 개발에서 널리 사용되기 때문에, 프론트엔드와 백엔드 개발자들이 &lt;strong&gt;같은 언어&lt;/strong&gt;를 사용할 수 있어 통합 개발 속도가 빨라질 수 있습니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust Web</title>
+      <link>http://localhost:1313/portfolio/posts/developer/rust/rust-web/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/rust/rust-web/</guid>
+      <description>&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Rust&lt;/strong&gt;는 시스템 프로그래밍 언어로 높은 성능과 안전성을 제공하지만, &lt;strong&gt;웹 프레임워크&lt;/strong&gt; 측면에서는 여전히 &lt;strong&gt;상대적으로 적은 선택지&lt;/strong&gt;가 있습니다. 그럼에도 불구하고 &lt;strong&gt;Spring Boot&lt;/strong&gt;나 &lt;strong&gt;NestJS&lt;/strong&gt;와 비슷한 &lt;strong&gt;구조적 접근&lt;/strong&gt;을 제공하는 Rust 웹 프레임워크들이 있습니다. 이들 프레임워크는 &lt;strong&gt;모듈화&lt;/strong&gt;, &lt;strong&gt;라우팅&lt;/strong&gt;, &lt;strong&gt;미들웨어 지원&lt;/strong&gt; 등을 제공하며, 일반적으로 &lt;strong&gt;백엔드 API 서버&lt;/strong&gt;나 &lt;strong&gt;웹 애플리케이션&lt;/strong&gt;을 구축할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;다음은 &lt;strong&gt;Rust&lt;/strong&gt;에서 Spring Boot나 NestJS처럼 &lt;strong&gt;구조적이고 확장 가능한&lt;/strong&gt; 웹 애플리케이션을 구축할 수 있는 프레임워크들입니다:&lt;/p&gt;
+&lt;h3 id=&#34;1-actix-web&#34;&gt;&lt;strong&gt;1. Actix Web&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;특징&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Actix Web&lt;/strong&gt;은 &lt;strong&gt;고성능&lt;/strong&gt;과 &lt;strong&gt;비동기 처리&lt;/strong&gt;를 지원하는 Rust의 가장 인기 있는 웹 프레임워크입니다. &lt;strong&gt;Spring Boot&lt;/strong&gt;와 비슷하게, 매우 높은 성능을 자랑하면서도 유연한 미들웨어 및 라우팅 기능을 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모듈화&lt;/strong&gt;된 &lt;strong&gt;라우팅&lt;/strong&gt;과 &lt;strong&gt;미들웨어&lt;/strong&gt;를 지원하며, &lt;strong&gt;웹 소켓&lt;/strong&gt;, &lt;strong&gt;API 서버&lt;/strong&gt; 등 다양한 서버 애플리케이션을 구현할 수 있습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Actors&lt;/strong&gt; 모델을 기반으로 한 &lt;strong&gt;Actix 시스템&lt;/strong&gt;을 제공하여, 복잡한 상태 관리 및 비동기 처리를 유연하게 처리할 수 있습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Spring Boot&lt;/strong&gt;와 비슷한 방식으로 &lt;strong&gt;동시성&lt;/strong&gt;을 처리하며, &lt;strong&gt;REST API 서버&lt;/strong&gt;로 매우 적합합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;타입 안전성&lt;/strong&gt;과 &lt;strong&gt;비동기 I/O&lt;/strong&gt;를 지원하여, 성능과 안정성에서 우수한 결과를 도출할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenCV compile on Windows</title>
+      <link>http://localhost:1313/portfolio/posts/developer/opencv-win/</link>
+      <pubDate>Thu, 20 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/opencv-win/</guid>
+      <description>&lt;h1 id=&#34;claude&#34;&gt;Claude&lt;/h1&gt;
+&lt;p&gt;이 오류는 ARM64 플랫폼을 위한 CMake 구성 과정에서 발생한 문제입니다. 주요 오류는 프로젝트 설정이 제대로 되지 않았고, ARM64 플랫폼 구성이 올바르지 않다는 것입니다.&lt;/p&gt;
+&lt;p&gt;PowerShell 스크립트를 다음과 같이 수정하여 해결할 수 있습니다:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# OpenCV Windows Build Script for x64 and ARM64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Prerequisites: Visual Studio 2022, CMake, Git&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Configuration&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$OPENCV_VERSION = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.9.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$SOURCE_DIR = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\workspace\jonpark-work\opencv_source&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$BUILD_BASE_DIR = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\workspace\jonpark-work\opencv_build&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$INSTALL_BASE_DIR = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\workspace\jonpark-work\opencv_install&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Common CMake parameters&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$CMAKE_COMMON_PARAMS = @(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DCMAKE_MINIMUM_REQUIRED_VERSION=3.10&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#75715e&#34;&gt;# 최소 CMake 버전 지정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DBUILD_SHARED_LIBS=ON&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DBUILD_TESTS=OFF&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DBUILD_PERF_TESTS=OFF&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DBUILD_EXAMPLES=OFF&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DWITH_CUDA=OFF&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DBUILD_opencv_world=ON&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DBUILD_opencv_python2=OFF&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DBUILD_opencv_python3=OFF&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DWITH_IPP=ON&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DENABLE_CXX11=ON&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DOPENCV_ENABLE_NONFREE=ON&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-DBUILD_WITH_STATIC_CRT=OFF&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Download OpenCV source&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;-not&lt;/span&gt; (Test-Path $SOURCE_DIR)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    git clone https&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;//github.com/opencv/opencv.git $SOURCE_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Push-Location $SOURCE_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    git checkout $OPENCV_VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Pop-Location
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Function to build OpenCV for specific architecture&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; Build-OpenCV {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;param&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        [&lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;]$arch,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        [&lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;]$generator,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        [&lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;]$platform
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $BUILD_DIR = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$BUILD_BASE_DIR&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;$arch&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $INSTALL_DIR = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$INSTALL_BASE_DIR&lt;span style=&#34;color:#e6db74&#34;&gt;\&lt;/span&gt;$arch&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Remove existing build directory to ensure clean build&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (Test-Path $BUILD_DIR) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Remove-Item -Path $BUILD_DIR -Recurse -Force
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Create build directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    New-Item -ItemType Directory -Force -Path $BUILD_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Push-Location $BUILD_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Configure CMake with explicit project name and build type&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    cmake -G $generator -A $platform `
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        -DCMAKE_INSTALL_PREFIX=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$INSTALL_DIR&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; `
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        -DCMAKE_BUILD_TYPE=Release `
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        -DOpenCV_ARCH=$platform `
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        -DOpenCV_RUNTIME=vc17 `
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $CMAKE_COMMON_PARAMS `
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        -S $SOURCE_DIR -B $BUILD_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($LASTEXITCODE &lt;span style=&#34;color:#f92672&#34;&gt;-ne&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Write-Error &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CMake configuration failed for &lt;/span&gt;$arch&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Pop-Location
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        exit &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Build and install&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    cmake --build $BUILD_DIR --config Release --target INSTALL --parallel &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($LASTEXITCODE &lt;span style=&#34;color:#f92672&#34;&gt;-ne&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Write-Error &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Build failed for &lt;/span&gt;$arch&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Pop-Location
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        exit &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Pop-Location
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 빌드 전 Visual Studio 환경 설정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$VS_PATH = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Program Files\Microsoft Visual Studio\2022\Community&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$VS_TOOLS = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$VS_PATH&lt;span style=&#34;color:#e6db74&#34;&gt;\VC\Auxiliary\Build&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (Test-Path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$VS_TOOLS&lt;span style=&#34;color:#e6db74&#34;&gt;\vcvarsall.bat&amp;#34;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Setting up Visual Studio environment...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# x64 환경 설정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    cmd.exe /c &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;call &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;`&amp;#34;&lt;/span&gt;$VS_TOOLS&lt;span style=&#34;color:#e6db74&#34;&gt;\vcvarsall.bat&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;`&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; x64 &amp;amp;&amp;amp; set &amp;gt; %temp%\vcvars.txt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Get-Content &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$env:temp&lt;span style=&#34;color:#e6db74&#34;&gt;\vcvars.txt&amp;#34;&lt;/span&gt; | foreach-object {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($_ &lt;span style=&#34;color:#f92672&#34;&gt;-match&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^(.*?)=(.*)$&amp;#34;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            Set-Content &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;env:\&lt;/span&gt;$($matches[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; $matches[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Write-Error &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Visual Studio environment setup failed&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    exit &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Build for x64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Building for x64...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Build-OpenCV -arch &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;x64&amp;#34;&lt;/span&gt; -generator &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Visual Studio 17 2022&amp;#34;&lt;/span&gt; -platform &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;x64&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# ARM64 빌드 전 환경 재설정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (Test-Path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$VS_TOOLS&lt;span style=&#34;color:#e6db74&#34;&gt;\vcvarsall.bat&amp;#34;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Setting up Visual Studio environment for ARM64...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    cmd.exe /c &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;call &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;`&amp;#34;&lt;/span&gt;$VS_TOOLS&lt;span style=&#34;color:#e6db74&#34;&gt;\vcvarsall.bat&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;`&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; x64_arm64 &amp;amp;&amp;amp; set &amp;gt; %temp%\vcvars.txt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Get-Content &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$env:temp&lt;span style=&#34;color:#e6db74&#34;&gt;\vcvars.txt&amp;#34;&lt;/span&gt; | foreach-object {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($_ &lt;span style=&#34;color:#f92672&#34;&gt;-match&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^(.*?)=(.*)$&amp;#34;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            Set-Content &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;env:\&lt;/span&gt;$($matches[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; $matches[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Build for ARM64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Building for ARM64...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Build-OpenCV -arch &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;arm64&amp;#34;&lt;/span&gt; -generator &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Visual Studio 17 2022&amp;#34;&lt;/span&gt; -platform &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ARM64&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;주요 변경사항과 해결방법:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cpp Lamda</title>
+      <link>http://localhost:1313/portfolio/posts/developer/cpp-lamda/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/cpp-lamda/</guid>
+      <description>&lt;h1 id=&#34;cpp-lamda-variable-is-private&#34;&gt;Cpp Lamda Variable is Private&lt;/h1&gt;
+&lt;p&gt;C++에서 람다 함수는 외부 변수들을 캡처하여 내부에서 사용할 수 있습니다. 이때, 캡처된 변수들은 람다 객체의 멤버 변수로 저장되며, 이러한 멤버 변수들은 &lt;strong&gt;컴파일러에 의해 &lt;code&gt;private&lt;/code&gt; 접근 지정자로 선언됩니다&lt;/strong&gt;. 따라서, 람다 객체 외부에서는 이들 멤버 변수에 직접 접근할 수 없습니다.&lt;/p&gt;
+&lt;h3 id=&#34;예제-코드&#34;&gt;예제 코드&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;functional&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// x를 값으로 캡처하는 람다 함수
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; lambda &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x]() &lt;span style=&#34;color:#66d9ef&#34;&gt;mutable&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Captured x: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        x&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    };
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    lambda(); &lt;span style=&#34;color:#75715e&#34;&gt;// Captured x: 10
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    lambda(); &lt;span style=&#34;color:#75715e&#34;&gt;// Captured x: 11
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 람다 객체의 멤버 변수 x에 직접 접근하려는 시도
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// std::cout &amp;lt;&amp;lt; &amp;#34;Internal x: &amp;#34; &amp;lt;&amp;lt; lambda.x &amp;lt;&amp;lt; std::endl; // 오류: &amp;#39;lambda&amp;#39;의 &amp;#39;x&amp;#39;에 접근할 수 없음
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;분석&#34;&gt;분석&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;캡처된 변수의 저장&lt;/strong&gt;: 람다 함수 &lt;code&gt;[x]&lt;/code&gt;는 외부 변수 &lt;code&gt;x&lt;/code&gt;를 값으로 캡처하여 람다 객체의 멤버 변수로 저장합니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>React Hook</title>
+      <link>http://localhost:1313/portfolio/posts/developer/javascipt/react-hook/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/javascipt/react-hook/</guid>
+      <description>&lt;h1 id=&#34;react-hook&#34;&gt;React Hook&lt;/h1&gt;
+&lt;p&gt;React의 함수형 컴포넌트는 매 렌더링마다 컴포넌트 함수를 호출합니다. 이때 React는 내부적으로 **hook 체인(혹은 hook 리스트)**를 유지하며, 각 hook 호출마다 고유한 상태(예: useState의 상태, useEffect의 효과 정보 등)를 저장합니다. 이 구조와 재호출 과정을 자세히 설명하면 다음과 같습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-hook-체인의-기본-구조&#34;&gt;1. Hook 체인의 기본 구조&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Fiber와 Hook 리스트:&lt;/strong&gt;&lt;br&gt;
+React는 각 컴포넌트 인스턴스(실제로는 Fiber 노드)에 hook 정보를 저장합니다. 이 정보는 hook들이 호출된 순서대로 배열(혹은 연결 리스트)로 관리되며, 각 hook은 해당 컴포넌트의 렌더링 상태와 관련된 데이터를 보관합니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>React Native</title>
+      <link>http://localhost:1313/portfolio/posts/developer/javascipt/react-native/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/javascipt/react-native/</guid>
+      <description>&lt;h1 id=&#34;react-native-와-react-의-차이&#34;&gt;React Native 와 React 의 차이&lt;/h1&gt;
+&lt;p&gt;React Native는 React의 개념과 철학을 기반으로 하지만, 주로 모바일 앱 개발(안드로이드와 iOS)을 위해 설계된 프레임워크입니다. 아래에서는 React Native의 주요 특징과 React(Web)와의 차이점을 자세히 설명합니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-react-native란&#34;&gt;1. React Native란?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;목적:&lt;/strong&gt;&lt;br&gt;
+React Native는 JavaScript와 React의 컴포넌트 기반 아키텍처를 활용하여 네이티브 모바일 앱(안드로이드, iOS)을 개발할 수 있도록 해줍니다.&lt;br&gt;
+웹 브라우저가 아닌, 모바일 기기의 네이티브 UI 컴포넌트(예: &lt;code&gt;View&lt;/code&gt;, &lt;code&gt;Text&lt;/code&gt;, &lt;code&gt;Image&lt;/code&gt;)를 사용하여 사용자 인터페이스를 구성합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;구조 및 실행 방식:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;JS 코드와 네이티브 브리지:&lt;/strong&gt;&lt;br&gt;
+React Native 앱은 JavaScript 코드로 작성되며, 이 코드는 JavaScript 엔진(V8, Hermes 등)에서 실행됩니다.&lt;br&gt;
+JavaScript와 네이티브 플랫폼 간의 통신은 &amp;ldquo;브리지(Bridge)&amp;ldquo;를 통해 이뤄지며, 이로 인해 JavaScript 코드에서 네이티브 UI 컴포넌트나 기능을 호출할 수 있습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;플랫폼별 네이티브 컴포넌트:&lt;/strong&gt;&lt;br&gt;
+React Native는 플랫폼에 최적화된 네이티브 UI 컴포넌트를 사용하여, 높은 성능과 원활한 사용자 경험을 제공합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-react-web와-react-native의-차이점&#34;&gt;2. React (Web)와 React Native의 차이점&lt;/h2&gt;
+&lt;h3 id=&#34;21-렌더링-대상&#34;&gt;2.1 렌더링 대상&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;React (Web):&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cyclomatic Complexity in C&#43;&#43; Code</title>
+      <link>http://localhost:1313/portfolio/posts/developer/cyclomatic-complexity-in-c&#43;&#43;-code/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/cyclomatic-complexity-in-c&#43;&#43;-code/</guid>
+      <description>&lt;h1 id=&#34;cyclomatic-complexity-in-c-code&#34;&gt;Cyclomatic Complexity in C++ Code&lt;/h1&gt;
+&lt;p&gt;Cyclomatic Complexity (CCM) is a software metric used to indicate the complexity of a program. It directly measures the number of linearly independent paths through a program&amp;rsquo;s source code. Higher CCM values suggest more complex and potentially less maintainable code.&lt;/p&gt;
+&lt;h2 id=&#34;ccm-calculation-rules&#34;&gt;CCM Calculation Rules&lt;/h2&gt;
+&lt;p&gt;Cyclomatic Complexity is calculated based on the control flow graph of the program using the following rules:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Basic Complexity: The simplest program has a CCM of 1.&lt;/li&gt;
+&lt;li&gt;Control Flow Branches: Each if, for, while, case, and other control flow statements add to the CCM.&lt;/li&gt;
+&lt;li&gt;Logical Operators: Logical operators like &amp;amp;&amp;amp; and || can also increase CCM by introducing additional paths.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;example-c-code-with-ccm-calculation&#34;&gt;Example C++ Code with CCM Calculation&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Function declaration
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;calculate&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; a, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; b, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; c);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; z &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; calculate(x, y, z);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Result: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; result &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Function with high Cyclomatic Complexity
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;calculate&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; a, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; b, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; c) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; CCM &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#75715e&#34;&gt;// Basic complexity
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// If statement 1: CCM += 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; b) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a is greater than b&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// If-else statement: CCM += 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (b &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; c) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;b is greater than c&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;c is greater than or equal to b&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// For loop: CCM += 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;i) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Iteration: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// While loop: CCM += 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt;(count &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Count: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; count &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        count&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Switch-case statement: Each case adds to CCM
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; option &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt;(option) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Option 1 selected&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Option 2 selected&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Option 3 selected&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Default option selected&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Logical operators: Each &amp;#39;&amp;amp;&amp;amp;&amp;#39; or &amp;#39;||&amp;#39; adds to CCM
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) { &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;&amp;amp;&amp;amp;&amp;#39; adds 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Both a and b are positive&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) { &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;#39;||&amp;#39; adds 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        CCM&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Either a or c is positive&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; CCM;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;code-explanation-and-ccm-calculation&#34;&gt;Code Explanation and CCM Calculation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Basic Complexity:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Next.js - JWT</title>
+      <link>http://localhost:1313/portfolio/posts/developer/javascipt/nextjs-jwt/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/javascipt/nextjs-jwt/</guid>
+      <description>&lt;h1 id=&#34;nextjs-app-with-jwt-based-authentication-and-a-basic-security-setup&#34;&gt;Next.js app with JWT-based authentication and a basic security setup&lt;/h1&gt;
+&lt;p&gt;Here&amp;rsquo;s how you can create a simple &lt;strong&gt;Next.js&lt;/strong&gt; app with &lt;strong&gt;JWT-based authentication&lt;/strong&gt; and a basic security setup.&lt;/p&gt;
+&lt;h3 id=&#34;steps-overview&#34;&gt;Steps Overview:&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Initialize a Next.js app&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Set up authentication with JWT&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create login and protected routes&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Add security features&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;1-initialize-nextjs-app&#34;&gt;1. Initialize Next.js App&lt;/h3&gt;
+&lt;p&gt;Run the following commands to initialize a Next.js app:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npx create-next-app@latest my-nextjs-jwt-app
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd my-nextjs-jwt-app
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npm install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-install-dependencies&#34;&gt;2. Install Dependencies&lt;/h3&gt;
+&lt;p&gt;You need additional packages for handling JWT, user authentication, and securing the app:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python Basic Grammar</title>
+      <link>http://localhost:1313/portfolio/posts/developer/python-basics/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/developer/python-basics/</guid>
+      <description>&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;FastAPI&lt;/strong&gt;, &lt;strong&gt;Flask&lt;/strong&gt;, &lt;strong&gt;Django&lt;/strong&gt;는 모두 &lt;strong&gt;Python&lt;/strong&gt;으로 개발된 인기 있는 웹 프레임워크입니다. 이들 각각은 사용 사례와 목적이 다르며, 성능, 확장성, 사용 편의성 등에서 차이가 있습니다. 각 프레임워크의 특징과 장단점을 비교하여, 어떤 상황에서 어떤 프레임워크가 적합할지 알아보겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-fastapi&#34;&gt;&lt;strong&gt;1. FastAPI&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;특징&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비동기 처리&lt;/strong&gt;와 &lt;strong&gt;자동화된 데이터 검증&lt;/strong&gt;을 기본으로 지원합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Python 3.7+&lt;/strong&gt; 이상에서 사용하는 &lt;strong&gt;type hints&lt;/strong&gt;를 기반으로, &lt;strong&gt;자동 API 문서화&lt;/strong&gt;(Swagger, ReDoc)를 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;성능&lt;/strong&gt;이 매우 뛰어나며, 특히 &lt;strong&gt;REST API&lt;/strong&gt;나 &lt;strong&gt;GraphQL&lt;/strong&gt; 서버 구축에 적합합니다. &lt;strong&gt;Starlette&lt;/strong&gt;을 기반으로 하여 높은 성능을 자랑합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pydantic&lt;/strong&gt;을 사용한 &lt;strong&gt;데이터 검증&lt;/strong&gt;이 매우 강력하고, 코드의 오류를 컴파일 시점에 잡을 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

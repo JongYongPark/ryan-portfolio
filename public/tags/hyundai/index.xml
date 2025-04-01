@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Hyundai on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/hyundai/</link>
+    <description>Recent content in Hyundai on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Mon, 17 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/hyundai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hyundai Cpp Checker</title>
+      <link>http://localhost:1313/portfolio/posts/checker/hyundai-cpp-checker/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/checker/hyundai-cpp-checker/</guid>
+      <description>&lt;h1 id=&#34;hyundai-mp-oop-011&#34;&gt;HYUNDAI MP-OOP-011&lt;/h1&gt;
+&lt;p&gt;HYUNDAI MP-OOP-011 룰은 C++ 프로그래밍에서 &lt;strong&gt;클래스의 멤버 변수를 직접적으로 노출하지 말고, 적절한 접근 제어를 통해 캡슐화(encapsulation)를 유지하라&lt;/strong&gt;는 원칙을 강조합니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-룰의-목적&#34;&gt;&lt;strong&gt;1. 룰의 목적&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;데이터 보호&lt;/strong&gt;: 클래스 내부의 데이터가 외부 코드에 의해 직접 수정되는 것을 방지하여 무결성을 유지합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;유지보수성 향상&lt;/strong&gt;: 데이터 접근을 메서드를 통해 제어함으로써 코드 변경 시 영향 범위를 최소화합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;캡슐화 준수&lt;/strong&gt;: 객체 지향 프로그래밍의 기본 원칙인 캡슐화를 통해 데이터와 메서드를 하나의 단위로 묶어 관리합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-권장-사항&#34;&gt;&lt;strong&gt;2. 권장 사항&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;멤버 변수의 접근 제어&lt;/strong&gt;: 모든 멤버 변수를 &lt;code&gt;private&lt;/code&gt; 또는 &lt;code&gt;protected&lt;/code&gt;로 선언하여 외부에서 직접 접근하지 못하도록 합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;접근자 메서드 제공&lt;/strong&gt;: 필요한 경우, 멤버 변수에 접근하기 위한 &lt;code&gt;getter&lt;/code&gt; 및 &lt;code&gt;setter&lt;/code&gt; 메서드를 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;불필요한 공개 멤버 제거&lt;/strong&gt;: 외부에서 직접 접근할 필요가 없는 멤버는 공개하지 않습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-예시&#34;&gt;&lt;strong&gt;3. 예시&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;잘못된 예:&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hyundai Java Checker</title>
+      <link>http://localhost:1313/portfolio/posts/checker/hyundai-java-checker/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/checker/hyundai-java-checker/</guid>
+      <description>&lt;h1 id=&#34;mj-ser-002--do-not-serialize-unencrypted-sensitive-data&#34;&gt;MJ-SER-002 : Do not serialize unencrypted sensitive data.&lt;/h1&gt;
+&lt;p&gt;CERT SER03-J 에 매핑됨&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://documentation.blackduck.com/bundle/coverity-docs-2023.12/page/checker-ref/tables/hyundai-java.html&#34;&gt;https://documentation.blackduck.com/bundle/coverity-docs-2023.12/page/checker-ref/tables/hyundai-java.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://documentation.blackduck.com/bundle/coverity-docs/page/checker-ref/tables/sei-cert-java-coding-standard.html&#34;&gt;https://documentation.blackduck.com/bundle/coverity-docs/page/checker-ref/tables/sei-cert-java-coding-standard.html&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

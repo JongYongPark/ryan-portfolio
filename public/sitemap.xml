@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+<<<<<<< HEAD
     <loc>http://localhost:1313/portfolio/posts/</loc>
     <lastmod>2024-03-30T00:00:00+00:00</lastmod>
   </url><url>
@@ -41,6 +42,47 @@
     <loc>http://localhost:1313/portfolio/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8/</loc>
     <lastmod>2024-03-24T00:00:00+00:00</lastmod>
   </url><url>
+=======
+    <loc>http://localhost:1313/portfolio/categories/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/categories/category1/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/categories/devsecops/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/posts/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/tags/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/tags/%EC%83%98%ED%94%8C/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/posts/sample-post-1/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/posts/sample-post-2/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/posts/sample-post-3/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/posts/sample-post-4/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/posts/sample-post-5/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/portfolio/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8/</loc>
+    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+>>>>>>> c954130 (update)
     <loc>http://localhost:1313/portfolio/categories/archives/</loc>
     <lastmod>2023-03-24T00:00:00+00:00</lastmod>
   </url><url>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Rust Web | RyanLabs</title>
+<meta name="keywords" content="Rust, Web">
+<meta name="description" content="
+Rust는 시스템 프로그래밍 언어로 높은 성능과 안전성을 제공하지만, 웹 프레임워크 측면에서는 여전히 상대적으로 적은 선택지가 있습니다. 그럼에도 불구하고 Spring Boot나 NestJS와 비슷한 구조적 접근을 제공하는 Rust 웹 프레임워크들이 있습니다. 이들 프레임워크는 모듈화, 라우팅, 미들웨어 지원 등을 제공하며, 일반적으로 백엔드 API 서버나 웹 애플리케이션을 구축할 수 있습니다.
+다음은 Rust에서 Spring Boot나 NestJS처럼 구조적이고 확장 가능한 웹 애플리케이션을 구축할 수 있는 프레임워크들입니다:
+1. Actix Web
+
+
+특징:
+
+Actix Web은 고성능과 비동기 처리를 지원하는 Rust의 가장 인기 있는 웹 프레임워크입니다. Spring Boot와 비슷하게, 매우 높은 성능을 자랑하면서도 유연한 미들웨어 및 라우팅 기능을 제공합니다.
+모듈화된 라우팅과 미들웨어를 지원하며, 웹 소켓, API 서버 등 다양한 서버 애플리케이션을 구현할 수 있습니다.
+Actors 모델을 기반으로 한 Actix 시스템을 제공하여, 복잡한 상태 관리 및 비동기 처리를 유연하게 처리할 수 있습니다.
+Spring Boot와 비슷한 방식으로 동시성을 처리하며, REST API 서버로 매우 적합합니다.
+타입 안전성과 비동기 I/O를 지원하여, 성능과 안정성에서 우수한 결과를 도출할 수 있습니다.
+
+
+
+장점:">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/developer/rust/rust-web/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/developer/rust/rust-web/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Rust Web
+    </h1>
+    <div class="post-meta"><span title='2025-02-21 00:00:00 +0000 UTC'>2월 21, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h1>
+<p><strong>Rust</strong>는 시스템 프로그래밍 언어로 높은 성능과 안전성을 제공하지만, <strong>웹 프레임워크</strong> 측면에서는 여전히 <strong>상대적으로 적은 선택지</strong>가 있습니다. 그럼에도 불구하고 <strong>Spring Boot</strong>나 <strong>NestJS</strong>와 비슷한 <strong>구조적 접근</strong>을 제공하는 Rust 웹 프레임워크들이 있습니다. 이들 프레임워크는 <strong>모듈화</strong>, <strong>라우팅</strong>, <strong>미들웨어 지원</strong> 등을 제공하며, 일반적으로 <strong>백엔드 API 서버</strong>나 <strong>웹 애플리케이션</strong>을 구축할 수 있습니다.</p>
+<p>다음은 <strong>Rust</strong>에서 Spring Boot나 NestJS처럼 <strong>구조적이고 확장 가능한</strong> 웹 애플리케이션을 구축할 수 있는 프레임워크들입니다:</p>
+<h3 id="1-actix-web"><strong>1. Actix Web</strong><a hidden class="anchor" aria-hidden="true" href="#1-actix-web">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>:</p>
+<ul>
+<li><strong>Actix Web</strong>은 <strong>고성능</strong>과 <strong>비동기 처리</strong>를 지원하는 Rust의 가장 인기 있는 웹 프레임워크입니다. <strong>Spring Boot</strong>와 비슷하게, 매우 높은 성능을 자랑하면서도 유연한 미들웨어 및 라우팅 기능을 제공합니다.</li>
+<li><strong>모듈화</strong>된 <strong>라우팅</strong>과 <strong>미들웨어</strong>를 지원하며, <strong>웹 소켓</strong>, <strong>API 서버</strong> 등 다양한 서버 애플리케이션을 구현할 수 있습니다.</li>
+<li><strong>Actors</strong> 모델을 기반으로 한 <strong>Actix 시스템</strong>을 제공하여, 복잡한 상태 관리 및 비동기 처리를 유연하게 처리할 수 있습니다.</li>
+<li><strong>Spring Boot</strong>와 비슷한 방식으로 <strong>동시성</strong>을 처리하며, <strong>REST API 서버</strong>로 매우 적합합니다.</li>
+<li><strong>타입 안전성</strong>과 <strong>비동기 I/O</strong>를 지원하여, 성능과 안정성에서 우수한 결과를 도출할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>장점</strong>:</p>
+<ul>
+<li><strong>높은 성능</strong>과 <strong>비동기 I/O</strong>를 통한 빠른 처리</li>
+<li><strong>미들웨어</strong>를 통한 확장 가능성</li>
+<li><strong>유연한 라우팅</strong>과 <strong>상태 관리</strong></li>
+<li><strong>모듈화</strong>된 코드 구조</li>
+</ul>
+</li>
+<li>
+<p><strong>단점</strong>:</p>
+<ul>
+<li><strong>학습 곡선</strong>이 다소 있을 수 있으며, <strong>Actors</strong> 모델에 대한 이해가 필요합니다.</li>
+<li>Rust의 문법적 특성상 <strong>초기 개발 속도</strong>가 다소 느릴 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>사용 사례</strong>:</p>
+<ul>
+<li>고성능 <strong>API 서버</strong></li>
+<li><strong>마이크로서비스</strong> 아키텍처</li>
+<li><strong>실시간 애플리케이션</strong> (예: 웹소켓, 실시간 데이터 처리)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-rocket"><strong>2. Rocket</strong><a hidden class="anchor" aria-hidden="true" href="#2-rocket">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>:</p>
+<ul>
+<li><strong>Rocket</strong>은 Rust에서 가장 <strong>간단하고 직관적인</strong> 웹 프레임워크로, <strong>Spring Boot</strong>처럼 빠르게 애플리케이션을 설정하고 실행할 수 있습니다.</li>
+<li><strong>타입 안전성</strong>을 제공하며, <strong>고급 라우팅</strong>, <strong>폼 데이터 처리</strong>, <strong>템플릿 렌더링</strong> 등의 기능을 쉽게 활용할 수 있습니다.</li>
+<li><strong>Spring Boot</strong>와 비슷하게, <strong>컨트롤러</strong>와 <strong>라우팅</strong>을 쉽게 관리할 수 있으며, <strong>템플릿 엔진</strong>과 <strong>상태 관리</strong> 기능도 잘 통합되어 있습니다.</li>
+<li><strong>성능</strong>은 Actix Web보다 약간 떨어지지만, 매우 <strong>사용하기 쉬운</strong> 프레임워크입니다.</li>
+<li><strong>동기적 처리</strong>를 기본으로 하며, 비동기 처리는 <code>async</code> 키워드를 사용해 구현할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>장점</strong>:</p>
+<ul>
+<li><strong>간단한 API 서버</strong>와 <strong>빠른 개발</strong>에 유리</li>
+<li><strong>직관적인 API</strong>와 <strong>자동화된 검증</strong></li>
+<li><strong>템플릿 엔진</strong> 및 <strong>폼 데이터 처리</strong> 등의 웹 애플리케이션 기능 제공</li>
+<li><strong>타입 안전성</strong>이 높은 코드 작성 가능</li>
+</ul>
+</li>
+<li>
+<p><strong>단점</strong>:</p>
+<ul>
+<li><strong>비동기 처리</strong>는 기본적으로 지원하지 않으며, 필요시 별도 설정이 필요합니다.</li>
+<li><strong>성능</strong>이 Actix Web보다는 약간 낮습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>사용 사례</strong>:</p>
+<ul>
+<li><strong>소규모 웹 애플리케이션</strong> 및 <strong>프로토타입</strong></li>
+<li><strong>고급 라우팅</strong> 및 <strong>데이터 처리</strong>가 필요한 서버</li>
+<li><strong>웹 서버</strong> 또는 <strong>REST API 서버</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-tide"><strong>3. Tide</strong><a hidden class="anchor" aria-hidden="true" href="#3-tide">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>:</p>
+<ul>
+<li><strong>Tide</strong>는 <strong>간결한 API</strong>를 제공하며, Rust의 <strong>asynchronous programming</strong>을 활용한 <strong>비동기 I/O</strong>를 지원하는 프레임워크입니다.</li>
+<li><strong>Spring Boot</strong>나 <strong>NestJS</strong>와 유사하게 <strong>모듈화된</strong> 라우팅과 <strong>미들웨어</strong> 시스템을 제공하며, 애플리케이션의 확장성에 유리합니다.</li>
+<li><strong>async/await</strong>을 기반으로 비동기 작업을 처리하며, <strong>라우팅</strong>과 <strong>미들웨어</strong>를 매우 간단하게 설정할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>장점</strong>:</p>
+<ul>
+<li><strong>간결한 코드</strong>로 빠르게 애플리케이션을 개발할 수 있습니다.</li>
+<li><strong>비동기 I/O</strong> 및 <strong>동시성 처리</strong>에 유리한 아키텍처</li>
+<li><strong>미들웨어</strong>를 활용한 애플리케이션 확장 용이</li>
+</ul>
+</li>
+<li>
+<p><strong>단점</strong>:</p>
+<ul>
+<li><strong>비동기 처리</strong>가 주요 방식이므로, <strong>동기 처리</strong>에 대한 설정이 필요할 수 있습니다.</li>
+<li><strong>Tide</strong>는 상대적으로 <strong>작은 커뮤니티</strong>를 가지고 있어, <strong>문서화</strong>와 <strong>지원</strong>이 다른 프레임워크에 비해 부족할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>사용 사례</strong>:</p>
+<ul>
+<li><strong>REST API</strong> 및 <strong>마이크로서비스</strong> 아키텍처</li>
+<li><strong>비동기 처리</strong>가 필요한 서버 애플리케이션</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-axum"><strong>4. Axum</strong><a hidden class="anchor" aria-hidden="true" href="#4-axum">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>:</p>
+<ul>
+<li><strong>Axum</strong>은 <strong>Tokio</strong> 기반의 <strong>Rust</strong> 웹 프레임워크로, <strong>비동기 I/O</strong>와 <strong>동시성 처리</strong>를 지원합니다. 이 프레임워크는 <strong>NestJS</strong>와 비슷한 방식으로 모듈화된 <strong>라우팅</strong>을 지원하며, <strong>미들웨어</strong>와 <strong>서비스 로직</strong>을 잘 분리할 수 있는 구조를 제공합니다.</li>
+<li><strong>Axum</strong>은 <strong>Tokio</strong>와 <strong>Tower</strong> 라이브러리를 기반으로 하여 <strong>미들웨어</strong>를 활용한 <strong>확장성</strong>이 뛰어나며, 특히 <strong>REST API</strong> 및 <strong>WebSocket</strong>을 처리하는 데 강점을 가집니다.</li>
+<li><strong>Axum</strong>은 다른 Rust 웹 프레임워크와 비교해 <strong>모듈화된 설계</strong>로 더욱 <strong>개발자 친화적</strong>인 특징을 보입니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>장점</strong>:</p>
+<ul>
+<li><strong>비동기 처리</strong>와 <strong>고성능</strong>을 지원하여 <strong>대규모 웹 애플리케이션</strong> 및 <strong>API 서버</strong>에 적합합니다.</li>
+<li><strong>Tokio</strong> 기반의 높은 성능과 <strong>미들웨어</strong>를 활용한 확장성 제공</li>
+<li><strong>유연한 라우팅</strong> 및 <strong>타입 안전성</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>단점</strong>:</p>
+<ul>
+<li><strong>비동기 프로그래밍</strong>을 다룰 때 학습 곡선이 있을 수 있습니다.</li>
+<li>아직 <strong>커뮤니티</strong>가 Actix나 Rocket에 비해 상대적으로 작은 편입니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>사용 사례</strong>:</p>
+<ul>
+<li><strong>고성능 API 서버</strong>와 <strong>마이크로서비스</strong></li>
+<li><strong>비동기 작업</strong>을 많이 처리해야 하는 웹 애플리케이션</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="비교-요약"><strong>비교 요약</strong><a hidden class="anchor" aria-hidden="true" href="#비교-요약">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>특징</strong></th>
+          <th><strong>Actix Web</strong></th>
+          <th><strong>Rocket</strong></th>
+          <th><strong>Tide</strong></th>
+          <th><strong>Axum</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>비동기 지원</strong></td>
+          <td>기본적으로 지원</td>
+          <td>비동기 지원 미비, <code>async</code>으로 처리 필요</td>
+          <td>기본적으로 비동기 지원</td>
+          <td>기본적으로 비동기 지원</td>
+      </tr>
+      <tr>
+          <td><strong>성능</strong></td>
+          <td>매우 뛰어남</td>
+          <td>뛰어난 성능, 동기적 처리 주로 사용</td>
+          <td>비동기 처리로 효율적, 성능은 괜찮음</td>
+          <td>매우 뛰어난 성능, <strong>Tokio</strong> 기반 비동기 처리</td>
+      </tr>
+      <tr>
+          <td><strong>유연성</strong></td>
+          <td>매우 유연, 상태 관리, 비동기 처리 강점</td>
+          <td><strong>간단하고 직관적인</strong> 코드, 사용하기 쉬움</td>
+          <td><strong>간결하고 유연한 API</strong> 제공</td>
+          <td>매우 유연한 라우팅 및 <strong>미들웨어</strong> 시스템 지원</td>
+      </tr>
+      <tr>
+          <td><strong>학습 곡선</strong></td>
+          <td>다소 높은 학습 곡선 (Actors 모델)</td>
+          <td>낮음 (간단하고 직관적)</td>
+          <td>낮음 (간단한 비동기 I/O)</td>
+          <td>중간 (Tokio, Tower 기반 학습 필요)</td>
+      </tr>
+      <tr>
+          <td><strong>주요 사용 사례</strong></td>
+          <td><strong>API 서버</strong>, <strong>웹 소켓</strong>, <strong>고성능 서버</strong></td>
+          <td><strong>REST API 서버</strong>, <strong>웹 애플리케이션</strong></td>
+          <td><strong>마이크로서비스</strong>,</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="heading-1"><a hidden class="anchor" aria-hidden="true" href="#heading-1">#</a></h1>
+<p><strong>Actix Web</strong>과 <strong>Axum</strong>은 둘 다 <strong>Rust</strong> 기반의 웹 프레임워크이지만, 그들의 철학, 아키텍처, 사용 사례에서 차이점이 있습니다. 아래에서 주요 차이점을 정리해보겠습니다.</p>
+<h3 id="1-프레임워크-철학-및-목표">1. <strong>프레임워크 철학 및 목표</strong><a hidden class="anchor" aria-hidden="true" href="#1-프레임워크-철학-및-목표">#</a></h3>
+<ul>
+<li>
+<p><strong>Actix Web</strong>:</p>
+<ul>
+<li><strong>성능 우선</strong>: Actix Web은 <strong>최고 성능</strong>을 목표로 설계된 프레임워크입니다. 이는 <strong>Actor 모델</strong>을 기반으로 하며, 효율적인 비동기 I/O 및 멀티스레딩을 활용하여 높은 처리 성능을 제공합니다.</li>
+<li><strong>기능 풍부</strong>: Actix Web은 많은 내장 기능을 제공하며, 여러 가지 미들웨어와 설정 옵션이 있어 대규모 애플리케이션 구축에 적합합니다. 하지만, 기능이 많다 보니 설정과 구성이 다소 복잡할 수 있습니다.</li>
+<li><strong>동시성 처리</strong>: 기본적으로 비동기 코드 실행과 멀티스레딩을 적극적으로 활용하여 대규모 시스템을 처리하는 데 유리합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Axum</strong>:</p>
+<ul>
+<li><strong>Rust의 <code>async/await</code> 친화적</strong>: Axum은 Rust의 비동기 기능인 <code>async</code>/<code>await</code>를 <strong>자연스럽게 지원</strong>하는 프레임워크입니다. <code>async</code>/<code>await</code> 구문을 통한 <strong>간결하고 직관적인 코드</strong> 작성이 가능합니다.</li>
+<li><strong>단순함과 유연성</strong>: Axum은 <strong>단순하고 직관적인 API</strong>를 제공하는 것을 목표로 하고 있습니다. 많은 기능을 제공하기보다는, 필요한 경우 다른 라이브러리와 결합하여 사용할 수 있도록 설계되었습니다.</li>
+<li><strong>Tower와의 통합</strong>: Axum은 <strong>Tower</strong>라는 비동기 미들웨어 라이브러리와 잘 통합되며, 이를 통해 요청을 처리하는 데 있어 유연성과 확장성이 뛰어납니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-아키텍처">2. <strong>아키텍처</strong><a hidden class="anchor" aria-hidden="true" href="#2-아키텍처">#</a></h3>
+<ul>
+<li>
+<p><strong>Actix Web</strong>:</p>
+<ul>
+<li><strong>Actor 모델</strong>: Actix Web은 <strong>Actor 모델</strong>을 활용하여 비동기적인 작업을 수행합니다. 이 모델은 각 작업을 독립적인 액터(작업 단위)로 처리하여 높은 동시성 처리를 지원합니다.</li>
+<li><strong>복잡한 설정</strong>: Actix Web은 기본적으로 더 많은 설정과 구성이 필요하며, 다양한 <strong>미들웨어와 확장 기능</strong>을 제공합니다. 다소 복잡하지만, 대규모 애플리케이션을 관리하는 데 유리합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Axum</strong>:</p>
+<ul>
+<li><strong>직관적인 <code>async/await</code> 사용</strong>: Axum은 <strong>Rust의 <code>async/await</code> 패턴</strong>을 적극적으로 채택하여 비동기 웹 요청 처리를 간단하게 만듭니다. 코드가 간결하고 이해하기 쉬운 구조를 제공합니다.</li>
+<li><strong>미니멀한 설계</strong>: Axum은 기본적으로 필요한 것만을 제공하며, 추가 기능을 위한 확장이 용이합니다. 예를 들어, 기본적인 HTTP 요청 및 응답 처리에만 집중하고, 더 복잡한 기능은 외부 라이브러리와 조합하여 사용합니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-비동기-처리-및-성능">3. <strong>비동기 처리 및 성능</strong><a hidden class="anchor" aria-hidden="true" href="#3-비동기-처리-및-성능">#</a></h3>
+<ul>
+<li>
+<p><strong>Actix Web</strong>:</p>
+<ul>
+<li>Actix Web은 <strong>성능에 최적화</strong>된 비동기 처리 모델을 제공하며, <code>tokio</code>와 같은 비동기 런타임을 사용합니다. 이 덕분에 매우 높은 동시성 처리 성능을 자랑합니다.</li>
+<li>멀티스레딩을 잘 활용하여 고성능의 애플리케이션을 지원합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Axum</strong>:</p>
+<ul>
+<li>Axum은 <strong>Tokio</strong>와 함께 작동하는 <strong>비동기 기반</strong> 프레임워크로, 비동기 I/O를 매우 자연스럽게 지원합니다.</li>
+<li>비동기 처리는 <code>async/await</code> 구문을 사용하여 코드가 더 직관적이고 읽기 쉽습니다. 성능 면에서는 Actix Web보다는 다소 느릴 수 있지만, 대부분의 웹 애플리케이션에서는 충분히 빠릅니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-확장성-및-커스터마이징">4. <strong>확장성 및 커스터마이징</strong><a hidden class="anchor" aria-hidden="true" href="#4-확장성-및-커스터마이징">#</a></h3>
+<ul>
+<li>
+<p><strong>Actix Web</strong>:</p>
+<ul>
+<li>매우 <strong>확장성이 뛰어난</strong> 프레임워크로, 다양한 내장 미들웨어와 커스터마이징 가능성을 제공합니다. 예를 들어, 웹소켓, 파일 업로드, 인증 처리 등 여러 기능을 지원합니다.</li>
+<li>설정이나 사용에 있어 더 많은 자유도를 제공하지만, 그만큼 복잡한 구조와 다루기 어려운 부분도 존재할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Axum</strong>:</p>
+<ul>
+<li>Axum은 <strong>간단하고 직관적</strong>인 아키텍처로, 빠르게 시작할 수 있고 필요한 경우에만 추가 라이브러리를 사용해 확장합니다.</li>
+<li>필요한 기능만큼 추가하여 유연성을 제공하므로, 작은 규모의 애플리케이션이나 간단한 웹 서비스 개발에 적합합니다. 복잡한 커스터마이징이 필요한 경우에는 외부 라이브러리나 패턴을 사용해야 할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-사용-사례">5. <strong>사용 사례</strong><a hidden class="anchor" aria-hidden="true" href="#5-사용-사례">#</a></h3>
+<ul>
+<li>
+<p><strong>Actix Web</strong>:</p>
+<ul>
+<li><strong>대규모, 고성능</strong> 시스템에 적합합니다. 예를 들어, <strong>실시간 애플리케이션</strong>, <strong>게임 서버</strong>, <strong>고속 데이터 처리</strong> 등에서 사용할 수 있습니다.</li>
+<li>높은 동시성 처리 성능과 멀티스레딩 지원 덕분에 <strong>대규모 웹 애플리케이션</strong>에 적합합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Axum</strong>:</p>
+<ul>
+<li><strong>간단한 웹 애플리케이션</strong>이나 <strong>API 서버</strong>를 구축할 때 적합합니다.</li>
+<li>기본적인 웹 애플리케이션, RESTful API, 비동기 HTTP 처리 등에 유리하며, 설계가 간단하고 코드가 직관적이기 때문에 빠른 프로토타이핑이 가능합니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-커뮤니티-및-문서화">6. <strong>커뮤니티 및 문서화</strong><a hidden class="anchor" aria-hidden="true" href="#6-커뮤니티-및-문서화">#</a></h3>
+<ul>
+<li>
+<p><strong>Actix Web</strong>:</p>
+<ul>
+<li><strong>성숙한 프레임워크</strong>로서, 이미 많은 개발자들이 사용하고 있으며, 커뮤니티와 문서도 잘 마련되어 있습니다. 그러나 복잡한 기능이 많고, 배우기에는 약간의 시간이 걸릴 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Axum</strong>:</p>
+<ul>
+<li>Axum은 <strong>비교적 새로운 프레임워크</strong>이지만, <strong>Rust의 공식 웹 라이브러리</strong>인 <strong>Tokio</strong>와 긴밀하게 통합되어 있어 빠르게 성장하고 있습니다.</li>
+<li>문서가 잘 작성되어 있으며, 커뮤니티가 빠르게 성장하고 있습니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="차이점-요약"><strong>차이점 요약</strong><a hidden class="anchor" aria-hidden="true" href="#차이점-요약">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>Feature</th>
+          <th><strong>Actix Web</strong></th>
+          <th><strong>Axum</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>설계 철학</strong></td>
+          <td>성능 최우선, 고성능 대규모 시스템</td>
+          <td>직관적이고 단순한 비동기 웹 처리</td>
+      </tr>
+      <tr>
+          <td><strong>비동기 처리</strong></td>
+          <td>고성능 비동기 처리, 멀티스레딩</td>
+          <td><code>async/await</code> 기반, 간결한 코드</td>
+      </tr>
+      <tr>
+          <td><strong>확장성</strong></td>
+          <td>높은 확장성, 복잡한 커스터마이징 가능</td>
+          <td>미니멀리즘, 외부 라이브러리 활용</td>
+      </tr>
+      <tr>
+          <td><strong>사용 사례</strong></td>
+          <td>고성능 애플리케이션, 대규모 시스템</td>
+          <td>간단한 웹 애플리케이션, API 서버</td>
+      </tr>
+      <tr>
+          <td><strong>성능</strong></td>
+          <td>매우 빠르며 동시성 처리 성능 뛰어남</td>
+          <td>빠르지만 Actix Web보다는 다소 느림</td>
+      </tr>
+      <tr>
+          <td><strong>커뮤니티와 문서화</strong></td>
+          <td>성숙하고 문서가 잘 마련됨</td>
+          <td>새로운 프레임워크, 빠르게 성장 중</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="결론">결론:<a hidden class="anchor" aria-hidden="true" href="#결론">#</a></h3>
+<ul>
+<li><strong>Actix Web</strong>은 <strong>고성능, 대규모 시스템</strong>에서 강점을 보이며, <strong>성능</strong>을 최우선시하는 경우 적합합니다.</li>
+<li><strong>Axum</strong>은 <strong>간단하고 직관적인</strong> 코드 작성을 지원하는 프레임워크로, <strong>비동기 작업</strong>을 쉽게 처리할 수 있으며, 빠른 프로토타이핑과 작은 규모의 애플리케이션에 유리합니다.</li>
+</ul>
+<h1 id="heading-2"><a hidden class="anchor" aria-hidden="true" href="#heading-2">#</a></h1>
+<p>네, <strong>Actix Web</strong>에서도 <strong>서비스</strong>와 <strong>컨트롤러</strong>를 구분할 수 있습니다. 기본적으로 Actix Web은 프레임워크 자체에서 특정한 <strong>서비스</strong>와 <strong>컨트롤러</strong>를 구분하는 구조를 제공하지 않지만, 비즈니스 로직을 서비스 계층에, 요청 처리는 핸들러(컨트롤러)에서 처리하는 구조를 쉽게 구현할 수 있습니다.</p>
+<p>여기서는 <strong>서비스 계층</strong>과 <strong>컨트롤러 계층</strong>을 분리하여 로그인 기능을 구현하는 예제를 보여드리겠습니다. 예제에서는 <strong>서비스 계층</strong>에서 로그인 비즈니스 로직을 처리하고, <strong>컨트롤러</strong>에서는 HTTP 요청을 처리하는 방식으로 구현할 것입니다.</p>
+<h3 id="1-actix-web에서-서비스와-컨트롤러-구분-예제">1. <strong>Actix Web에서 서비스와 컨트롤러 구분 예제</strong><a hidden class="anchor" aria-hidden="true" href="#1-actix-web에서-서비스와-컨트롤러-구분-예제">#</a></h3>
+<h4 id="프로젝트-구조"><strong>프로젝트 구조</strong>:<a hidden class="anchor" aria-hidden="true" href="#프로젝트-구조">#</a></h4>
+<pre tabindex="0"><code>src/
+ ├── main.rs       # 메인 파일
+ ├── controllers/  # 컨트롤러
+ │    └── auth.rs  # 로그인 관련 컨트롤러
+ ├── services/     # 서비스
+ │    └── auth.rs  # 로그인 비즈니스 로직
+ └── models/       # 데이터 모델
+      └── user.rs  # 사용자 데이터 모델
+</code></pre><h4 id="1-모델-modelsuserrs"><strong>1. 모델 (models/user.rs)</strong><a hidden class="anchor" aria-hidden="true" href="#1-모델-modelsuserrs">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// 사용자 모델 (예시: 로그인 시 사용할 사용자 데이터 모델)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#[derive(Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">User</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> username: String,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> password: String, <span style="color:#75715e">// 실제로는 해시값을 저장해야 함
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h4 id="2-서비스-servicesauthrs"><strong>2. 서비스 (services/auth.rs)</strong><a hidden class="anchor" aria-hidden="true" href="#2-서비스-servicesauthrs">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#66d9ef">crate</span>::models::user::User;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> jsonwebtoken::{encode, Header, EncodingKey};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> serde::{Serialize, Deserialize};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> std::time::{SystemTime, Duration};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// JWT 토큰에 사용할 Claims 구조체
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#[derive(Serialize, Deserialize)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Claims</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> sub: String,   <span style="color:#75715e">// 사용자 이름
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">pub</span> exp: <span style="color:#66d9ef">usize</span>,    <span style="color:#75715e">// 만료 시간
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 로그인 로직 처리하는 서비스 함수
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">login</span>(username: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>, password: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Option<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 실제 DB나 인증 로직을 사용해야 합니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> username <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;user123&#34;</span> <span style="color:#f92672">&amp;&amp;</span> password <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;password&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 유효한 로그인이라면 JWT 토큰 생성
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> claims <span style="color:#f92672">=</span> Claims {
+</span></span><span style="display:flex;"><span>            sub: <span style="color:#a6e22e">username</span>.to_string(),
+</span></span><span style="display:flex;"><span>            exp: (SystemTime::now() <span style="color:#f92672">+</span> Duration::from_secs(<span style="color:#ae81ff">3600</span>)).duration_since(SystemTime::<span style="color:#66d9ef">UNIX_EPOCH</span>).unwrap().as_secs() <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>,
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> secret <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mysecretkey&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> token <span style="color:#f92672">=</span> encode(<span style="color:#f92672">&amp;</span>Header::default(), <span style="color:#f92672">&amp;</span>claims, <span style="color:#f92672">&amp;</span>EncodingKey::from_secret(secret.as_ref())).unwrap();
+</span></span><span style="display:flex;"><span>        Some(token)
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        None <span style="color:#75715e">// 로그인 실패
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="3-컨트롤러-controllersauthrs"><strong>3. 컨트롤러 (controllers/auth.rs)</strong><a hidden class="anchor" aria-hidden="true" href="#3-컨트롤러-controllersauthrs">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> actix_web::{web, HttpResponse, Responder};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#66d9ef">crate</span>::services::auth::login;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> serde::Deserialize;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 요청에서 사용할 구조체 정의 (로그인 데이터)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#[derive(Deserialize)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">LoginRequest</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> username: String,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> password: String,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 로그인 요청을 처리하는 컨트롤러 핸들러
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">login_handler</span>(body: <span style="color:#a6e22e">web</span>::Json<span style="color:#f92672">&lt;</span>LoginRequest<span style="color:#f92672">&gt;</span>) -&gt; <span style="color:#a6e22e">impl</span> Responder {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">match</span> login(<span style="color:#f92672">&amp;</span>body.username, <span style="color:#f92672">&amp;</span>body.password) {
+</span></span><span style="display:flex;"><span>        Some(token) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 로그인 성공 시, JWT 토큰 반환
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            HttpResponse::Ok().json(token)
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        None <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 로그인 실패 시, Unauthorized 응답
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            HttpResponse::Unauthorized().body(<span style="color:#e6db74">&#34;Invalid username or password&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 라우터 생성 함수
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">create_auth_router</span>() -&gt; <span style="color:#a6e22e">actix_web</span>::web::ServiceConfig {
+</span></span><span style="display:flex;"><span>    actix_web::web::scope(<span style="color:#e6db74">&#34;/auth&#34;</span>)
+</span></span><span style="display:flex;"><span>        .route(<span style="color:#e6db74">&#34;/login&#34;</span>, web::post().to(login_handler)) <span style="color:#75715e">// /login 엔드포인트 연결
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h4 id="4-메인-파일-mainrs"><strong>4. 메인 파일 (main.rs)</strong><a hidden class="anchor" aria-hidden="true" href="#4-메인-파일-mainrs">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> actix_web::{web, App, HttpServer};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> actix_web::middleware::Logger;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#66d9ef">crate</span>::controllers::auth::create_auth_router;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">mod</span> controllers;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">mod</span> services;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">mod</span> models;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[actix_rt::main]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() -&gt; <span style="color:#a6e22e">std</span>::io::Result<span style="color:#f92672">&lt;</span>()<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    HttpServer::new(<span style="color:#f92672">||</span> {
+</span></span><span style="display:flex;"><span>        App::new()
+</span></span><span style="display:flex;"><span>            .wrap(Logger::default()) <span style="color:#75715e">// 로깅 미들웨어
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            .configure(create_auth_router) <span style="color:#75715e">// 인증 관련 라우터 등록
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    })
+</span></span><span style="display:flex;"><span>    .bind(<span style="color:#e6db74">&#34;127.0.0.1:8080&#34;</span>)<span style="color:#f92672">?</span>
+</span></span><span style="display:flex;"><span>    .run()
+</span></span><span style="display:flex;"><span>    .<span style="color:#66d9ef">await</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="설명"><strong>설명</strong>:<a hidden class="anchor" aria-hidden="true" href="#설명">#</a></h3>
+<ol>
+<li>
+<p><strong>모델 (models/user.rs)</strong>:</p>
+<ul>
+<li><code>User</code> 모델은 로그인 시 사용할 데이터를 표현합니다. 비밀번호는 실제로 해시값을 저장해야 하지만, 여기서는 단순히 문자열로 처리합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>서비스 (services/auth.rs)</strong>:</p>
+<ul>
+<li><code>login</code> 함수는 로그인 로직을 처리합니다. 실제로는 사용자 이름과 비밀번호를 DB에서 검증해야 하지만, 이 예제에서는 간단한 비교로 처리하고, 인증이 성공하면 <strong>JWT 토큰</strong>을 반환합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>컨트롤러 (controllers/auth.rs)</strong>:</p>
+<ul>
+<li><code>login_handler</code>는 HTTP 요청을 처리하는 핸들러입니다. 클라이언트로부터 받은 로그인 정보를 <code>login</code> 서비스에 전달하고, 결과에 따라 <strong>JWT 토큰</strong>을 반환하거나 <strong>Unauthorized</strong> 응답을 보냅니다.</li>
+<li><code>create_auth_router</code>는 <code>/auth</code> 경로에 대해 로그인 관련 라우팅을 설정합니다. <code>POST /auth/login</code> 요청이 <code>login_handler</code>와 연결됩니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>메인 파일 (main.rs)</strong>:</p>
+<ul>
+<li><code>HttpServer::new</code>로 Actix 서버를 시작하고, 인증 관련 라우팅을 등록하는 <code>create_auth_router</code>를 호출합니다. 서버는 <code>127.0.0.1:8080</code>에서 실행됩니다.</li>
+</ul>
+</li>
+</ol>
+<h3 id="장점"><strong>장점</strong>:<a hidden class="anchor" aria-hidden="true" href="#장점">#</a></h3>
+<ul>
+<li><strong>모듈화</strong>: 서비스와 컨트롤러를 분리하여 각 계층의 역할을 명확히 할 수 있습니다.</li>
+<li><strong>유지보수 용이성</strong>: 비즈니스 로직과 HTTP 요청 처리를 분리하므로 코드가 깔끔하고, 유지보수가 용이합니다.</li>
+<li><strong>확장성</strong>: 비즈니스 로직을 서비스 계층에 두고, 나중에 더 복잡한 로직을 추가할 수 있습니다.</li>
+</ul>
+<h3 id="결론-1"><strong>결론</strong>:<a hidden class="anchor" aria-hidden="true" href="#결론-1">#</a></h3>
+<ul>
+<li><strong>Actix Web</strong>에서 <strong>서비스</strong>와 <strong>컨트롤러</strong>를 구분하는 방식은 <strong>NestJS</strong>나 <strong>Spring Boot</strong>와 비슷한 구조를 제공합니다. 이렇게 구분함으로써, 각 계층의 책임을 명확히 하여 코드가 더 <strong>모듈화</strong>되고 <strong>유지보수</strong>가 용이해집니다.</li>
+</ul>
+<h1 id="heading-3"><a hidden class="anchor" aria-hidden="true" href="#heading-3">#</a></h1>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/portfolio/tags/rust/">Rust</a></li>
+      <li><a href="http://localhost:1313/portfolio/tags/web/">Web</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

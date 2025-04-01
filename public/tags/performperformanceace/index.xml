@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>PerformPerformanceace on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/performperformanceace/</link>
+    <description>Recent content in PerformPerformanceace on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/performperformanceace/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Coverity Performance</title>
+      <link>http://localhost:1313/portfolio/posts/technical-support/coverity/cov-performance/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/technical-support/coverity/cov-performance/</guid>
+      <description>&lt;h1 id=&#34;expected-a-covjsessionid-build-cookie-in-the-response-but-it-was-missing&#34;&gt;Expected a [COVJSESSIONID-build] cookie in the response, but it was missing&lt;/h1&gt;
+&lt;p&gt;추가 로그 분석을 통해 더 자세한 상황을 파악할 수 있습니다:&lt;/p&gt;
+&lt;p&gt;원래 문제:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Expected a [COVJSESSIONID-build] cookie in the response, but it was missing
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;추가 로그 분석:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;인증 상태:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Authentication=CovUsernameAuthenticationToken [
+    Principal=admin (Admin User),
+    Authenticated=true,
+    RemoteIpAddress=10.2.150.57,
+    SessionId=69FB1C3437377E29D3B887C9FDFA5403,
+    Granted Authorities=[ROLE_AUTHENTICATED_USER]
+]
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;서버 측에서는 admin 사용자가 성공적으로 인증됨&lt;/li&gt;
+&lt;li&gt;세션이 정상적으로 생성됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;백그라운드 프로세스:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;com.coverity.ces.service.GarbageCollectionServiceImpl.runGarbageCollection
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;GarbageCollection 서비스가 정상적으로 동작 중&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;수정된 해결 방안:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;세션 관련:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

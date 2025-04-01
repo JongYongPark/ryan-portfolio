@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>IP on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/ip/</link>
+    <description>Recent content in IP on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Mon, 24 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/tags/ip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Public IP &amp; CIDR</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/public-ip-cidr/</link>
+      <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/public-ip-cidr/</guid>
+      <description>&lt;h1 id=&#34;windows-powershell-에서-public-ip와-cidr-얻기---claude&#34;&gt;Windows Powershell 에서 public IP와 CIDR 얻기 - claude&lt;/h1&gt;
+&lt;h2 id=&#34;테스트&#34;&gt;테스트&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 방법 1: ipify API 사용&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; (Invoke-WebRequest -Uri &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://api.ipify.org&amp;#34;&lt;/span&gt;).Content
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;44.214&lt;/span&gt;.210.109                                                                                                                      (base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt;                                                                                     (base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 방방법법 2: ifconfig.me 사사용용                                                          (base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; (Invoke-WebRequest -Uri &amp;#34;https://ifconfig.me/ip&amp;#34;).Content                           &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 방법 3: ipinfo.io 사용 (더 자세한 정보)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; (Invoke-WebRequest -Uri &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://ipinfo.io/json&amp;#34;&lt;/span&gt;).Content | ConvertFrom-Json
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ip       &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;44.214&lt;/span&gt;.210.109
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hostname &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; vpn-aws.blackduck.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;city     &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; Ashburn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;region   &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; Virginia
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;country  &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; US
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;loc      &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;39.0437&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;-77.4875&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;org      &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; AS14618 Amazon.com, Inc.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;postal   &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20147&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;timezone &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; America/New_York
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;readme   &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; https&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;//ipinfo.io/missingauth
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Start-Process &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://whois.domaintools.com/&lt;/span&gt;$ip&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; Quick Stats
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IP Location	United States United States Ashburn Amazon Data Services Nova
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ASN	United States AS14618 AMAZON-AES, US (registered Nov &lt;span style=&#34;color:#ae81ff&#34;&gt;04&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2005&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Resolve Host	vpn-aws.blackduck.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Whois Server	whois.arin.net
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IP Address	&lt;span style=&#34;color:#ae81ff&#34;&gt;44.214&lt;/span&gt;.210.109
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NetRange&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;       &lt;span style=&#34;color:#ae81ff&#34;&gt;44.192&lt;/span&gt;.0.0 - &lt;span style=&#34;color:#ae81ff&#34;&gt;44.255&lt;/span&gt;.255.255
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CIDR&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;           &lt;span style=&#34;color:#ae81ff&#34;&gt;44.192&lt;/span&gt;.0.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;/&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;답변&#34;&gt;답변&lt;/h2&gt;
+&lt;p&gt;PowerShell에서 Public IP와 CIDR를 확인하는 방법을 알려드리겠습니다:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

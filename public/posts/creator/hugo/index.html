@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="카테고리에 게시물을 할당하는 방법
+물론입니다! Hugo에서 블로그를 만들 때 특정 카테고리에 게시물을 할당하는 방법에 대해 단계별로 안내해드리겠습니다. Hugo는 Taxonomies라는 개념을 사용하여 카테고리와 태그를 관리합니다. 아래는 Hugo에서 카테고리를 설정하고 게시물에 할당하는 방법입니다.
+
+1. Taxonomies 설정하기
+먼저, Hugo 사이트의 설정 파일(config.toml, config.yaml, 또는 config.json)에 Taxonomies를 정의해야 합니다. 일반적으로 카테고리와 태그를 사용하므로 이를 설정합니다.
+config.toml 예시
+[taxonomies]
+  category = &#34;categories&#34;
+  tag = &#34;tags&#34;
+config.yaml 예시
+taxonomies:
+  category: categories
+  tag: tags
+config.json 예시
+{
+  &#34;taxonomies&#34;: {
+    &#34;category&#34;: &#34;categories&#34;,
+    &#34;tag&#34;: &#34;tags&#34;
+  }
+}
+
+2. 게시물에 카테고리 할당하기
+게시물의 메타데이터(front matter)에 카테고리를 지정하여 특정 카테고리에 게시물을 할당할 수 있습니다. Hugo는 기본적으로 Markdown 파일을 사용합니다.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/creator/hugo/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/creator/hugo/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="카테고리에-게시물을-할당하는-방법">카테고리에 게시물을 할당하는 방법<a hidden class="anchor" aria-hidden="true" href="#카테고리에-게시물을-할당하는-방법">#</a></h1>
+<p>물론입니다! Hugo에서 블로그를 만들 때 특정 카테고리에 게시물을 할당하는 방법에 대해 단계별로 안내해드리겠습니다. Hugo는 <strong>Taxonomies</strong>라는 개념을 사용하여 카테고리와 태그를 관리합니다. 아래는 Hugo에서 카테고리를 설정하고 게시물에 할당하는 방법입니다.</p>
+<hr>
+<h2 id="1-taxonomies-설정하기">1. Taxonomies 설정하기<a hidden class="anchor" aria-hidden="true" href="#1-taxonomies-설정하기">#</a></h2>
+<p>먼저, Hugo 사이트의 설정 파일(<code>config.toml</code>, <code>config.yaml</code>, 또는 <code>config.json</code>)에 Taxonomies를 정의해야 합니다. 일반적으로 카테고리와 태그를 사용하므로 이를 설정합니다.</p>
+<h3 id="configtoml-예시"><code>config.toml</code> 예시<a hidden class="anchor" aria-hidden="true" href="#configtoml-예시">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">taxonomies</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">category</span> = <span style="color:#e6db74">&#34;categories&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">tag</span> = <span style="color:#e6db74">&#34;tags&#34;</span>
+</span></span></code></pre></div><h3 id="configyaml-예시"><code>config.yaml</code> 예시<a hidden class="anchor" aria-hidden="true" href="#configyaml-예시">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">taxonomies</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">category</span>: <span style="color:#ae81ff">categories</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tag</span>: <span style="color:#ae81ff">tags</span>
+</span></span></code></pre></div><h3 id="configjson-예시"><code>config.json</code> 예시<a hidden class="anchor" aria-hidden="true" href="#configjson-예시">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;taxonomies&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;categories&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;tag&#34;</span>: <span style="color:#e6db74">&#34;tags&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="2-게시물에-카테고리-할당하기">2. 게시물에 카테고리 할당하기<a hidden class="anchor" aria-hidden="true" href="#2-게시물에-카테고리-할당하기">#</a></h2>
+<p>게시물의 메타데이터(front matter)에 카테고리를 지정하여 특정 카테고리에 게시물을 할당할 수 있습니다. Hugo는 기본적으로 Markdown 파일을 사용합니다.</p>
+<h3 id="예시-contentpostsmy-first-postmd">예시: <code>content/posts/my-first-post.md</code><a hidden class="anchor" aria-hidden="true" href="#예시-contentpostsmy-first-postmd">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: &#34;나의 첫 번째 포스트&#34;
+</span></span><span style="display:flex;"><span>date: 2025-01-31T12:00:00+09:00
+</span></span><span style="display:flex;"><span>categories:
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">-</span> &#34;기술&#34;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">-</span> &#34;프로그래밍&#34;
+</span></span><span style="display:flex;"><span>tags:
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">-</span> &#34;Hugo&#34;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">-</span> &#34;블로그&#34;
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>여기에 게시물의 내용이 들어갑니다.
+</span></span></code></pre></div><p>위 예시에서 <code>categories</code> 필드에 <code>&quot;기술&quot;</code>과 <code>&quot;프로그래밍&quot;</code>이라는 두 개의 카테고리를 할당했습니다. 이는 게시물이 두 카테고리에 모두 속하게 합니다.</p>
+<hr>
+<h2 id="3-카테고리-페이지-템플릿-설정하기">3. 카테고리 페이지 템플릿 설정하기<a hidden class="anchor" aria-hidden="true" href="#3-카테고리-페이지-템플릿-설정하기">#</a></h2>
+<p>카테고리별로 게시물을 나열하려면 템플릿을 설정해야 합니다. Hugo는 기본적으로 카테고리 페이지를 지원하지만, 테마에 따라 다를 수 있습니다. 기본적인 방법을 설명드리겠습니다.</p>
+<h3 id="layouts_defaultlisthtml-파일-생성-또는-수정"><code>layouts/_default/list.html</code> 파일 생성 또는 수정<a hidden class="anchor" aria-hidden="true" href="#layouts_defaultlisthtml-파일-생성-또는-수정">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{ define &#34;main&#34; }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">h1</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>  {{ range .Pages }}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">article</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">h2</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">p</span>&gt;{{ .Summary }}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">article</span>&gt;
+</span></span><span style="display:flex;"><span>  {{ end }}
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>이 템플릿은 카테고리별로 게시물을 나열하는 기본적인 구조를 제공합니다.</p>
+<h3 id="카테고리-페이지-url-예시">카테고리 페이지 URL 예시<a hidden class="anchor" aria-hidden="true" href="#카테고리-페이지-url-예시">#</a></h3>
+<p>Hugo는 Taxonomies 설정에 따라 자동으로 카테고리 페이지를 생성합니다. 예를 들어, <code>&quot;기술&quot;</code> 카테고리의 게시물을 보려면 다음과 같은 URL을 사용할 수 있습니다:</p>
+<pre tabindex="0"><code>https://your-site.com/categories/기술/
+</code></pre><hr>
+<h2 id="4-네비게이션에-카테고리-추가하기">4. 네비게이션에 카테고리 추가하기<a hidden class="anchor" aria-hidden="true" href="#4-네비게이션에-카테고리-추가하기">#</a></h2>
+<p>사이트의 네비게이션 메뉴에 카테고리를 추가하여 방문자가 쉽게 접근할 수 있도록 설정할 수 있습니다.</p>
+<h3 id="configtoml-예시-1"><code>config.toml</code> 예시<a hidden class="anchor" aria-hidden="true" href="#configtoml-예시-1">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;기술&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/categories/기술/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;프로그래밍&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/categories/프로그래밍/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><p>이 설정은 메인 메뉴에 <code>&quot;기술&quot;</code>과 <code>&quot;프로그래밍&quot;</code> 카테고리를 추가합니다.</p>
+<hr>
+<h2 id="5-카테고리별-스타일링-및-커스터마이징">5. 카테고리별 스타일링 및 커스터마이징<a hidden class="anchor" aria-hidden="true" href="#5-카테고리별-스타일링-및-커스터마이징">#</a></h2>
+<p>카테고리 페이지의 디자인을 커스터마이징하려면 테마의 CSS 파일을 수정하거나, 카테고리 전용 템플릿을 생성할 수 있습니다.</p>
+<h3 id="예시-layoutscategorieslisthtml-파일-생성">예시: <code>layouts/categories/list.html</code> 파일 생성<a hidden class="anchor" aria-hidden="true" href="#예시-layoutscategorieslisthtml-파일-생성">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{ define &#34;main&#34; }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">h1</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ range .Pages }}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ end }}
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>이 템플릿은 카테고리 페이지에 게시물 목록을 간단하게 나열합니다.</p>
+<hr>
+<h2 id="6-hugo-서버-실행-및-확인">6. Hugo 서버 실행 및 확인<a hidden class="anchor" aria-hidden="true" href="#6-hugo-서버-실행-및-확인">#</a></h2>
+<p>설정을 완료한 후 Hugo 개발 서버를 실행하여 변경 사항을 확인할 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><p>브라우저에서 <code>http://localhost:1313</code>에 접속하여 카테고리 페이지가 제대로 표시되는지 확인하세요.</p>
+<hr>
+<h2 id="추가-팁">추가 팁<a hidden class="anchor" aria-hidden="true" href="#추가-팁">#</a></h2>
+<ul>
+<li>
+<p><strong>다중 카테고리 지원</strong>: 하나의 게시물을 여러 카테고리에 할당할 수 있습니다. 이는 관련 주제별로 게시물을 분류할 때 유용합니다.</p>
+</li>
+<li>
+<p><strong>카테고리 이름 관리</strong>: 카테고리 이름에 공백이나 특수 문자를 사용하면 URL에 영향을 줄 수 있으므로, 일관된 네이밍 규칙을 사용하는 것이 좋습니다. 예를 들어, 공백 대신 대시(<code>-</code>)를 사용할 수 있습니다.</p>
+</li>
+<li>
+<p><strong>카테고리 아이콘 및 이미지 추가</strong>: 카테고리별로 아이콘이나 이미지를 추가하여 시각적으로 구분할 수 있습니다. 이를 위해 카테고리 템플릿을 수정하거나 CSS를 활용하세요.</p>
+</li>
+</ul>
+<hr>
+<h2 id="참고-자료">참고 자료<a hidden class="anchor" aria-hidden="true" href="#참고-자료">#</a></h2>
+<ul>
+<li><a href="https://gohugo.io/content-management/taxonomies/">Hugo 공식 문서 - Taxonomies</a></li>
+<li><a href="https://gohugo.io/templates/">Hugo 공식 문서 - Customizing Your Site</a></li>
+</ul>
+<hr>
+<h2 id="이-가이드가-hugo에서-특정-카테고리에-게시물을-할당하고-관리하는-데-도움이-되길-바랍니다-추가적인-질문이나-도움이-필요하시면-언제든지-문의해주세요">이 가이드가 Hugo에서 특정 카테고리에 게시물을 할당하고 관리하는 데 도움이 되길 바랍니다. 추가적인 질문이나 도움이 필요하시면 언제든지 문의해주세요!<a hidden class="anchor" aria-hidden="true" href="#이-가이드가-hugo에서-특정-카테고리에-게시물을-할당하고-관리하는-데-도움이-되길-바랍니다-추가적인-질문이나-도움이-필요하시면-언제든지-문의해주세요">#</a></h2>
+<h1 id="posts-under-the-post-directory-assign-each-document-to-a-specific-category">posts under the <code>/post</code> directory, assign each document to a specific category<a hidden class="anchor" aria-hidden="true" href="#posts-under-the-post-directory-assign-each-document-to-a-specific-category">#</a></h1>
+<p>Certainly! Below is a comprehensive guide on how to structure your Hugo blog with all posts under the <code>/post</code> directory and assign each document to a specific category. This guide includes setting up taxonomies, organizing your content, configuring permalinks, and customizing templates to achieve the desired structure.</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents<a hidden class="anchor" aria-hidden="true" href="#table-of-contents">#</a></h2>
+<ol>
+<li><a href="#1-project-structure">Project Structure</a></li>
+<li><a href="#2-configuring-taxonomies">Configuring Taxonomies</a></li>
+<li><a href="#3-organizing-content">Organizing Content</a></li>
+<li><a href="#4-assigning-categories-to-posts">Assigning Categories to Posts</a></li>
+<li><a href="#5-configuring-permalinks">Configuring Permalinks</a></li>
+<li><a href="#6-customizing-category-pages">Customizing Category Pages</a></li>
+<li><a href="#7-updating-navigation-menu">Updating Navigation Menu</a></li>
+<li><a href="#8-running-the-hugo-server">Running the Hugo Server</a></li>
+<li><a href="#9-additional-tips">Additional Tips</a></li>
+<li><a href="#10-references">References</a></li>
+</ol>
+<hr>
+<h2 id="1-project-structure">1. Project Structure<a hidden class="anchor" aria-hidden="true" href="#1-project-structure">#</a></h2>
+<p>First, ensure that your Hugo project is set up correctly with the following structure:</p>
+<pre tabindex="0"><code>your-hugo-site/
+├── archetypes/
+├── content/
+│   └── post/
+│       ├── category1/
+│       │   └── your-first-post.md
+│       └── category2/
+│           └── your-second-post.md
+├── layouts/
+├── static/
+├── config.toml
+└── themes/
+</code></pre><ul>
+<li><strong><code>content/post/</code></strong>: All your blog posts will reside here, organized by category.</li>
+<li><strong><code>layouts/</code></strong>: Contains templates for your site.</li>
+<li><strong><code>config.toml</code></strong>: Hugo configuration file.</li>
+</ul>
+<hr>
+<h2 id="2-configuring-taxonomies">2. Configuring Taxonomies<a hidden class="anchor" aria-hidden="true" href="#2-configuring-taxonomies">#</a></h2>
+<p>Hugo uses <strong>Taxonomies</strong> to categorize and tag content. To set up categories, you need to define them in your configuration file.</p>
+<h3 id="editing-configtoml">Editing <code>config.toml</code><a hidden class="anchor" aria-hidden="true" href="#editing-configtoml">#</a></h3>
+<p>Open your <code>config.toml</code> (or <code>config.yaml</code> / <code>config.json</code> depending on your setup) and add the following lines to define taxonomies:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">taxonomies</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">category</span> = <span style="color:#e6db74">&#34;categories&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">tag</span> = <span style="color:#e6db74">&#34;tags&#34;</span>
+</span></span></code></pre></div><p><strong>Explanation:</strong></p>
+<ul>
+<li><strong><code>category</code></strong>: Defines the taxonomy for categories.</li>
+<li><strong><code>tag</code></strong>: Defines the taxonomy for tags (optional, but commonly used).</li>
+</ul>
+<hr>
+<h2 id="3-organizing-content">3. Organizing Content<a hidden class="anchor" aria-hidden="true" href="#3-organizing-content">#</a></h2>
+<p>Organize your content by placing all posts under the <code>/content/post/</code> directory. Within this directory, you can further organize posts into subdirectories based on categories.</p>
+<p><strong>Example Directory Structure:</strong></p>
+<pre tabindex="0"><code>content/
+└── post/
+    ├── technology/
+    │   └── intro-to-hugo.md
+    ├── programming/
+    │   └── understanding-cycles.md
+    └── lifestyle/
+        └── healthy-living-tips.md
+</code></pre><hr>
+<h2 id="4-assigning-categories-to-posts">4. Assigning Categories to Posts<a hidden class="anchor" aria-hidden="true" href="#4-assigning-categories-to-posts">#</a></h2>
+<p>Each post should specify its category in the front matter. This allows Hugo to categorize the post appropriately.</p>
+<h3 id="example-front-matter">Example Front Matter<a hidden class="anchor" aria-hidden="true" href="#example-front-matter">#</a></h3>
+<p>Create a Markdown file for your post, e.g., <code>content/post/technology/intro-to-hugo.md</code>, with the following front matter:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: &#34;Introduction to Hugo&#34;
+</span></span><span style="display:flex;"><span>date: 2025-02-01T10:00:00+09:00
+</span></span><span style="display:flex;"><span>categories: [&#34;Technology&#34;]
+</span></span><span style="display:flex;"><span>tags: [&#34;Hugo&#34;, &#34;Static Site Generator&#34;]
+</span></span><span style="display:flex;"><span>description: &#34;A beginner&#39;s guide to getting started with Hugo.&#34;
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Introduction to Hugo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Welcome to your first post about Hugo!
+</span></span></code></pre></div><p><strong>Notes:</strong></p>
+<ul>
+<li><strong><code>categories</code></strong>: Assigns the post to the &ldquo;Technology&rdquo; category.</li>
+<li><strong><code>tags</code></strong>: Assigns relevant tags to the post.</li>
+<li><strong><code>description</code></strong>: (Optional) A brief summary of the post.</li>
+</ul>
+<h3 id="multiple-categories">Multiple Categories<a hidden class="anchor" aria-hidden="true" href="#multiple-categories">#</a></h3>
+<p>If a post belongs to multiple categories, list them as an array:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>categories: [&#34;Technology&#34;, &#34;Programming&#34;]
+</span></span></code></pre></div><hr>
+<h2 id="5-configuring-permalinks">5. Configuring Permalinks<a hidden class="anchor" aria-hidden="true" href="#5-configuring-permalinks">#</a></h2>
+<p>To have a URL structure like <code>/post/category/post-name/</code>, you need to configure permalinks in your <code>config.toml</code>.</p>
+<h3 id="editing-configtoml-1">Editing <code>config.toml</code><a hidden class="anchor" aria-hidden="true" href="#editing-configtoml-1">#</a></h3>
+<p>Add the following to define the permalink structure for posts:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">permalinks</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">post</span> = <span style="color:#e6db74">&#34;/post/:categories/:slug/&#34;</span>
+</span></span></code></pre></div><p><strong>Explanation:</strong></p>
+<ul>
+<li><strong><code>:categories</code></strong>: Inserts the category of the post into the URL.</li>
+<li><strong><code>:slug</code></strong>: Inserts the post&rsquo;s slug (typically derived from the filename).</li>
+</ul>
+<p><strong>Full Example <code>config.toml</code>:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">baseURL</span> = <span style="color:#e6db74">&#34;https://your-site.com/&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">languageCode</span> = <span style="color:#e6db74">&#34;en-us&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;Your Blog Title&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">taxonomies</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">category</span> = <span style="color:#e6db74">&#34;categories&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">tag</span> = <span style="color:#e6db74">&#34;tags&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">permalinks</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">post</span> = <span style="color:#e6db74">&#34;/post/:categories/:slug/&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">menu</span>]
+</span></span><span style="display:flex;"><span>  [[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Home&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><hr>
+<h2 id="6-customizing-category-pages">6. Customizing Category Pages<a hidden class="anchor" aria-hidden="true" href="#6-customizing-category-pages">#</a></h2>
+<p>Hugo automatically generates category pages based on your taxonomies. However, to customize how these pages look, you can create specific templates.</p>
+<h3 id="creating-a-category-list-template">Creating a Category List Template<a hidden class="anchor" aria-hidden="true" href="#creating-a-category-list-template">#</a></h3>
+<p>Create a file at <code>layouts/categories/list.html</code> with the following content:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{ define &#34;main&#34; }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">h1</span>&gt;Category: {{ .Title }}&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ range .Pages }}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">a</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">p</span>&gt;{{ .Summary }}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ end }}
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p><strong>Explanation:</strong></p>
+<ul>
+<li><strong><code>{{ .Title }}</code></strong>: Displays the category name.</li>
+<li><strong><code>{{ range .Pages }}</code></strong>: Iterates over all posts in the category.</li>
+<li><strong><code>{{ .Permalink }}</code></strong>: Links to the individual post.</li>
+<li><strong><code>{{ .Summary }}</code></strong>: Displays a summary of the post.</li>
+</ul>
+<h3 id="styling-the-category-pages">Styling the Category Pages<a hidden class="anchor" aria-hidden="true" href="#styling-the-category-pages">#</a></h3>
+<p>You can add CSS styles to your category pages by modifying your theme&rsquo;s CSS files or adding new styles specific to category pages.</p>
+<hr>
+<h2 id="7-updating-navigation-menu">7. Updating Navigation Menu<a hidden class="anchor" aria-hidden="true" href="#7-updating-navigation-menu">#</a></h2>
+<p>To make categories easily accessible from your site&rsquo;s navigation menu, add them to the menu in your <code>config.toml</code>.</p>
+<h3 id="editing-configtoml-2">Editing <code>config.toml</code><a hidden class="anchor" aria-hidden="true" href="#editing-configtoml-2">#</a></h3>
+<p>Add menu entries for each category:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Technology&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/post/technology/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Programming&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/post/programming/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Lifestyle&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/post/lifestyle/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">4</span>
+</span></span></code></pre></div><p><strong>Explanation:</strong></p>
+<ul>
+<li><strong><code>name</code></strong>: The display name of the menu item.</li>
+<li><strong><code>url</code></strong>: The URL path to the category page.</li>
+<li><strong><code>weight</code></strong>: Determines the order of menu items (lower numbers appear first).</li>
+</ul>
+<p><strong>Full Example <code>config.toml</code>:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">baseURL</span> = <span style="color:#e6db74">&#34;https://your-site.com/&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">languageCode</span> = <span style="color:#e6db74">&#34;en-us&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;Your Blog Title&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">taxonomies</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">category</span> = <span style="color:#e6db74">&#34;categories&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">tag</span> = <span style="color:#e6db74">&#34;tags&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">permalinks</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">post</span> = <span style="color:#e6db74">&#34;/post/:categories/:slug/&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Home&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Technology&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/post/technology/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Programming&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/post/programming/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#a6e22e">menu</span>.<span style="color:#a6e22e">main</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Lifestyle&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;/post/lifestyle/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">4</span>
+</span></span></code></pre></div><hr>
+<h2 id="8-running-the-hugo-server">8. Running the Hugo Server<a hidden class="anchor" aria-hidden="true" href="#8-running-the-hugo-server">#</a></h2>
+<p>After setting up your content and configuration, run the Hugo development server to see your changes in action.</p>
+<h3 id="command-to-start-hugo-server">Command to Start Hugo Server<a hidden class="anchor" aria-hidden="true" href="#command-to-start-hugo-server">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><p><strong>Explanation:</strong></p>
+<ul>
+<li><strong><code>hugo server</code></strong>: Builds your site and serves it locally with live reload enabled.</li>
+</ul>
+<h3 id="accessing-the-site">Accessing the Site<a hidden class="anchor" aria-hidden="true" href="#accessing-the-site">#</a></h3>
+<p>Open your web browser and navigate to <code>http://localhost:1313</code>. You should see your blog with posts organized under the <code>/post</code> directory and categorized appropriately.</p>
+<hr>
+<h2 id="9-additional-tips">9. Additional Tips<a hidden class="anchor" aria-hidden="true" href="#9-additional-tips">#</a></h2>
+<h3 id="a-using-aliases-for-categories">A. Using Aliases for Categories<a hidden class="anchor" aria-hidden="true" href="#a-using-aliases-for-categories">#</a></h3>
+<p>If you want to have more readable URLs or aliases for your categories, you can use the <code>aliases</code> feature in Hugo.</p>
+<p><strong>Example Front Matter with Alias:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: &#34;Introduction to Hugo&#34;
+</span></span><span style="display:flex;"><span>date: 2025-02-01T10:00:00+09:00
+</span></span><span style="display:flex;"><span>categories: [&#34;Technology&#34;]
+</span></span><span style="display:flex;"><span>aliases: [&#34;/tech/&#34;]
+</span></span><span style="display:flex;"><span>tags: [&#34;Hugo&#34;, &#34;Static Site Generator&#34;]
+</span></span><span style="display:flex;"><span>description: &#34;A beginner&#39;s guide to getting started with Hugo.&#34;
+</span></span><span style="display:flex;"><span>---
+</span></span></code></pre></div><p><strong>Explanation:</strong></p>
+<ul>
+<li><strong><code>aliases</code></strong>: Provides alternative URLs that redirect to the main page of the post.</li>
+</ul>
+<h3 id="b-creating-category-sections">B. Creating Category Sections<a hidden class="anchor" aria-hidden="true" href="#b-creating-category-sections">#</a></h3>
+<p>If you prefer to have category sections with their own list of posts, ensure your <code>layouts/categories/list.html</code> is properly set up as shown earlier.</p>
+<h3 id="c-using-shortcodes-for-consistent-formatting">C. Using Shortcodes for Consistent Formatting<a hidden class="anchor" aria-hidden="true" href="#c-using-shortcodes-for-consistent-formatting">#</a></h3>
+<p>To maintain consistent formatting across posts, consider using Hugo <strong>shortcodes</strong> for elements like alerts, images, or code snippets.</p>
+<h3 id="d-leveraging-themes">D. Leveraging Themes<a hidden class="anchor" aria-hidden="true" href="#d-leveraging-themes">#</a></h3>
+<p>Hugo has a vast collection of themes that support taxonomies out of the box. Choosing a theme that aligns with your desired structure can save time.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
+</span></span></code></pre></div><p>Update your <code>config.toml</code> to use the new theme:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">theme</span> = <span style="color:#e6db74">&#34;ananke&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="10-references">10. References<a hidden class="anchor" aria-hidden="true" href="#10-references">#</a></h2>
+<ul>
+<li><a href="https://gohugo.io/content-management/taxonomies/">Hugo Official Documentation - Taxonomies</a></li>
+<li><a href="https://gohugo.io/getting-started/configuration/">Hugo Official Documentation - Configuration</a></li>
+<li><a href="https://gohugo.io/templates/overview/">Hugo Official Documentation - Templates</a></li>
+<li><a href="https://themes.gohugo.io/">Hugo Themes</a></li>
+</ul>
+<hr>
+<p>By following this guide, you can effectively organize your Hugo blog with all posts under the <code>/post</code> directory and assign each document to specific categories. This structure not only improves the navigability of your site but also enhances SEO and user experience. If you encounter any issues or have further questions, feel free to ask!</p>
+<hr>
+<h1 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h1>
+<hr>
+<h1 id="heading-1"><a hidden class="anchor" aria-hidden="true" href="#heading-1">#</a></h1>
+<hr>
+<h1 id="heading-2"><a hidden class="anchor" aria-hidden="true" href="#heading-2">#</a></h1>
+<hr>
+<h1 id="heading-3"><a hidden class="anchor" aria-hidden="true" href="#heading-3">#</a></h1>
+<hr>
+<h1 id="heading-4"><a hidden class="anchor" aria-hidden="true" href="#heading-4">#</a></h1>
+<hr>
+<h1 id="heading-5"><a hidden class="anchor" aria-hidden="true" href="#heading-5">#</a></h1>
+<hr>
+<h1 id="heading-6"><a hidden class="anchor" aria-hidden="true" href="#heading-6">#</a></h1>
+<hr>
+<h1 id="heading-7"><a hidden class="anchor" aria-hidden="true" href="#heading-7">#</a></h1>
+<hr>
+<h1 id="heading-8"><a hidden class="anchor" aria-hidden="true" href="#heading-8">#</a></h1>
+<hr>
+<h1 id="heading-9"><a hidden class="anchor" aria-hidden="true" href="#heading-9">#</a></h1>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

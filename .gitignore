@@ -31,4 +31,8 @@ desktop.ini
 *.bak
 
 # 개인 비공개 콘텐츠 예시
+<<<<<<< HEAD
 # /content/private/
+=======
+/content/private/
+>>>>>>> c954130 (update)

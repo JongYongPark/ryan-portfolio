@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="Obfuscated 장단점
+장점
+
+보안 강화: 민감한 클래스나 패키지 이름을 숨겨 시스템 구조 노출 방지.
+외부 노출 방지: 로그에서 내부 구현 세부사항 은닉.
+
+단점
+
+가독성 저하: 디버깅과 문제 해결이 복잡해짐.
+유지보수 부담: 난독화된 이름 관리 및 매핑 필요.
+
+결론
+보안이 중요한 경우 유용하지만, 디버깅이 어렵고 관리가 복잡해질 수 있어 상황에 맞게 사용해야 합니다.
+Obfuscated(난독화된) 이름을 사용
+Akka 프레임워크와 Logback을 사용하는 프로그램에서 logback.xml에 Obfuscated(난독화된) 이름을 사용하는 것은 특정 시나리오에서 유용하거나 부정적인 영향을 미칠 수 있습니다. 아래는 주요 장점과 단점을 정리한 내용입니다.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/technical-support/srm/srm-logback/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/technical-support/srm/srm-logback/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="obfuscated-장단점">Obfuscated 장단점<a hidden class="anchor" aria-hidden="true" href="#obfuscated-장단점">#</a></h1>
+<h3 id="장점"><strong>장점</strong><a hidden class="anchor" aria-hidden="true" href="#장점">#</a></h3>
+<ol>
+<li><strong>보안 강화</strong>: 민감한 클래스나 패키지 이름을 숨겨 시스템 구조 노출 방지.</li>
+<li><strong>외부 노출 방지</strong>: 로그에서 내부 구현 세부사항 은닉.</li>
+</ol>
+<h3 id="단점"><strong>단점</strong><a hidden class="anchor" aria-hidden="true" href="#단점">#</a></h3>
+<ol>
+<li><strong>가독성 저하</strong>: 디버깅과 문제 해결이 복잡해짐.</li>
+<li><strong>유지보수 부담</strong>: 난독화된 이름 관리 및 매핑 필요.</li>
+</ol>
+<h3 id="결론"><strong>결론</strong><a hidden class="anchor" aria-hidden="true" href="#결론">#</a></h3>
+<p>보안이 중요한 경우 유용하지만, 디버깅이 어렵고 관리가 복잡해질 수 있어 상황에 맞게 사용해야 합니다.</p>
+<h1 id="obfuscated난독화된-이름을-사용">Obfuscated(난독화된) 이름을 사용<a hidden class="anchor" aria-hidden="true" href="#obfuscated난독화된-이름을-사용">#</a></h1>
+<p>Akka 프레임워크와 Logback을 사용하는 프로그램에서 <code>logback.xml</code>에 Obfuscated(난독화된) 이름을 사용하는 것은 특정 시나리오에서 유용하거나 부정적인 영향을 미칠 수 있습니다. 아래는 주요 <strong>장점</strong>과 <strong>단점</strong>을 정리한 내용입니다.</p>
+<hr>
+<h3 id="장점-1"><strong>장점</strong><a hidden class="anchor" aria-hidden="true" href="#장점-1">#</a></h3>
+<ol>
+<li>
+<p><strong>보안 강화</strong></p>
+<ul>
+<li>Obfuscated 이름은 로그 파일에서 민감한 정보를 숨기는 데 유용합니다. 예를 들어, 실제 클래스나 패키지 이름이 유출되면 시스템 구조를 노출할 수 있지만, 난독화된 이름은 이를 방지합니다.</li>
+<li>해커가 로그를 분석해 시스템의 동작 방식을 역추적하기 어렵게 만듭니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>로그 레벨 필터링 가능</strong></p>
+<ul>
+<li>특정 컨텍스트나 모듈에 대해 Obfuscated 이름을 사용하면 로그 필터링을 위한 규칙을 쉽게 만들 수 있습니다.</li>
+<li>예를 들어, 같은 형식의 난독화된 이름으로 여러 모듈을 그룹화할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>외부 의존성 숨김</strong></p>
+<ul>
+<li>외부 라이브러리 이름을 그대로 노출하지 않고 난독화하면 타사 라이브러리의 사용을 추적하기 어렵게 만들어 내부 구현 세부사항을 은닉할 수 있습니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="단점-1"><strong>단점</strong><a hidden class="anchor" aria-hidden="true" href="#단점-1">#</a></h3>
+<ol>
+<li>
+<p><strong>가독성 저하</strong></p>
+<ul>
+<li>난독화된 이름은 사람이 읽고 이해하기 어렵습니다. 이는 디버깅 및 문제 해결을 복잡하게 만들 수 있습니다.</li>
+<li>예를 들어, <code>com.example.MainService</code> 대신 <code>A1B2C3</code> 같은 이름이 나오면 어떤 코드가 로그를 남겼는지 알기 어렵습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>디버깅 시간 증가</strong></p>
+<ul>
+<li>난독화된 이름 때문에 로그 분석과 디버깅 과정에서 추가적인 매핑 작업이 필요할 수 있습니다. 특히 긴급한 문제를 해결할 때 방해가 될 가능성이 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>유지보수 부담</strong></p>
+<ul>
+<li>난독화된 이름을 사용할 경우, 이를 관리하고 이해하는 문서나 도구가 필요합니다. 시간이 지나면서 이런 문서가 업데이트되지 않으면 유지보수가 어렵습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>타사 도구와의 호환성 문제</strong></p>
+<ul>
+<li>일부 로그 분석 도구나 모니터링 도구에서 Obfuscated 이름을 처리하기 어렵거나 부정확한 결과를 낼 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>개발자 간 협업 어려움</strong></p>
+<ul>
+<li>팀원 간에 Obfuscated 이름의 의미를 공유해야 하므로 협업이 복잡해질 수 있습니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="추천-사용-시나리오"><strong>추천 사용 시나리오</strong><a hidden class="anchor" aria-hidden="true" href="#추천-사용-시나리오">#</a></h3>
+<ul>
+<li><strong>보안이 중요한 환경</strong>: 금융, 의료 등 민감한 데이터를 다루는 시스템에서는 Obfuscated 이름 사용이 유리합니다.</li>
+<li><strong>외부 로그 접근 가능성이 있는 경우</strong>: 예를 들어, 로그가 외부 클라이언트에 노출될 가능성이 있다면, 난독화된 이름으로 민감한 정보를 숨길 수 있습니다.</li>
+</ul>
+<hr>
+<h3 id="대안-및-최적화"><strong>대안 및 최적화</strong><a hidden class="anchor" aria-hidden="true" href="#대안-및-최적화">#</a></h3>
+<ul>
+<li><strong>맵핑 테이블 제공</strong>: 난독화된 이름과 원래 이름 간 매핑 테이블을 관리하여 디버깅에 활용할 수 있습니다.</li>
+<li><strong>환경별 설정</strong>: 개발 환경에서는 원래 이름을 사용하고, 프로덕션 환경에서만 난독화된 이름을 사용하도록 설정할 수 있습니다.</li>
+<li><strong>Contextual Logging</strong>: MDC (Mapped Diagnostic Context)를 활용해 추가적인 컨텍스트 정보를 로그에 포함시킴으로써 난독화된 이름의 단점을 완화할 수 있습니다.</li>
+</ul>
+<hr>
+<p>Obfuscated 이름 사용은 보안과 가독성 사이에서의 절충을 요구합니다. 로그 데이터를 보호해야 할 필요가 있다면 적절한 난독화 전략과 로그 관리 방식을 병행하는 것이 좋습니다.</p>
+<hr>
+<h1 id="credentialpassword-같은-민감한-정보를-자동으로-숨길-수-있는-방법법">credential,password 같은 민감한 정보를 자동으로 숨길 수 있는 방법법<a hidden class="anchor" aria-hidden="true" href="#credentialpassword-같은-민감한-정보를-자동으로-숨길-수-있는-방법법">#</a></h1>
+<p>Obfuscated 이름을 사용한다고 해서 <strong>credential</strong>, <strong>password</strong> 같은 민감한 정보를 자동으로 숨길 수 있는 것은 아닙니다. Obfuscation은 클래스나 로거 이름을 난독화하여 정보 유출 위험을 줄이는 데 도움을 줄 뿐이며, 로그 내용 자체를 제어하거나 보호하는 역할은 하지 않습니다.</p>
+<h3 id="민감한-정보를-숨기기-위한-방법">민감한 정보를 숨기기 위한 방법<a hidden class="anchor" aria-hidden="true" href="#민감한-정보를-숨기기-위한-방법">#</a></h3>
+<p>Obfuscated 이름과 함께 <strong>credential</strong>, <strong>password</strong> 같은 민감한 정보를 로그에서 숨기려면 추가적인 조치가 필요합니다.</p>
+<hr>
+<h3 id="1-로그-필터링-log-masking">1. <strong>로그 필터링</strong> (Log Masking)<a hidden class="anchor" aria-hidden="true" href="#1-로그-필터링-log-masking">#</a></h3>
+<ul>
+<li><strong>로그 필터를 설정</strong>하여 특정 키워드나 패턴(예: <code>password=</code>, <code>credential=</code>)을 감지하고 이를 마스킹(예: <code>*****</code>) 처리합니다.</li>
+<li><strong>Logback 마스킹 필터 예시</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;turboFilter</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;ch.qos.logback.classic.turbo.MarkerFilter&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;Marker&gt;</span>MASK<span style="color:#f92672">&lt;/Marker&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;OnMatch&gt;</span>ACCEPT<span style="color:#f92672">&lt;/OnMatch&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;OnMismatch&gt;</span>NEUTRAL<span style="color:#f92672">&lt;/OnMismatch&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/turboFilter&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;appender</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;CONSOLE&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;ch.qos.logback.core.ConsoleAppender&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;encoder&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;pattern&gt;</span>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n<span style="color:#f92672">&lt;/pattern&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;replace&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;regex&gt;</span>(password=)([^<span style="color:#960050;background-color:#1e0010">&amp;</span>\s]*)<span style="color:#f92672">&lt;/regex&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;replacement&gt;</span>$1*****<span style="color:#f92672">&lt;/replacement&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/replace&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/encoder&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/appender&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="2-mdc-mapped-diagnostic-context-활용">2. <strong>MDC (Mapped Diagnostic Context) 활용</strong><a hidden class="anchor" aria-hidden="true" href="#2-mdc-mapped-diagnostic-context-활용">#</a></h3>
+<ul>
+<li>민감한 데이터를 로그 메시지에서 제외하고, 추가적인 정보를 MDC를 통해 컨텍스트로 전달합니다. 필요한 경우에만 로그 기록을 남기도록 제어합니다.</li>
+<li><strong>예시 코드</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>MDC.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;userId&#34;</span>, <span style="color:#e6db74">&#34;12345&#34;</span>);
+</span></span><span style="display:flex;"><span>log.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;Processing request for user.&#34;</span>);
+</span></span><span style="display:flex;"><span>MDC.<span style="color:#a6e22e">clear</span>();  <span style="color:#75715e">// 로그에 민감 정보가 남지 않도록 클리어</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="3-보안-프레임워크와-통합">3. <strong>보안 프레임워크와 통합</strong><a hidden class="anchor" aria-hidden="true" href="#3-보안-프레임워크와-통합">#</a></h3>
+<ul>
+<li>보안 관련 라이브러리(예: Spring Security)나 Akka의 설정을 통해 로그에 민감한 정보가 포함되지 않도록 제어합니다.</li>
+<li>Spring Boot와 같은 프레임워크에서는 <code>logging.level.*</code>을 조정해 민감한 데이터를 숨길 수 있습니다.</li>
+</ul>
+<hr>
+<h3 id="4-전역-필터링">4. <strong>전역 필터링</strong><a hidden class="anchor" aria-hidden="true" href="#4-전역-필터링">#</a></h3>
+<ul>
+<li>Akka에서는 전역적으로 로그 메시지를 제어하는 설정을 통해 민감 정보를 제거할 수 있습니다.</li>
+<li><strong>Akka에서 전역 로깅 필터 설정</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> akka.event.slf4j.SLF4JLoggingFilter
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> config <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ConfigFactory</span><span style="color:#f92672">.</span>parseString<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  akka.loggers = [&#34;akka.event.slf4j.Slf4jLogger&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  akka.logging-filter = &#34;com.example.CustomLoggingFilter&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomLoggingFilter</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">SLF4JLoggingFilter</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> isErrorEnabled<span style="color:#f92672">(</span>logSource<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> logClass<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Class</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">],</span> message<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Any</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 메시지에서 민감한 정보를 필터링하거나 스킵
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span>isErrorEnabled<span style="color:#f92672">(</span>logSource<span style="color:#f92672">,</span> logClass<span style="color:#f92672">,</span> message<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="5-로그-레벨-및-로거-이름-관리">5. <strong>로그 레벨 및 로거 이름 관리</strong><a hidden class="anchor" aria-hidden="true" href="#5-로그-레벨-및-로거-이름-관리">#</a></h3>
+<ul>
+<li>
+<p>Obfuscated 이름을 사용하는 경우, 로그 레벨을 낮추거나 특정 이름만 로깅하도록 설정해 민감한 데이터가 기록될 가능성을 줄일 수 있습니다.</p>
+</li>
+<li>
+<p><strong>Logback 예시</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;logger</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;com.example.SecretService&#34;</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;OFF&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="6-데이터-암호화">6. <strong>데이터 암호화</strong><a hidden class="anchor" aria-hidden="true" href="#6-데이터-암호화">#</a></h3>
+<ul>
+<li>민감한 정보를 반드시 로그에 포함해야 한다면, 이를 암호화한 후 기록하고 디코딩 가능한 주체만 접근하도록 설정할 수 있습니다.</li>
+</ul>
+<hr>
+<h3 id="결론-1">결론<a hidden class="anchor" aria-hidden="true" href="#결론-1">#</a></h3>
+<h2 id="logback이나-akka-설정에서-로그-필터링-mdc-활용-보안-프레임워크-통합-등의-방법을-통해-민감-정보를-효과적으로-숨기는-것이-좋습니다">Obfuscated 이름은 클래스나 로거 이름을 숨기는 데 유용하지만, <strong>로그의 민감 정보 보호</strong>는 별도의 전략이 필요합니다.<br>
+Logback이나 Akka 설정에서 <strong>로그 필터링</strong>, <strong>MDC 활용</strong>, <strong>보안 프레임워크 통합</strong> 등의 방법을 통해 민감 정보를 효과적으로 숨기는 것이 좋습니다.</h2>
+<h1 id="orgasynchttpclient">org.asynchttpclient<a hidden class="anchor" aria-hidden="true" href="#orgasynchttpclient">#</a></h1>
+<p>Here’s a cleaned-up version of your request with <strong>&ldquo;they&rdquo;</strong> replaced by <strong>&ldquo;you&rdquo;</strong> and the sentences polished for clarity:</p>
+<hr>
+<p>Instead of setting debug logging at the global level, which can be quite noisy, please configure trace logging for the relevant logger. For this instance, use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;logger</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;org.asynchttpclient&#34;</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;TRACE&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>(Note: This is not the obfuscated version, so ensure you remove any sensitive tokens from the log before attaching it to a ticket.)</p>
+<p>I’m unable to reproduce this issue. I created 50 Work Items using the auto-create functionality, and they were all successfully created and associated with the relevant Findings as expected. How many Sonatype Findings matched the filter criteria in your project? From the provided screenshots, it seems like there were 39. I was able to create 50 Work Items without any errors.</p>
+<p>If the Work Items are not associated with the relevant Findings in SRM as expected, SRM might not have received a response from the AZDO instance containing the Work Items&rsquo; details. This issue seems specific to your AZDO instance or project. There are some <code>codedx.props</code> settings you can adjust to manage the Issue Tracker behavior:</p>
+<ul>
+<li>
+<p><code>issue-tracker.enable-automatic-refresh</code> [default: true]<br>
+If set to <code>false</code>, automatic syncing with the issue tracker will be disabled.</p>
+</li>
+<li>
+<p><code>azure-issue-limit</code> [default: 200]<br>
+Specifies the maximum number of Work Items to query at a time for certain endpoints. The maximum value is 200.</p>
+</li>
+<li>
+<p><code>azure.concurrency-limit</code> [default: 3]<br>
+Defines how many concurrent processes the HttpClient can run. If the TSTU limit is frequently reached, try setting this to 1.</p>
+</li>
+</ul>
+<p>Reverting the global debug logging setting and reproducing the issue with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;logger</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;org.asynchttpclient&#34;</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;TRACE&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>should help clarify the behavior. Additionally, you might want to test by lowering <code>azure.concurrency-limit</code> to 1 in <code>codedx.props</code>.</p>
+<hr>
+<p>Let me know if you&rsquo;d like further refinements!</p>
+<hr>
+<h1 id="orgasynchttpclient-란">org.asynchttpclient 란<a hidden class="anchor" aria-hidden="true" href="#orgasynchttpclient-란">#</a></h1>
+<p><code>org.asynchttpclient</code>는 Java 기반의 <strong>비동기 HTTP 클라이언트 라이브러리</strong>인 <strong>Async Http Client</strong>의 주요 패키지입니다. 이 라이브러리는 고성능 비동기 HTTP 요청 및 응답 처리를 지원하며, REST API 호출, 파일 업로드/다운로드, 스트리밍 같은 작업에 적합합니다.</p>
+<hr>
+<h3 id="주요-특징"><strong>주요 특징</strong><a hidden class="anchor" aria-hidden="true" href="#주요-특징">#</a></h3>
+<ol>
+<li>
+<p><strong>비동기 처리</strong></p>
+<ul>
+<li>비동기 방식으로 HTTP 요청을 처리하여, 응답을 기다리는 동안 다른 작업을 수행할 수 있습니다.</li>
+<li>성능과 응답 속도가 중요한 애플리케이션에 유용합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>고성능</strong></p>
+<ul>
+<li>Non-blocking I/O(NIO) 기반으로 설계되어 다수의 요청을 동시에 처리할 수 있습니다.</li>
+<li>Netty를 기본 I/O 처리 엔진으로 사용하여 효율적인 리소스 관리를 제공합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>HTTP/1.1 및 HTTP/2 지원</strong></p>
+<ul>
+<li>최신 HTTP 프로토콜을 지원하여 다양한 요구사항에 대응할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>플러그인 가능 구조</strong></p>
+<ul>
+<li>SSL/TLS, 프록시, 인증, 쿠키 관리 등을 쉽게 설정하고 확장할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>스트리밍 및 파일 업로드/다운로드 지원</strong></p>
+<ul>
+<li>대규모 데이터 스트리밍 및 파일 처리에 적합한 API 제공.</li>
+</ul>
+</li>
+<li>
+<p><strong>유연한 설정</strong></p>
+<ul>
+<li>타임아웃, 최대 연결 수, 연결 풀, 프로토콜 등 다양한 설정을 지원.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="주요-클래스-및-인터페이스"><strong>주요 클래스 및 인터페이스</strong><a hidden class="anchor" aria-hidden="true" href="#주요-클래스-및-인터페이스">#</a></h3>
+<ol>
+<li>
+<p><strong><code>AsyncHttpClient</code></strong></p>
+<ul>
+<li>HTTP 요청을 생성하고 실행하는 주요 인터페이스.</li>
+<li>비동기 요청 처리를 위해 <code>CompletableFuture</code> 또는 <code>ListenableFuture</code>를 반환합니다.</li>
+<li>예제:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> (AsyncHttpClient client <span style="color:#f92672">=</span> Dsl.<span style="color:#a6e22e">asyncHttpClient</span>()) {
+</span></span><span style="display:flex;"><span>    client.<span style="color:#a6e22e">prepareGet</span>(<span style="color:#e6db74">&#34;https://example.com&#34;</span>)
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">execute</span>()
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">toCompletableFuture</span>()
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">thenAccept</span>(response <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>              System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(response.<span style="color:#a6e22e">getResponseBody</span>());
+</span></span><span style="display:flex;"><span>          });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong><code>Request</code> 및 <code>RequestBuilder</code></strong></p>
+<ul>
+<li>HTTP 요청을 생성하고 설정하는 클래스.</li>
+<li>다양한 옵션(헤더, 쿼리 파라미터, 바디 등)을 유연하게 설정 가능.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>Response</code></strong></p>
+<ul>
+<li>HTTP 응답 데이터를 캡슐화하는 클래스.</li>
+<li>상태 코드, 헤더, 본문 등 응답 데이터를 쉽게 읽을 수 있음.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>BoundRequestBuilder</code></strong></p>
+<ul>
+<li>HTTP 요청을 빌드하고 실행할 수 있는 유연한 빌더.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>ListenableFuture</code> 및 <code>CompletableFuture</code></strong></p>
+<ul>
+<li>비동기 요청 실행 결과를 비동기적으로 처리할 수 있도록 제공.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="활용-예"><strong>활용 예</strong><a hidden class="anchor" aria-hidden="true" href="#활용-예">#</a></h3>
+<ol>
+<li>
+<p><strong>GET 요청</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> (AsyncHttpClient client <span style="color:#f92672">=</span> Dsl.<span style="color:#a6e22e">asyncHttpClient</span>()) {
+</span></span><span style="display:flex;"><span>    client.<span style="color:#a6e22e">prepareGet</span>(<span style="color:#e6db74">&#34;https://jsonplaceholder.typicode.com/posts/1&#34;</span>)
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">execute</span>()
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">toCompletableFuture</span>()
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">thenAccept</span>(response <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>              System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Response: &#34;</span> <span style="color:#f92672">+</span> response.<span style="color:#a6e22e">getResponseBody</span>());
+</span></span><span style="display:flex;"><span>          })
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">join</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>POST 요청</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> (AsyncHttpClient client <span style="color:#f92672">=</span> Dsl.<span style="color:#a6e22e">asyncHttpClient</span>()) {
+</span></span><span style="display:flex;"><span>    String json <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;{\&#34;name\&#34;:\&#34;John\&#34;, \&#34;age\&#34;:30}&#34;</span>;
+</span></span><span style="display:flex;"><span>    client.<span style="color:#a6e22e">preparePost</span>(<span style="color:#e6db74">&#34;https://jsonplaceholder.typicode.com/posts&#34;</span>)
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">setBody</span>(json)
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">setHeader</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;application/json&#34;</span>)
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">execute</span>()
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">toCompletableFuture</span>()
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">thenAccept</span>(response <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>              System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Response: &#34;</span> <span style="color:#f92672">+</span> response.<span style="color:#a6e22e">getResponseBody</span>());
+</span></span><span style="display:flex;"><span>          })
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">join</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h3 id="장점-2"><strong>장점</strong><a hidden class="anchor" aria-hidden="true" href="#장점-2">#</a></h3>
+<ul>
+<li>고성능 비동기 처리로 대규모 요청을 효율적으로 처리.</li>
+<li>Netty 기반의 Non-blocking I/O로 리소스 사용 최소화.</li>
+<li>HTTP/2 지원으로 최신 웹 표준에 적합.</li>
+</ul>
+<hr>
+<h3 id="단점-2"><strong>단점</strong><a hidden class="anchor" aria-hidden="true" href="#단점-2">#</a></h3>
+<ul>
+<li>비동기 프로그래밍에 익숙하지 않은 경우 학습 곡선이 있을 수 있음.</li>
+<li>추가적인 라이브러리(Netty, Jackson 등)와의 통합이 필요할 수 있음.</li>
+</ul>
+<hr>
+<p><code>org.asynchttpclient</code>는 특히 성능과 확장성이 중요한 애플리케이션에서 널리 사용됩니다. RESTful API 호출, 데이터 스트리밍, 실시간 통신 등에 적합하며, Akka 프레임워크와도 잘 통합됩니다.</p>
+<hr>
+<h1 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h1>
+<hr>
+<h1 id="heading-1"><a hidden class="anchor" aria-hidden="true" href="#heading-1">#</a></h1>
+<hr>
+<h1 id="heading-2"><a hidden class="anchor" aria-hidden="true" href="#heading-2">#</a></h1>
+<hr>
+<h1 id="heading-3"><a hidden class="anchor" aria-hidden="true" href="#heading-3">#</a></h1>
+<hr>
+<h1 id="heading-4"><a hidden class="anchor" aria-hidden="true" href="#heading-4">#</a></h1>
+<hr>
+<h1 id="heading-5"><a hidden class="anchor" aria-hidden="true" href="#heading-5">#</a></h1>
+<hr>
+<h1 id="heading-6"><a hidden class="anchor" aria-hidden="true" href="#heading-6">#</a></h1>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Creator on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/categories/creator/</link>
+    <description>Recent content in Creator on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 14 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/categories/creator/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github Pages with Hugo</title>
+      <link>http://localhost:1313/portfolio/posts/creator/github-page-with-hugo/</link>
+      <pubDate>Fri, 14 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/creator/github-page-with-hugo/</guid>
+      <description>&lt;h1 id=&#34;github-pages&#34;&gt;Github Pages&lt;/h1&gt;
+&lt;p&gt;GitHub Pages는 GitHub 저장소를 사용하여 정적 웹사이트를 쉽게 배포할 수 있는 기능입니다.&lt;br&gt;
+다음은 &lt;strong&gt;GitHub Pages를 설정하고 사용하는 방법&lt;/strong&gt;을 단계별로 설명합니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-github-pages-활성화하기&#34;&gt;&lt;strong&gt;1. GitHub Pages 활성화하기&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;1-github-저장소-생성&#34;&gt;&lt;strong&gt;(1) GitHub 저장소 생성&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;GitHub에 로그인하고 &lt;strong&gt;새로운 저장소(New Repository)&lt;/strong&gt; 생성&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;저장소 이름을 설정 (예: &lt;code&gt;my-blog&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Public&lt;/code&gt;(공개) 저장소로 설정해야 GitHub Pages에서 무료로 사용할 수 있음&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;README.md&lt;/code&gt; 파일을 추가하는 것이 좋음&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;저장소 생성 후 &lt;code&gt;git clone&lt;/code&gt;으로 로컬에 다운로드&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/your-username/my-blog.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd my-blog
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-github-pages-활성화&#34;&gt;&lt;strong&gt;2. GitHub Pages 활성화&lt;/strong&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;GitHub 저장소로 이동&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Settings &amp;gt; Pages&lt;/strong&gt; 탭으로 이동&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Branch 선택&lt;/strong&gt;: &lt;code&gt;main&lt;/code&gt; 또는 &lt;code&gt;gh-pages&lt;/code&gt; 브랜치를 선택하여 배포할 수 있음&lt;/li&gt;
+&lt;li&gt;저장 후 몇 분 내로 GitHub Pages가 활성화됨&lt;/li&gt;
+&lt;li&gt;배포된 사이트 URL 확인 (&lt;code&gt;https://your-username.github.io/my-blog/&lt;/code&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-htmlcss-파일-추가하여-웹사이트-배포&#34;&gt;&lt;strong&gt;3. HTML/CSS 파일 추가하여 웹사이트 배포&lt;/strong&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;로컬 저장소에서 기본 웹페이지 생성:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;h1&amp;gt;Welcome to My GitHub Page&amp;lt;/h1&amp;gt;&amp;#34;&lt;/span&gt; &amp;gt; index.html
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;변경 사항을 커밋하고 푸시:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git add index.html
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git commit -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Add main page&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git push origin main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;GitHub Pages가 자동으로 &lt;code&gt;index.html&lt;/code&gt;을 인식하여 배포함&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-jekyll을-이용한-블로그-만들기&#34;&gt;&lt;strong&gt;4. Jekyll을 이용한 블로그 만들기&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;GitHub Pages는 Jekyll을 지원하므로, Jekyll을 활용하여 정적 블로그를 쉽게 만들 수 있음.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

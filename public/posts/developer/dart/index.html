@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Dart | RyanLabs</title>
+<meta name="keywords" content="Dart">
+<meta name="description" content="Dart 와 JavaScript 비교교
+Dart와 JavaScript 중 어떤 언어를 배우는 것이 더 좋은지는 Ryan의 목표와 개발하려는 서비스의 방향에 따라 다릅니다.
+✅ Dart를 배우는 것이 좋은 경우
+
+Flutter를 활용한 크로스 플랫폼 앱 개발
+
+Ryan이 모바일 앱 개발(특히 iOS &amp; Android) 을 목표로 한다면 Dart &#43; Flutter 조합이 유리합니다.
+하나의 코드베이스로 iOS, Android, 웹까지 개발 가능하여 유지보수 비용을 절감할 수 있습니다.
+
+
+안정적이고 타입 안정성이 중요한 경우
+
+Dart는 정적 타입을 제공하여 코드의 안정성이 높고, 유지보수가 쉬운 편입니다.
+JavaScript보다 더 안전한 프로그래밍이 가능합니다.
+
+
+Google 생태계에 관심이 있다면
+
+Dart는 Google이 적극적으로 지원하는 언어이므로, Google 관련 기술과 함께 사용하기 좋습니다.
+
+
+
+✅ JavaScript를 배우는 것이 좋은 경우
+
+웹 서비스 개발이 목표라면
+
+Ryan이 웹 기반 서비스(프론트엔드 &amp; 백엔드) 를 개발하려면 JavaScript가 훨씬 강력한 선택지입니다.
+React, Vue, Angular 등 다양한 웹 프레임워크를 활용할 수 있습니다.
+서버 개발도 Node.js 를 활용해 JavaScript로 가능하므로 전체 개발이 JavaScript로 통일됩니다.
+
+
+더 많은 오픈 소스 및 커뮤니티 지원을 원한다면
+
+JavaScript는 웹 개발의 표준이며, 가장 많은 라이브러리와 프레임워크가 존재합니다.
+Dart에 비해 커뮤니티가 훨씬 크며, 문제 해결이 빠릅니다.
+
+
+프론트엔드 개발자가 되고 싶다면
+
+JavaScript는 웹 브라우저에서 기본적으로 실행되는 언어이므로, 프론트엔드 개발자 를 목표로 한다면 필수입니다.
+
+
+
+⚖️ 결론: Ryan에게 적합한 선택
+
+웹 서비스를 중심으로 개발하려면? → JavaScript
+모바일 앱을 중심으로 개발하려면? → Dart &#43; Flutter
+웹과 모바일을 모두 고려한다면?
+
+웹이 더 중요하면 JavaScript
+모바일이 더 중요하면 Dart
+
+
+
+Ryan이 만들고 싶은 서비스가 웹 기반이라면 JavaScript가 더 적합할 가능성이 큽니다.
+어떤 서비스를 만들고 싶은지 더 구체적으로 이야기해주면 더 적합한 선택을 도와줄 수 있어요!">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/developer/dart/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/developer/dart/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Dart
+    </h1>
+    <div class="post-meta"><span title='2025-02-21 00:00:00 +0000 UTC'>2월 21, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="dart-와-javascript-비교교">Dart 와 JavaScript 비교교<a hidden class="anchor" aria-hidden="true" href="#dart-와-javascript-비교교">#</a></h1>
+<p>Dart와 JavaScript 중 어떤 언어를 배우는 것이 더 좋은지는 <strong>Ryan의 목표와 개발하려는 서비스의 방향</strong>에 따라 다릅니다.</p>
+<h3 id="-dart를-배우는-것이-좋은-경우">✅ <strong>Dart를 배우는 것이 좋은 경우</strong><a hidden class="anchor" aria-hidden="true" href="#-dart를-배우는-것이-좋은-경우">#</a></h3>
+<ol>
+<li><strong>Flutter를 활용한 크로스 플랫폼 앱 개발</strong>
+<ul>
+<li>Ryan이 <strong>모바일 앱 개발(특히 iOS &amp; Android)</strong> 을 목표로 한다면 <strong>Dart + Flutter</strong> 조합이 유리합니다.</li>
+<li>하나의 코드베이스로 iOS, Android, 웹까지 개발 가능하여 유지보수 비용을 절감할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>안정적이고 타입 안정성이 중요한 경우</strong>
+<ul>
+<li>Dart는 정적 타입을 제공하여 코드의 안정성이 높고, 유지보수가 쉬운 편입니다.</li>
+<li>JavaScript보다 더 안전한 프로그래밍이 가능합니다.</li>
+</ul>
+</li>
+<li><strong>Google 생태계에 관심이 있다면</strong>
+<ul>
+<li>Dart는 Google이 적극적으로 지원하는 언어이므로, Google 관련 기술과 함께 사용하기 좋습니다.</li>
+</ul>
+</li>
+</ol>
+<h3 id="-javascript를-배우는-것이-좋은-경우">✅ <strong>JavaScript를 배우는 것이 좋은 경우</strong><a hidden class="anchor" aria-hidden="true" href="#-javascript를-배우는-것이-좋은-경우">#</a></h3>
+<ol>
+<li><strong>웹 서비스 개발이 목표라면</strong>
+<ul>
+<li>Ryan이 <strong>웹 기반 서비스(프론트엔드 &amp; 백엔드)</strong> 를 개발하려면 JavaScript가 훨씬 강력한 선택지입니다.</li>
+<li><strong>React, Vue, Angular</strong> 등 다양한 웹 프레임워크를 활용할 수 있습니다.</li>
+<li>서버 개발도 <strong>Node.js</strong> 를 활용해 JavaScript로 가능하므로 전체 개발이 JavaScript로 통일됩니다.</li>
+</ul>
+</li>
+<li><strong>더 많은 오픈 소스 및 커뮤니티 지원을 원한다면</strong>
+<ul>
+<li>JavaScript는 웹 개발의 표준이며, 가장 많은 라이브러리와 프레임워크가 존재합니다.</li>
+<li>Dart에 비해 커뮤니티가 훨씬 크며, 문제 해결이 빠릅니다.</li>
+</ul>
+</li>
+<li><strong>프론트엔드 개발자가 되고 싶다면</strong>
+<ul>
+<li>JavaScript는 웹 브라우저에서 기본적으로 실행되는 언어이므로, <strong>프론트엔드 개발자</strong> 를 목표로 한다면 필수입니다.</li>
+</ul>
+</li>
+</ol>
+<h3 id="-결론-ryan에게-적합한-선택">⚖️ <strong>결론: Ryan에게 적합한 선택</strong><a hidden class="anchor" aria-hidden="true" href="#-결론-ryan에게-적합한-선택">#</a></h3>
+<ul>
+<li><strong>웹 서비스를 중심으로 개발하려면?</strong> → <strong>JavaScript</strong></li>
+<li><strong>모바일 앱을 중심으로 개발하려면?</strong> → <strong>Dart + Flutter</strong></li>
+<li><strong>웹과 모바일을 모두 고려한다면?</strong>
+<ul>
+<li>웹이 더 중요하면 <strong>JavaScript</strong></li>
+<li>모바일이 더 중요하면 <strong>Dart</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>Ryan이 만들고 싶은 서비스가 웹 기반이라면 JavaScript가 더 적합할 가능성이 큽니다.</strong><br>
+어떤 서비스를 만들고 싶은지 더 구체적으로 이야기해주면 더 적합한 선택을 도와줄 수 있어요!</p>
+<hr>
+<h1 id="dart-backend">Dart Backend<a hidden class="anchor" aria-hidden="true" href="#dart-backend">#</a></h1>
+<p>네, Dart 언어를 사용하여 크로스 플랫폼 앱뿐만 아니라 백엔드 애플리케이션도 개발할 수 있습니다. Dart는 서버 측 개발을 지원하며, 이를 위해 다양한 프레임워크와 라이브러리가 존재합니다.</p>
+<h3 id="dart를-활용한-백엔드-개발-프레임워크">Dart를 활용한 백엔드 개발 프레임워크<a hidden class="anchor" aria-hidden="true" href="#dart를-활용한-백엔드-개발-프레임워크">#</a></h3>
+<ol>
+<li>
+<p><strong>Shelf</strong></p>
+<ul>
+<li>Dart 팀에서 공식적으로 제공하는 라이브러리로, 웹 서버 및 미들웨어 구성을 위한 모듈식 도구입니다.</li>
+<li>가벼우며, 필요한 기능을 조합하여 사용할 수 있습니다.</li>
+<li>Pub.dev의 백엔드가 Shelf를 기반으로 구축되었습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dart Frog</strong></p>
+<ul>
+<li>Very Good Ventures에서 개발한 프레임워크로, Shelf 위에 구축되어 더 간단하고 빠른 개발을 지원합니다.</li>
+<li>파일 시스템 기반의 라우팅을 제공하여 직관적인 엔드포인트 구성이 가능합니다.</li>
+<li>핫 리로드 기능을 통해 개발 생산성을 높일 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Serverpod</strong></p>
+<ul>
+<li>Flutter 커뮤니티를 위해 Dart로 작성된 오픈 소스 스케일러블 앱 서버입니다.</li>
+<li>PostgreSQL 및 Redis와의 통합을 기본으로 제공하며, 코드 생성 도구를 통해 개발을 용이하게 합니다.</li>
+<li>프론트엔드와 백엔드 간의 원활한 통신을 위한 클라이언트 패키지도 함께 제공합니다.</li>
+</ul>
+</li>
+</ol>
+<p>Dart를 사용하여 백엔드 애플리케이션을 개발하면, 프론트엔드(Flutter)와 백엔드 모두 동일한 언어로 작성되어 코드 공유와 유지보수가 용이해집니다. 또한, 언어 간 전환 없이 일관된 개발 환경을 유지할 수 있어 생산성 향상에 도움이 됩니다.</p>
+<p>다만, Dart 기반의 백엔드 생태계는 JavaScript(Node.js)나 Java(Spring) 등 다른 언어에 비해 상대적으로 작을 수 있습니다. 따라서 프로젝트의 요구사항과 팀의 역량을 고려하여 적합한 기술 스택을 선택하는 것이 중요합니다.</p>
+<hr>
+<h1 id="dart의-백엔드-프레임워크인-serverpod-shelf-dart-frog와-javascript의-expressjs-nestjs-그리고-java의-spring-boot를-비교">Dart의 백엔드 프레임워크인 <strong>Serverpod</strong>, <strong>Shelf</strong>, <strong>Dart Frog</strong>와 JavaScript의 <strong>Express.js</strong>, <strong>NestJS</strong>, 그리고 Java의 <strong>Spring Boot</strong>를 비교<a hidden class="anchor" aria-hidden="true" href="#dart의-백엔드-프레임워크인-serverpod-shelf-dart-frog와-javascript의-expressjs-nestjs-그리고-java의-spring-boot를-비교">#</a></h1>
+<p>Dart의 백엔드 프레임워크인 <strong>Serverpod</strong>, <strong>Shelf</strong>, <strong>Dart Frog</strong>와 JavaScript의 <strong>Express.js</strong>, <strong>NestJS</strong>, 그리고 Java의 <strong>Spring Boot</strong>를 비교해보겠습니다.</p>
+<h3 id="1-serverpod-dart">1. <strong>Serverpod (Dart)</strong><a hidden class="anchor" aria-hidden="true" href="#1-serverpod-dart">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>: <strong>Serverpod</strong>는 Flutter와의 통합을 염두에 두고 설계된 풀스택 백엔드 프레임워크입니다. PostgreSQL 데이터베이스와의 연동, 코드 생성, 로깅, 캐싱, ORM, 데이터 스트리밍, 작업 스케줄링 등 다양한 기능을 제공합니다. 또한, VS Code 확장을 통해 개발 편의성을 높였습니다.</p>
+</li>
+<li>
+<p><strong>비교</strong>: Serverpod는 <strong>Spring Boot</strong>와 유사하게 많은 기능을 내장하고 있어, 빠른 개발과 생산성 향상에 도움이 됩니다. 다만, Dart 생태계의 특성상 Java나 JavaScript에 비해 커뮤니티와 라이브러리 지원이 제한적일 수 있습니다.</p>
+</li>
+</ul>
+<h3 id="2-shelf-dart">2. <strong>Shelf (Dart)</strong><a hidden class="anchor" aria-hidden="true" href="#2-shelf-dart">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>: <strong>Shelf</strong>는 모듈식이고 유연한 웹 프레임워크로, 미들웨어와 핸들러를 조합하여 서버를 구성합니다. 경량 프레임워크로서 필요한 기능을 플러그인 형태로 추가할 수 있습니다.</p>
+</li>
+<li>
+<p><strong>비교</strong>: <strong>Express.js</strong>와 유사하게 최소한의 구조를 제공하며, 개발자가 필요한 기능을 직접 구현하거나 추가하도록 설계되었습니다. 그러나 JavaScript의 방대한 패키지 생태계와 비교하면 Dart의 패키지 지원은 상대적으로 제한적일 수 있습니다.</p>
+</li>
+</ul>
+<h3 id="3-dart-frog-dart">3. <strong>Dart Frog (Dart)</strong><a hidden class="anchor" aria-hidden="true" href="#3-dart-frog-dart">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>: <strong>Dart Frog</strong>는 <strong>Shelf</strong>를 기반으로 한 프레임워크로, 파일 시스템 기반의 라우팅, 의존성 주입, 핫 리로드, Docker 지원 등의 기능을 제공합니다. <strong>Very Good Ventures</strong>에서 개발하였으며, 개발 생산성을 높이기 위한 도구들을 포함하고 있습니다.</p>
+</li>
+<li>
+<p><strong>비교</strong>: <strong>NestJS</strong>와 같이 구조화된 개발을 지원하며, 개발 편의성을 위한 다양한 기능을 내장하고 있습니다. 다만, <strong>NestJS</strong>는 TypeScript를 기반으로 하며, 방대한 커뮤니티와 패키지 지원을 받는 반면, <strong>Dart Frog</strong>는 Dart 생태계의 제한된 지원을 받습니다.</p>
+</li>
+</ul>
+<h3 id="4-expressjs-javascript">4. <strong>Express.js (JavaScript)</strong><a hidden class="anchor" aria-hidden="true" href="#4-expressjs-javascript">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>: <strong>Express.js</strong>는 Node.js를 위한 경량 웹 프레임워크로, 단순하고 유연한 구조를 제공합니다. 미들웨어를 통해 기능을 확장할 수 있으며, 방대한 npm 패키지 생태계를 활용할 수 있습니다.</p>
+</li>
+<li>
+<p><strong>비교</strong>: <strong>Shelf</strong>와 유사한 철학을 가지고 있으나, JavaScript의 널리 사용되는 언어적 특성과 npm의 방대한 패키지로 인해 더 풍부한 생태계를 자랑합니다.</p>
+</li>
+</ul>
+<h3 id="5-nestjs-javascript">5. <strong>NestJS (JavaScript)</strong><a hidden class="anchor" aria-hidden="true" href="#5-nestjs-javascript">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>: <strong>NestJS</strong>는 TypeScript를 기반으로 한 서버 측 애플리케이션 프레임워크로, 모듈화된 구조와 의존성 주입, 데코레이터 등을 활용하여 확장성과 유지보수성을 높였습니다.</p>
+</li>
+<li>
+<p><strong>비교</strong>: <strong>Dart Frog</strong>와 유사하게 구조화된 개발을 지원하지만, <strong>NestJS</strong>는 더 성숙한 생태계와 커뮤니티 지원을 받습니다.</p>
+</li>
+</ul>
+<h3 id="6-spring-boot-java">6. <strong>Spring Boot (Java)</strong><a hidden class="anchor" aria-hidden="true" href="#6-spring-boot-java">#</a></h3>
+<ul>
+<li>
+<p><strong>특징</strong>: <strong>Spring Boot</strong>는 Java 기반의 프레임워크로, 복잡한 설정 없이 빠르게 프로덕션급 애플리케이션을 구축할 수 있도록 도와줍니다. 자동 구성, 내장 서버, 다양한 스타터 패키지를 통해 개발 효율성을 높입니다.</p>
+</li>
+<li>
+<p><strong>비교</strong>: <strong>Serverpod</strong>와 마찬가지로 많은 기능을 내장하고 있으며, 특히 엔터프라이즈급 애플리케이션 개발에 널리 사용됩니다. Java의 오랜 역사와 방대한 라이브러리 지원으로 안정성과 신뢰성이 높습니다.</p>
+</li>
+</ul>
+<h3 id="결론">결론<a hidden class="anchor" aria-hidden="true" href="#결론">#</a></h3>
+<ul>
+<li>
+<p><strong>생태계 및 커뮤니티 지원</strong>: JavaScript와 Java는 오랜 기간 동안 방대한 커뮤니티와 라이브러리 생태계를 구축해왔습니다. Dart는 상대적으로 새로운 언어로, 특히 서버 사이드 개발에서는 생태계와 커뮤니티 지원이 제한적일 수 있습니다.</p>
+</li>
+<li>
+<p><strong>개발 생산성</strong>: Dart 기반 프레임워크는 Flutter와의 통합을 통해 프론트엔드와 백엔드를 동일한 언어로 개발할 수 있어 생산성을 높일 수 있습니다. 그러나 특정 기능이나 라이브러리가 부족할 수 있으므로, 프로젝트의 요구사항에 따라 적합한 프레임워크를 선택하는 것이 중요합니다.</p>
+</li>
+<li>
+<p><strong>성숙도 및 안정성</strong>: Java의 <strong>Spring Boot</strong>는 엔터프라이즈급 솔루션으로 검증되어 왔으며, <strong>Express.js</strong>와 <strong>NestJS</strong>도 많은 프로젝트에서 사용되어 안정성이 높습니다. Dart의 프레임워크는 빠르게 발전하고 있으나, 아직 성숙도 면에서 차이가 있을 수 있습니다.</p>
+</li>
+</ul>
+<p>프로젝트의 규모, 팀의 역량, 요구되는 기능 등을 고려하여 적합한 프레임워크를 선택하시길 권장합니다.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/portfolio/tags/dart/">Dart</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

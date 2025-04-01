@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
+<<<<<<< HEAD
     <title>테스트 on Ryan&#39;s Portfolio</title>
     <link>http://localhost:1313/portfolio/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8/</link>
     <description>Recent content in 테스트 on Ryan&#39;s Portfolio</description>
     <generator>Hugo -- 0.142.0</generator>
     <language>ko</language>
     <lastBuildDate>Sun, 24 Mar 2024 00:00:00 +0000</lastBuildDate>
+=======
+    <title>테스트 on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8/</link>
+    <description>Recent content in 테스트 on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Tue, 01 Apr 2025 00:00:00 +0000</lastBuildDate>
+>>>>>>> c954130 (update)
     <atom:link href="http://localhost:1313/portfolio/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>샘플 포스트 1</title>
       <link>http://localhost:1313/portfolio/posts/sample-post-1/</link>
+<<<<<<< HEAD
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
+=======
+      <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+>>>>>>> c954130 (update)
       <guid>http://localhost:1313/portfolio/posts/sample-post-1/</guid>
       <description>&lt;p&gt;이것은 요약입니다.&lt;/p&gt;</description>
     </item>
     <item>
       <title>샘플 포스트 2</title>
       <link>http://localhost:1313/portfolio/posts/sample-post-2/</link>
+<<<<<<< HEAD
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
+=======
+      <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+>>>>>>> c954130 (update)
       <guid>http://localhost:1313/portfolio/posts/sample-post-2/</guid>
       <description>&lt;p&gt;이것은 샘플 포스트 2의 본문입니다.&lt;br&gt;
 Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
@@ -26,7 +43,11 @@ Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt
     <item>
       <title>샘플 포스트 3</title>
       <link>http://localhost:1313/portfolio/posts/sample-post-3/</link>
+<<<<<<< HEAD
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
+=======
+      <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+>>>>>>> c954130 (update)
       <guid>http://localhost:1313/portfolio/posts/sample-post-3/</guid>
       <description>&lt;p&gt;이것은 샘플 포스트 3의 본문입니다.&lt;br&gt;
 Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
@@ -34,7 +55,11 @@ Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt
     <item>
       <title>샘플 포스트 4</title>
       <link>http://localhost:1313/portfolio/posts/sample-post-4/</link>
+<<<<<<< HEAD
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
+=======
+      <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+>>>>>>> c954130 (update)
       <guid>http://localhost:1313/portfolio/posts/sample-post-4/</guid>
       <description>&lt;p&gt;이것은 샘플 포스트 4의 본문입니다.&lt;br&gt;
 Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
@@ -42,7 +67,11 @@ Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt
     <item>
       <title>샘플 포스트 5</title>
       <link>http://localhost:1313/portfolio/posts/sample-post-5/</link>
+<<<<<<< HEAD
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
+=======
+      <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+>>>>>>> c954130 (update)
       <guid>http://localhost:1313/portfolio/posts/sample-post-5/</guid>
       <description>&lt;p&gt;이것은 샘플 포스트 5의 본문입니다.&lt;br&gt;
 Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>

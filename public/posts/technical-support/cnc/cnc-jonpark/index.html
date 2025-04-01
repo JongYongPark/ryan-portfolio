@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="find out the items of vpc_private_subnets
+입력
+ cluster_name = &#34;cnc-test-cluster&#34;
+cluster_region = &#34;ap-northeast-2&#34;
+vpc_cidr_block = &#34;10.0.0.0/16&#34;
+vpc_id = &#34;vpc-0ee6ce9b74a82d087&#34;
+vpc_nat_public_ips = tolist([
+  &#34;3.35.204.211&#34;,
+])
+vpc_private_subnets = [
+  &#34;subnet-0329309bce8fe3cd7&#34;,
+  &#34;subnet-0a3426c348f958ac0&#34;,
+]
+vpc_public_subnets = [
+  &#34;subnet-0a042f89e148e823e&#34;,
+  &#34;subnet-0035ab195d22e6cd0&#34;,
+]
+You can use the following sed command to find out the items of vpc_private_subnets:
+sed -n &#39;s/.*vpc_private_subnets = \[\(.*\)\].*/\1/p&#39; &lt;filename&gt;
+Replace &lt;filename&gt; with the name of the file containing the above configuration. The sed command will extract the contents of vpc_private_subnets and print them out.
+Here&rsquo;s an explanation of the command:">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/posts/technical-support/cnc/cnc-jonpark/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/posts/technical-support/cnc/cnc-jonpark/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="find-out-the-items-of-vpc_private_subnets">find out the items of vpc_private_subnets<a hidden class="anchor" aria-hidden="true" href="#find-out-the-items-of-vpc_private_subnets">#</a></h1>
+<h2 id="입력">입력<a hidden class="anchor" aria-hidden="true" href="#입력">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> cluster_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cnc-test-cluster&#34;</span>
+</span></span><span style="display:flex;"><span>cluster_region <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ap-northeast-2&#34;</span>
+</span></span><span style="display:flex;"><span>vpc_cidr_block <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.0.0.0/16&#34;</span>
+</span></span><span style="display:flex;"><span>vpc_id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vpc-0ee6ce9b74a82d087&#34;</span>
+</span></span><span style="display:flex;"><span>vpc_nat_public_ips <span style="color:#f92672">=</span> tolist<span style="color:#f92672">([</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;3.35.204.211&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>vpc_private_subnets <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;subnet-0329309bce8fe3cd7&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;subnet-0a3426c348f958ac0&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>vpc_public_subnets <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;subnet-0a042f89e148e823e&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;subnet-0035ab195d22e6cd0&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>You can use the following <code>sed</code> command to find out the items of <code>vpc_private_subnets</code>:</p>
+<pre tabindex="0"><code>sed -n &#39;s/.*vpc_private_subnets = \[\(.*\)\].*/\1/p&#39; &lt;filename&gt;
+</code></pre><p>Replace <code>&lt;filename&gt;</code> with the name of the file containing the above configuration. The <code>sed</code> command will extract the contents of <code>vpc_private_subnets</code> and print them out.</p>
+<p>Here&rsquo;s an explanation of the command:</p>
+<ul>
+<li><code>-n</code> option suppresses the default output, so only the pattern that matches will be printed.</li>
+<li><code>s</code> command is used for substitution in <code>sed</code>.</li>
+<li><code>.*vpc_private_subnets = \[</code> matches any characters followed by <code>vpc_private_subnets = [</code>.</li>
+<li><code>\(.*\)</code> matches any characters and saves it as a group. The group contents can be referred to as <code>\1</code> in the replacement text.</li>
+<li><code>\]</code> matches the closing square bracket.</li>
+<li><code>.*</code> matches any remaining characters.</li>
+<li><code>/p</code> at the end of the command prints the matched pattern.</li>
+</ul>
+<p>The output will be:</p>
+<pre tabindex="0"><code>&#34;subnet-0329309bce8fe3cd7&#34;,
+&#34;subnet-0a3426c348f958ac0&#34;,
+</code></pre><hr>
+<h1 id="how-to-change-from">how to change from<a hidden class="anchor" aria-hidden="true" href="#how-to-change-from">#</a></h1>
+<p>vpc_nat_public_ips</p>
+<h2 id="input">input<a hidden class="anchor" aria-hidden="true" href="#input">#</a></h2>
+<p>vpc_nat_public_ips = tolist([
+&ldquo;3.35.204.211&rdquo;,
+])
+to
+vpc_nat_public_ips = [
+&ldquo;3.35.204.211&rdquo;,
+]</p>
+<h2 id="response">response<a hidden class="anchor" aria-hidden="true" href="#response">#</a></h2>
+<p>You can use the <code>sed</code> command in Linux to replace the <code>vpc_nat_public_ips</code> variable in your file from a <code>tolist()</code> function to a list directly. You can use the following command:</p>
+<pre tabindex="0"><code>sed -i &#39;s/vpc_nat_public_ips = tolist(\[\(\S*\)\])/vpc_nat_public_ips = [\1]/g&#39; your_file.py
+</code></pre><p>This command will replace the <code>vpc_nat_public_ips</code> variable with a list directly by removing the <code>tolist()</code> function and its parentheses. It uses a regular expression to capture the IP address within the <code>tolist()</code> function and replace it with the same IP address enclosed in square brackets. The <code>-i</code> option modifies the file in-place.</p>
+<p>Note that this command assumes that the variable is defined in a Python file and that the IP address is the only element in the list. If your situation is different, you may need to adjust the regular expression accordingly.</p>
+<hr>
+<p>You can use the following <code>sed</code> command to change from the <code>tolist()</code> function to a list in the given format:</p>
+<pre tabindex="0"><code>sed -i &#39;s/vpc_nat_public_ips = tolist(\[\([^]]*\)\])/vpc_nat_public_ips = [\1]/g&#39; your_file.py
+</code></pre><p>This command uses the <code>-i</code> option to modify the file in place. It searches for the <code>vpc_nat_public_ips</code> variable assignment line that contains the <code>tolist()</code> function call, captures the contents of the square brackets using a regular expression, and replaces the entire line with the same variable assignment line but with the <code>tolist()</code> function call removed and the contents of the square brackets enclosed in square brackets again.</p>
+<p>Note that this command assumes that the <code>vpc_nat_public_ips</code> variable is assigned only once in the file and that the IP address is the only element in the list. If there are multiple occurrences or if there are other elements in the list, you may need to adjust the regular expression accordingly.</p>
+<hr>
+<h1 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h1>
+<hr>
+<h1 id="heading-1"><a hidden class="anchor" aria-hidden="true" href="#heading-1">#</a></h1>
+<hr>
+<h1 id="heading-2"><a hidden class="anchor" aria-hidden="true" href="#heading-2">#</a></h1>
+<hr>
+<h1 id="heading-3"><a hidden class="anchor" aria-hidden="true" href="#heading-3">#</a></h1>
+<hr>
+<h1 id="heading-4"><a hidden class="anchor" aria-hidden="true" href="#heading-4">#</a></h1>
+<hr>
+<h1 id="heading-5"><a hidden class="anchor" aria-hidden="true" href="#heading-5">#</a></h1>
+<hr>
+<h1 id="heading-6"><a hidden class="anchor" aria-hidden="true" href="#heading-6">#</a></h1>
+<hr>
+<h1 id="heading-7"><a hidden class="anchor" aria-hidden="true" href="#heading-7">#</a></h1>
+<hr>
+<h1 id="heading-8"><a hidden class="anchor" aria-hidden="true" href="#heading-8">#</a></h1>
+<hr>
+<h1 id="heading-9"><a hidden class="anchor" aria-hidden="true" href="#heading-9">#</a></h1>
+<hr>
+<h1 id="heading-10"><a hidden class="anchor" aria-hidden="true" href="#heading-10">#</a></h1>
+<hr>
+<h1 id="heading-11"><a hidden class="anchor" aria-hidden="true" href="#heading-11">#</a></h1>
+<hr>
+<h1 id="heading-12"><a hidden class="anchor" aria-hidden="true" href="#heading-12">#</a></h1>
+<hr>
+<h1 id="heading-13"><a hidden class="anchor" aria-hidden="true" href="#heading-13">#</a></h1>
+<hr>
+<h1 id="heading-14"><a hidden class="anchor" aria-hidden="true" href="#heading-14">#</a></h1>
+<hr>
+<h1 id="heading-15"><a hidden class="anchor" aria-hidden="true" href="#heading-15">#</a></h1>
+<hr>
+<h1 id="heading-16"><a hidden class="anchor" aria-hidden="true" href="#heading-16">#</a></h1>
+<hr>
+<h1 id="heading-17"><a hidden class="anchor" aria-hidden="true" href="#heading-17">#</a></h1>
+<hr>
+<h1 id="heading-18"><a hidden class="anchor" aria-hidden="true" href="#heading-18">#</a></h1>
+<hr>
+<h1 id="heading-19"><a hidden class="anchor" aria-hidden="true" href="#heading-19">#</a></h1>
+<hr>
+<h1 id="heading-20"><a hidden class="anchor" aria-hidden="true" href="#heading-20">#</a></h1>
+<hr>
+<h1 id="heading-21"><a hidden class="anchor" aria-hidden="true" href="#heading-21">#</a></h1>
+<hr>
+<h1 id="heading-22"><a hidden class="anchor" aria-hidden="true" href="#heading-22">#</a></h1>
+<hr>
+<h1 id="heading-23"><a hidden class="anchor" aria-hidden="true" href="#heading-23">#</a></h1>
+<hr>
+<h1 id="heading-24"><a hidden class="anchor" aria-hidden="true" href="#heading-24">#</a></h1>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

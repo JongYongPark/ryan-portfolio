@@ -1,0 +1,1209 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>SDLC on RyanLabs</title>
+    <link>http://localhost:1313/portfolio/categories/sdlc/</link>
+    <description>Recent content in SDLC on RyanLabs</description>
+    <generator>Hugo -- 0.142.0</generator>
+    <language>ko</language>
+    <lastBuildDate>Fri, 14 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/portfolio/categories/sdlc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apt proxy issue</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/apt/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/apt/</guid>
+      <description>&lt;h1 id=&#34;apt-proxy-issue&#34;&gt;Apt proxy issue&lt;/h1&gt;
+&lt;p&gt;Ubuntu에서 발생한 APT 업데이트 문제의 원인과 해결 방법을 정리해드리겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;문제-원인&#34;&gt;문제 원인&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;APT(Advanced Package Tool)가 패키지 정보를 업데이트하려 할 때 프록시 서버(10.4.241.231:3142)를 통해 연결을 시도했습니다.&lt;/li&gt;
+&lt;li&gt;해당 프록시 서버에 연결할 수 없어 모든 저장소에 대한 연결이 타임아웃되었습니다.&lt;/li&gt;
+&lt;li&gt;문제는 &lt;code&gt;/etc/apt/apt.conf&lt;/code&gt; 파일에 설정된 프록시 설정이었습니다. 이 설정은 APT가 인터넷에 직접 연결하지 않고 프록시 서버를 통해 연결하도록 지시합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;진단-과정&#34;&gt;진단 과정&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;프록시 설정 확인:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cat /etc/apt/apt.conf.d/* | grep -i proxy
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;이 명령어로는 apt.conf.d 디렉토리 내의 파일들에서 프록시 설정을 찾을 수 없었습니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Special characters</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/special-chars/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/special-chars/</guid>
+      <description>&lt;h1 id=&#34;자주-사용되는-특수-문자-및-설명&#34;&gt;&lt;strong&gt;자주 사용되는 특수 문자 및 설명&lt;/strong&gt;&lt;/h1&gt;
+&lt;h3 id=&#34;1-기본적인-특수-문자&#34;&gt;&lt;strong&gt;1. 기본적인 특수 문자&lt;/strong&gt;&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;기호&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;이름 (영어)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;설명 (한국어)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;_&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Underscore&lt;/td&gt;
+          &lt;td&gt;언더스코어 (밑줄)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Hyphen&lt;/td&gt;
+          &lt;td&gt;하이픈 (대시, 붙임표)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;–&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;En dash&lt;/td&gt;
+          &lt;td&gt;엔 대시 (숫자 범위에서 사용, 예: 2020–2025)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;—&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Em dash&lt;/td&gt;
+          &lt;td&gt;엠 대시 (긴 대시, 문장 구분에 사용)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;=&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Equal sign&lt;/td&gt;
+          &lt;td&gt;등호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;+&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Plus sign&lt;/td&gt;
+          &lt;td&gt;더하기 기호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;*&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Asterisk&lt;/td&gt;
+          &lt;td&gt;별표, 곱셈 연산자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Slash, Forward slash&lt;/td&gt;
+          &lt;td&gt;슬래시, 경로 구분자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;\&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Backslash&lt;/td&gt;
+          &lt;td&gt;백슬래시, Windows 경로 구분자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;`&lt;/td&gt;
+          &lt;td&gt;`&lt;/td&gt;
+          &lt;td&gt;Vertical bar, Pipe&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;!&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Exclamation mark&lt;/td&gt;
+          &lt;td&gt;느낌표&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;@&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;At sign&lt;/td&gt;
+          &lt;td&gt;골뱅이, 이메일에서 사용&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;#&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Hash, Pound sign&lt;/td&gt;
+          &lt;td&gt;해시, 샵 (SNS 태그, 주석 표시)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;$&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Dollar sign&lt;/td&gt;
+          &lt;td&gt;달러 기호, 변수 기호 (Bash, PHP)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;%&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Percent sign&lt;/td&gt;
+          &lt;td&gt;퍼센트 기호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;^&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Caret&lt;/td&gt;
+          &lt;td&gt;캐럿 (지수 표현, 텍스트 강조)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;amp;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Ampersand&lt;/td&gt;
+          &lt;td&gt;앰퍼샌드 (AND 연산자)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-괄호-및-인용부호&#34;&gt;&lt;strong&gt;2. 괄호 및 인용부호&lt;/strong&gt;&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;기호&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;이름 (영어)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;설명 (한국어)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Parentheses&lt;/td&gt;
+          &lt;td&gt;소괄호 (괄호)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Square brackets&lt;/td&gt;
+          &lt;td&gt;대괄호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Curly brackets, Braces&lt;/td&gt;
+          &lt;td&gt;중괄호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Angle brackets&lt;/td&gt;
+          &lt;td&gt;꺾쇠 괄호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&#39;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Single quote, Apostrophe&lt;/td&gt;
+          &lt;td&gt;작은따옴표, 아포스트로피&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;quot;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Double quote&lt;/td&gt;
+          &lt;td&gt;큰따옴표&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;`&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Backtick&lt;/td&gt;
+          &lt;td&gt;백틱 (역따옴표, Markdown, JavaScript 등에서 사용)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-프로그래밍-및-명령어에서-자주-사용되는-특수-문자&#34;&gt;&lt;strong&gt;3. 프로그래밍 및 명령어에서 자주 사용되는 특수 문자&lt;/strong&gt;&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;기호&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;이름 (영어)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;설명 (한국어)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;~&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Tilde&lt;/td&gt;
+          &lt;td&gt;물결표 (홈 디렉토리 표현, 대략적인 의미)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;:&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Colon&lt;/td&gt;
+          &lt;td&gt;콜론 (경로, 시간, 네임스페이스에서 사용)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Semicolon&lt;/td&gt;
+          &lt;td&gt;세미콜론 (문장 구분자)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;.&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Period, Dot&lt;/td&gt;
+          &lt;td&gt;마침표 (파일 확장자, 숨김 파일)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;,&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Comma&lt;/td&gt;
+          &lt;td&gt;쉼표&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;?&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Question mark&lt;/td&gt;
+          &lt;td&gt;물음표 (쿼리스트링, 조건문)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;lt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Less than&lt;/td&gt;
+          &lt;td&gt;작다 (비교 연산자)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Greater than&lt;/td&gt;
+          &lt;td&gt;크다 (비교 연산자)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Left shift&lt;/td&gt;
+          &lt;td&gt;비트 연산자, 리디렉션 (Bash)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Right shift&lt;/td&gt;
+          &lt;td&gt;비트 연산자, 파일 추가 (Bash)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4-주요-사용-예시&#34;&gt;&lt;strong&gt;4. 주요 사용 예시&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;프로그래밍&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, World!&amp;#34;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;# 큰따옴표 사용&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;x is greater than or equal to 10&amp;#34;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;# 비교 연산자 `&amp;gt;=`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bash 명령어&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, &lt;/span&gt;$USER&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#75715e&#34;&gt;# $ (변수)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls -l /home/user      &lt;span style=&#34;color:#75715e&#34;&gt;# - (옵션)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd ~/Documents        &lt;span style=&#34;color:#75715e&#34;&gt;# ~ (홈 디렉토리)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Markdown&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;**Bold Text**  # 굵은 글씨 (별표 사용)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`Code`&lt;/span&gt;  # 인라인 코드 (백틱 사용)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-결론&#34;&gt;&lt;strong&gt;🔹 결론&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;파일명: &lt;code&gt;_&lt;/code&gt;(언더스코어)와 &lt;code&gt;-&lt;/code&gt;(하이픈) 사용 추천&lt;/li&gt;
+&lt;li&gt;변수명: &lt;code&gt;_&lt;/code&gt;(언더스코어) 주로 사용&lt;/li&gt;
+&lt;li&gt;프로그래밍: &lt;code&gt;;&lt;/code&gt;, &lt;code&gt;:&lt;/code&gt; 등 문법적 기호 많이 사용&lt;/li&gt;
+&lt;li&gt;터미널/명령어: &lt;code&gt;$&lt;/code&gt;, &lt;code&gt;~&lt;/code&gt;, &lt;code&gt;|&lt;/code&gt; 등 필수 기호 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;📌 &lt;strong&gt;상황에 따라 적절한 특수 문자를 사용하면 코드 가독성과 명령어 실행이 편리해집니다!&lt;/strong&gt; 🚀&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SSHFS Debugging</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/sshfs-debug/</link>
+      <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/sshfs-debug/</guid>
+      <description>&lt;h1 id=&#34;내-작업&#34;&gt;내 작업&lt;/h1&gt;
+&lt;p&gt;아래 명령어로 중복된 sshfs 가 있다면
+mount | grep sshfs&lt;/p&gt;
+&lt;p&gt;아래 명령어로 제거하 다시 시도
+sudo umount ~/work_jonpark&lt;/p&gt;
+&lt;p&gt;mount_jonpark&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;base&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; jonpark@BD-82898:~/workspace/jonpark-work/cnc-umbrella-chart-2025.3.maint/local-dev$ ssh -vvv jonpark@aws-sig-ts-jonpark.aws.internalal
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;OpenSSH_9.6p1 Ubuntu-3ubuntu13.8, OpenSSL 3.0.13 &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt; Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;2024&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Reading configuration data /home/jonpark/.ssh/config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Reading configuration data /etc/ssh/ssh_config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: /etc/ssh/ssh_config line 19: include /etc/ssh/ssh_config.d/*.conf matched no files
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: /etc/ssh/ssh_config line 21: Applying options &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; *
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: expanded UserKnownHostsFile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;~/.ssh/known_hosts&amp;#39;&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/home/jonpark/.ssh/known_hosts&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: expanded UserKnownHostsFile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;~/.ssh/known_hosts2&amp;#39;&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/home/jonpark/.ssh/known_hosts2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: resolving &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;aws-sig-ts-jonpark.aws.internal&amp;#34;&lt;/span&gt; port &lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: resolve_host: lookup aws-sig-ts-jonpark.aws.internal:22
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: channel_clear_timeouts: clearing
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: ssh_connect_direct: entering
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Connecting to aws-sig-ts-jonpark.aws.internal &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;10.230.157.239&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; port 22.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: set_sock_tos: set socket &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; IP_TOS 0x10
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Connection established.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_rsa type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_rsa-cert type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_ecdsa type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_ecdsa-cert type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_ecdsa_sk type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_ecdsa_sk-cert type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_ed25519 type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_ed25519-cert type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_ed25519_sk type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_ed25519_sk-cert type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_xmss type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_xmss-cert type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_dsa type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: identity file /home/jonpark/.ssh/id_dsa-cert type -1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Local version string SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.8
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Remote protocol version 2.0, remote software version OpenSSH_8.9p1 Ubuntu-3ubuntu0.11
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: compat_banner: match: OpenSSH_8.9p1 Ubuntu-3ubuntu0.11 pat OpenSSH* compat 0x04000000
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: fd &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; setting O_NONBLOCK
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Authenticating to aws-sig-ts-jonpark.aws.internal:22 as &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;jonpark&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: load_hostkeys: fopen /home/jonpark/.ssh/known_hosts2: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: load_hostkeys: fopen /etc/ssh/ssh_known_hosts: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: load_hostkeys: fopen /etc/ssh/ssh_known_hosts2: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: order_hostkeyalgs: no algorithms matched; accept original
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: send packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: SSH2_MSG_KEXINIT sent
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: receive packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: SSH2_MSG_KEXINIT received
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: local client KEXINIT proposal
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: KEX algorithms: sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,ext-info-c,kex-strict-c-v00@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: host key algorithms: ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,sk-ecdsa-sha2-nistp256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,sk-ssh-ed25519@openssh.com,sk-ecdsa-sha2-nistp256@openssh.com,rsa-sha2-512,rsa-sha2-256
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: ciphers ctos: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: ciphers stoc: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: MACs ctos: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: MACs stoc: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: compression ctos: none,zlib@openssh.com,zlib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: compression stoc: none,zlib@openssh.com,zlib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: languages ctos: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: languages stoc: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: first_kex_follows &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: reserved &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: peer server KEXINIT proposal
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: KEX algorithms: curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,kex-strict-s-v00@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: host key algorithms: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: ciphers ctos: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: ciphers stoc: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: MACs ctos: umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: MACs stoc: umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: compression ctos: none,zlib@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: compression stoc: none,zlib@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: languages ctos: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: languages stoc: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: first_kex_follows &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: reserved &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: kex_choose_conf: will use strict KEX ordering
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: kex: algorithm: curve25519-sha256
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: kex: host key algorithm: ssh-ed25519
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: kex: server-&amp;gt;client cipher: chacha20-poly1305@openssh.com MAC: &amp;lt;implicit&amp;gt; compression: none
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: kex: client-&amp;gt;server cipher: chacha20-poly1305@openssh.com MAC: &amp;lt;implicit&amp;gt; compression: none
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: send packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: receive packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;31&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: SSH2_MSG_KEX_ECDH_REPLY received
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Server host key: ssh-ed25519 SHA256:5D1rxgnPZJQM+hxFvUM5lP6+jMATgvQgonw/F8TIRVA
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: load_hostkeys: fopen /home/jonpark/.ssh/known_hosts2: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: load_hostkeys: fopen /etc/ssh/ssh_known_hosts: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: load_hostkeys: fopen /etc/ssh/ssh_known_hosts2: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_find_by_key_hostfile: trying user hostfile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/jonpark/.ssh/known_hosts&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_foreach: reading file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/jonpark/.ssh/known_hosts&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: hostkeys_find_by_key_cb: found matching key in ~/.ssh/known_hosts:1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_find_by_key_hostfile: trying user hostfile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/jonpark/.ssh/known_hosts2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: hostkeys_find_by_key_hostfile: hostkeys file /home/jonpark/.ssh/known_hosts2 does not exist
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_find_by_key_hostfile: trying system hostfile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/etc/ssh/ssh_known_hosts&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: hostkeys_find_by_key_hostfile: hostkeys file /etc/ssh/ssh_known_hosts does not exist
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_find_by_key_hostfile: trying system hostfile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/etc/ssh/ssh_known_hosts2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: hostkeys_find_by_key_hostfile: hostkeys file /etc/ssh/ssh_known_hosts2 does not exist
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The authenticity of host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;aws-sig-ts-jonpark.aws.internal (10.230.157.239)&amp;#39;&lt;/span&gt; can&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;t be established.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ED25519 key fingerprint is SHA256:5D1rxgnPZJQM+hxFvUM5lP6+jMATgvQgonw/F8TIRVA.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;This host key is known by the following other names/addresses:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    ~/.ssh/known_hosts:1: us03-sig-ts-jonpark.nprd.sig.synopsys.com
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Warning: Permanently added &amp;#39;&lt;/span&gt;aws-sig-ts-jonpark.aws.internal&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; (ED25519) to the list of known hosts.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: send packet: type 21
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: ssh_packet_send2_wrapped: resetting send seqnr 3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug2: ssh_set_newkeys: mode 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: rekey out after 134217728 blocks
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: SSH2_MSG_NEWKEYS sent
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: expecting SSH2_MSG_NEWKEYS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: receive packet: type 21
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: ssh_packet_read_poll2: resetting read seqnr 3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: SSH2_MSG_NEWKEYS received
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug2: ssh_set_newkeys: mode 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: rekey in after 134217728 blocks
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: send packet: type 5
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: receive packet: type 7
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: SSH2_MSG_EXT_INFO received
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: kex_input_ext_info: extension server-sig-algs
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: kex_ext_info_client_parse: server-sig-algs=&amp;lt;ssh-ed25519,sk-ssh-ed25519@openssh.com,ssh-rsa,rsa-sha2-256,rsa-sha2-512,ssh-dss,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,sk-ecdsa-sha2-nistp256@openssh.com,webauthn-sk-ecdsa-sha2-nistp256@openssh.com&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: kex_input_ext_info: extension publickey-hostbound@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: kex_ext_info_check_ver: publickey-hostbound@openssh.com=&amp;lt;0&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: receive packet: type 6
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug2: service_accept: ssh-userauth
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: SSH2_MSG_SERVICE_ACCEPT received
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: send packet: type 50
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: receive packet: type 51
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Authentications that can continue: publickey,gssapi-keyex,gssapi-with-mic,password
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: start over, passed a different list publickey,gssapi-keyex,gssapi-with-mic,password
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: preferred gssapi-with-mic,publickey,keyboard-interactive,password
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: authmethod_lookup gssapi-with-mic
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: remaining preferred: publickey,keyboard-interactive,password
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: authmethod_is_enabled gssapi-with-mic
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Next authentication method: gssapi-with-mic
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: No credentials were supplied, or the credentials were unavailable or inaccessible
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;No Kerberos credentials available (default cache: FILE:/tmp/krb5cc_1000)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: No credentials were supplied, or the credentials were unavailable or inaccessible
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;No Kerberos credentials available (default cache: FILE:/tmp/krb5cc_1000)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug2: we did not send a packet, disable method
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: authmethod_lookup publickey
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: remaining preferred: keyboard-interactive,password
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: authmethod_is_enabled publickey
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Next authentication method: publickey
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Will attempt key: /home/jonpark/.ssh/id_rsa 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Will attempt key: /home/jonpark/.ssh/id_ecdsa 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Will attempt key: /home/jonpark/.ssh/id_ecdsa_sk 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Will attempt key: /home/jonpark/.ssh/id_ed25519 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Will attempt key: /home/jonpark/.ssh/id_ed25519_sk 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Will attempt key: /home/jonpark/.ssh/id_xmss 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Will attempt key: /home/jonpark/.ssh/id_dsa 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug2: pubkey_prepare: done
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Trying private key: /home/jonpark/.ssh/id_rsa
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: no such identity: /home/jonpark/.ssh/id_rsa: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Trying private key: /home/jonpark/.ssh/id_ecdsa
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: no such identity: /home/jonpark/.ssh/id_ecdsa: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Trying private key: /home/jonpark/.ssh/id_ecdsa_sk
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: no such identity: /home/jonpark/.ssh/id_ecdsa_sk: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Trying private key: /home/jonpark/.ssh/id_ed25519
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: no such identity: /home/jonpark/.ssh/id_ed25519: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Trying private key: /home/jonpark/.ssh/id_ed25519_sk
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: no such identity: /home/jonpark/.ssh/id_ed25519_sk: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Trying private key: /home/jonpark/.ssh/id_xmss
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: no such identity: /home/jonpark/.ssh/id_xmss: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Trying private key: /home/jonpark/.ssh/id_dsa
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: no such identity: /home/jonpark/.ssh/id_dsa: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug2: we did not send a packet, disable method
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: authmethod_lookup password
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: remaining preferred: ,password
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug3: authmethod_is_enabled password
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;debug1: Next authentication method: password
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;jonpark@aws-sig-ts-jonpark.aws.internal&amp;#39;&lt;/span&gt;s password: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: send packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: we sent a password packet, wait &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; reply
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: receive packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authenticated to aws-sig-ts-jonpark.aws.internal &lt;span style=&#34;color:#f92672&#34;&gt;([&lt;/span&gt;10.230.157.239&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:22&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; using &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: channel 0: new session &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;client-session&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;inactive timeout: 0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: ssh_session2_open: channel_new: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel 0: send open
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: send packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Requesting no-more-sessions@openssh.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: send packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Entering interactive session.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: pledge: filesystem
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: client_repledge: enter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: receive packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: client_input_global_request: rtype hostkeys-00@openssh.com want_reply &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: client_input_hostkeys: received RSA key SHA256:q5fXsdVe64oWpCs4iJ3FZVuPhCc0jVS1eaBnbodu4Ao
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: client_input_hostkeys: received ECDSA key SHA256:2CuF+VWAhjLWVdiq+DHjknUpY/qOCejEphFrHKZ0EUA
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: client_input_hostkeys: received ED25519 key SHA256:5D1rxgnPZJQM+hxFvUM5lP6+jMATgvQgonw/F8TIRVA
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: client_input_hostkeys: searching /home/jonpark/.ssh/known_hosts &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; aws-sig-ts-jonpark.aws.internal / &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;none&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_foreach: reading file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/jonpark/.ssh/known_hosts&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_find: found ssh-ed25519 key under different name/addr at /home/jonpark/.ssh/known_hosts:1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_find: found ssh-rsa key under different name/addr at /home/jonpark/.ssh/known_hosts:2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_find: found ecdsa-sha2-nistp256 key under different name/addr at /home/jonpark/.ssh/known_hosts:3
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: hostkeys_find: found ssh-ed25519 key at /home/jonpark/.ssh/known_hosts:8
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: client_input_hostkeys: searching /home/jonpark/.ssh/known_hosts2 &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; aws-sig-ts-jonpark.aws.internal / &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;none&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: client_input_hostkeys: hostkeys file /home/jonpark/.ssh/known_hosts2 does not exist
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: client_input_hostkeys: &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; server keys: &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; new, &lt;span style=&#34;color:#ae81ff&#34;&gt;18446744073709551615&lt;/span&gt; retained, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; incomplete match. &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; to remove
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: client_input_hostkeys: host key found matching a different name/address, skipping UserKnownHostsFile update
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: client_repledge: enter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: receive packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;91&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel_input_open_confirmation: channel 0: callback start
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: fd &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; setting TCP_NODELAY
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: set_sock_tos: set socket &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; IP_TOS 0x10
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: client_session2_setup: id &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel 0: request pty-req confirm &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: send packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;98&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: Sending environment.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SHELL
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env COLORTERM
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env CVSROOT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env WSL2_GUI_APPS_ENABLED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env TERM_PROGRAM_VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env CONDA_EXE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env _CE_M
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env WSL_DISTRO_NAME
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env IN_PROFILE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env MODULAR_HOME
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env DOCKER_SYNOPSYS_USER
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SNYK_API_TOKEN
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env LANGUAGE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SWIP_CLI
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env TI_CGT_C6000
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env DOTNET_ROOT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env GRADLE_HOME
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SNYK_ORG_NAME
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env PYDEVD_DISABLE_FILE_VALIDATION
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SDKMAN_CANDIDATES_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env GOBIN
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env NAME
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env PWD
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env LOGNAME
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env CONDA_PREFIX
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env BUNDLED_DEBUGPY_PATH
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env VSCODE_GIT_ASKPASS_NODE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SNYK_TOKEN
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env HOME
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: channel 0: setting env LANG &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;en_US.UTF-8&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel 0: request env confirm &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: send packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;98&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env WSL_INTEROP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env LS_COLORS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env WAYLAND_DISPLAY
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env DOCKER_SYNOPSYS_PASS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env CONDA_PROMPT_MODIFIER
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env GIT_ASKPASS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env M2_HOME
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env GOROOT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env NVM_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env VSCODE_GIT_ASKPASS_EXTRA_ARGS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env LESSCLOSE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env COVERITY_NO_LOG_ENVIRONMENT_VARIABLES
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env TERM
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env DEBUGPY_ADAPTER_ENDPOINTS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env _CE_CONDA
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env LESSOPEN
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env USER
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env VSCODE_GIT_IPC_HANDLE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env CONDA_SHLVL
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env MAVEN_HOME
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SDKMAN_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env DISPLAY
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SHLVL
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env COV_ROOT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env API_VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SONAR_SCANNER
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env CVS_RSH
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SDKMAN_CANDIDATES_API
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env IN_BASHRC
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env CONDA_PYTHON_EXE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env CSA_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env XDG_RUNTIME_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env CONDA_DEFAULT_ENV
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env ZIPINFO
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env UNZIP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env WSLENV
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: channel 0: setting env LC_ALL &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;en_US.UTF-8&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel 0: request env confirm &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: send packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;98&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env VSCODE_GIT_ASKPASS_MAIN
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SONAR_SCANNER_BIN_PATH
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env COV_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env XDG_DATA_DIRS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env PATH
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SRM_DIR
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env USING_SRM_VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env USING_CSA_BIN_PATH
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SNYK_API_VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env DBUS_SESSION_BUS_ADDRESS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env SDKMAN_PLATFORM
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env HOSTTYPE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env PULSE_SERVER
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env OLDPWD
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env GOPATH
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env TERM_PROGRAM
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env VSCODE_IPC_HOOK_CLI
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: Ignored env _
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel 0: request shell confirm &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: send packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;98&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: client_repledge: enter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug1: pledge: fork
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel_input_open_confirmation: channel 0: callback &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel 0: open confirm rwindow &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; rmax &lt;span style=&#34;color:#ae81ff&#34;&gt;32768&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: receive packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;99&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel_input_status_confirm: type &lt;span style=&#34;color:#ae81ff&#34;&gt;99&lt;/span&gt; id &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: PTY allocation request accepted on channel &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel 0: rcvd adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;2097152&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug3: receive packet: type &lt;span style=&#34;color:#ae81ff&#34;&gt;99&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: channel_input_status_confirm: type &lt;span style=&#34;color:#ae81ff&#34;&gt;99&lt;/span&gt; id &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;debug2: shell request accepted on channel &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Welcome to Ubuntu 22.04.4 LTS &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;GNU/Linux 5.15.0-131-generic x86_64&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; * Documentation:  https://help.ubuntu.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; * Management:     https://landscape.canonical.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; * Support:        https://ubuntu.com/pro
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Expanded Security Maintenance &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; Applications is not enabled.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;144&lt;/span&gt; updates can be applied immediately.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;To see these additional updates run: apt list --upgradable
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;38&lt;/span&gt; additional security updates can be applied with ESM Apps.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The list of available updates is more than a week old.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;To check &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; new updates run: sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;*** System restart required ***
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Last login: Sun Mar  &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt; 19:52:44 &lt;span style=&#34;color:#ae81ff&#34;&gt;2025&lt;/span&gt; from 10.230.18.206
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;base&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; jonpark@aws-sig-ts-jonpark:~$ hostname
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws-sig-ts-jonpark.aws.internal
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h1 id=&#34;디버깅-방법&#34;&gt;디버깅 방법&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>Windows 에서 WSL을 통해 ec2에 접근하기</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/sshfs-win-wsl-ec2/</link>
+      <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/sshfs-win-wsl-ec2/</guid>
+      <description>&lt;h1 id=&#34;windows-에서-wsl을-통해-ec2-에-접근시-symbol-link에-따른-문제점&#34;&gt;Windows 에서 WSL을 통해 ec2 에 접근시 symbol link에 따른 문제점&lt;/h1&gt;
+&lt;h2 id=&#34;내-작업&#34;&gt;내 작업&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;### AWS ec2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Hdd 가 부족해서 하나 더 추가했다 - 이것이 opt/dlami/nvme 임임&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;base&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ubuntu@ip-172-31-26-173:~$ df -Th
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Filesystem                     Type      Size  Used Avail Use% Mounted on
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/root                      ext4      117G   69G   48G  60% /
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs      32G   48M   32G   1% /dev/shm
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs      13G  1.4M   13G   1% /run
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs     5.0M     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  5.0M   0% /run/lock
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;efivarfs                       efivarfs  128K  4.1K  119K   4% /sys/firmware/efi/efivars
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/nvme0n1p15                vfat      105M  6.1M   99M   6% /boot/efi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs     6.3G   68K  6.3G   1% /run/user/126
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/mapper/vg.01-lv_ephemeral ext4      206G   76G  119G  39% /opt/dlami/nvme
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs                          tmpfs     6.3G   76K  6.3G   1% /run/user/1000
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;base&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ubuntu@ip-172-31-26-173:~$ ll workspace
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lrwxrwxrwx &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ubuntu ubuntu &lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt; Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; 09:47 workspace -&amp;gt; /opt/dlami/nvme/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;### WSL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ cat .bashrc | grep ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;alias mount_ec2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo sshfs  -o uid=`id -u jonpark`  -o gid=`id -g jonpark`  -o allow_other ubuntu@jonpark-ec2:/home/ubuntu -o IdentityFile=~/jonpark-ec2.pem ~/work_ec2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 수정 : -o follow_symlinks  추가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;alias mount_ec2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo sshfs -o uid=`id -u jonpark` -o gid=`id -g jonpark` -o allow_other -o follow_symlinks ubuntu@jonpark-ec2:/home/ubuntu -o IdentityFile=~/jonpark-ec2.pem ~/work_ec2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 실행 &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ sudo umount ~/work_ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ sudo sshfs -o uid&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;id -u jonpark&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; -o gid&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;id -g jonpark&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; -o allow_other -o follow_symlinks ubuntu@jonpark-ec2:/home/ubuntu -o IdentityFile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;~/jonpark-ec2.pem ~/work_ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;sudo&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; password &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; jonpark:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 결과&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ ll  -d work_ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;drwx------ &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark 4.0K Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 14:13 work_ec2/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ ls  work_ec2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;blackduck-oidc                          LINUX_PACKAGES_LICENSES                 Public/                                   THIRD_PARTY_SOURCE_CODE_URLS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BUILD_FROM_SOURCE_PACKAGES_LICENCES     LINUX_PACKAGES_LIST                     PYTHON_PACKAGES_LICENSES                  Videos/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Desktop/                                Music/                                  srm-2024.12.1-0-linux-x64-installer.run*  workspace/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Documents/                              nvidia-acknowledgements/                srm-license.txt                           zed-linux-x86_64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Downloads/                              OSSNvidiaDriver_v550.90.07_license.txt  Templates/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;google-chrome-stable_current_amd64.deb  Pictures/                               thinclient_drives/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ ll  -d work_ec2/workspace/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;drwxrwxrwt &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark 4.0K Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; 19:20 work_ec2/workspace//
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ ls  work_ec2/workspace/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ai/  dev_tool/  dockers/  jonpark-work/  lost+found/  miniconda3/  open-webui/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;답변&#34;&gt;답변&lt;/h2&gt;
+&lt;p&gt;이제 문제가 더 명확해졌습니다. EC2에서 &lt;code&gt;workspace&lt;/code&gt;는 &lt;code&gt;/opt/dlami/nvme/&lt;/code&gt;를 가리키는 심볼릭 링크입니다. SSHFS를 통한 마운트 시 심볼릭 링크 처리에 문제가 있는 것으로 보입니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Zone.Identifier</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/wsl-zone.identifier/</link>
+      <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/wsl-zone.identifier/</guid>
+      <description>&lt;h1 id=&#34;windows-에서-wsl로-복사하면-복사한-파일이름-zoneidenifier-파일이-생기지-않게-하는-방법&#34;&gt;windows 에서 wsl로 복사하면 &amp;ldquo;복사한 파일이름 zone.idenifier&amp;rdquo; 파일이 생기지 않게 하는 방법.&lt;/h1&gt;
+&lt;p&gt;Zone.Identifier 파일은 Windows 시스템에서 외부 출처(인터넷, 이메일 등)에서 다운로드한 파일에 자동으로 추가되는 대체 데이터 스트림(Alternate Data Stream, ADS)입니다. 이 파일에는 원본 파일의 출처와 관련된 보안 정보가 포함되어 있습니다.&lt;/p&gt;
+&lt;p&gt;파일을 WSL로 복사할 때 Windows에서는 이 메타데이터를 별도의 Zone.Identifier 파일로 변환합니다. 이는 NTFS 파일 시스템의 기능이지만 Linux 파일 시스템에서는 지원하지 않기 때문입니다.&lt;/p&gt;
+&lt;h2 id=&#34;zoneidentifier-파일이-생성되지-않게-하는-방법&#34;&gt;Zone.Identifier 파일이 생성되지 않게 하는 방법:&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Windows에서 파일 신뢰 설정&lt;/strong&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deno Install</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/deno-install/</link>
+      <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/deno-install/</guid>
+      <description>&lt;h1 id=&#34;install&#34;&gt;Install&lt;/h1&gt;
+&lt;p&gt;Deno는 JavaScript와 TypeScript를 위한 현대적인 런타임 환경으로, 설치 및 사용이 매우 간단합니다. 아래에 Deno를 설치하고 &amp;ldquo;Hello, World!&amp;rdquo; 프로그램을 작성하여 실행하는 방법을 안내해 드리겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-deno-설치하기&#34;&gt;1. Deno 설치하기&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;macOS 및 Linux&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;터미널을 열고 다음 명령어를 입력하여 Deno를 설치할 수 있습니다:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -fsSL https://deno.land/install.sh | sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 명령어는 공식 설치 스크립트를 다운로드하여 실행합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;PowerShell을 관리자 권한으로 열고 다음 명령어를 실행합니다:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;iwr https&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;//deno.land/install.ps1 -useb | iex
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;또는, Windows에서 &lt;a href=&#34;https://chocolatey.org/&#34;&gt;Chocolatey&lt;/a&gt; 패키지 관리자를 사용 중이라면, 다음과 같이 설치할 수 있습니다:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Go Install</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/go-install/</link>
+      <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/go-install/</guid>
+      <description>&lt;h1 id=&#34;go-install&#34;&gt;Go Install&lt;/h1&gt;
+&lt;p&gt;기존 Go 1.22.2가 &lt;code&gt;/usr/bin/go&lt;/code&gt;로 설치되어 있고, 새롭게 Go 1.23.1 및 Go 1.23.5를 &lt;strong&gt;&lt;code&gt;~/local&lt;/code&gt;&lt;/strong&gt; 폴더에 설치한 후 원하는 버전을 선택해서 사용하는 방법을 정리해 드리겠습니다. 🚀&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-1-기존-go-1222-확인&#34;&gt;✅ &lt;strong&gt;1. 기존 Go (1.22.2) 확인&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;현재 기본 Go(1.22.2)가 &lt;code&gt;/usr/bin/go&lt;/code&gt;에 설치되어 있음.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/usr/bin/go version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;출력 예시:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;go version go1.22.2 linux/amd64
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;-2-새로운-go-버전-1231--1235-설치&#34;&gt;✅ &lt;strong&gt;2. 새로운 Go 버전 (1.23.1 &amp;amp; 1.23.5) 설치&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;기존 Go(1.22.2)는 유지하면서, 추가 Go 버전을 설치하겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;-go-1231-다운로드-및-설치&#34;&gt;🔹 &lt;strong&gt;Go 1.23.1 다운로드 및 설치&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p ~/local
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd ~/local
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://go.dev/dl/go1.23.1.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -xzf go1.23.1.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv go go1.23.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;-go-1235-다운로드-및-설치&#34;&gt;🔹 &lt;strong&gt;Go 1.23.5 다운로드 및 설치&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd ~/local
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://go.dev/dl/go1.23.5.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -xzf go1.23.5.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv go go1.23.5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;설치 후 폴더 구조:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mojo Install</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/mojo-install/</link>
+      <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/mojo-install/</guid>
+      <description>&lt;h1 id=&#34;mojo-설치&#34;&gt;Mojo 설치&lt;/h1&gt;
+&lt;p&gt;Mojo는 Modular가 개발한 새로운 프로그래밍 언어로, Python과 유사하지만 더 높은 성능을 제공합니다. WSL (Windows Subsystem for Linux)의 Ubuntu 환경에서 Mojo를 설치하려면 다음과 같은 단계를 따르면 됩니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-wsl-및-ubuntu-확인&#34;&gt;&lt;strong&gt;1. WSL 및 Ubuntu 확인&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;먼저 WSL이 설치되어 있고 Ubuntu가 실행 중인지 확인하세요.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WSL이 설치되어 있지 않다면 &lt;a href=&#34;https://learn.microsoft.com/ko-kr/windows/wsl/install&#34;&gt;Microsoft 공식 문서&lt;/a&gt;를 참고하여 설치하세요.&lt;/li&gt;
+&lt;li&gt;Ubuntu는 Microsoft Store에서 다운로드하거나 명령줄에서 설치할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;WSL Ubuntu가 이미 설치되어 있다면, 터미널을 열고 다음 명령어로 Ubuntu 버전을 확인하세요:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lsb_release -a
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;2-mojo-설치-준비&#34;&gt;&lt;strong&gt;2. Mojo 설치 준비&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Mojo는 아직 초기 단계의 언어이므로 공식적으로 지원되는 패키지 관리자가 없습니다. 따라서 Modular의 공식 웹사이트나 CLI 도구를 사용하여 설치해야 합니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mojo Sample Code like Curl</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/mojo-curl/</link>
+      <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/mojo-curl/</guid>
+      <description>&lt;h2 id=&#34;-mojo로-curl과-비슷한-기능-구현하기&#34;&gt;&lt;strong&gt;🚀 Mojo로 &lt;code&gt;curl&lt;/code&gt;과 비슷한 기능 구현하기&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Mojo는 Python과 유사한 문법을 가지면서도, 시스템 프로그래밍에 적합한 고성능 언어입니다. 현재 Mojo는 공식적으로 네트워크 라이브러리를 제공하지 않으므로, &lt;strong&gt;소켓을 활용하여 HTTP 요청을 보내는 &lt;code&gt;curl&lt;/code&gt; 대체 기능&lt;/strong&gt;을 직접 구현할 수 있습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;-1-mojo에서-http-요청curl-기능-구현하기&#34;&gt;&lt;strong&gt;📌 1. Mojo에서 HTTP 요청(&lt;code&gt;curl&lt;/code&gt; 기능) 구현하기&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;다음 코드는 &lt;strong&gt;Mojo에서 &lt;code&gt;curl&lt;/code&gt;과 유사한 기능을 수행하는 HTTP GET 요청 함수&lt;/strong&gt;입니다.&lt;/p&gt;
+&lt;h3 id=&#34;-mojo_curlmojo-파일-생성&#34;&gt;&lt;strong&gt;💾 &lt;code&gt;mojo_curl.mojo&lt;/code&gt; 파일 생성&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;아래 코드를 &lt;code&gt;mojo_curl.mojo&lt;/code&gt;라는 파일에 저장하세요.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-mojo&#34; data-lang=&#34;mojo&#34;&gt;import sys
+import socket
+
+# HTTP GET 요청 함수
+fn http_get(url: str) -&amp;gt; str:
+    # URL 파싱
+    let parts = url.split(&amp;#34;://&amp;#34;)
+    if parts.size() != 2 or parts[0] != &amp;#34;http&amp;#34;:
+        return &amp;#34;❌ 지원되지 않는 URL 형식입니다! (http만 지원)&amp;#34;
+
+    let domain_path = parts[1].split(&amp;#34;/&amp;#34;, 1)
+    let host = domain_path[0]
+    let path = &amp;#34;/&amp;#34; + domain_path[1] if domain_path.size() &amp;gt; 1 else &amp;#34;/&amp;#34;
+
+    # 소켓 생성 및 서버 연결
+    let sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect((host, 80))
+
+    # HTTP 요청 작성
+    let request = &amp;#34;GET &amp;#34; + path + &amp;#34; HTTP/1.1\r\n&amp;#34;
+    request += &amp;#34;Host: &amp;#34; + host + &amp;#34;\r\n&amp;#34;
+    request += &amp;#34;User-Agent: Mojo-Curl/1.0\r\n&amp;#34;
+    request += &amp;#34;Connection: close\r\n\r\n&amp;#34;
+
+    # 요청 전송
+    sock.send(request.encode())
+
+    # 응답 수신
+    let response = &amp;#34;&amp;#34;
+    while True:
+        let data = sock.recv(1024)
+        if not data:
+            break
+        response += data.decode()
+
+    sock.close()
+    return response
+
+# 명령줄에서 URL 입력 받기
+fn main():
+    if sys.argv.size() &amp;lt; 2:
+        print(&amp;#34;🛠 사용법: mojo run mojo_curl.mojo &amp;lt;URL&amp;gt;&amp;#34;)
+        return
+
+    let url = sys.argv[1]
+    let response = http_get(url)
+    print(response)
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h1 id=&#34;-2-mojo-설치-및-실행-방법&#34;&gt;&lt;strong&gt;📌 2. Mojo 설치 및 실행 방법&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;Mojo는 현재 &lt;strong&gt;Linux 및 macOS에서만 실행 가능&lt;/strong&gt;합니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Beyond Compare 4를 리눅스에 설치하기</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/beyond-compare-wsl/</link>
+      <pubDate>Tue, 25 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/beyond-compare-wsl/</guid>
+      <description>&lt;h1 id=&#34;beyond-compare-4를-리눅스에-설치하기&#34;&gt;Beyond Compare 4를 리눅스에 설치하기&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~$ cd ~/Downloads/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ wget https://www.scootersoftware.com/bcompare-4.4.6.27483_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--2025-02-25 14:58:16--  https://www.scootersoftware.com/bcompare-4.4.6.27483_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Resolving www.scootersoftware.com &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;www.scootersoftware.com&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;... 72.32.90.250
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connecting to www.scootersoftware.com &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;www.scootersoftware.com&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;|72.32.90.250|:443... connected.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;HTTP request sent, awaiting response... &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; OK
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Length: &lt;span style=&#34;color:#ae81ff&#34;&gt;20609066&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;20M&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;application/octet-stream&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Saving to: ‘bcompare-4.4.6.27483_amd64.deb’
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcompare-4.4.6.27483_amd64.deb          100%&lt;span style=&#34;color:#f92672&#34;&gt;[=============================================================================&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;  19.65M  3.55MB/s    in 6.7s
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2025-02-25 14:58:24 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2.93 MB/s&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; - ‘bcompare-4.4.6.27483_amd64.deb’ saved &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;20609066/20609066&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ sudo apt install ./bcompare-4.4.6.27483_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;sudo&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; password &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; jonpark:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Reading package lists... Done
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Building dependency tree... Done
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Reading state information... Done
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Note, selecting &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bcompare&amp;#39;&lt;/span&gt; instead of &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;./bcompare-4.4.6.27483_amd64.deb&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The following package was automatically installed and is no longer required:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  libllvm17t64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Use &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo apt autoremove&amp;#39;&lt;/span&gt; to remove it.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The following NEW packages will be installed:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  bcompare
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; upgraded, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; newly installed, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; to remove and &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt; not upgraded.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Need to get &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; B/20.6 MB of archives.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;After this operation, 60.9 MB of additional disk space will be used.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Get:1 /home/jonpark/Downloads/bcompare-4.4.6.27483_amd64.deb bcompare amd64 4.4.6-27483 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;20.6 MB&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Selecting previously unselected package bcompare.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Reading database ... &lt;span style=&#34;color:#ae81ff&#34;&gt;130187&lt;/span&gt; files and directories currently installed.&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Preparing to unpack .../bcompare-4.4.6.27483_amd64.deb ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Unpacking bcompare &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;4.4.6-27483&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Setting up bcompare &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;4.4.6-27483&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp: cannot create regular file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/usr/share/kservices5/&amp;#39;&lt;/span&gt;: Not a directory
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; bamfdaemon &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0.5.6+22.04.20220217-0ubuntu5&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Rebuilding /usr/share/applications/bamf-2.index...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; desktop-file-utils &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0.27-2build1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; gnome-menus &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;3.36.0-1.1ubuntu3&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; shared-mime-info &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2.4-4&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Processing triggers &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; libc-bin &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2.39-0ubuntu8.4&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/locale
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/man
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/tcltk
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/templates
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/locale
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/doc-root
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/templates
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/locale
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/cups/doc-root
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/help
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;localepurge: Disk space freed:      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB in /usr/share/vim/vim91/lang
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Total disk space freed by localepurge: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; KiB
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;N: Download is performed unsandboxed as root as file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/home/jonpark/Downloads/bcompare-4.4.6.27483_amd64.deb&amp;#39;&lt;/span&gt; couldn&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;t be accessed by user &amp;#39;&lt;/span&gt;_apt&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;. - pkgAcquire::Run &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;13: Permission denied&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;########################################&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 아래부터는 옵션임.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ ls  ~/.config/bcompare/ -al
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;total 28K
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;drwxrwxr-x  &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; jonpark jonpark 4.0K Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 ./
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;drwx------ &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt; jonpark jonpark 4.0K Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 ../
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark    &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 BCLOCK_11.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark  &lt;span style=&#34;color:#ae81ff&#34;&gt;546&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 BCState.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark  &lt;span style=&#34;color:#ae81ff&#34;&gt;204&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 BCState.xml.bak
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 IsPro
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark  &lt;span style=&#34;color:#ae81ff&#34;&gt;563&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:05 menu.ini
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-rw-rw-r--  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; jonpark jonpark   &lt;span style=&#34;color:#ae81ff&#34;&gt;48&lt;/span&gt; Feb &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 15:07 registry.dat
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ ls /usr/lib/beyondcompare/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcmount32*  bcmount.sh*  BCompare.mad  GPG-KEY-scootersoftware  lib7z.so*        libunrar.so*  qt4/                         scootersoftware.list
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcmount64*  BCompare*    ext/          help/                    libQt4Pas.so.5*  mime.types    scootersoftware-keyring.gpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:~/Downloads$ cd  /usr/lib/beyondcompare/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcmount32*  bcmount.sh*  BCompare.mad  GPG-KEY-scootersoftware  lib7z.so*        libunrar.so*  qt4/                         scootersoftware.list
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bcmount64*  BCompare*    ext/          help/                    libQt4Pas.so.5*  mime.types    scootersoftware-keyring.gpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ sudo cp BCompare BCompare.org
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ sudo cp -r ~/.config/bcompare ~/.config/bcompare.org
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ rm -rf ~/.config/bcompare
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;kill BC&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kill BC
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$ sudo rm -rf ~/.config/bcompare &lt;span style=&#34;color:#75715e&#34;&gt;#thinks bensonkb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo sed -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;s/??????????????????????/g&amp;#34;&lt;/span&gt; /usr/lib/beyondcompare/BCompare
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash#:/usr/lib/beyondcompare$
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Start BC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Enter license&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Works&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>MOJO</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/mojo/</link>
+      <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/mojo/</guid>
+      <description>&lt;h1 id=&#34;mojo-사용처&#34;&gt;Mojo 사용처&lt;/h1&gt;
+&lt;p&gt;Mojo는 2023년에 출시된 비교적 새로운 프로그래밍 언어로, 아직 초기 단계에 있습니다. 따라서 현재까지 Mojo를 사용한 대표적인 오픈소스 프로젝트나 상용 프로젝트는 많지 않습니다. 그러나 Modular(모듈러)가 Mojo를 설계한 목적과 특징을 기반으로, Mojo가 어떤 유형의 프로젝트에 적합할지 예측할 수 있으며, 이미 공개된 몇 가지 실험적 또는 데모 프로젝트를 통해 그 활용 가능성을 확인할 수 있습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-mojo를-사용한-주요-프로젝트-및-사례&#34;&gt;&lt;strong&gt;1. Mojo를 사용한 주요 프로젝트 및 사례&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4 id=&#34;1-modular-ai-플랫폼&#34;&gt;&lt;strong&gt;(1) Modular AI 플랫폼&lt;/strong&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로젝트 설명&lt;/strong&gt;: Modular는 Mojo를 개발한 회사이며, 이들의 주요 목표는 AI 및 머신러닝 워크플로우를 최적화하는 것입니다. Modular AI 플랫폼은 Mojo를 기반으로 구축되며, 고성능 컴퓨팅과 AI 모델 개발을 지원합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;왜 Mojo를 사용했는가?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;고성능 요구사항&lt;/strong&gt;: AI 모델 학습 및 추론은 대규모 데이터와 복잡한 계산을 필요로 합니다. Mojo는 LLVM 기반으로 컴파일되며 SIMD(Single Instruction, Multiple Data) 명령어와 병렬 처리를 내장으로 지원하여 Python보다 훨씬 빠른 성능을 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Python 호환성&lt;/strong&gt;: 많은 AI/ML 프로젝트는 Python 기반으로 작성되어 있습니다. Mojo는 Python 문법과 생태계를 유지하면서도 성능을 극대화하므로, 기존 코드베이스를 쉽게 마이그레이션하거나 확장할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;2-과학-컴퓨팅-및-시뮬레이션&#34;&gt;&lt;strong&gt;(2) 과학 컴퓨팅 및 시뮬레이션&lt;/strong&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로젝트 설명&lt;/strong&gt;: 일부 연구자들은 Mojo를 사용하여 물리 시뮬레이션, 기상 예측, 분자 동역학 시뮬레이션 등을 구현하고 있습니다. 이러한 작업은 일반적으로 C++ 또는 Fortran으로 작성되었지만, Mojo는 Python의 가독성과 Rust 수준의 성능을 결합하여 더 접근하기 쉬운 솔루션을 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;왜 Mojo를 사용했는가?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;성능 최적화&lt;/strong&gt;: 과학 컴퓨팅은 높은 계산 성능을 요구하며, Mojo는 이를 위해 SIMD 및 병렬 처리를 내장으로 지원합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;생산성 향상&lt;/strong&gt;: Python처럼 간결한 문법을 사용하여 코드 작성이 빠르며, 동시에 성능 저하 없이 작업을 완료할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;3-실시간-데이터-처리&#34;&gt;&lt;strong&gt;(3) 실시간 데이터 처리&lt;/strong&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로젝트 설명&lt;/strong&gt;: 실시간 스트리밍 데이터를 처리하거나 금융 거래 시스템에서 사용되는 고성능 애플리케이션에서도 Mojo가 활용될 가능성이 큽니다. 예를 들어, 주식 시장 데이터를 실시간으로 분석하고 트레이딩 신호를 생성하는 시스템이 Mojo로 구현될 수 있습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;왜 Mojo를 사용했는가?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;저지연(Low Latency)&lt;/strong&gt;: 실시간 데이터 처리는 매우 짧은 시간 내에 데이터를 처리해야 하며, Mojo는 이러한 요구를 충족할 수 있는 성능을 제공합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;병렬 처리&lt;/strong&gt;: Mojo의 내장된 병렬 처리 기능은 다중 코어를 효율적으로 활용하여 데이터 처리 속도를 극대화합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-mojo를-선택한-이유-요약&#34;&gt;&lt;strong&gt;2. Mojo를 선택한 이유 요약&lt;/strong&gt;&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;특징&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;왜 Mojo를 선택했는가?&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;고성능&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;LLVM 기반 컴파일러와 SIMD, 병렬 처리를 통해 Python보다 훨씬 빠른 성능을 제공합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Python 호환성&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Python 문법과 생태계를 유지하므로, 기존 Python 코드를 쉽게 마이그레이션하거나 확장할 수 있습니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;메모리 안전성&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Rust와 유사한 메모리 관리 모델을 도입하여 안전하고 효율적인 메모리 사용이 가능합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;개발 생산성&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Python처럼 간결한 문법을 사용하여 개발 속도를 높입니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;AI/ML 최적화&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;AI/ML 워크플로우를 위한 고성능 컴퓨팅 환경을 제공합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-mojo의-잠재적-활용-분야&#34;&gt;&lt;strong&gt;3. Mojo의 잠재적 활용 분야&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;현재 Mojo는 초기 단계이지만, 다음과 같은 분야에서 활용될 가능성이 큽니다:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Public IP &amp; CIDR</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/public-ip-cidr/</link>
+      <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/public-ip-cidr/</guid>
+      <description>&lt;h1 id=&#34;windows-powershell-에서-public-ip와-cidr-얻기---claude&#34;&gt;Windows Powershell 에서 public IP와 CIDR 얻기 - claude&lt;/h1&gt;
+&lt;h2 id=&#34;테스트&#34;&gt;테스트&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 방법 1: ipify API 사용&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; (Invoke-WebRequest -Uri &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://api.ipify.org&amp;#34;&lt;/span&gt;).Content
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;44.214&lt;/span&gt;.210.109                                                                                                                      (base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt;                                                                                     (base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 방방법법 2: ifconfig.me 사사용용                                                          (base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; (Invoke-WebRequest -Uri &amp;#34;https://ifconfig.me/ip&amp;#34;).Content                           &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 방법 3: ipinfo.io 사용 (더 자세한 정보)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt; (Invoke-WebRequest -Uri &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://ipinfo.io/json&amp;#34;&lt;/span&gt;).Content | ConvertFrom-Json
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ip       &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;44.214&lt;/span&gt;.210.109
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hostname &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; vpn-aws.blackduck.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;city     &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; Ashburn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;region   &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; Virginia
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;country  &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; US
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;loc      &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;39.0437&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;-77.4875&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;org      &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; AS14618 Amazon.com, Inc.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;postal   &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20147&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;timezone &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; America/New_York
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;readme   &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; https&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;//ipinfo.io/missingauth
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(base) PS C:\workspace\blog\ryanpark-devsecops&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Start-Process &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://whois.domaintools.com/&lt;/span&gt;$ip&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; Quick Stats
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IP Location	United States United States Ashburn Amazon Data Services Nova
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ASN	United States AS14618 AMAZON-AES, US (registered Nov &lt;span style=&#34;color:#ae81ff&#34;&gt;04&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2005&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Resolve Host	vpn-aws.blackduck.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Whois Server	whois.arin.net
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IP Address	&lt;span style=&#34;color:#ae81ff&#34;&gt;44.214&lt;/span&gt;.210.109
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NetRange&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;       &lt;span style=&#34;color:#ae81ff&#34;&gt;44.192&lt;/span&gt;.0.0 - &lt;span style=&#34;color:#ae81ff&#34;&gt;44.255&lt;/span&gt;.255.255
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CIDR&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;           &lt;span style=&#34;color:#ae81ff&#34;&gt;44.192&lt;/span&gt;.0.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;/&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;답변&#34;&gt;답변&lt;/h2&gt;
+&lt;p&gt;PowerShell에서 Public IP와 CIDR를 확인하는 방법을 알려드리겠습니다:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Chrome</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/chrome/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/chrome/</guid>
+      <description>&lt;h1 id=&#34;chrome-install-on-ubuntu&#34;&gt;Chrome Install on Ubuntu&lt;/h1&gt;
+&lt;p&gt;Ubuntu에서 Chrome을 완전히 제거하고 다시 설치하는 명령어 순서입니다:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Chrome 제거:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Chrome 패키지 제거&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get purge google-chrome-stable
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 관련 의존성 패키지 제거&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get autoremove
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Chrome 설정 파일 제거 (선택사항)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rm -rf ~/.config/google-chrome
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Chrome 다시 설치:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Chrome 다운로드를 위한 필요 패키지 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get install wget
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Chrome 패키지 다운로드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 다운로드한 패키지 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dpkg -i google-chrome-stable_current_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 의존성 문제가 있다면 다음 명령어로 해결&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get install -f
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 다운로드한 설치 파일 제거 (선택사항)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rm google-chrome-stable_current_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;설치가 완료되면 Applications 메뉴나 터미널에서 &lt;code&gt;google-chrome&lt;/code&gt; 명령어로 Chrome을 실행할 수 있습니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Bash &amp; PowerShell Script Comparison</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/bash-powershell/</link>
+      <pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/bash-powershell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MobaXterm Usage</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/mobaxterm/</link>
+      <pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/mobaxterm/</guid>
+      <description>&lt;h1 id=&#34;issue&#34;&gt;Issue&lt;/h1&gt;
+&lt;p&gt;Remote side unexpectedly closed network connection&lt;/p&gt;
+&lt;p&gt;────&lt;/p&gt;
+&lt;p&gt;Session stopped
+- Press &lt;!-- raw HTML omitted --&gt; to exit tab
+- Press R to restart session
+- Press S to save terminal output to file&lt;/p&gt;
+&lt;h2 id=&#34;fix&#34;&gt;Fix&lt;/h2&gt;
+&lt;h3 id=&#34;remove-saved-password&#34;&gt;Remove saved password&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;.md/mobaxterm/password-settings.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;It does not fix issue.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Git - Change Branch</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/git-branch/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/git-branch/</guid>
+      <description>&lt;h1 id=&#34;clone-with-branch&#34;&gt;Clone with branch&lt;/h1&gt;
+&lt;p&gt;특정 브랜치를 바로 클론하려면 다음 명령어를 사용하시면 됩니다:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b 2025.3.maint https://gitlab.host_name/group_name/repo_name.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 명령어는 지정된 URL에서 2025.3.maint 브랜치를 클론합니다. 기본적으로 로컬 디렉토리 이름은 저장소 이름(cnc-umbrella-chart)으로 생성됩니다.&lt;/p&gt;
+&lt;p&gt;다른 디렉토리 이름을 지정하고 싶다면 URL 뒤에 원하는 디렉토리 이름을 추가하면 됩니다:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b 2025.3.maint https://gitlab.host_name/group_name/repo_name.git custom-directory-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 명령어를 실행하면 2025.3.maint 브랜치만 가져오게 됩니다. 더 빠른 클론을 원한다면 &lt;code&gt;--single-branch&lt;/code&gt; 옵션을 추가할 수 있습니다:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b 2025.3.maint --single-branch https://gitlab.host_name/group_name/repo_name.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;change-branch&#34;&gt;Change branch&lt;/h1&gt;
+&lt;p&gt;이미 main 브랜치를 clone하였다. 2025.3.maint 브랜치를 가져오는 방법은?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Git Usage</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/git/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/git/</guid>
+      <description>&lt;hr&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;github에서-새로운-repository저장소를-생성하는-방법&#34;&gt;&lt;strong&gt;GitHub에서 새로운 Repository(저장소)를 생성하는 방법&lt;/strong&gt;&lt;/h1&gt;
+&lt;h2 id=&#34;github에서-새로운-repository저장소를-생성하는-방법-1&#34;&gt;&lt;strong&gt;GitHub에서 새로운 Repository(저장소)를 생성하는 방법&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;GitHub에서 새로운 **Repository(저장소)**를 생성하는 방법을 단계별로 설명하겠습니다.&lt;br&gt;
+&lt;strong&gt;방법 1:&lt;/strong&gt; GitHub 웹사이트에서 직접 생성하는 방법&lt;br&gt;
+&lt;strong&gt;방법 2:&lt;/strong&gt; Git CLI를 사용하여 터미널에서 생성하는 방법&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-방법-1-github-웹사이트에서-직접-생성하기&#34;&gt;&lt;strong&gt;📝 방법 1: GitHub 웹사이트에서 직접 생성하기&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;1-github에-로그인&#34;&gt;&lt;strong&gt;1️⃣ GitHub에 로그인&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/&#34;&gt;GitHub 홈페이지&lt;/a&gt;에 접속 후 로그인합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-새-저장소-생성-페이지-이동&#34;&gt;&lt;strong&gt;2️⃣ 새 저장소 생성 페이지 이동&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;우측 상단의 &lt;strong&gt;&lt;code&gt;+&lt;/code&gt; 버튼&lt;/strong&gt;을 클릭한 후 &lt;strong&gt;&amp;ldquo;New repository&amp;rdquo;&lt;/strong&gt; 선택&lt;/li&gt;
+&lt;li&gt;또는 직접 &lt;a href=&#34;https://github.com/new&#34;&gt;새 저장소 생성 페이지&lt;/a&gt;로 이동&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-저장소-정보-입력&#34;&gt;&lt;strong&gt;3️⃣ 저장소 정보 입력&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Repository name (필수):&lt;/strong&gt; 저장소 이름을 입력합니다. (예: &lt;code&gt;my-new-repo&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Description (선택):&lt;/strong&gt; 저장소에 대한 설명을 입력합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Visibility 선택:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Public&lt;/code&gt;(공개) → 누구나 볼 수 있음.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Private&lt;/code&gt;(비공개) → 본인과 초대한 사용자만 접근 가능.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-추가-설정&#34;&gt;&lt;strong&gt;4️⃣ 추가 설정&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ &lt;code&gt;Initialize this repository with a README&lt;/code&gt; (선택)
+&lt;ul&gt;
+&lt;li&gt;체크하면 기본적인 &lt;code&gt;README.md&lt;/code&gt; 파일이 생성됨.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;✅ &lt;code&gt;.gitignore&lt;/code&gt; (선택)
+&lt;ul&gt;
+&lt;li&gt;특정 파일을 Git에서 무시하도록 설정 (예: Python, Node.js 등).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;✅ &lt;code&gt;License&lt;/code&gt; (선택)
+&lt;ul&gt;
+&lt;li&gt;오픈소스 라이선스를 설정 (예: MIT, Apache 2.0 등).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-저장소-생성&#34;&gt;&lt;strong&gt;5️⃣ 저장소 생성&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;Create repository&amp;rdquo;&lt;/strong&gt; 버튼을 클릭하면 저장소가 생성됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-로컬-프로젝트와-연결&#34;&gt;&lt;strong&gt;6️⃣ 로컬 프로젝트와 연결&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;이제 로컬에서 작업 중인 프로젝트를 GitHub 저장소에 연결할 수 있습니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Differences, priorities, and Bash equivalents for :=, =, and ?= in Makefiles</title>
+      <link>http://localhost:1313/portfolio/posts/sdlc/makefile-bash--variable-assignment/</link>
+      <pubDate>Mon, 03 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sdlc/makefile-bash--variable-assignment/</guid>
+      <description>&lt;p&gt;Differences, priorities, and Bash equivalents for :=, =, and ?= in Makefiles&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;An Explanation of the differences, priorities, and Bash equivalents for :=, =, and ?= in Makefiles.&lt;/p&gt;
+&lt;p&gt;Makefile variable assignment operators:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;:= (Simple expansion):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Expands variables immediately at assignment time.&lt;/li&gt;
+&lt;li&gt;Example: FOO := $(BAR)&lt;/li&gt;
+&lt;li&gt;If BAR changes later, FOO will not be affected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;= (Recursive expansion):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Defers expansion until the variable is used.&lt;/li&gt;
+&lt;li&gt;Example: FOO = $(BAR)&lt;/li&gt;
+&lt;li&gt;If BAR changes later, FOO will reflect the new value when used.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;?= (Conditional assignment):&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko" dir="auto">
+
+<head><script src="/portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Git | RyanLabs</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/portfolio/tags/git/">
+<link crossorigin="anonymous" href="/portfolio/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/portfolio/tags/git/index.xml">
+<link rel="alternate" hreflang="ko" href="http://localhost:1313/portfolio/tags/git/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/portfolio/" accesskey="h" title="RyanLabs (Alt + H)">RyanLabs</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/portfolio/search/" title="검색">
+                    <span>검색</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/categories/" title="카테고리">
+                    <span>카테고리</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/tags/" title="태그">
+                    <span>태그</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/archives/" title="연도">
+                    <span>연도</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/lectures/" title="강의">
+                    <span>강의</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/portfolio/about/" title="어바웃미">
+                    <span>어바웃미</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header">
+  <h1>
+    Git
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Git - Change Branch
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Clone with branch 특정 브랜치를 바로 클론하려면 다음 명령어를 사용하시면 됩니다:
+git clone -b 2025.3.maint https://gitlab.host_name/group_name/repo_name.git 이 명령어는 지정된 URL에서 2025.3.maint 브랜치를 클론합니다. 기본적으로 로컬 디렉토리 이름은 저장소 이름(cnc-umbrella-chart)으로 생성됩니다.
+다른 디렉토리 이름을 지정하고 싶다면 URL 뒤에 원하는 디렉토리 이름을 추가하면 됩니다:
+git clone -b 2025.3.maint https://gitlab.host_name/group_name/repo_name.git custom-directory-name 이 명령어를 실행하면 2025.3.maint 브랜치만 가져오게 됩니다. 더 빠른 클론을 원한다면 --single-branch 옵션을 추가할 수 있습니다:
+git clone -b 2025.3.maint --single-branch https://gitlab.host_name/group_name/repo_name.git Change branch 이미 main 브랜치를 clone하였다. 2025.3.maint 브랜치를 가져오는 방법은?
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-02-17 00:00:00 +0000 UTC'>2월 17, 2025</span></footer>
+  <a class="entry-link" aria-label="post link to Git - Change Branch" href="http://localhost:1313/portfolio/posts/sdlc/git-branch/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Git Usage
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> GitHub에서 새로운 Repository(저장소)를 생성하는 방법 GitHub에서 새로운 Repository(저장소)를 생성하는 방법 GitHub에서 새로운 **Repository(저장소)**를 생성하는 방법을 단계별로 설명하겠습니다.
+방법 1: GitHub 웹사이트에서 직접 생성하는 방법
+방법 2: Git CLI를 사용하여 터미널에서 생성하는 방법
+📝 방법 1: GitHub 웹사이트에서 직접 생성하기 1️⃣ GitHub에 로그인 GitHub 홈페이지에 접속 후 로그인합니다. 2️⃣ 새 저장소 생성 페이지 이동 우측 상단의 &#43; 버튼을 클릭한 후 “New repository” 선택 또는 직접 새 저장소 생성 페이지로 이동 3️⃣ 저장소 정보 입력 Repository name (필수): 저장소 이름을 입력합니다. (예: my-new-repo) Description (선택): 저장소에 대한 설명을 입력합니다. Visibility 선택: Public(공개) → 누구나 볼 수 있음. Private(비공개) → 본인과 초대한 사용자만 접근 가능. 4️⃣ 추가 설정 ✅ Initialize this repository with a README (선택) 체크하면 기본적인 README.md 파일이 생성됨. ✅ .gitignore (선택) 특정 파일을 Git에서 무시하도록 설정 (예: Python, Node.js 등). ✅ License (선택) 오픈소스 라이선스를 설정 (예: MIT, Apache 2.0 등). 5️⃣ 저장소 생성 “Create repository” 버튼을 클릭하면 저장소가 생성됩니다. 6️⃣ 로컬 프로젝트와 연결 이제 로컬에서 작업 중인 프로젝트를 GitHub 저장소에 연결할 수 있습니다.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-02-17 00:00:00 +0000 UTC'>2월 17, 2025</span></footer>
+  <a class="entry-link" aria-label="post link to Git Usage" href="http://localhost:1313/portfolio/posts/sdlc/git/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Different URL Formats for Accessing a Git Repository
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>🔹 Different URL Formats for Accessing a Git Repository Git supports multiple protocols for accessing repositories, each with its own advantages and disadvantages in terms of authentication, security, and ease of use. Below is a summary of the common URL formats, their corresponding protocols, authentication methods, and a comparison of their pros and cons.
+📌 Git Repository URL Formats and Their Characteristics Git URL Format Protocol Used Authentication Method Pros Cons git@host:path/repo.git SSH SSH key authentication (Private/Public key pair) ✅ Secure authentication without storing passwords ✅ Supports read &amp; write access ✅ Works well in automation (CI/CD) ❌ Requires setting up SSH keys ❌ Firewalls may block SSH (port 22) ssh://git@host/path/repo.git SSH SSH key authentication ✅ Same as git@host:path/repo.git, but with explicit protocol ✅ More readable for some users ❌ Identical disadvantages as the git@ format https://host/path/repo.git HTTPS Username &#43; Password, or Personal Access Token (PAT) ✅ Works without additional setup ✅ Usually allowed through firewalls ✅ Supports 2FA via PAT ❌ Requires entering credentials or setting up a credential manager ❌ PATs need to be managed securely git://host/path/repo.git Git Daemon (read-only) No authentication required ✅ Fast and lightweight ✅ Ideal for public repositories ❌ No authentication, security risk ❌ Only supports read access /path/to/repo.git Local File System No authentication needed (local access) ✅ Fastest access (no network latency) ✅ No need for authentication ❌ Only works on the local machine ❌ Cannot be used for remote access 📌 Pros and Cons of Each Git Access Method 1️⃣ SSH (git@host:path/repo.git or ssh://git@host/path/repo.git) ✅ Pros:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-02-14 00:00:00 +0000 UTC'>2월 14, 2025</span></footer>
+  <a class="entry-link" aria-label="post link to Different URL Formats for Accessing a Git Repository" href="http://localhost:1313/portfolio/posts/technical-support/git--repo-access-url-formats/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/portfolio/">RyanLabs</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
