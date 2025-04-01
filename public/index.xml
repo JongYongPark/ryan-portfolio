@@ -9,53 +9,43 @@
     <lastBuildDate>Sun, 24 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/portfolio/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Category1</title>
-      <link>http://localhost:1313/portfolio/categories/category1/</link>
+      <title>샘플 포스트 1</title>
+      <link>http://localhost:1313/portfolio/posts/sample-post-1/</link>
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/portfolio/categories/category1/</guid>
-      <description></description>
+      <guid>http://localhost:1313/portfolio/posts/sample-post-1/</guid>
+      <description>&lt;p&gt;이것은 요약입니다.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>DevSecOps</title>
-      <link>http://localhost:1313/portfolio/categories/devsecops/</link>
+      <title>샘플 포스트 2</title>
+      <link>http://localhost:1313/portfolio/posts/sample-post-2/</link>
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/portfolio/categories/devsecops/</guid>
-      <description></description>
+      <guid>http://localhost:1313/portfolio/posts/sample-post-2/</guid>
+      <description>&lt;p&gt;이것은 샘플 포스트 2의 본문입니다.&lt;br&gt;
+Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>샘플</title>
-      <link>http://localhost:1313/portfolio/tags/%EC%83%98%ED%94%8C/</link>
+      <title>샘플 포스트 3</title>
+      <link>http://localhost:1313/portfolio/posts/sample-post-3/</link>
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/portfolio/tags/%EC%83%98%ED%94%8C/</guid>
-      <description></description>
+      <guid>http://localhost:1313/portfolio/posts/sample-post-3/</guid>
+      <description>&lt;p&gt;이것은 샘플 포스트 3의 본문입니다.&lt;br&gt;
+Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>테스트</title>
-      <link>http://localhost:1313/portfolio/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8/</link>
+      <title>샘플 포스트 4</title>
+      <link>http://localhost:1313/portfolio/posts/sample-post-4/</link>
       <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/portfolio/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8/</guid>
-      <description></description>
+      <guid>http://localhost:1313/portfolio/posts/sample-post-4/</guid>
+      <description>&lt;p&gt;이것은 샘플 포스트 4의 본문입니다.&lt;br&gt;
+Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Categories/Archives</title>
-      <link>http://localhost:1313/portfolio/categories/archives/</link>
-      <pubDate>Fri, 24 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/portfolio/categories/archives/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Posts</title>
-      <link>http://localhost:1313/portfolio/posts/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/portfolio/posts/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Private</title>
-      <link>http://localhost:1313/portfolio/private/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/portfolio/private/</guid>
-      <description></description>
+      <title>샘플 포스트 5</title>
+      <link>http://localhost:1313/portfolio/posts/sample-post-5/</link>
+      <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/posts/sample-post-5/</guid>
+      <description>&lt;p&gt;이것은 샘플 포스트 5의 본문입니다.&lt;br&gt;
+Hugo 블로그가 잘 작동하는지 확인하기 위한 글입니다.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

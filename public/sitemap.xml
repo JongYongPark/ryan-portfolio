@@ -2,13 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/portfolio/posts/</loc>
+    <lastmod>2024-03-30T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/portfolio/</loc>
-    <lastmod>2024-03-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/portfolio/posts/my-private-in-posts/</loc>
-    <lastmod>2024-03-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/portfolio/private/my-secret/</loc>
     <lastmod>2024-03-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/portfolio/categories/</loc>
@@ -49,10 +46,6 @@
   </url><url>
     <loc>http://localhost:1313/portfolio/archives/</loc>
     <lastmod>2023-03-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/portfolio/posts/</loc>
-  </url><url>
-    <loc>http://localhost:1313/portfolio/private/</loc>
   </url><url>
     <loc>http://localhost:1313/portfolio/search/</loc>
   </url>

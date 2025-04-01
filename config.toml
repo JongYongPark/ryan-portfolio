@@ -5,6 +5,9 @@ theme = "PaperMod"
 languageCode = "ko"
 defaultContentLanguage = "ko"
 
+ignoreFiles = ["/private/"]
+
+
 [params]
   homeInfoParams = false
 
@@ -80,4 +83,3 @@ defaultContentLanguage = "ko"
   category = "categories"
   tag = "tags"
 
-ignoreFiles = ["^content/private/"]  
