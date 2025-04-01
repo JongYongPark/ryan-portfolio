@@ -5,6 +5,9 @@
     <loc>http://localhost:1313/portfolio/</loc>
     <lastmod>2024-03-30T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/portfolio/posts/my-private-in-posts/</loc>
+    <lastmod>2024-03-30T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/portfolio/private/my-secret/</loc>
     <lastmod>2024-03-30T00:00:00+00:00</lastmod>
   </url><url>
